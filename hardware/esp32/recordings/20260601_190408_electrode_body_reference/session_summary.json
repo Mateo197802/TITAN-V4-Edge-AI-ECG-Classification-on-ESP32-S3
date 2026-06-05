@@ -1,0 +1,9 @@
+{
+  "saved_cycles": [
+    14
+  ],
+  "saved_window_count": 1,
+  "status": "accepted_reference_only",
+  "long_recording_authorized": false,
+  "reason": "Subsequent windows clipped on Lead II and the third sensor remained near the ADC floor."
+}

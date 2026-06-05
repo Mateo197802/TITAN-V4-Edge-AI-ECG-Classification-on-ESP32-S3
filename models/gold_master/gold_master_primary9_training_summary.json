@@ -1,0 +1,184 @@
+{
+  "best_epoch": 2,
+  "best_val_f1_macro": 0.8947793257908268,
+  "best_val_checkpoint_score": 0.8947793257908268,
+  "checkpoint_metric": "rhythm_f1",
+  "epochs_ran": 3,
+  "train_windows": 3785,
+  "val_windows": 706,
+  "full_train_windows": 3785,
+  "full_val_windows": 706,
+  "sampler": "balanced",
+  "train_samples_per_epoch": 3776,
+  "balanced_samples_per_class": 4096,
+  "class_weights": [
+    0.4989408552646637,
+    1.5423986911773682,
+    1.2581136226654053,
+    0.7129310369491577,
+    0.6825935244560242,
+    0.368757426738739,
+    2.197390079498291,
+    0.7980570793151855,
+    0.9408180713653564
+  ],
+  "loss_class_weight_mode": "none",
+  "loss_class_weights": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "num_workers": 0,
+  "pin_memory": false,
+  "persistent_workers": false,
+  "prefetch_factor": null,
+  "morphology_fusion": false,
+  "morphology_dim": 0,
+  "pathology_head": true,
+  "pathology_num_classes": 10,
+  "pathology_class_names": [
+    "IMI",
+    "ASMI",
+    "LVH",
+    "ISC_",
+    "ISCAL",
+    "NST_",
+    "ILMI",
+    "AMI",
+    "ALMI",
+    "LAE"
+  ],
+  "pathology_weight": 0.0,
+  "pathology_sidecar": "/home/kevin.landazuri__yachaytech.edu.ec/Mateo Gavilanes/V4_CEDIA/DATA/ptb-xl/ptbxl_pathology_label_map.json",
+  "pathology_records_labelled": 2580,
+  "pathology_combined_alpha": 0.1,
+  "pathology_pos_weight": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "pathology_pos_weight_stats": {
+    "labeled_windows": 0,
+    "positive_counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "negative_counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "biometry_head": true,
+  "biometry_targets": [
+    "sex",
+    "age"
+  ],
+  "biometry_weight": 0.03,
+  "biometry_combined_alpha": 0.05,
+  "freeze_for_auxiliary_heads": false,
+  "auxiliary_freeze_summary": null,
+  "boundary_aux_enabled": false,
+  "boundary_aux_weight": 0.0,
+  "boundary_aux_train_windows": 0,
+  "boundary_aux_full_train_windows": 0,
+  "boundary_aux_batches": 0,
+  "teacher_distillation_enabled": false,
+  "teacher_kl_weight": 0.0,
+  "teacher_temperature": 2.0,
+  "offline_teacher_logits_enabled": true,
+  "offline_teacher_logits_weight": 1.0,
+  "offline_teacher_embedding_weight": 0.05,
+  "offline_teacher_temperature": 2.5,
+  "offline_teacher_tables": [
+    {
+      "path": "/home/kevin.landazuri__yachaytech.edu.ec/Mateo Gavilanes/V4_CEDIA/DATA/DATASETS_CURADOS/RHYTHM_PRIMARY9_DISTILL/teacher_sidecars/protected_primary9_logits_train.npz",
+      "weight": 0.4,
+      "rows": 3785,
+      "num_classes": 9,
+      "embedding_dim": 192,
+      "group_name": null,
+      "group_indices": null
+    },
+    {
+      "path": "/home/kevin.landazuri__yachaytech.edu.ec/Mateo Gavilanes/V4_CEDIA/DATA/DATASETS_CURADOS/RHYTHM_PRIMARY9_DISTILL/teacher_sidecars/rate_teacher_logits_train.npz",
+      "weight": 0.2,
+      "rows": 3785,
+      "num_classes": 9,
+      "embedding_dim": 192,
+      "group_name": "rate",
+      "group_indices": [
+        1,
+        3,
+        2
+      ]
+    },
+    {
+      "path": "/home/kevin.landazuri__yachaytech.edu.ec/Mateo Gavilanes/V4_CEDIA/DATA/DATASETS_CURADOS/RHYTHM_PRIMARY9_DISTILL/teacher_sidecars/ectopy_teacher_logits_train.npz",
+      "weight": 0.25,
+      "rows": 3785,
+      "num_classes": 9,
+      "embedding_dim": 192,
+      "group_name": "ectopy",
+      "group_indices": [
+        7,
+        4,
+        3
+      ]
+    },
+    {
+      "path": "/home/kevin.landazuri__yachaytech.edu.ec/Mateo Gavilanes/V4_CEDIA/DATA/DATASETS_CURADOS/RHYTHM_PRIMARY9_DISTILL/teacher_sidecars/conduction_teacher_logits_train.npz",
+      "weight": 0.25,
+      "rows": 3785,
+      "num_classes": 9,
+      "embedding_dim": 192,
+      "group_name": "conduction",
+      "group_indices": [
+        5,
+        6,
+        8,
+        3
+      ]
+    },
+    {
+      "path": "/home/kevin.landazuri__yachaytech.edu.ec/Mateo Gavilanes/V4_CEDIA/DATA/DATASETS_CURADOS/RHYTHM_PRIMARY9_DISTILL/teacher_sidecars/atrial_teacher_logits_train.npz",
+      "weight": 0.15,
+      "rows": 3785,
+      "num_classes": 9,
+      "embedding_dim": 192,
+      "group_name": "atrial",
+      "group_indices": [
+        0,
+        3
+      ]
+    }
+  ]
+}

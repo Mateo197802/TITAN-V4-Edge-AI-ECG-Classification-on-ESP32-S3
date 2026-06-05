@@ -1,0 +1,3064 @@
+{
+  "schema_version": 1,
+  "summary": {
+    "total_onnx_node_outputs": 118,
+    "direct_count": 60,
+    "rewritten_count": 17,
+    "inferred_count": 5,
+    "missing_count": 36,
+    "rewritten_but_missing_count": 0,
+    "lineage_event_count": 44
+  },
+  "lineage_events": [
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "onnx::Conv_294",
+        "onnx::Conv_295",
+        "onnx::Conv_297",
+        "onnx::Conv_298",
+        "onnx::Conv_300",
+        "onnx::Conv_301",
+        "res_layers.0.se.fc1.weight",
+        "res_layers.0.se.fc1.bias",
+        "res_layers.0.se.fc2.weight",
+        "res_layers.0.se.fc2.bias",
+        "onnx::Conv_303",
+        "onnx::Conv_304",
+        "onnx::Conv_306",
+        "onnx::Conv_307",
+        "onnx::Conv_309",
+        "onnx::Conv_310",
+        "res_layers.1.se.fc1.weight",
+        "res_layers.1.se.fc1.bias",
+        "res_layers.1.se.fc2.weight",
+        "res_layers.1.se.fc2.bias",
+        "onnx::Conv_312",
+        "onnx::Conv_313",
+        "onnx::Conv_315",
+        "onnx::Conv_316",
+        "onnx::Conv_318",
+        "onnx::Conv_319",
+        "res_layers.2.se.fc1.weight",
+        "res_layers.2.se.fc1.bias",
+        "res_layers.2.se.fc2.weight",
+        "res_layers.2.se.fc2.bias",
+        "onnx::Conv_321",
+        "onnx::Conv_322",
+        "onnx::Conv_324",
+        "onnx::Conv_325",
+        "onnx::Conv_327",
+        "onnx::Conv_328",
+        "res_layers.3.se.fc1.weight",
+        "res_layers.3.se.fc1.bias",
+        "res_layers.3.se.fc2.weight",
+        "res_layers.3.se.fc2.bias",
+        "onnx::Conv_330",
+        "onnx::Conv_331",
+        "onnx::Conv_333",
+        "onnx::Conv_334",
+        "onnx::Conv_336",
+        "onnx::Conv_337",
+        "res_layers.4.se.fc1.weight",
+        "res_layers.4.se.fc1.bias",
+        "res_layers.4.se.fc2.weight",
+        "res_layers.4.se.fc2.bias",
+        "head_rhythm.0.weight",
+        "head_rhythm.0.bias",
+        "head_pathology.0.weight",
+        "head_pathology.0.bias",
+        "head_rhythm.3.weight",
+        "head_rhythm.3.bias",
+        "head_pathology.3.weight",
+        "head_pathology.3.bias",
+        "/res_layers/res_layers.0/se/ReduceMean_axes",
+        "/res_layers/res_layers.1/se/ReduceMean_axes",
+        "/res_layers/res_layers.2/se/ReduceMean_axes",
+        "/res_layers/res_layers.3/se/ReduceMean_axes",
+        "/res_layers/res_layers.4/se/ReduceMean_axes",
+        "/stem/stem.0/Conv_conv1d_filter_2d",
+        "/stem/stem.2/Constant_output_0",
+        "/stem/stem.2/Constant_1_output_0",
+        "/res_layers/res_layers.0/silu/Constant_output_0",
+        "/res_layers/res_layers.0/silu/Constant_1_output_0",
+        "/res_layers/res_layers.0/se/silu/Constant_output_0",
+        "/res_layers/res_layers.0/se/silu/Constant_1_output_0",
+        "/res_layers/res_layers.0/se/Constant_output_0",
+        "/res_layers/res_layers.0/silu_1/Constant_output_0",
+        "/res_layers/res_layers.0/silu_1/Constant_1_output_0",
+        "/res_layers/res_layers.1/silu/Constant_output_0",
+        "/res_layers/res_layers.1/silu/Constant_1_output_0",
+        "/res_layers/res_layers.1/se/silu/Constant_output_0",
+        "/res_layers/res_layers.1/se/silu/Constant_1_output_0",
+        "/res_layers/res_layers.1/se/Constant_output_0",
+        "/res_layers/res_layers.1/silu_1/Constant_output_0",
+        "/res_layers/res_layers.1/silu_1/Constant_1_output_0",
+        "/res_layers/res_layers.2/silu/Constant_output_0",
+        "/res_layers/res_layers.2/silu/Constant_1_output_0",
+        "/res_layers/res_layers.2/se/silu/Constant_output_0",
+        "/res_layers/res_layers.2/se/silu/Constant_1_output_0",
+        "/res_layers/res_layers.2/se/Constant_output_0",
+        "/res_layers/res_layers.2/silu_1/Constant_output_0",
+        "/res_layers/res_layers.2/silu_1/Constant_1_output_0",
+        "/res_layers/res_layers.3/silu/Constant_output_0",
+        "/res_layers/res_layers.3/silu/Constant_1_output_0",
+        "/res_layers/res_layers.3/se/silu/Constant_output_0",
+        "/res_layers/res_layers.3/se/silu/Constant_1_output_0",
+        "/res_layers/res_layers.3/se/Constant_output_0",
+        "/res_layers/res_layers.3/silu_1/Constant_output_0",
+        "/res_layers/res_layers.3/silu_1/Constant_1_output_0",
+        "/res_layers/res_layers.4/silu/Constant_output_0",
+        "/res_layers/res_layers.4/silu/Constant_1_output_0",
+        "/res_layers/res_layers.4/se/silu/Constant_output_0",
+        "/res_layers/res_layers.4/se/silu/Constant_1_output_0",
+        "/res_layers/res_layers.4/se/Constant_output_0",
+        "/res_layers/res_layers.4/silu_1/Constant_output_0",
+        "/res_layers/res_layers.4/silu_1/Constant_1_output_0",
+        "/head_rhythm/head_rhythm.1/Constant_output_0",
+        "/head_rhythm/head_rhythm.1/Constant_1_output_0",
+        "/head_pathology/head_pathology.1/Constant_output_0",
+        "/head_pathology/head_pathology.1/Constant_1_output_0",
+        "/res_layers/res_layers.0/conv1/Conv_conv1d_filter_2d",
+        "/res_layers/res_layers.0/conv2/Conv_conv1d_filter_2d",
+        "/res_layers/res_layers.1/downsample/downsample.0/Conv_conv1d_filter_2d",
+        "/res_layers/res_layers.1/conv1/Conv_conv1d_filter_2d",
+        "/res_layers/res_layers.1/conv2/Conv_conv1d_filter_2d",
+        "/res_layers/res_layers.2/downsample/downsample.0/Conv_conv1d_filter_2d",
+        "/res_layers/res_layers.2/conv1/Conv_conv1d_filter_2d",
+        "/res_layers/res_layers.2/conv2/Conv_conv1d_filter_2d",
+        "/res_layers/res_layers.3/downsample/downsample.0/Conv_conv1d_filter_2d",
+        "/res_layers/res_layers.3/conv1/Conv_conv1d_filter_2d",
+        "/res_layers/res_layers.3/conv2/Conv_conv1d_filter_2d",
+        "/res_layers/res_layers.4/downsample/downsample.0/Conv_conv1d_filter_2d",
+        "/res_layers/res_layers.4/conv1/Conv_conv1d_filter_2d",
+        "/res_layers/res_layers.4/conv2/Conv_conv1d_filter_2d"
+      ],
+      "event_index": 0
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 1
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 2
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 3
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 4
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 5
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 6
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 7
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 8
+    },
+    {
+      "kind": "rename_tensor",
+      "old_name": "/res_layers/res_layers.0/Add_output_0",
+      "new_name": "/res_layers/res_layers.0/silu_1/Clip_output_0",
+      "source": "set_operator_outputs",
+      "event_index": 9
+    },
+    {
+      "kind": "fuse_add_activation",
+      "add_op_type": "ADD",
+      "activation_op_type": "RELU6",
+      "fused_activation": "RELU6",
+      "add_output": "/res_layers/res_layers.0/Add_output_0",
+      "fused_output": "/res_layers/res_layers.0/silu_1/Clip_output_0",
+      "event_index": 10
+    },
+    {
+      "kind": "rename_tensor",
+      "old_name": "/res_layers/res_layers.1/Add_output_0",
+      "new_name": "/res_layers/res_layers.1/silu_1/Clip_output_0",
+      "source": "set_operator_outputs",
+      "event_index": 11
+    },
+    {
+      "kind": "fuse_add_activation",
+      "add_op_type": "ADD",
+      "activation_op_type": "RELU6",
+      "fused_activation": "RELU6",
+      "add_output": "/res_layers/res_layers.1/Add_output_0",
+      "fused_output": "/res_layers/res_layers.1/silu_1/Clip_output_0",
+      "event_index": 12
+    },
+    {
+      "kind": "rename_tensor",
+      "old_name": "/res_layers/res_layers.2/Add_output_0",
+      "new_name": "/res_layers/res_layers.2/silu_1/Clip_output_0",
+      "source": "set_operator_outputs",
+      "event_index": 13
+    },
+    {
+      "kind": "fuse_add_activation",
+      "add_op_type": "ADD",
+      "activation_op_type": "RELU6",
+      "fused_activation": "RELU6",
+      "add_output": "/res_layers/res_layers.2/Add_output_0",
+      "fused_output": "/res_layers/res_layers.2/silu_1/Clip_output_0",
+      "event_index": 14
+    },
+    {
+      "kind": "rename_tensor",
+      "old_name": "/res_layers/res_layers.3/Add_output_0",
+      "new_name": "/res_layers/res_layers.3/silu_1/Clip_output_0",
+      "source": "set_operator_outputs",
+      "event_index": 15
+    },
+    {
+      "kind": "fuse_add_activation",
+      "add_op_type": "ADD",
+      "activation_op_type": "RELU6",
+      "fused_activation": "RELU6",
+      "add_output": "/res_layers/res_layers.3/Add_output_0",
+      "fused_output": "/res_layers/res_layers.3/silu_1/Clip_output_0",
+      "event_index": 16
+    },
+    {
+      "kind": "rename_tensor",
+      "old_name": "/res_layers/res_layers.4/Add_output_0",
+      "new_name": "/res_layers/res_layers.4/silu_1/Clip_output_0",
+      "source": "set_operator_outputs",
+      "event_index": 17
+    },
+    {
+      "kind": "fuse_add_activation",
+      "add_op_type": "ADD",
+      "activation_op_type": "RELU6",
+      "fused_activation": "RELU6",
+      "add_output": "/res_layers/res_layers.4/Add_output_0",
+      "fused_output": "/res_layers/res_layers.4/silu_1/Clip_output_0",
+      "event_index": 18
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "/res_layers/res_layers.0/Add_output_0",
+        "/res_layers/res_layers.1/Add_output_0",
+        "/res_layers/res_layers.2/Add_output_0",
+        "/res_layers/res_layers.3/Add_output_0",
+        "/res_layers/res_layers.4/Add_output_0"
+      ],
+      "event_index": 19
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 20
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 21
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 22
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 23
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 24
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 25
+    },
+    {
+      "kind": "replace_input",
+      "src_name": "/res_layers/res_layers.0/conv1/Conv_output_0",
+      "dst_name": "/res_layers/res_layers.0/conv1/Conv_output_nhwc",
+      "source": "set_operator_inputs",
+      "event_index": 26
+    },
+    {
+      "kind": "rename_tensor",
+      "old_name": "/res_layers/res_layers.0/silu/Clip_output_0",
+      "new_name": "/res_layers/res_layers.0/conv2/Conv_input_nhwc",
+      "source": "set_operator_outputs",
+      "event_index": 27
+    },
+    {
+      "kind": "replace_input",
+      "src_name": "/res_layers/res_layers.1/conv1/Conv_output_0",
+      "dst_name": "/res_layers/res_layers.1/conv1/Conv_output_nhwc",
+      "source": "set_operator_inputs",
+      "event_index": 28
+    },
+    {
+      "kind": "rename_tensor",
+      "old_name": "/res_layers/res_layers.1/silu/Clip_output_0",
+      "new_name": "/res_layers/res_layers.1/conv2/Conv_input_nhwc",
+      "source": "set_operator_outputs",
+      "event_index": 29
+    },
+    {
+      "kind": "replace_input",
+      "src_name": "/res_layers/res_layers.2/conv1/Conv_output_0",
+      "dst_name": "/res_layers/res_layers.2/conv1/Conv_output_nhwc",
+      "source": "set_operator_inputs",
+      "event_index": 30
+    },
+    {
+      "kind": "rename_tensor",
+      "old_name": "/res_layers/res_layers.2/silu/Clip_output_0",
+      "new_name": "/res_layers/res_layers.2/conv2/Conv_input_nhwc",
+      "source": "set_operator_outputs",
+      "event_index": 31
+    },
+    {
+      "kind": "replace_input",
+      "src_name": "/res_layers/res_layers.3/conv1/Conv_output_0",
+      "dst_name": "/res_layers/res_layers.3/conv1/Conv_output_nhwc",
+      "source": "set_operator_inputs",
+      "event_index": 32
+    },
+    {
+      "kind": "rename_tensor",
+      "old_name": "/res_layers/res_layers.3/silu/Clip_output_0",
+      "new_name": "/res_layers/res_layers.3/conv2/Conv_input_nhwc",
+      "source": "set_operator_outputs",
+      "event_index": 33
+    },
+    {
+      "kind": "replace_input",
+      "src_name": "/res_layers/res_layers.4/conv1/Conv_output_0",
+      "dst_name": "/res_layers/res_layers.4/conv1/Conv_output_nhwc",
+      "source": "set_operator_inputs",
+      "event_index": 34
+    },
+    {
+      "kind": "rename_tensor",
+      "old_name": "/res_layers/res_layers.4/silu/Clip_output_0",
+      "new_name": "/res_layers/res_layers.4/conv2/Conv_input_nhwc",
+      "source": "set_operator_outputs",
+      "event_index": 35
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "/res_layers/res_layers.0/conv1/Conv_output_0",
+        "/res_layers/res_layers.0/conv1/Conv_conv1d_output_nchw2d",
+        "/res_layers/res_layers.0/conv1/Conv_conv1d_output_nchw2d_perm",
+        "/res_layers/res_layers.0/silu/Clip_output_0",
+        "/res_layers/res_layers.0/conv2/Conv_conv1d_expand_axis",
+        "/res_layers/res_layers.0/conv2/Conv_conv1d_input_nchw2d",
+        "/res_layers/res_layers.0/conv2/Conv_input_nhwc_perm",
+        "/res_layers/res_layers.1/conv1/Conv_output_0",
+        "/res_layers/res_layers.1/conv1/Conv_conv1d_output_nchw2d",
+        "/res_layers/res_layers.1/conv1/Conv_conv1d_output_nchw2d_perm",
+        "/res_layers/res_layers.1/silu/Clip_output_0",
+        "/res_layers/res_layers.1/conv2/Conv_conv1d_expand_axis",
+        "/res_layers/res_layers.1/conv2/Conv_conv1d_input_nchw2d",
+        "/res_layers/res_layers.1/conv2/Conv_input_nhwc_perm",
+        "/res_layers/res_layers.2/conv1/Conv_output_0",
+        "/res_layers/res_layers.2/conv1/Conv_conv1d_output_nchw2d",
+        "/res_layers/res_layers.2/conv1/Conv_conv1d_output_nchw2d_perm",
+        "/res_layers/res_layers.2/silu/Clip_output_0",
+        "/res_layers/res_layers.2/conv2/Conv_conv1d_expand_axis",
+        "/res_layers/res_layers.2/conv2/Conv_conv1d_input_nchw2d",
+        "/res_layers/res_layers.2/conv2/Conv_input_nhwc_perm",
+        "/res_layers/res_layers.3/conv1/Conv_output_0",
+        "/res_layers/res_layers.3/conv1/Conv_conv1d_output_nchw2d",
+        "/res_layers/res_layers.3/conv1/Conv_conv1d_output_nchw2d_perm",
+        "/res_layers/res_layers.3/silu/Clip_output_0",
+        "/res_layers/res_layers.3/conv2/Conv_conv1d_expand_axis",
+        "/res_layers/res_layers.3/conv2/Conv_conv1d_input_nchw2d",
+        "/res_layers/res_layers.3/conv2/Conv_input_nhwc_perm",
+        "/res_layers/res_layers.4/conv1/Conv_output_0",
+        "/res_layers/res_layers.4/conv1/Conv_conv1d_output_nchw2d",
+        "/res_layers/res_layers.4/conv1/Conv_conv1d_output_nchw2d_perm",
+        "/res_layers/res_layers.4/silu/Clip_output_0",
+        "/res_layers/res_layers.4/conv2/Conv_conv1d_expand_axis",
+        "/res_layers/res_layers.4/conv2/Conv_conv1d_input_nchw2d",
+        "/res_layers/res_layers.4/conv2/Conv_input_nhwc_perm"
+      ],
+      "event_index": 36
+    },
+    {
+      "kind": "replace_input",
+      "src_name": "/stem/stem.0/Conv_output_0",
+      "dst_name": "/stem/stem.0/Conv_output_nhwc",
+      "source": "set_operator_inputs",
+      "event_index": 37
+    },
+    {
+      "kind": "rename_tensor",
+      "old_name": "/stem/stem.2/Clip_output_0",
+      "new_name": "/res_layers/res_layers.0/conv1/Conv_input_nhwc",
+      "source": "set_operator_outputs",
+      "event_index": 38
+    },
+    {
+      "kind": "replace_input",
+      "src_name": "/stem/stem.0/Conv_output_nhwc",
+      "dst_name": "/res_layers/res_layers.0/conv1/Conv_input_nhwc",
+      "source": "replace_operator_input_at",
+      "event_index": 39
+    },
+    {
+      "kind": "rename_tensor",
+      "old_name": "/stem/stem.0/Conv_output_0",
+      "new_name": "/stem/stem.2/Clip_output_0",
+      "source": "set_operator_outputs",
+      "event_index": 40
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "/stem/stem.0/Conv_output_0",
+        "/res_layers/res_layers.0/conv1/Conv_conv1d_expand_axis",
+        "/res_layers/res_layers.0/conv1/Conv_conv1d_input_nchw2d",
+        "/res_layers/res_layers.0/conv1/Conv_input_nhwc_perm"
+      ],
+      "event_index": 41
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "__nhwc_to_nchw_perm_rank4__"
+      ],
+      "event_index": 42
+    },
+    {
+      "kind": "prune_unused_tensors",
+      "removed_names": [
+        "/stem/stem.0/Conv_conv1d_expand_axis",
+        "/res_layers/res_layers.1/downsample/downsample.0/Conv_conv1d_expand_axis",
+        "/res_layers/res_layers.1/conv1/Conv_conv1d_expand_axis",
+        "/res_layers/res_layers.2/downsample/downsample.0/Conv_conv1d_expand_axis",
+        "/res_layers/res_layers.2/conv1/Conv_conv1d_expand_axis",
+        "/res_layers/res_layers.3/downsample/downsample.0/Conv_conv1d_expand_axis",
+        "/res_layers/res_layers.3/conv1/Conv_conv1d_expand_axis",
+        "/res_layers/res_layers.4/downsample/downsample.0/Conv_conv1d_expand_axis",
+        "/res_layers/res_layers.4/conv1/Conv_conv1d_expand_axis"
+      ],
+      "event_index": 43
+    }
+  ],
+  "records": [
+    {
+      "identifier": 1,
+      "onnx_op_type": "Conv",
+      "onnx_op_name": "/stem/stem.0/Conv",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/stem/stem.0/Conv_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/conv1/Conv_input_nhwc",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 2,
+      "producer_operator_index": 5,
+      "producer_op_type": "RELU6",
+      "assume_channel_last_layout": true,
+      "status": "rewritten",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": 37,
+          "kind": "replace_input",
+          "from": "/stem/stem.0/Conv_output_0",
+          "to": "/stem/stem.0/Conv_output_nhwc"
+        },
+        {
+          "event_index": 39,
+          "kind": "replace_input",
+          "from": "/stem/stem.0/Conv_output_nhwc",
+          "to": "/res_layers/res_layers.0/conv1/Conv_input_nhwc"
+        }
+      ],
+      "rewrite_name_chain": [
+        "/stem/stem.0/Conv_output_0",
+        "/stem/stem.0/Conv_output_nhwc",
+        "/res_layers/res_layers.0/conv1/Conv_input_nhwc"
+      ]
+    },
+    {
+      "identifier": 2,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/stem/stem.2/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/stem/stem.2/Constant_output_0",
+      "resolved_tflite_tensor_name": "/stem/stem.2/Constant_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/stem/stem.2/Constant_output_0"
+      ]
+    },
+    {
+      "identifier": 3,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/stem/stem.2/Constant_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/stem/stem.2/Constant_1_output_0",
+      "resolved_tflite_tensor_name": "/stem/stem.2/Constant_1_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/stem/stem.2/Constant_1_output_0"
+      ]
+    },
+    {
+      "identifier": 4,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.0/silu/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.0/silu/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/silu/Constant_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.0/silu/Constant_output_0"
+      ]
+    },
+    {
+      "identifier": 5,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.0/silu/Constant_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.0/silu/Constant_1_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/silu/Constant_1_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.0/silu/Constant_1_output_0"
+      ]
+    },
+    {
+      "identifier": 6,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.0/se/silu/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.0/se/silu/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/se/silu/Constant_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.0/se/silu/Constant_output_0"
+      ]
+    },
+    {
+      "identifier": 7,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.0/se/silu/Constant_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.0/se/silu/Constant_1_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/se/silu/Constant_1_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.0/se/silu/Constant_1_output_0"
+      ]
+    },
+    {
+      "identifier": 8,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.0/se/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.0/se/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/se/Reshape_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 18,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "inferred",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": null,
+          "kind": "inferred_via_downstream",
+          "from": "/res_layers/res_layers.0/se/Constant_output_0",
+          "to": "/res_layers/res_layers.0/se/Reshape_output_0",
+          "via_onnx_output": "/res_layers/res_layers.0/se/Reshape_output_0",
+          "hops": 1
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.0/se/Constant_output_0",
+        "/res_layers/res_layers.0/se/Reshape_output_0"
+      ],
+      "inferred_from_onnx_output_name": "/res_layers/res_layers.0/se/Reshape_output_0",
+      "inferred_hops": 1
+    },
+    {
+      "identifier": 9,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.0/silu_1/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.0/silu_1/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/silu_1/Constant_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.0/silu_1/Constant_output_0"
+      ]
+    },
+    {
+      "identifier": 10,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.0/silu_1/Constant_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.0/silu_1/Constant_1_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/silu_1/Constant_1_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.0/silu_1/Constant_1_output_0"
+      ]
+    },
+    {
+      "identifier": 11,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.1/silu/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/silu/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/silu/Constant_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/silu/Constant_output_0"
+      ]
+    },
+    {
+      "identifier": 12,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.1/silu/Constant_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/silu/Constant_1_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/silu/Constant_1_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/silu/Constant_1_output_0"
+      ]
+    },
+    {
+      "identifier": 13,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.1/se/silu/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/se/silu/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/se/silu/Constant_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/se/silu/Constant_output_0"
+      ]
+    },
+    {
+      "identifier": 14,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.1/se/silu/Constant_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/se/silu/Constant_1_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/se/silu/Constant_1_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/se/silu/Constant_1_output_0"
+      ]
+    },
+    {
+      "identifier": 15,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.1/se/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/se/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/se/Reshape_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 39,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "inferred",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": null,
+          "kind": "inferred_via_downstream",
+          "from": "/res_layers/res_layers.1/se/Constant_output_0",
+          "to": "/res_layers/res_layers.1/se/Reshape_output_0",
+          "via_onnx_output": "/res_layers/res_layers.1/se/Reshape_output_0",
+          "hops": 1
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/se/Constant_output_0",
+        "/res_layers/res_layers.1/se/Reshape_output_0"
+      ],
+      "inferred_from_onnx_output_name": "/res_layers/res_layers.1/se/Reshape_output_0",
+      "inferred_hops": 1
+    },
+    {
+      "identifier": 16,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.1/silu_1/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/silu_1/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/silu_1/Constant_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/silu_1/Constant_output_0"
+      ]
+    },
+    {
+      "identifier": 17,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.1/silu_1/Constant_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/silu_1/Constant_1_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/silu_1/Constant_1_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/silu_1/Constant_1_output_0"
+      ]
+    },
+    {
+      "identifier": 18,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.2/silu/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/silu/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/silu/Constant_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/silu/Constant_output_0"
+      ]
+    },
+    {
+      "identifier": 19,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.2/silu/Constant_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/silu/Constant_1_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/silu/Constant_1_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/silu/Constant_1_output_0"
+      ]
+    },
+    {
+      "identifier": 20,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.2/se/silu/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/se/silu/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/se/silu/Constant_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/se/silu/Constant_output_0"
+      ]
+    },
+    {
+      "identifier": 21,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.2/se/silu/Constant_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/se/silu/Constant_1_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/se/silu/Constant_1_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/se/silu/Constant_1_output_0"
+      ]
+    },
+    {
+      "identifier": 22,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.2/se/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/se/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/se/Reshape_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 60,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "inferred",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": null,
+          "kind": "inferred_via_downstream",
+          "from": "/res_layers/res_layers.2/se/Constant_output_0",
+          "to": "/res_layers/res_layers.2/se/Reshape_output_0",
+          "via_onnx_output": "/res_layers/res_layers.2/se/Reshape_output_0",
+          "hops": 1
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/se/Constant_output_0",
+        "/res_layers/res_layers.2/se/Reshape_output_0"
+      ],
+      "inferred_from_onnx_output_name": "/res_layers/res_layers.2/se/Reshape_output_0",
+      "inferred_hops": 1
+    },
+    {
+      "identifier": 23,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.2/silu_1/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/silu_1/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/silu_1/Constant_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/silu_1/Constant_output_0"
+      ]
+    },
+    {
+      "identifier": 24,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.2/silu_1/Constant_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/silu_1/Constant_1_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/silu_1/Constant_1_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/silu_1/Constant_1_output_0"
+      ]
+    },
+    {
+      "identifier": 25,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.3/silu/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/silu/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/silu/Constant_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/silu/Constant_output_0"
+      ]
+    },
+    {
+      "identifier": 26,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.3/silu/Constant_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/silu/Constant_1_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/silu/Constant_1_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/silu/Constant_1_output_0"
+      ]
+    },
+    {
+      "identifier": 27,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.3/se/silu/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/se/silu/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/se/silu/Constant_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/se/silu/Constant_output_0"
+      ]
+    },
+    {
+      "identifier": 28,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.3/se/silu/Constant_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/se/silu/Constant_1_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/se/silu/Constant_1_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/se/silu/Constant_1_output_0"
+      ]
+    },
+    {
+      "identifier": 29,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.3/se/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/se/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/se/Reshape_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 81,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "inferred",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": null,
+          "kind": "inferred_via_downstream",
+          "from": "/res_layers/res_layers.3/se/Constant_output_0",
+          "to": "/res_layers/res_layers.3/se/Reshape_output_0",
+          "via_onnx_output": "/res_layers/res_layers.3/se/Reshape_output_0",
+          "hops": 1
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/se/Constant_output_0",
+        "/res_layers/res_layers.3/se/Reshape_output_0"
+      ],
+      "inferred_from_onnx_output_name": "/res_layers/res_layers.3/se/Reshape_output_0",
+      "inferred_hops": 1
+    },
+    {
+      "identifier": 30,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.3/silu_1/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/silu_1/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/silu_1/Constant_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/silu_1/Constant_output_0"
+      ]
+    },
+    {
+      "identifier": 31,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.3/silu_1/Constant_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/silu_1/Constant_1_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/silu_1/Constant_1_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/silu_1/Constant_1_output_0"
+      ]
+    },
+    {
+      "identifier": 32,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.4/silu/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/silu/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/silu/Constant_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/silu/Constant_output_0"
+      ]
+    },
+    {
+      "identifier": 33,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.4/silu/Constant_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/silu/Constant_1_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/silu/Constant_1_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/silu/Constant_1_output_0"
+      ]
+    },
+    {
+      "identifier": 34,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.4/se/silu/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/se/silu/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/se/silu/Constant_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/se/silu/Constant_output_0"
+      ]
+    },
+    {
+      "identifier": 35,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.4/se/silu/Constant_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/se/silu/Constant_1_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/se/silu/Constant_1_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/se/silu/Constant_1_output_0"
+      ]
+    },
+    {
+      "identifier": 36,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.4/se/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/se/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/se/Reshape_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 102,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "inferred",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": null,
+          "kind": "inferred_via_downstream",
+          "from": "/res_layers/res_layers.4/se/Constant_output_0",
+          "to": "/res_layers/res_layers.4/se/Reshape_output_0",
+          "via_onnx_output": "/res_layers/res_layers.4/se/Reshape_output_0",
+          "hops": 1
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/se/Constant_output_0",
+        "/res_layers/res_layers.4/se/Reshape_output_0"
+      ],
+      "inferred_from_onnx_output_name": "/res_layers/res_layers.4/se/Reshape_output_0",
+      "inferred_hops": 1
+    },
+    {
+      "identifier": 37,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.4/silu_1/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/silu_1/Constant_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/silu_1/Constant_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/silu_1/Constant_output_0"
+      ]
+    },
+    {
+      "identifier": 38,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/res_layers/res_layers.4/silu_1/Constant_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/silu_1/Constant_1_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/silu_1/Constant_1_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/silu_1/Constant_1_output_0"
+      ]
+    },
+    {
+      "identifier": 39,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/head_rhythm/head_rhythm.1/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/head_rhythm/head_rhythm.1/Constant_output_0",
+      "resolved_tflite_tensor_name": "/head_rhythm/head_rhythm.1/Constant_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/head_rhythm/head_rhythm.1/Constant_output_0"
+      ]
+    },
+    {
+      "identifier": 40,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/head_rhythm/head_rhythm.1/Constant_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/head_rhythm/head_rhythm.1/Constant_1_output_0",
+      "resolved_tflite_tensor_name": "/head_rhythm/head_rhythm.1/Constant_1_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/head_rhythm/head_rhythm.1/Constant_1_output_0"
+      ]
+    },
+    {
+      "identifier": 41,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/head_pathology/head_pathology.1/Constant",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/head_pathology/head_pathology.1/Constant_output_0",
+      "resolved_tflite_tensor_name": "/head_pathology/head_pathology.1/Constant_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/head_pathology/head_pathology.1/Constant_output_0"
+      ]
+    },
+    {
+      "identifier": 42,
+      "onnx_op_type": "Constant",
+      "onnx_op_name": "/head_pathology/head_pathology.1/Constant_1",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/head_pathology/head_pathology.1/Constant_1_output_0",
+      "resolved_tflite_tensor_name": "/head_pathology/head_pathology.1/Constant_1_output_0",
+      "exists_in_final_model": false,
+      "is_graph_output": false,
+      "consumer_count": 0,
+      "producer_operator_index": null,
+      "producer_op_type": null,
+      "assume_channel_last_layout": false,
+      "status": "missing",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/head_pathology/head_pathology.1/Constant_1_output_0"
+      ]
+    },
+    {
+      "identifier": 43,
+      "onnx_op_type": "Clip",
+      "onnx_op_name": "/stem/stem.2/Clip",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/stem/stem.2/Clip_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/conv1/Conv_input_nhwc",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 2,
+      "producer_operator_index": 5,
+      "producer_op_type": "RELU6",
+      "assume_channel_last_layout": true,
+      "status": "rewritten",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": 38,
+          "kind": "rename_tensor",
+          "from": "/stem/stem.2/Clip_output_0",
+          "to": "/res_layers/res_layers.0/conv1/Conv_input_nhwc"
+        }
+      ],
+      "rewrite_name_chain": [
+        "/stem/stem.2/Clip_output_0",
+        "/res_layers/res_layers.0/conv1/Conv_input_nhwc"
+      ]
+    },
+    {
+      "identifier": 44,
+      "onnx_op_type": "Conv",
+      "onnx_op_name": "/res_layers/res_layers.0/conv1/Conv",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.0/conv1/Conv_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/conv1/Conv_output_nhwc",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 8,
+      "producer_op_type": "CONV_2D",
+      "assume_channel_last_layout": true,
+      "status": "rewritten",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": 26,
+          "kind": "replace_input",
+          "from": "/res_layers/res_layers.0/conv1/Conv_output_0",
+          "to": "/res_layers/res_layers.0/conv1/Conv_output_nhwc"
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.0/conv1/Conv_output_0",
+        "/res_layers/res_layers.0/conv1/Conv_output_nhwc"
+      ]
+    },
+    {
+      "identifier": 45,
+      "onnx_op_type": "Clip",
+      "onnx_op_name": "/res_layers/res_layers.0/silu/Clip",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.0/silu/Clip_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/conv2/Conv_input_nhwc",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 9,
+      "producer_op_type": "RELU6",
+      "assume_channel_last_layout": true,
+      "status": "rewritten",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": 27,
+          "kind": "rename_tensor",
+          "from": "/res_layers/res_layers.0/silu/Clip_output_0",
+          "to": "/res_layers/res_layers.0/conv2/Conv_input_nhwc"
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.0/silu/Clip_output_0",
+        "/res_layers/res_layers.0/conv2/Conv_input_nhwc"
+      ]
+    },
+    {
+      "identifier": 46,
+      "onnx_op_type": "Conv",
+      "onnx_op_name": "/res_layers/res_layers.0/conv2/Conv",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.0/conv2/Conv_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/conv2/Conv_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 2,
+      "producer_operator_index": 12,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.0/conv2/Conv_output_0"
+      ]
+    },
+    {
+      "identifier": 47,
+      "onnx_op_type": "ReduceMean",
+      "onnx_op_name": "/res_layers/res_layers.0/se/ReduceMean",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.0/se/ReduceMean_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/se/ReduceMean_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 13,
+      "producer_op_type": "MEAN",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.0/se/ReduceMean_output_0"
+      ]
+    },
+    {
+      "identifier": 48,
+      "onnx_op_type": "Gemm",
+      "onnx_op_name": "/res_layers/res_layers.0/se/fc1/Gemm",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.0/se/fc1/Gemm_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/se/fc1/Gemm_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 14,
+      "producer_op_type": "FULLY_CONNECTED",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.0/se/fc1/Gemm_output_0"
+      ]
+    },
+    {
+      "identifier": 49,
+      "onnx_op_type": "Clip",
+      "onnx_op_name": "/res_layers/res_layers.0/se/silu/Clip",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.0/se/silu/Clip_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/se/silu/Clip_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 15,
+      "producer_op_type": "RELU6",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.0/se/silu/Clip_output_0"
+      ]
+    },
+    {
+      "identifier": 50,
+      "onnx_op_type": "Gemm",
+      "onnx_op_name": "/res_layers/res_layers.0/se/fc2/Gemm",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.0/se/fc2/Gemm_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/se/fc2/Gemm_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 16,
+      "producer_op_type": "FULLY_CONNECTED",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.0/se/fc2/Gemm_output_0"
+      ]
+    },
+    {
+      "identifier": 51,
+      "onnx_op_type": "Sigmoid",
+      "onnx_op_name": "/res_layers/res_layers.0/se/sigmoid/Sigmoid",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.0/se/sigmoid/Sigmoid_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/se/sigmoid/Sigmoid_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 17,
+      "producer_op_type": "LOGISTIC",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.0/se/sigmoid/Sigmoid_output_0"
+      ]
+    },
+    {
+      "identifier": 52,
+      "onnx_op_type": "Reshape",
+      "onnx_op_name": "/res_layers/res_layers.0/se/Reshape",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.0/se/Reshape_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/se/Reshape_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 18,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.0/se/Reshape_output_0"
+      ]
+    },
+    {
+      "identifier": 53,
+      "onnx_op_type": "Mul",
+      "onnx_op_name": "/res_layers/res_layers.0/se/Mul",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.0/se/Mul_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/se/Mul_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 19,
+      "producer_op_type": "MUL",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.0/se/Mul_output_0"
+      ]
+    },
+    {
+      "identifier": 54,
+      "onnx_op_type": "Add",
+      "onnx_op_name": "/res_layers/res_layers.0/Add",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.0/Add_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/silu_1/Clip_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 2,
+      "producer_operator_index": 20,
+      "producer_op_type": "ADD",
+      "assume_channel_last_layout": false,
+      "status": "rewritten",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": 9,
+          "kind": "rename_tensor",
+          "from": "/res_layers/res_layers.0/Add_output_0",
+          "to": "/res_layers/res_layers.0/silu_1/Clip_output_0"
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.0/Add_output_0",
+        "/res_layers/res_layers.0/silu_1/Clip_output_0"
+      ]
+    },
+    {
+      "identifier": 55,
+      "onnx_op_type": "Clip",
+      "onnx_op_name": "/res_layers/res_layers.0/silu_1/Clip",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.0/silu_1/Clip_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.0/silu_1/Clip_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 2,
+      "producer_operator_index": 20,
+      "producer_op_type": "ADD",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.0/silu_1/Clip_output_0"
+      ]
+    },
+    {
+      "identifier": 56,
+      "onnx_op_type": "Conv",
+      "onnx_op_name": "/res_layers/res_layers.1/downsample/downsample.0/Conv",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/downsample/downsample.0/Conv_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/downsample/downsample.0/Conv_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 25,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/downsample/downsample.0/Conv_output_0"
+      ]
+    },
+    {
+      "identifier": 57,
+      "onnx_op_type": "Conv",
+      "onnx_op_name": "/res_layers/res_layers.1/conv1/Conv",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/conv1/Conv_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/conv1/Conv_output_nhwc",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 29,
+      "producer_op_type": "CONV_2D",
+      "assume_channel_last_layout": true,
+      "status": "rewritten",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": 28,
+          "kind": "replace_input",
+          "from": "/res_layers/res_layers.1/conv1/Conv_output_0",
+          "to": "/res_layers/res_layers.1/conv1/Conv_output_nhwc"
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/conv1/Conv_output_0",
+        "/res_layers/res_layers.1/conv1/Conv_output_nhwc"
+      ]
+    },
+    {
+      "identifier": 58,
+      "onnx_op_type": "Clip",
+      "onnx_op_name": "/res_layers/res_layers.1/silu/Clip",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/silu/Clip_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/conv2/Conv_input_nhwc",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 30,
+      "producer_op_type": "RELU6",
+      "assume_channel_last_layout": true,
+      "status": "rewritten",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": 29,
+          "kind": "rename_tensor",
+          "from": "/res_layers/res_layers.1/silu/Clip_output_0",
+          "to": "/res_layers/res_layers.1/conv2/Conv_input_nhwc"
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/silu/Clip_output_0",
+        "/res_layers/res_layers.1/conv2/Conv_input_nhwc"
+      ]
+    },
+    {
+      "identifier": 59,
+      "onnx_op_type": "Conv",
+      "onnx_op_name": "/res_layers/res_layers.1/conv2/Conv",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/conv2/Conv_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/conv2/Conv_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 2,
+      "producer_operator_index": 33,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/conv2/Conv_output_0"
+      ]
+    },
+    {
+      "identifier": 60,
+      "onnx_op_type": "ReduceMean",
+      "onnx_op_name": "/res_layers/res_layers.1/se/ReduceMean",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/se/ReduceMean_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/se/ReduceMean_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 34,
+      "producer_op_type": "MEAN",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/se/ReduceMean_output_0"
+      ]
+    },
+    {
+      "identifier": 61,
+      "onnx_op_type": "Gemm",
+      "onnx_op_name": "/res_layers/res_layers.1/se/fc1/Gemm",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/se/fc1/Gemm_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/se/fc1/Gemm_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 35,
+      "producer_op_type": "FULLY_CONNECTED",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/se/fc1/Gemm_output_0"
+      ]
+    },
+    {
+      "identifier": 62,
+      "onnx_op_type": "Clip",
+      "onnx_op_name": "/res_layers/res_layers.1/se/silu/Clip",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/se/silu/Clip_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/se/silu/Clip_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 36,
+      "producer_op_type": "RELU6",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/se/silu/Clip_output_0"
+      ]
+    },
+    {
+      "identifier": 63,
+      "onnx_op_type": "Gemm",
+      "onnx_op_name": "/res_layers/res_layers.1/se/fc2/Gemm",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/se/fc2/Gemm_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/se/fc2/Gemm_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 37,
+      "producer_op_type": "FULLY_CONNECTED",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/se/fc2/Gemm_output_0"
+      ]
+    },
+    {
+      "identifier": 64,
+      "onnx_op_type": "Sigmoid",
+      "onnx_op_name": "/res_layers/res_layers.1/se/sigmoid/Sigmoid",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/se/sigmoid/Sigmoid_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/se/sigmoid/Sigmoid_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 38,
+      "producer_op_type": "LOGISTIC",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/se/sigmoid/Sigmoid_output_0"
+      ]
+    },
+    {
+      "identifier": 65,
+      "onnx_op_type": "Reshape",
+      "onnx_op_name": "/res_layers/res_layers.1/se/Reshape",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/se/Reshape_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/se/Reshape_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 39,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/se/Reshape_output_0"
+      ]
+    },
+    {
+      "identifier": 66,
+      "onnx_op_type": "Mul",
+      "onnx_op_name": "/res_layers/res_layers.1/se/Mul",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/se/Mul_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/se/Mul_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 40,
+      "producer_op_type": "MUL",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/se/Mul_output_0"
+      ]
+    },
+    {
+      "identifier": 67,
+      "onnx_op_type": "Add",
+      "onnx_op_name": "/res_layers/res_layers.1/Add",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/Add_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/silu_1/Clip_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 2,
+      "producer_operator_index": 41,
+      "producer_op_type": "ADD",
+      "assume_channel_last_layout": false,
+      "status": "rewritten",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": 11,
+          "kind": "rename_tensor",
+          "from": "/res_layers/res_layers.1/Add_output_0",
+          "to": "/res_layers/res_layers.1/silu_1/Clip_output_0"
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/Add_output_0",
+        "/res_layers/res_layers.1/silu_1/Clip_output_0"
+      ]
+    },
+    {
+      "identifier": 68,
+      "onnx_op_type": "Clip",
+      "onnx_op_name": "/res_layers/res_layers.1/silu_1/Clip",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.1/silu_1/Clip_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.1/silu_1/Clip_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 2,
+      "producer_operator_index": 41,
+      "producer_op_type": "ADD",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.1/silu_1/Clip_output_0"
+      ]
+    },
+    {
+      "identifier": 69,
+      "onnx_op_type": "Conv",
+      "onnx_op_name": "/res_layers/res_layers.2/downsample/downsample.0/Conv",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/downsample/downsample.0/Conv_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/downsample/downsample.0/Conv_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 46,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/downsample/downsample.0/Conv_output_0"
+      ]
+    },
+    {
+      "identifier": 70,
+      "onnx_op_type": "Conv",
+      "onnx_op_name": "/res_layers/res_layers.2/conv1/Conv",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/conv1/Conv_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/conv1/Conv_output_nhwc",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 50,
+      "producer_op_type": "CONV_2D",
+      "assume_channel_last_layout": true,
+      "status": "rewritten",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": 30,
+          "kind": "replace_input",
+          "from": "/res_layers/res_layers.2/conv1/Conv_output_0",
+          "to": "/res_layers/res_layers.2/conv1/Conv_output_nhwc"
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/conv1/Conv_output_0",
+        "/res_layers/res_layers.2/conv1/Conv_output_nhwc"
+      ]
+    },
+    {
+      "identifier": 71,
+      "onnx_op_type": "Clip",
+      "onnx_op_name": "/res_layers/res_layers.2/silu/Clip",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/silu/Clip_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/conv2/Conv_input_nhwc",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 51,
+      "producer_op_type": "RELU6",
+      "assume_channel_last_layout": true,
+      "status": "rewritten",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": 31,
+          "kind": "rename_tensor",
+          "from": "/res_layers/res_layers.2/silu/Clip_output_0",
+          "to": "/res_layers/res_layers.2/conv2/Conv_input_nhwc"
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/silu/Clip_output_0",
+        "/res_layers/res_layers.2/conv2/Conv_input_nhwc"
+      ]
+    },
+    {
+      "identifier": 72,
+      "onnx_op_type": "Conv",
+      "onnx_op_name": "/res_layers/res_layers.2/conv2/Conv",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/conv2/Conv_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/conv2/Conv_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 2,
+      "producer_operator_index": 54,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/conv2/Conv_output_0"
+      ]
+    },
+    {
+      "identifier": 73,
+      "onnx_op_type": "ReduceMean",
+      "onnx_op_name": "/res_layers/res_layers.2/se/ReduceMean",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/se/ReduceMean_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/se/ReduceMean_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 55,
+      "producer_op_type": "MEAN",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/se/ReduceMean_output_0"
+      ]
+    },
+    {
+      "identifier": 74,
+      "onnx_op_type": "Gemm",
+      "onnx_op_name": "/res_layers/res_layers.2/se/fc1/Gemm",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/se/fc1/Gemm_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/se/fc1/Gemm_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 56,
+      "producer_op_type": "FULLY_CONNECTED",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/se/fc1/Gemm_output_0"
+      ]
+    },
+    {
+      "identifier": 75,
+      "onnx_op_type": "Clip",
+      "onnx_op_name": "/res_layers/res_layers.2/se/silu/Clip",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/se/silu/Clip_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/se/silu/Clip_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 57,
+      "producer_op_type": "RELU6",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/se/silu/Clip_output_0"
+      ]
+    },
+    {
+      "identifier": 76,
+      "onnx_op_type": "Gemm",
+      "onnx_op_name": "/res_layers/res_layers.2/se/fc2/Gemm",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/se/fc2/Gemm_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/se/fc2/Gemm_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 58,
+      "producer_op_type": "FULLY_CONNECTED",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/se/fc2/Gemm_output_0"
+      ]
+    },
+    {
+      "identifier": 77,
+      "onnx_op_type": "Sigmoid",
+      "onnx_op_name": "/res_layers/res_layers.2/se/sigmoid/Sigmoid",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/se/sigmoid/Sigmoid_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/se/sigmoid/Sigmoid_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 59,
+      "producer_op_type": "LOGISTIC",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/se/sigmoid/Sigmoid_output_0"
+      ]
+    },
+    {
+      "identifier": 78,
+      "onnx_op_type": "Reshape",
+      "onnx_op_name": "/res_layers/res_layers.2/se/Reshape",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/se/Reshape_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/se/Reshape_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 60,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/se/Reshape_output_0"
+      ]
+    },
+    {
+      "identifier": 79,
+      "onnx_op_type": "Mul",
+      "onnx_op_name": "/res_layers/res_layers.2/se/Mul",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/se/Mul_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/se/Mul_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 61,
+      "producer_op_type": "MUL",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/se/Mul_output_0"
+      ]
+    },
+    {
+      "identifier": 80,
+      "onnx_op_type": "Add",
+      "onnx_op_name": "/res_layers/res_layers.2/Add",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/Add_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/silu_1/Clip_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 2,
+      "producer_operator_index": 62,
+      "producer_op_type": "ADD",
+      "assume_channel_last_layout": false,
+      "status": "rewritten",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": 13,
+          "kind": "rename_tensor",
+          "from": "/res_layers/res_layers.2/Add_output_0",
+          "to": "/res_layers/res_layers.2/silu_1/Clip_output_0"
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/Add_output_0",
+        "/res_layers/res_layers.2/silu_1/Clip_output_0"
+      ]
+    },
+    {
+      "identifier": 81,
+      "onnx_op_type": "Clip",
+      "onnx_op_name": "/res_layers/res_layers.2/silu_1/Clip",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.2/silu_1/Clip_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.2/silu_1/Clip_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 2,
+      "producer_operator_index": 62,
+      "producer_op_type": "ADD",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.2/silu_1/Clip_output_0"
+      ]
+    },
+    {
+      "identifier": 82,
+      "onnx_op_type": "Conv",
+      "onnx_op_name": "/res_layers/res_layers.3/downsample/downsample.0/Conv",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/downsample/downsample.0/Conv_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/downsample/downsample.0/Conv_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 67,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/downsample/downsample.0/Conv_output_0"
+      ]
+    },
+    {
+      "identifier": 83,
+      "onnx_op_type": "Conv",
+      "onnx_op_name": "/res_layers/res_layers.3/conv1/Conv",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/conv1/Conv_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/conv1/Conv_output_nhwc",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 71,
+      "producer_op_type": "CONV_2D",
+      "assume_channel_last_layout": true,
+      "status": "rewritten",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": 32,
+          "kind": "replace_input",
+          "from": "/res_layers/res_layers.3/conv1/Conv_output_0",
+          "to": "/res_layers/res_layers.3/conv1/Conv_output_nhwc"
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/conv1/Conv_output_0",
+        "/res_layers/res_layers.3/conv1/Conv_output_nhwc"
+      ]
+    },
+    {
+      "identifier": 84,
+      "onnx_op_type": "Clip",
+      "onnx_op_name": "/res_layers/res_layers.3/silu/Clip",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/silu/Clip_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/conv2/Conv_input_nhwc",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 72,
+      "producer_op_type": "RELU6",
+      "assume_channel_last_layout": true,
+      "status": "rewritten",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": 33,
+          "kind": "rename_tensor",
+          "from": "/res_layers/res_layers.3/silu/Clip_output_0",
+          "to": "/res_layers/res_layers.3/conv2/Conv_input_nhwc"
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/silu/Clip_output_0",
+        "/res_layers/res_layers.3/conv2/Conv_input_nhwc"
+      ]
+    },
+    {
+      "identifier": 85,
+      "onnx_op_type": "Conv",
+      "onnx_op_name": "/res_layers/res_layers.3/conv2/Conv",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/conv2/Conv_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/conv2/Conv_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 2,
+      "producer_operator_index": 75,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/conv2/Conv_output_0"
+      ]
+    },
+    {
+      "identifier": 86,
+      "onnx_op_type": "ReduceMean",
+      "onnx_op_name": "/res_layers/res_layers.3/se/ReduceMean",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/se/ReduceMean_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/se/ReduceMean_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 76,
+      "producer_op_type": "MEAN",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/se/ReduceMean_output_0"
+      ]
+    },
+    {
+      "identifier": 87,
+      "onnx_op_type": "Gemm",
+      "onnx_op_name": "/res_layers/res_layers.3/se/fc1/Gemm",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/se/fc1/Gemm_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/se/fc1/Gemm_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 77,
+      "producer_op_type": "FULLY_CONNECTED",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/se/fc1/Gemm_output_0"
+      ]
+    },
+    {
+      "identifier": 88,
+      "onnx_op_type": "Clip",
+      "onnx_op_name": "/res_layers/res_layers.3/se/silu/Clip",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/se/silu/Clip_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/se/silu/Clip_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 78,
+      "producer_op_type": "RELU6",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/se/silu/Clip_output_0"
+      ]
+    },
+    {
+      "identifier": 89,
+      "onnx_op_type": "Gemm",
+      "onnx_op_name": "/res_layers/res_layers.3/se/fc2/Gemm",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/se/fc2/Gemm_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/se/fc2/Gemm_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 79,
+      "producer_op_type": "FULLY_CONNECTED",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/se/fc2/Gemm_output_0"
+      ]
+    },
+    {
+      "identifier": 90,
+      "onnx_op_type": "Sigmoid",
+      "onnx_op_name": "/res_layers/res_layers.3/se/sigmoid/Sigmoid",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/se/sigmoid/Sigmoid_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/se/sigmoid/Sigmoid_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 80,
+      "producer_op_type": "LOGISTIC",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/se/sigmoid/Sigmoid_output_0"
+      ]
+    },
+    {
+      "identifier": 91,
+      "onnx_op_type": "Reshape",
+      "onnx_op_name": "/res_layers/res_layers.3/se/Reshape",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/se/Reshape_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/se/Reshape_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 81,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/se/Reshape_output_0"
+      ]
+    },
+    {
+      "identifier": 92,
+      "onnx_op_type": "Mul",
+      "onnx_op_name": "/res_layers/res_layers.3/se/Mul",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/se/Mul_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/se/Mul_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 82,
+      "producer_op_type": "MUL",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/se/Mul_output_0"
+      ]
+    },
+    {
+      "identifier": 93,
+      "onnx_op_type": "Add",
+      "onnx_op_name": "/res_layers/res_layers.3/Add",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/Add_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/silu_1/Clip_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 2,
+      "producer_operator_index": 83,
+      "producer_op_type": "ADD",
+      "assume_channel_last_layout": false,
+      "status": "rewritten",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": 15,
+          "kind": "rename_tensor",
+          "from": "/res_layers/res_layers.3/Add_output_0",
+          "to": "/res_layers/res_layers.3/silu_1/Clip_output_0"
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/Add_output_0",
+        "/res_layers/res_layers.3/silu_1/Clip_output_0"
+      ]
+    },
+    {
+      "identifier": 94,
+      "onnx_op_type": "Clip",
+      "onnx_op_name": "/res_layers/res_layers.3/silu_1/Clip",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.3/silu_1/Clip_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.3/silu_1/Clip_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 2,
+      "producer_operator_index": 83,
+      "producer_op_type": "ADD",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.3/silu_1/Clip_output_0"
+      ]
+    },
+    {
+      "identifier": 95,
+      "onnx_op_type": "Conv",
+      "onnx_op_name": "/res_layers/res_layers.4/downsample/downsample.0/Conv",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/downsample/downsample.0/Conv_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/downsample/downsample.0/Conv_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 88,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/downsample/downsample.0/Conv_output_0"
+      ]
+    },
+    {
+      "identifier": 96,
+      "onnx_op_type": "Conv",
+      "onnx_op_name": "/res_layers/res_layers.4/conv1/Conv",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/conv1/Conv_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/conv1/Conv_output_nhwc",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 92,
+      "producer_op_type": "CONV_2D",
+      "assume_channel_last_layout": true,
+      "status": "rewritten",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": 34,
+          "kind": "replace_input",
+          "from": "/res_layers/res_layers.4/conv1/Conv_output_0",
+          "to": "/res_layers/res_layers.4/conv1/Conv_output_nhwc"
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/conv1/Conv_output_0",
+        "/res_layers/res_layers.4/conv1/Conv_output_nhwc"
+      ]
+    },
+    {
+      "identifier": 97,
+      "onnx_op_type": "Clip",
+      "onnx_op_name": "/res_layers/res_layers.4/silu/Clip",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/silu/Clip_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/conv2/Conv_input_nhwc",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 93,
+      "producer_op_type": "RELU6",
+      "assume_channel_last_layout": true,
+      "status": "rewritten",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": 35,
+          "kind": "rename_tensor",
+          "from": "/res_layers/res_layers.4/silu/Clip_output_0",
+          "to": "/res_layers/res_layers.4/conv2/Conv_input_nhwc"
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/silu/Clip_output_0",
+        "/res_layers/res_layers.4/conv2/Conv_input_nhwc"
+      ]
+    },
+    {
+      "identifier": 98,
+      "onnx_op_type": "Conv",
+      "onnx_op_name": "/res_layers/res_layers.4/conv2/Conv",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/conv2/Conv_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/conv2/Conv_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 2,
+      "producer_operator_index": 96,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/conv2/Conv_output_0"
+      ]
+    },
+    {
+      "identifier": 99,
+      "onnx_op_type": "ReduceMean",
+      "onnx_op_name": "/res_layers/res_layers.4/se/ReduceMean",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/se/ReduceMean_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/se/ReduceMean_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 97,
+      "producer_op_type": "MEAN",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/se/ReduceMean_output_0"
+      ]
+    },
+    {
+      "identifier": 100,
+      "onnx_op_type": "Gemm",
+      "onnx_op_name": "/res_layers/res_layers.4/se/fc1/Gemm",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/se/fc1/Gemm_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/se/fc1/Gemm_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 98,
+      "producer_op_type": "FULLY_CONNECTED",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/se/fc1/Gemm_output_0"
+      ]
+    },
+    {
+      "identifier": 101,
+      "onnx_op_type": "Clip",
+      "onnx_op_name": "/res_layers/res_layers.4/se/silu/Clip",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/se/silu/Clip_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/se/silu/Clip_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 99,
+      "producer_op_type": "RELU6",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/se/silu/Clip_output_0"
+      ]
+    },
+    {
+      "identifier": 102,
+      "onnx_op_type": "Gemm",
+      "onnx_op_name": "/res_layers/res_layers.4/se/fc2/Gemm",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/se/fc2/Gemm_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/se/fc2/Gemm_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 100,
+      "producer_op_type": "FULLY_CONNECTED",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/se/fc2/Gemm_output_0"
+      ]
+    },
+    {
+      "identifier": 103,
+      "onnx_op_type": "Sigmoid",
+      "onnx_op_name": "/res_layers/res_layers.4/se/sigmoid/Sigmoid",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/se/sigmoid/Sigmoid_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/se/sigmoid/Sigmoid_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 101,
+      "producer_op_type": "LOGISTIC",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/se/sigmoid/Sigmoid_output_0"
+      ]
+    },
+    {
+      "identifier": 104,
+      "onnx_op_type": "Reshape",
+      "onnx_op_name": "/res_layers/res_layers.4/se/Reshape",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/se/Reshape_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/se/Reshape_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 102,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/se/Reshape_output_0"
+      ]
+    },
+    {
+      "identifier": 105,
+      "onnx_op_type": "Mul",
+      "onnx_op_name": "/res_layers/res_layers.4/se/Mul",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/se/Mul_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/se/Mul_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 103,
+      "producer_op_type": "MUL",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/se/Mul_output_0"
+      ]
+    },
+    {
+      "identifier": 106,
+      "onnx_op_type": "Add",
+      "onnx_op_name": "/res_layers/res_layers.4/Add",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/Add_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/silu_1/Clip_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 104,
+      "producer_op_type": "ADD",
+      "assume_channel_last_layout": false,
+      "status": "rewritten",
+      "is_rewritten": true,
+      "rewrite_events": [
+        {
+          "event_index": 17,
+          "kind": "rename_tensor",
+          "from": "/res_layers/res_layers.4/Add_output_0",
+          "to": "/res_layers/res_layers.4/silu_1/Clip_output_0"
+        }
+      ],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/Add_output_0",
+        "/res_layers/res_layers.4/silu_1/Clip_output_0"
+      ]
+    },
+    {
+      "identifier": 107,
+      "onnx_op_type": "Clip",
+      "onnx_op_name": "/res_layers/res_layers.4/silu_1/Clip",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/res_layers/res_layers.4/silu_1/Clip_output_0",
+      "resolved_tflite_tensor_name": "/res_layers/res_layers.4/silu_1/Clip_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 104,
+      "producer_op_type": "ADD",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/res_layers/res_layers.4/silu_1/Clip_output_0"
+      ]
+    },
+    {
+      "identifier": 108,
+      "onnx_op_type": "GlobalAveragePool",
+      "onnx_op_name": "/global_pool/GlobalAveragePool",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/global_pool/GlobalAveragePool_output_0",
+      "resolved_tflite_tensor_name": "/global_pool/GlobalAveragePool_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 105,
+      "producer_op_type": "MEAN",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/global_pool/GlobalAveragePool_output_0"
+      ]
+    },
+    {
+      "identifier": 109,
+      "onnx_op_type": "Flatten",
+      "onnx_op_name": "/flatten/Flatten",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/flatten/Flatten_output_0",
+      "resolved_tflite_tensor_name": "/flatten/Flatten_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 2,
+      "producer_operator_index": 106,
+      "producer_op_type": "RESHAPE",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/flatten/Flatten_output_0"
+      ]
+    },
+    {
+      "identifier": 110,
+      "onnx_op_type": "Gemm",
+      "onnx_op_name": "/head_rhythm/head_rhythm.0/Gemm",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/head_rhythm/head_rhythm.0/Gemm_output_0",
+      "resolved_tflite_tensor_name": "/head_rhythm/head_rhythm.0/Gemm_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 107,
+      "producer_op_type": "FULLY_CONNECTED",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/head_rhythm/head_rhythm.0/Gemm_output_0"
+      ]
+    },
+    {
+      "identifier": 111,
+      "onnx_op_type": "Gemm",
+      "onnx_op_name": "/head_pathology/head_pathology.0/Gemm",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/head_pathology/head_pathology.0/Gemm_output_0",
+      "resolved_tflite_tensor_name": "/head_pathology/head_pathology.0/Gemm_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 108,
+      "producer_op_type": "FULLY_CONNECTED",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/head_pathology/head_pathology.0/Gemm_output_0"
+      ]
+    },
+    {
+      "identifier": 112,
+      "onnx_op_type": "Clip",
+      "onnx_op_name": "/head_rhythm/head_rhythm.1/Clip",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/head_rhythm/head_rhythm.1/Clip_output_0",
+      "resolved_tflite_tensor_name": "/head_rhythm/head_rhythm.1/Clip_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 109,
+      "producer_op_type": "RELU6",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/head_rhythm/head_rhythm.1/Clip_output_0"
+      ]
+    },
+    {
+      "identifier": 113,
+      "onnx_op_type": "Clip",
+      "onnx_op_name": "/head_pathology/head_pathology.1/Clip",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/head_pathology/head_pathology.1/Clip_output_0",
+      "resolved_tflite_tensor_name": "/head_pathology/head_pathology.1/Clip_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 110,
+      "producer_op_type": "RELU6",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/head_pathology/head_pathology.1/Clip_output_0"
+      ]
+    },
+    {
+      "identifier": 114,
+      "onnx_op_type": "Gemm",
+      "onnx_op_name": "/head_rhythm/head_rhythm.3/Gemm",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/head_rhythm/head_rhythm.3/Gemm_output_0",
+      "resolved_tflite_tensor_name": "/head_rhythm/head_rhythm.3/Gemm_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 111,
+      "producer_op_type": "FULLY_CONNECTED",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/head_rhythm/head_rhythm.3/Gemm_output_0"
+      ]
+    },
+    {
+      "identifier": 115,
+      "onnx_op_type": "Gemm",
+      "onnx_op_name": "/head_pathology/head_pathology.3/Gemm",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/head_pathology/head_pathology.3/Gemm_output_0",
+      "resolved_tflite_tensor_name": "/head_pathology/head_pathology.3/Gemm_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 112,
+      "producer_op_type": "FULLY_CONNECTED",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/head_pathology/head_pathology.3/Gemm_output_0"
+      ]
+    },
+    {
+      "identifier": 116,
+      "onnx_op_type": "Softmax",
+      "onnx_op_name": "/Softmax",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/Softmax_output_0",
+      "resolved_tflite_tensor_name": "/Softmax_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 113,
+      "producer_op_type": "SOFTMAX",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/Softmax_output_0"
+      ]
+    },
+    {
+      "identifier": 117,
+      "onnx_op_type": "Sigmoid",
+      "onnx_op_name": "/Sigmoid",
+      "onnx_output_index": 0,
+      "onnx_output_name": "/Sigmoid_output_0",
+      "resolved_tflite_tensor_name": "/Sigmoid_output_0",
+      "exists_in_final_model": true,
+      "is_graph_output": false,
+      "consumer_count": 1,
+      "producer_operator_index": 114,
+      "producer_op_type": "LOGISTIC",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "/Sigmoid_output_0"
+      ]
+    },
+    {
+      "identifier": 118,
+      "onnx_op_type": "Concat",
+      "onnx_op_name": "/Concat",
+      "onnx_output_index": 0,
+      "onnx_output_name": "predictions",
+      "resolved_tflite_tensor_name": "predictions",
+      "exists_in_final_model": true,
+      "is_graph_output": true,
+      "consumer_count": 0,
+      "producer_operator_index": 115,
+      "producer_op_type": "CONCATENATION",
+      "assume_channel_last_layout": false,
+      "status": "direct",
+      "is_rewritten": false,
+      "rewrite_events": [],
+      "rewrite_name_chain": [
+        "predictions"
+      ]
+    }
+  ]
+}

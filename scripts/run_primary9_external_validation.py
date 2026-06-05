@@ -1,0 +1,26 @@
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+
+from titan_v4.metrics.external_validation import load_json, primary9_summary
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Read and validate the Primary-9 external validation report.")
+    parser.add_argument(
+        "--report",
+        type=Path,
+        default=Path("outputs/gold_master_external_validation/arrhythmia_primary9/primary9_external_validation_report.json"),
+    )
+    args = parser.parse_args()
+    print(json.dumps(primary9_summary(load_json(args.report)), indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

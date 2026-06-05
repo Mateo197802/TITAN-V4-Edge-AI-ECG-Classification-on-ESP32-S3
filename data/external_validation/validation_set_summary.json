@@ -1,0 +1,20 @@
+{
+  "package": "FINAL_EXTERNAL_VALIDATION_SET",
+  "created_date": "2026-05-26",
+  "source_manifest": "primary9_external_validation_manifest",
+  "reportable_primary9_records": 672,
+  "requested_raw_universe_records": 675,
+  "local_manifest_records_found": 672,
+  "note": "The external registry contains 675 records. The reportable Primary-9 rhythm validation set contains 672 records after applying the predefined reportable rhythm scope.",
+  "class_distribution_final": {
+    "RBBB": 54,
+    "AFIB": 76,
+    "NSR": 62,
+    "SB": 38,
+    "1AVB": 64,
+    "STACH": 150,
+    "PVC": 112,
+    "LBBB": 30,
+    "PAC": 86
+  }
+}

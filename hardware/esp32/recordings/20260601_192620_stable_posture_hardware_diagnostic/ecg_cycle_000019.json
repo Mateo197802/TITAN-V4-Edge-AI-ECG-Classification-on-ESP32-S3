@@ -1,0 +1,65 @@
+{
+  "record_id": "ecg_cycle_000019",
+  "cycle": 19,
+  "captured_at": "2026-06-01T19:26:21.312724-05:00",
+  "sample_rate_hz": 200,
+  "samples": 2000,
+  "duration_seconds": 10.0,
+  "physical_channels": [
+    "I_ADC",
+    "II_ADC",
+    "III_SENSOR_ADC"
+  ],
+  "derived_leads": [
+    "I",
+    "II",
+    "III",
+    "aVR",
+    "aVL",
+    "aVF"
+  ],
+  "quality": {
+    "cycle": 19,
+    "window_ready": true,
+    "signal_usable": false,
+    "primary_signal_usable": false,
+    "third_sensor_usable": false,
+    "leads_off": false,
+    "window_accepted": false,
+    "einthoven_consistent": false,
+    "einthoven_correlation": 0.6711,
+    "einthoven_scale": 0.0194,
+    "einthoven_residual_ratio": 0.7414,
+    "full_frontal_quality": false,
+    "capture_rate_hz": 200,
+    "samples_per_window": 2000,
+    "physical_leads": [
+      {
+        "lead": "I",
+        "min": 668,
+        "max": 3373,
+        "span": 2705,
+        "mean": 1951.0
+      },
+      {
+        "lead": "II",
+        "min": 0,
+        "max": 4095,
+        "span": 4095,
+        "mean": 1854.2
+      },
+      {
+        "lead": "III_SENSOR",
+        "min": 2,
+        "max": 413,
+        "span": 411,
+        "mean": 64.6
+      }
+    ]
+  },
+  "notes": [
+    "Values are raw ADC counts; no mV calibration has been applied.",
+    "Derived Lead III follows the firmware equation II - I.",
+    "The third physical sensor channel is preserved separately for audit."
+  ]
+}

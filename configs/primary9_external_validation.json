@@ -1,0 +1,9 @@
+{
+  "module": "arrhythmia_primary9",
+  "classes": ["AFIB", "SB", "STACH", "NSR", "PVC", "RBBB", "LBBB", "PAC", "1AVB"],
+  "external_records": 672,
+  "label_set": "final external validation label set",
+  "external_training_allowed": false,
+  "external_threshold_tuning_allowed": false
+}
+

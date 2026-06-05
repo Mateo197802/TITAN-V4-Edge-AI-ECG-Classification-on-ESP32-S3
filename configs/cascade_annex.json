@@ -1,0 +1,7 @@
+{
+  "module": "cascade_ood",
+  "role": "safety_annex",
+  "primary_performance_source": false,
+  "metrics": ["coverage", "quarantine_rate", "accepted_predictions", "selective_risk"]
+}
+

@@ -1,0 +1,17 @@
+{
+  "protocol": "PATHOLOGY_PRIMARY5_EXTERNAL_VALIDATION_V1",
+  "label_set": "final external validation label set",
+  "primary_pathologies": [
+    "IMI",
+    "ALMI",
+    "ILMI",
+    "LAE",
+    "ISC_"
+  ],
+  "external_training_allowed": false,
+  "external_threshold_tuning_allowed": false,
+  "accuracy": 0.90256,
+  "macro_f1": 0.66874,
+  "configured_accuracy_reference": 0.8,
+  "configured_macro_f1_reference": 0.65
+}

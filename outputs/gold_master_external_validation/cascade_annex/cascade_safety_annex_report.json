@@ -1,0 +1,82 @@
+{
+  "protocol": "CASCADE_SAFETY_ANNEX_V1",
+  "role": "safety_annex",
+  "diagnostic_subset_records": 211,
+  "coverage": 0.5071090047393365,
+  "quarantine_rate": 0.4928909952606635,
+  "action_counts": {
+    "accepted_prediction": 107,
+    "quarantine_known_boundary": 53,
+    "quarantine_rare_rhythm": 0,
+    "quarantine_pathology": 0,
+    "ood_real": 51
+  },
+  "reason_counts": {
+    "accepted_low_risk": 107,
+    "selective_risk_ambiguous": 51,
+    "selective_risk_boundary": 53
+  },
+  "by_group": {
+    "RBBB": {
+      "records": 9,
+      "coverage": 0.4444444444444444,
+      "quarantine_rate": 0.5555555555555556,
+      "selective_risk": 1.0
+    },
+    "NSR": {
+      "records": 18,
+      "coverage": 0.4444444444444444,
+      "quarantine_rate": 0.5555555555555556,
+      "selective_risk": 1.0
+    },
+    "1AVB": {
+      "records": 3,
+      "coverage": 0.6666666666666666,
+      "quarantine_rate": 0.3333333333333333,
+      "selective_risk": 1.0
+    },
+    "SB": {
+      "records": 7,
+      "coverage": 0.5714285714285714,
+      "quarantine_rate": 0.42857142857142855,
+      "selective_risk": 1.0
+    },
+    "PAC": {
+      "records": 75,
+      "coverage": 0.5466666666666666,
+      "quarantine_rate": 0.4533333333333333,
+      "selective_risk": 1.0
+    },
+    "PVC": {
+      "records": 58,
+      "coverage": 0.5,
+      "quarantine_rate": 0.5,
+      "selective_risk": 1.0
+    },
+    "AFIB": {
+      "records": 10,
+      "coverage": 0.5,
+      "quarantine_rate": 0.5,
+      "selective_risk": 1.0
+    },
+    "STACH": {
+      "records": 30,
+      "coverage": 0.43333333333333335,
+      "quarantine_rate": 0.5666666666666667,
+      "selective_risk": 1.0
+    },
+    "LBBB": {
+      "records": 1,
+      "coverage": 1.0,
+      "quarantine_rate": 0.0,
+      "selective_risk": 1.0
+    }
+  },
+  "metrics_present": [
+    "coverage",
+    "selective_risk",
+    "quarantine_rate",
+    "false_release_proxy",
+    "top_k_embedding_hypotheses"
+  ]
+}

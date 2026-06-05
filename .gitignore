@@ -1,0 +1,9 @@
+__pycache__/
+.pytest_cache/
+.venv/
+*.pyc
+.pio/
+hardware/esp32/firmware/.pio/
+*.log
+tmp/
+

@@ -1,0 +1,10 @@
+{
+  "module": "esp32_edge",
+  "capture_rate_hz": 200,
+  "model_rate_hz": 125,
+  "window_seconds": 10,
+  "filter_context_seconds": 2,
+  "physical_channels": 3,
+  "derived_frontal_leads": 6
+}
+

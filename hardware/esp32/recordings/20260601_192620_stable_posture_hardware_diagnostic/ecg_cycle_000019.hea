@@ -1,0 +1,9 @@
+ecg_cycle_000019 6 200 2000
+ecg_cycle_000019.mat 16 1/ADC 16 0 2652 0 0 I
+ecg_cycle_000019.mat 16 1/ADC 16 0 11 0 0 II
+ecg_cycle_000019.mat 16 1/ADC 16 0 -2641 0 0 III
+ecg_cycle_000019.mat 16 1/ADC 16 0 -1332 0 0 aVR
+ecg_cycle_000019.mat 16 1/ADC 16 0 2646 0 0 aVL
+ecg_cycle_000019.mat 16 1/ADC 16 0 -1315 0 0 aVF
+# Signals are ADC-count representations and are not calibrated in mV.
+# Physical sensor channels are preserved in the paired MAT and CSV files.
