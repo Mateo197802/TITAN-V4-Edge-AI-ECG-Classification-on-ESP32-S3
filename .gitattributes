@@ -1,0 +1,11 @@
+# GitHub Linguist configuration.
+#
+# The ESP32 firmware includes a generated C/C++ header with embedded model
+# weights. It is required for edge reproducibility, but it should not dominate
+# repository language statistics.
+hardware/esp32/firmware/src/model_data.h linguist-generated=true
+
+# Binary model and recording artifacts are research artifacts, not source code.
+models/gold_master/*.pth linguist-vendored
+hardware/esp32/models/*.tflite linguist-vendored
+hardware/esp32/recordings/** linguist-vendored
