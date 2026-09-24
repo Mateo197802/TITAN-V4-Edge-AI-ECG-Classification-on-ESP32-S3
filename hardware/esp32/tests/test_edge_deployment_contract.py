@@ -27,7 +27,7 @@ class EdgeDeploymentContractTests(unittest.TestCase):
         module = load_header_generator()
         model_path = Path(module.select_tflite_path())
         self.assertEqual(model_path.name, "titan_v4_edge_float32.tflite")
-        self.assertEqual(model_path.parent.name, "_tf_saved_model")
+        self.assertEqual(model_path.parent.name, "models")
 
     def test_firmware_writes_nhwc_sample_major_input_layout(self):
         source = INFERENCE_ENGINE.read_text(encoding="utf-8")
@@ -132,7 +132,7 @@ class EdgeDeploymentContractTests(unittest.TestCase):
         self.assertIn("#if ENABLE_TFLITE_INFERENCE", source)
         self.assertIn("Inferencia desactivada", source)
         self.assertIn('json += ",\\"inference_enabled\\":"', source)
-        self.assertIn("[env:honor_quality]", platformio)
+        self.assertIn("[env:private_hotspot_quality]", platformio)
         self.assertIn("-DENABLE_TFLITE_INFERENCE=0", platformio)
         self.assertIn("pdMS_TO_TICKS(INFERENCE_TIMEOUT_MS)", inference)
         self.assertIn("vTaskDelete(task_handle);", inference)
@@ -142,12 +142,19 @@ class EdgeDeploymentContractTests(unittest.TestCase):
         config = FIRMWARE_CONFIG.read_text(encoding="utf-8")
         platformio = PLATFORMIO_CONFIG.read_text(encoding="utf-8")
         self.assertIn("#define WIFI_OPEN_NETWORK 0", config)
-        self.assertIn("#define ALLOW_SENSITIVE_HTTP 1", config)
+        self.assertIn("#define ALLOW_SENSITIVE_HTTP 0", config)
         self.assertIn("#if WIFI_OPEN_NETWORK", source)
         self.assertIn("WiFi.begin(WIFI_SSID);", source)
         self.assertIn("void handleSensitiveHttpBlocked()", source)
         self.assertIn("#if ALLOW_SENSITIVE_HTTP", source)
-        self.assertIn("[env:campus]", platformio)
+        profiles = {}
+        for name in ("esp32s3", "campus", "private_hotspot", "private_hotspot_quality"):
+            profile = platformio.split(f"[env:{name}]", 1)[1].split("[env:", 1)[0]
+            profiles[name] = profile
+        self.assertIn("-DALLOW_SENSITIVE_HTTP=0", profiles["esp32s3"])
+        self.assertIn("-DALLOW_SENSITIVE_HTTP=0", profiles["campus"])
+        self.assertIn("-DALLOW_SENSITIVE_HTTP=1", profiles["private_hotspot"])
+        self.assertIn("-DALLOW_SENSITIVE_HTTP=1", profiles["private_hotspot_quality"])
         self.assertIn('-DWIFI_SSID=\\"YACHAYTECH\\"', platformio)
         self.assertIn("-DWIFI_OPEN_NETWORK=1", platformio)
         self.assertIn("-DALLOW_SENSITIVE_HTTP=0", platformio)

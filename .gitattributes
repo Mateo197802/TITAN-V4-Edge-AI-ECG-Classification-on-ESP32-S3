@@ -1,5 +1,22 @@
 # GitHub Linguist configuration.
 #
+# Keep tracked text stable across Windows and Unix checkouts.
+*.py text eol=lf
+*.json text eol=lf
+*.jsonl text eol=lf
+*.csv text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.toml text eol=lf
+*.ini text eol=lf
+*.cff text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.h text eol=lf
+*.cpp text eol=lf
+*.c text eol=lf
+*.sh text eol=lf
+
 # The ESP32 firmware includes a generated C/C++ header with embedded model
 # weights. It is required for edge reproducibility, but it should not dominate
 # repository language statistics.

@@ -1,19 +1,30 @@
-import paramiko
-import os
+from __future__ import annotations
 
-HOSTNAME = 'hpc.cedia.edu.ec'
-USERNAME = 'kevin.landazuri__yachaytech.edu.ec'
-KEY_FILE = os.path.expanduser(r'~/.ssh/cedia_rsa')
+import argparse
+import sys
 
-ssh = paramiko.SSHClient()
-ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-try:
-    ssh.connect(HOSTNAME, username=USERNAME, key_filename=KEY_FILE)
-    print("Conectado a CEDIA...")
-    # Verificar estado
-    command = "cat 'Mateo Gavilanes/TEST_CEDIA/slurm-8802.out' && ls -la 'Mateo Gavilanes/TEST_CEDIA/03_OUTPUTS/'"
-    stdin, stdout, stderr = ssh.exec_command(command)
-    print("OUT:\n", stdout.read().decode('utf-8'))
-    print("ERR:\n", stderr.read().decode('utf-8'))
-finally:
-    ssh.close()
+from cedia.ssh_config import connect_ssh
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Run an explicitly supplied command on the CEDIA cluster.")
+    parser.add_argument("--command", required=True, help="Remote shell command to execute.")
+    args = parser.parse_args()
+
+    ssh = connect_ssh()
+    try:
+        stdin, stdout, stderr = ssh.exec_command(args.command)
+        del stdin
+        output = stdout.read().decode("utf-8", errors="replace")
+        errors = stderr.read().decode("utf-8", errors="replace")
+        if output:
+            print(output, end="")
+        if errors:
+            print(errors, end="", file=sys.stderr)
+        return stdout.channel.recv_exit_status()
+    finally:
+        ssh.close()
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

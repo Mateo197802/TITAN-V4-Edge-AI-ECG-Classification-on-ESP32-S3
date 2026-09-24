@@ -164,5 +164,5 @@
   "metric_source": "full_support_final_external_validation",
   "external_training_allowed": false,
   "external_threshold_tuning_allowed": false,
-  "validation_manifest": "C:/Users/intel/OneDrive - yachaytech.edu.ec/Escritorio/UITEY/Semestre VII/Matematica superior/Proyecto final/V4/V4 CEDIA/05_FINAL_EXTERNAL_VALIDATION_SET/2026-05-26_FINAL_EXTERNAL_VALIDATION_SET/primary9_final_external_validation_manifest.csv"
+  "validation_manifest": "not included; original local path removed"
 }

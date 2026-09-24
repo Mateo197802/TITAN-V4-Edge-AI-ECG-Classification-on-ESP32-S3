@@ -55,7 +55,7 @@
     "LAE"
   ],
   "pathology_weight": 0.0,
-  "pathology_sidecar": "/home/kevin.landazuri__yachaytech.edu.ec/Mateo Gavilanes/V4_CEDIA/DATA/ptb-xl/ptbxl_pathology_label_map.json",
+  "pathology_sidecar": "not included; original local path removed",
   "pathology_records_labelled": 2580,
   "pathology_combined_alpha": 0.1,
   "pathology_pos_weight": [
@@ -120,7 +120,7 @@
   "offline_teacher_temperature": 2.5,
   "offline_teacher_tables": [
     {
-      "path": "/home/kevin.landazuri__yachaytech.edu.ec/Mateo Gavilanes/V4_CEDIA/DATA/DATASETS_CURADOS/RHYTHM_PRIMARY9_DISTILL/teacher_sidecars/protected_primary9_logits_train.npz",
+      "path": "not included; original local path removed",
       "weight": 0.4,
       "rows": 3785,
       "num_classes": 9,
@@ -129,7 +129,7 @@
       "group_indices": null
     },
     {
-      "path": "/home/kevin.landazuri__yachaytech.edu.ec/Mateo Gavilanes/V4_CEDIA/DATA/DATASETS_CURADOS/RHYTHM_PRIMARY9_DISTILL/teacher_sidecars/rate_teacher_logits_train.npz",
+      "path": "not included; original local path removed",
       "weight": 0.2,
       "rows": 3785,
       "num_classes": 9,
@@ -142,7 +142,7 @@
       ]
     },
     {
-      "path": "/home/kevin.landazuri__yachaytech.edu.ec/Mateo Gavilanes/V4_CEDIA/DATA/DATASETS_CURADOS/RHYTHM_PRIMARY9_DISTILL/teacher_sidecars/ectopy_teacher_logits_train.npz",
+      "path": "not included; original local path removed",
       "weight": 0.25,
       "rows": 3785,
       "num_classes": 9,
@@ -155,7 +155,7 @@
       ]
     },
     {
-      "path": "/home/kevin.landazuri__yachaytech.edu.ec/Mateo Gavilanes/V4_CEDIA/DATA/DATASETS_CURADOS/RHYTHM_PRIMARY9_DISTILL/teacher_sidecars/conduction_teacher_logits_train.npz",
+      "path": "not included; original local path removed",
       "weight": 0.25,
       "rows": 3785,
       "num_classes": 9,
@@ -169,7 +169,7 @@
       ]
     },
     {
-      "path": "/home/kevin.landazuri__yachaytech.edu.ec/Mateo Gavilanes/V4_CEDIA/DATA/DATASETS_CURADOS/RHYTHM_PRIMARY9_DISTILL/teacher_sidecars/atrial_teacher_logits_train.npz",
+      "path": "not included; original local path removed",
       "weight": 0.15,
       "rows": 3785,
       "num_classes": 9,

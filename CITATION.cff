@@ -1,8 +1,16 @@
 cff-version: 1.2.0
 title: "NeuroGuardian TITAN V4 ECG External Validation"
-message: "If you use this research artifact, cite the associated manuscript or repository release."
+message: "If you use this software or its reported results, cite this repository. No associated manuscript DOI is currently provided. Dataset citations do not establish the provenance or redistribution rights of the included record-level labels."
 version: "0.1.0"
 date-released: "2026-06-05"
+url: "https://github.com/Mateo197802/TITAN-V4-Edge-AI-ECG-Classification-on-ESP32-S3"
+repository-code: "https://github.com/Mateo197802/TITAN-V4-Edge-AI-ECG-Classification-on-ESP32-S3"
+license: "MIT"
+keywords:
+  - electrocardiography
+  - ECG
+  - embedded machine learning
+  - ESP32-S3
 authors:
   - family-names: "Gavilanes Chavez"
     given-names: "Isaac Mateo"

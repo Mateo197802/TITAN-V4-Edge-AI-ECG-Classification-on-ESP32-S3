@@ -1,5 +1,4 @@
 import argparse
-import os
 import posixpath
 import stat
 import sys
@@ -7,16 +6,7 @@ from pathlib import Path
 
 import paramiko
 
-
-HOSTNAME = "hpc.cedia.edu.ec"
-USERNAME = "kevin.landazuri__yachaytech.edu.ec"
-KEY_FILE = os.path.expanduser(r"~/.ssh/cedia_rsa")
-
-PROJECT_ROOT = Path(
-    r"c:\Users\intel\OneDrive - yachaytech.edu.ec\Escritorio\UITEY\Semestre VII\Matematica superior\Proyecto final"
-)
-LOCAL_V4 = PROJECT_ROOT / "V4" / "V4 CEDIA"
-REMOTE_V4 = "/home/kevin.landazuri__yachaytech.edu.ec/Mateo Gavilanes/V4_CEDIA"
+from cedia.ssh_config import connect_ssh, required_env
 
 ROOT_FILES = [
     "lanzar_titan.sh",
@@ -73,18 +63,18 @@ def remote_is_dir(sftp: paramiko.SFTPClient, remote_path: str) -> bool:
         return False
 
 
-def iter_code_files() -> list[str]:
+def iter_code_files(local_v4: Path) -> list[str]:
     files: list[str] = []
-    source_root = LOCAL_V4 / "01_CODIGO_FUENTE"
+    source_root = local_v4 / "01_CODIGO_FUENTE"
     for path in sorted(source_root.rglob("*.py")):
         if any(part in SKIP_DIR_NAMES for part in path.parts):
             continue
-        files.append(path.relative_to(LOCAL_V4).as_posix())
+        files.append(path.relative_to(local_v4).as_posix())
     return files
 
 
-def iter_files_in_dir(rel_dir: str) -> list[str]:
-    base = LOCAL_V4 / Path(rel_dir)
+def iter_files_in_dir(local_v4: Path, rel_dir: str) -> list[str]:
+    base = local_v4 / Path(rel_dir)
     if not base.exists():
         raise FileNotFoundError(str(base))
     files: list[str] = []
@@ -92,26 +82,26 @@ def iter_files_in_dir(rel_dir: str) -> list[str]:
         if any(part in SKIP_DIR_NAMES for part in path.parts):
             continue
         if path.is_file():
-            files.append(path.relative_to(LOCAL_V4).as_posix())
+            files.append(path.relative_to(local_v4).as_posix())
     return files
 
 
-def upload_file(sftp: paramiko.SFTPClient, rel: str) -> None:
-    local_path = LOCAL_V4 / Path(rel)
-    remote_path = posixpath.join(REMOTE_V4, rel)
+def upload_file(sftp: paramiko.SFTPClient, local_v4: Path, remote_v4: str, rel: str) -> None:
+    local_path = local_v4 / Path(rel)
+    remote_path = posixpath.join(remote_v4, rel)
     if not local_path.exists():
         raise FileNotFoundError(str(local_path))
     mkdir_p(sftp, posixpath.dirname(remote_path))
     sftp.put(str(local_path), remote_path)
 
 
-def collect_uploads() -> list[str]:
+def collect_uploads(local_v4: Path) -> list[str]:
     files: list[str] = []
     files.extend(ROOT_FILES)
-    files.extend(iter_code_files())
+    files.extend(iter_code_files(local_v4))
     files.extend(EXTRA_FILES)
     for rel_dir in DATA_DIRS:
-        files.extend(iter_files_in_dir(rel_dir))
+        files.extend(iter_files_in_dir(local_v4, rel_dir))
     return sorted(dict.fromkeys(files))
 
 
@@ -141,40 +131,46 @@ def main() -> None:
     parser.add_argument("--audit_only", action="store_true", help="Envia solo lanzar_preflight_audit.sh.")
     args = parser.parse_args()
 
-    uploads = [] if args.skip_sync else collect_uploads()
+    remote_v4 = required_env("TITAN_CEDIA_REMOTE_V4")
+    username = required_env("TITAN_CEDIA_USERNAME")
+    local_v4 = None
+    if not args.skip_sync and not args.status and not args.cancel_job:
+        local_v4 = Path(required_env("TITAN_CEDIA_LOCAL_V4")).expanduser().resolve()
+        if not local_v4.is_dir():
+            raise FileNotFoundError(f"Local CEDIA project directory does not exist: {local_v4}")
+
+    uploads = collect_uploads(local_v4) if local_v4 is not None else []
     print(f"Archivos a sincronizar: {len(uploads)}")
 
-    ssh = paramiko.SSHClient()
-    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect(HOSTNAME, username=USERNAME, key_filename=KEY_FILE, timeout=30)
+    ssh = connect_ssh()
     try:
         if args.cancel_job:
             run_remote(ssh, f"scancel {args.cancel_job}", check=False)
-            run_remote(ssh, f"squeue -u {USERNAME}", check=False)
+            run_remote(ssh, f"squeue -u {quote_remote(username)}", check=False)
             return
         sftp = ssh.open_sftp()
         try:
             if args.status:
                 sftp.close()
-                run_remote(ssh, f"squeue -u {USERNAME}", check=False)
+                run_remote(ssh, f"squeue -u {quote_remote(username)}", check=False)
                 run_remote(
                     ssh,
-                    f"cd {quote_remote(REMOTE_V4)} && ls -1t titan_audit_log_*.out titan_train_log_*.out 2>/dev/null | head -n 5",
+                    f"cd {quote_remote(remote_v4)} && ls -1t titan_audit_log_*.out titan_train_log_*.out 2>/dev/null | head -n 5",
                     check=False,
                 )
                 run_remote(
                     ssh,
-                    f"cd {quote_remote(REMOTE_V4)} && tail -n 120 $(ls -1t titan_audit_log_*.out 2>/dev/null | head -n 1)",
+                    f"cd {quote_remote(remote_v4)} && tail -n 120 $(ls -1t titan_audit_log_*.out 2>/dev/null | head -n 1)",
                     check=False,
                 )
                 run_remote(
                     ssh,
-                    f"cd {quote_remote(REMOTE_V4)} && tail -n 160 $(ls -1t titan_train_log_*.out 2>/dev/null | head -n 1)",
+                    f"cd {quote_remote(remote_v4)} && tail -n 160 $(ls -1t titan_train_log_*.out 2>/dev/null | head -n 1)",
                     check=False,
                 )
                 run_remote(
                     ssh,
-                    f"cd {quote_remote(REMOTE_V4)} && tail -n 120 $(ls -1t titan_audit_err_*.err 2>/dev/null | head -n 1)",
+                    f"cd {quote_remote(remote_v4)} && tail -n 120 $(ls -1t titan_audit_err_*.err 2>/dev/null | head -n 1)",
                     check=False,
                 )
                 code = (
@@ -188,37 +184,37 @@ def main() -> None:
                     "print('total_windows=', sum(x.get('total_windows',0) for x in r.get('class_rows', []))); "
                     "[print(x) for x in r.get('class_rows', []) if x.get('class_name') in set(r.get('missing_classes', []) + r.get('below_minimum_classes', []))]"
                 )
-                run_remote(ssh, f"cd {quote_remote(REMOTE_V4)} && python -c {quote_remote(code)}", check=False)
+                run_remote(ssh, f"cd {quote_remote(remote_v4)} && python -c {quote_remote(code)}", check=False)
                 return
-            if uploads and not remote_is_dir(sftp, REMOTE_V4):
-                mkdir_p(sftp, REMOTE_V4)
+            if uploads and not remote_is_dir(sftp, remote_v4):
+                mkdir_p(sftp, remote_v4)
             for idx, rel in enumerate(uploads, start=1):
-                upload_file(sftp, rel)
+                upload_file(sftp, local_v4, remote_v4, rel)
                 if idx == 1 or idx == len(uploads) or idx % 50 == 0:
                     progress(idx, len(uploads), "sync")
         finally:
             sftp.close()
 
-        run_remote(ssh, f"cd {quote_remote(REMOTE_V4)} && chmod +x lanzar_titan.sh lanzar_preflight_audit.sh")
+        run_remote(ssh, f"cd {quote_remote(remote_v4)} && chmod +x lanzar_titan.sh lanzar_preflight_audit.sh")
 
         if args.no_launch:
             print("NO_LAUNCH activo: no se envio sbatch.")
             return
 
-        _, audit_out, _ = run_remote(ssh, f"cd {quote_remote(REMOTE_V4)} && sbatch --parsable lanzar_preflight_audit.sh")
+        _, audit_out, _ = run_remote(ssh, f"cd {quote_remote(remote_v4)} && sbatch --parsable lanzar_preflight_audit.sh")
         audit_job_id = audit_out.strip().splitlines()[-1].strip() if audit_out.strip() else "UNKNOWN"
         print(f"[##########..............] auditoria SLURM enviada job_id={audit_job_id}", flush=True)
         if args.audit_only:
-            run_remote(ssh, f"squeue -u {USERNAME}", check=False)
+            run_remote(ssh, f"squeue -u {quote_remote(username)}", check=False)
             return
 
         _, train_out, _ = run_remote(
             ssh,
-            f"cd {quote_remote(REMOTE_V4)} && sbatch --parsable --dependency=afterok:{audit_job_id} lanzar_titan.sh",
+            f"cd {quote_remote(remote_v4)} && sbatch --parsable --dependency=afterok:{audit_job_id} lanzar_titan.sh",
         )
         train_job_id = train_out.strip().splitlines()[-1].strip() if train_out.strip() else "UNKNOWN"
         print(f"[########################] entrenamiento dependiente enviado job_id={train_job_id}", flush=True)
-        run_remote(ssh, f"squeue -u {USERNAME}", check=False)
+        run_remote(ssh, f"squeue -u {username}", check=False)
     finally:
         ssh.close()
 

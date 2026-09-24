@@ -6,4 +6,11 @@ __pycache__/
 hardware/esp32/firmware/.pio/
 *.log
 tmp/
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*.key
+id_rsa*
 

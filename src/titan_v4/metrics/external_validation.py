@@ -11,6 +11,23 @@ from typing import Any
 
 PRIMARY9_CLASSES = ("AFIB", "SB", "STACH", "NSR", "PVC", "RBBB", "LBBB", "PAC", "1AVB")
 PATHOLOGY5_CLASSES = ("IMI", "ALMI", "ILMI", "LAE", "ISC_")
+TEXT_SUFFIXES = {
+    ".c",
+    ".cff",
+    ".cpp",
+    ".csv",
+    ".h",
+    ".ini",
+    ".json",
+    ".jsonl",
+    ".md",
+    ".py",
+    ".sh",
+    ".toml",
+    ".txt",
+    ".yaml",
+    ".yml",
+}
 
 
 def load_json(path: str | Path) -> dict[str, Any]:
@@ -32,6 +49,21 @@ def sha256_file(path: str | Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest().upper()
+
+
+def manifest_file_fingerprint(path: str | Path) -> tuple[str, int]:
+    target = Path(path)
+    if target.suffix.lower() not in TEXT_SUFFIXES:
+        return sha256_file(target), target.stat().st_size
+
+    digest = hashlib.sha256()
+    size_bytes = 0
+    with target.open("r", encoding="utf-8", newline=None) as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), ""):
+            canonical = chunk.encode("utf-8")
+            digest.update(canonical)
+            size_bytes += len(canonical)
+    return digest.hexdigest().upper(), size_bytes
 
 
 def primary9_summary(report: dict[str, Any]) -> dict[str, Any]:
@@ -103,7 +135,7 @@ def verify_hash_manifest(root: str | Path, manifest_csv: str | Path) -> list[dic
             if not target.is_file():
                 failures.append({"relative_path": relative_path, "error": "missing_file"})
                 continue
-            actual = sha256_file(target)
+            actual, _ = manifest_file_fingerprint(target)
             if actual != expected:
                 failures.append({"relative_path": relative_path, "expected": expected, "actual": actual})
     return failures
