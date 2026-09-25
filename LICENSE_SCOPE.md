@@ -1,33 +1,22 @@
 # License Scope
 
-## Original Software
+This repository contains material under separate licenses. Do not infer a license for one category from the license of another.
 
-The MIT License in `LICENSE` applies only to original software source code,
-tests, and build/configuration files in `src/`, `scripts/`, `cedia/`,
-`hardware/esp32/`, and `tests/`, plus the root `run` script, `Makefile`,
-`pyproject.toml`, and `requirements*.txt`. It excludes the third-party and
-generated materials listed below. The copyright notice names the software
-author identified in `CITATION.cff`. The MIT grant does not relicense files
-owned by another party.
+## Software Source
 
-## Excluded Materials
+The root [MIT License](LICENSE) applies to original software source code, tests, and build/configuration files in `src/`, `scripts/`, `cedia/`, `hardware/esp32/`, and `tests/`, plus the root `run` script, `Makefile`, `pyproject.toml`, and `requirements*.txt`. It does not apply to embedded model parameters in `hardware/esp32/firmware/src/model_data.h`.
 
-The MIT License does not apply to:
+## Research Artifacts
 
-- ECG datasets, row-level labels, metadata, source record identifiers, or
-  files under `data/`.
-- Model checkpoints and derived weights, including `.pth`, `.tflite`, and the
-  generated `hardware/esp32/firmware/src/model_data.h`.
-- ECG or other recordings under `hardware/esp32/recordings/`.
-- Aggregate results, validation reports, evidence packages, and other research
-  artifacts under `outputs/`, `reports/`, and `models/`.
-- Third-party software, documentation, or assets, which remain under their
-  respective notices and license terms.
+The separate [CC BY 4.0 artifact notice](LICENSE-ARTIFACTS.md) applies to project-authored reports, tables, validation labels/predictions, and model weights, subject to the third-party exclusions in that notice. The upstream Challenge 2021 release and source datasets retain their own attribution and license terms. No downloaded ECG waveform files are included in the Git repository.
 
-The source-specific licenses and citations listed in `REFERENCES.md` apply
-where they match the exact included material. A dataset citation alone does
-not establish that a local record came from that dataset or authorize
-redistribution. In particular, the rights and provenance of the 312 `data_test`
-rows are unresolved. Do not infer a data, model, or recording license from the
-MIT license for software. See `DATA_PROVENANCE.md` before using or redistributing
-those materials.
+## Exclusions
+
+Neither the MIT license nor the CC BY 4.0 project-artifact notice grants rights to:
+
+- Third-party ECG recordings, dataset content, source publications, or source-dataset marks.
+- Third-party models, logits, code, documentation, or assets that may have influenced the project artifacts.
+- Engineering recordings whose source/consent basis is not documented in this repository.
+- Personal information or medical data beyond the specific checked-in artifact and source release terms.
+
+The model grant is limited to rights held by the TITAN project authors; it cannot sublicense third-party material. The repository owner must ensure all co-authors and institutional rights holders have approved the applicable grant before treating it as a final legal clearance. See [data provenance](DATA_PROVENANCE.md) and the [audit report](AUDIT_REPORT.md).

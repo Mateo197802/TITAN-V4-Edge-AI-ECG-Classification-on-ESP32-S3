@@ -1,20 +1,21 @@
 {
   "package": "FINAL_EXTERNAL_VALIDATION_SET",
   "created_date": "2026-05-26",
-  "source_manifest": "primary9_external_validation_manifest",
+  "source_manifest": "record_source_manifest.csv",
+  "evidence_status": "CURRENT_672_RECORD_INDEX_AND_SOURCE_MAPPING",
   "reportable_primary9_records": 672,
   "requested_raw_universe_records": 675,
   "local_manifest_records_found": 672,
-  "note": "The external registry contains 675 records. The reportable Primary-9 rhythm validation set contains 672 records after applying the predefined reportable rhythm scope.",
+  "note": "The external registry contains 675 records. The frozen 672-record Primary-9 evaluation subset is source-mapped to PhysioNet Challenge 2021 v1.0.3 training paths. The project-local split label is not the official hidden Challenge test set.",
   "class_distribution_final": {
-    "RBBB": 54,
-    "AFIB": 76,
-    "NSR": 62,
+    "RBBB": 47,
+    "AFIB": 46,
+    "NSR": 38,
     "SB": 38,
-    "1AVB": 64,
-    "STACH": 150,
-    "PVC": 112,
+    "1AVB": 46,
+    "STACH": 147,
+    "PVC": 134,
     "LBBB": 30,
-    "PAC": 86
+    "PAC": 146
   }
 }

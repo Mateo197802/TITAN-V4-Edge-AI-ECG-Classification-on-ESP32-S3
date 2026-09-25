@@ -1,5 +1,7 @@
 # Metric Formulas And Validation Definitions
 
+The current computed Primary-9 report is `outputs/reproduced/primary9/primary9_recomputed_report.json`. Only that full 672-record inference is a current reproduced performance result. Pathology Primary-5 and Cascade/OOD formulas remain relevant to archived reports but those legacy results are not reproduced by this workflow.
+
 ## Accuracy
 
 For multiclass rhythm classification:

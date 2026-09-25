@@ -1,5 +1,6 @@
 {
   "package": "FINAL_EXTERNAL_VALIDATION_SET",
+  "evidence_status": "LEGACY_SUMMARY_SUPERSEDED_BY_DATA_EXTERNAL_VALIDATION_SUMMARY",
   "created_date": "2026-05-26",
   "source_manifest": "primary9_external_validation_manifest",
   "reportable_primary9_records": 672,

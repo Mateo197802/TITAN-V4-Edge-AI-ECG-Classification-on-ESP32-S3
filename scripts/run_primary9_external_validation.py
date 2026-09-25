@@ -15,7 +15,7 @@ def main() -> int:
     parser.add_argument(
         "--report",
         type=Path,
-        default=Path("outputs/gold_master_external_validation/arrhythmia_primary9/primary9_external_validation_report.json"),
+        default=Path("outputs/reproduced/primary9/primary9_recomputed_report.json"),
     )
     args = parser.parse_args()
     print(json.dumps(primary9_summary(load_json(args.report)), indent=2))

@@ -1,5 +1,6 @@
 {
   "protocol": "COMBINED_EXTERNAL_VALIDATION_SUMMARY_V1",
+  "evidence_status": "LEGACY_HISTORICAL_SUMMARY_NOT_CURRENT_REPRODUCED_RESULTS",
   "label_set": "final external validation label set",
   "external_training_allowed": false,
   "external_threshold_tuning_allowed": false,

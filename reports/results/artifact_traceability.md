@@ -10,6 +10,8 @@
 
 ## Verification
 
+The current Primary-9 inference evidence is under `outputs/reproduced/primary9/`. The old aggregate reports under `outputs/gold_master_external_validation/` are explicitly marked legacy.
+
 Run:
 
 ```powershell

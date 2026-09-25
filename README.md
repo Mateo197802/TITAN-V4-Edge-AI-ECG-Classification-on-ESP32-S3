@@ -1,73 +1,71 @@
-# NeuroGuardian TITAN V4 ECG Evidence Package
+# NeuroGuardian TITAN V4 ECG
 
-This repository packages aggregate reports, a Primary-9 checkpoint, validation labels and summaries, ESP32-S3 firmware, and engineering recordings. It is an evidence snapshot, not a complete end-to-end reproduction package: the public scripts summarize checked-in JSON reports and do not run inference or retrain the checkpoint.
+Reproducible inference and evidence package for the distributed TITAN V4 Primary-9 checkpoint, with ESP32-S3 firmware and archived engineering reports. This repository is research software and is not a medical device.
 
-## Reported Results
+## Recomputed Primary-9 Result
 
-| Evaluation | Scope | Accuracy | Macro-F1 | Role |
-|---|---:|---:|---:|---|
-| Arrhythmia Primary-9 | 672 records; 605 correct | 0.90030 | 0.87819 | Main rhythm result |
-| Pathology Primary-5 | Configured five-label set | 0.90256 | 0.66874 | Separate pathology result |
-| Cascade/OOD | 211 diagnostic records; 107 accepted | Coverage 0.50711 | Selective-risk metrics | Safety annex only |
-| ESP32 edge | Engineering recordings | Not an accuracy estimate | Not an accuracy estimate | Acquisition and deployment evidence |
+The repository now includes a full CPU inference run over the frozen 672-record evaluation label set. ECG signals are fetched from the versioned PhysioNet/Computing in Cardiology Challenge 2021 release, and the per-record predictions and probabilities are included under `outputs/reproduced/primary9/`.
 
-The Primary-9 aggregate is reported over all 672 records in the configured reportable set. The Pathology Primary-5 macro-F1 is 0.66874; it meets the documented 0.65 promoted threshold, not the earlier strict 0.70 target. Cascade/OOD coverage is 107/211 and must not be presented as primary full-support performance. These are the values in the bundled reports; the repository does not independently recompute them from per-record predictions.
+| Metric | Recomputed value |
+|---|---:|
+| Records | 672 |
+| Correct | 466 |
+| Accuracy | 0.693452 |
+| Macro-F1 | 0.688841 |
+| Weighted-F1 | 0.689590 |
 
-The project is research software, not a cleared medical device. Its classification output must not be used to diagnose, treat, or rule out a medical condition.
+These 672 records resolve to the public `training/` partition in Challenge 2021 v1.0.3. The local `split=test` field is a project label, not the Challenge's hidden test set. The exact training manifest for this checkpoint is not available, so independence from checkpoint training is not claimed. The older 605/672 aggregate has been superseded and is retained only as a marked legacy artifact.
 
-## Contents
+Pathology Primary-5 and Cascade/OOD numbers in the historical report folder have not been recomputed from record-level predictions. They are not presented as current results. See [results and claim boundaries](reports/results/arrhythmia_primary9_external.md) and the [legacy evidence index](outputs/gold_master_external_validation/README.md).
 
-| Path | Contents |
-|---|---|
-| `src/` | Data, model, training, and metric utilities. |
-| `scripts/` | Aggregate-report, table, and hash-manifest tools. |
-| `tests/` | Python and ESP32 contract tests. |
-| `data/external_validation/` | Final external validation labels and aggregate inputs; no ECG waveforms. |
-| `models/gold_master/` | Primary-9 checkpoint and training summary. |
-| `outputs/` | Machine-readable aggregate reports and hash manifest. |
-| `reports/` | Methods, results, and evidence traceability. |
-| `hardware/esp32/` | Firmware, recorder, model files, and engineering recordings. |
-| `cedia/` | Optional cluster sync and job tools; setup is documented separately. |
+## Run It
 
-## Reproduce Packaged Checks
-
-Use Python 3.12. Create and activate an environment:
+Requirements: Python 3.12, internet access for PhysioNet, and enough disk space for the selected ECG records. The runner downloads only the 672 referenced records, not the complete PhysioNet release.
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-```
-
-On macOS/Linux, activate with `source .venv/bin/activate`. Then install the pinned top-level requirements and package:
-
-```text
 python -m pip install -r requirements.txt
-python -m pip install -e .
+python -m pip install --no-deps -e .
+python scripts/build_validation_record_index.py --check
+python scripts/build_record_source_manifest.py --check
+python scripts/build_primary9_evaluation_labels.py --check
+python scripts/run_primary9_inference.py --download-workers 6 --batch-size 32
+python scripts/run_primary9_external_validation.py
+python scripts/run_combined_external_validation.py --write
+python scripts/build_result_tables.py
 python -m pytest -q
 python scripts/verify_artifact_hashes.py
 ```
 
-The report scripts validate and print the bundled aggregate inputs. `build_result_tables.py` regenerates the Markdown table from those same inputs:
+The first two source checks query the pinned PhysioNet 1.0.3 record indexes. The label check downloads only WFDB headers; inference downloads signal files as needed. `--offline` can be passed to the label/inference scripts after the files are cached. A smoke test with `--limit N` is not a reportable full evaluation.
 
-```text
-python scripts/run_primary9_external_validation.py
-python scripts/run_pathology_primary5_external_validation.py
-python scripts/run_combined_external_validation.py
-python scripts/build_result_tables.py
-```
+The run writes `primary9_record_predictions.csv`, `primary9_recomputed_report.json`, `source_files_sha256.csv`, and `run_manifest.json`. The manifest records dependency versions, dataset/checkpoint/label/source hashes, preprocessing settings, and hashes for the code files used. Rerunning the command recomputes all metrics from the distributed checkpoint; it does not merely summarize the stored JSON.
 
-To inspect or intentionally refresh the whole-repository hash inventory, use `python scripts/build_artifact_hashes.py` to check it, or pass `--write` only after reviewing the intended changes. Text hashes use LF-normalized UTF-8; binary hashes use the exact file bytes. The manifest does not hash itself.
+## Evidence Boundaries
 
-## Reproduction Limits
+- Inference and the 672-record evaluation are reproducible from this checkout and the cited public dataset release.
+- Training the checkpoint from scratch is not currently a reproducible claim: the exact training/validation manifests and offline teacher-sidecar arrays are not included.
+- A read-only CEDIA comparison confirmed that the local 672 record IDs and labels match its external manifest. CEDIA's train/validation manifests and checkpoint files do not establish the lineage or training overlap of the checkpoint distributed here; see the [cross-check evidence](reports/evidence/cedia-readonly-crosscheck.md).
+- The safe `esp32s3` firmware profile compiles with the pinned PlatformIO toolchain; the reproducible command and measured image sizes are in [firmware build evidence](reports/evidence/firmware-build.md). No physical-board flash, signal-chain equivalence, or on-device clinical performance is claimed.
+- The current Arduino firmware still uses a pinned legacy TensorFlow Lite Micro library. Its upstream maintainer marks it outdated/not recommended; it is retained here only to reproduce this firmware revision, not recommended as a dependency choice for new projects.
 
-The repository does not contain source ECG waveforms, prediction-level outputs for all 672 records, the exact training/validation manifests, or all training and teacher-sidecar data. The aggregate scripts do not load the `.pth` checkpoint. Therefore this checkout can verify packaged files, test code contracts, and rebuild summaries/tables, but cannot reproduce inference, training, the claimed record-level predictions, or a zero-overlap audit. See [REPRODUCIBILITY.md](REPRODUCIBILITY.md) and [DATA_PROVENANCE.md](DATA_PROVENANCE.md) for the evidence gaps and source-by-source status.
+See [REPRODUCIBILITY.md](REPRODUCIBILITY.md), [DATA_PROVENANCE.md](DATA_PROVENANCE.md), [AUDIT_REPORT.md](AUDIT_REPORT.md), and [REFERENCES.md](REFERENCES.md).
 
-## Edge Firmware
+## Repository Map
 
-Install the pinned PlatformIO CLI with `python -m pip install -r requirements-firmware.txt`, then build with `python -m platformio run -d hardware/esp32/firmware -e esp32s3`. The general and campus profiles block sensitive HTTP routes. Only explicitly named private-hotspot profiles enable the unauthenticated raw-ECG and result endpoints; use them on an isolated private network only. Firmware compilation and physical-device behavior were not verified in this audit environment. See [hardware/esp32/README.md](hardware/esp32/README.md).
+| Path | Contents |
+|---|---|
+| `src/`, `scripts/` | Model, signal processing, dataset resolution, inference, and reporting code |
+| `data/external_validation/` | Minimal label table, 672-record index, and per-record source manifest; no ECG signals |
+| `models/gold_master/` | Distributed Primary-9 checkpoint and training summary |
+| `outputs/reproduced/` | Recomputed per-record predictions, metrics, input hashes, and run manifest |
+| `outputs/gold_master_external_validation/` | Historical aggregate reports, explicitly marked legacy |
+| `reports/` | Methods, results, and evidence traceability |
+| `hardware/esp32/` | Firmware, conversion tools, and engineering artifacts |
 
-## Data, Citation, and License
+## Citation and License
 
-The MIT license applies only to original software source code, not to datasets, row-level labels, model weights, recordings, results, or evidence documents. See [LICENSE_SCOPE.md](LICENSE_SCOPE.md) for the boundary and [DATA_PROVENANCE.md](DATA_PROVENANCE.md) for the unresolved rights of the 312 `data_test` rows. Dataset and method citations are in [REFERENCES.md](REFERENCES.md); the repository currently has no associated manuscript citation.
+Dataset users must cite the versioned PhysioNet Challenge 2021 release and the relevant source-dataset papers. The release page specifies CC BY 4.0 for its files. TITAN source code is MIT-licensed; project-authored research artifacts and model weights have a separate CC BY 4.0 notice. Neither project license relicenses third-party datasets or recordings. See [license scope](LICENSE_SCOPE.md), [artifact license](LICENSE-ARTIFACTS.md), and [dataset provenance](DATA_PROVENANCE.md).
 
-See [CITATION.cff](CITATION.cff) for software citation metadata and [LICENSE](LICENSE) for the standard MIT terms. Redistribution of excluded data/model artifacts must follow their own source terms and is not authorized by the code license.
+The result is for research use only. It must not be used to diagnose, treat, or rule out a medical condition.

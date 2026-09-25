@@ -40,7 +40,6 @@ ECGInference::ECGInference()
       _model(nullptr), _input(nullptr), _output(nullptr) {}
 
 ECGInference::~ECGInference() {
-    if (_interpreter) delete _interpreter;
     if (_tensor_arena) {
         heap_caps_free(_tensor_arena);
     }

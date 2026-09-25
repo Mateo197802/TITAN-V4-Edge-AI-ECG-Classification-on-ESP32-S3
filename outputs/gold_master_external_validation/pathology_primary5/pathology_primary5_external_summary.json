@@ -1,5 +1,6 @@
 {
   "protocol": "PATHOLOGY_PRIMARY5_EXTERNAL_VALIDATION_V1",
+  "evidence_status": "LEGACY_NOT_REPRODUCED_FROM_RECORD_LEVEL_PREDICTIONS",
   "label_set": "final external validation label set",
   "primary_pathologies": [
     "IMI",

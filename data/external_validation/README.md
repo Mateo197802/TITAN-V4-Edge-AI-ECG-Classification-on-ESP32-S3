@@ -1,14 +1,7 @@
-# External Validation Data
+# External Validation Inputs
 
-This directory contains the final external validation label set and summary inputs used by the public validation scripts.
+This directory contains only a frozen 672-record index, a versioned per-record source manifest, and a minimal label table. It contains no ECG waveform files. Downloaded `.hea`/signal files are stored under ignored `data/cache/`.
 
-Files:
+The source release is PhysioNet/Computing in Cardiology Challenge 2021 v1.0.3, DOI `10.13026/34va-7q14`, licensed CC BY 4.0 for its files. Each manifest path is verified against the release's official `RECORDS` index. `split=test` is a project-local label; all resolved files are in the release's `training/` directory. The set is not the Challenge hidden test set.
 
-| File | Role |
-|---|---|
-| `final_external_validation_labels.csv` | Record-level final labels and metadata fields used for validation. |
-| `validation_set_summary.json` | External validation registry summary. |
-| `primary9_external_validation_input.json` | Primary-9 external validation input summary. |
-
-The external validation registry contains 675 records. The reportable Primary-9 rhythm evaluation uses 672 records after applying the predefined reportable rhythm scope.
-
+The labels are reconstructed deterministically from WFDB `Dx` codes and checked against all source headers. See [DATA_PROVENANCE.md](../../DATA_PROVENANCE.md) and [REFERENCES.md](../../REFERENCES.md) for the attribution, label rule, and license scope. The label table and project-authored derived artifacts are covered by the separate [CC BY 4.0 notice](../../LICENSE-ARTIFACTS.md), in addition to required upstream attribution.

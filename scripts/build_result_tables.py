@@ -10,7 +10,7 @@ from titan_v4.metrics.external_validation import cascade_summary, load_json, pat
 
 def main() -> int:
     primary9 = primary9_summary(
-        load_json("outputs/gold_master_external_validation/arrhythmia_primary9/primary9_external_validation_report.json")
+        load_json("outputs/reproduced/primary9/primary9_recomputed_report.json")
     )
     pathology = pathology_summary(
         load_json("outputs/gold_master_external_validation/pathology_primary5/pathology_primary5_external_summary.json")
@@ -22,14 +22,21 @@ def main() -> int:
         [
             "| Module | External scope | Accuracy | Macro-F1 | Evidence role |",
             "|---|---:|---:|---:|---|",
-            f"| Arrhythmia Primary-9 | {primary9['records']} records | {primary9['accuracy']:.4f} | {primary9['macro_f1']:.4f} | Main external rhythm result |",
-            f"| Pathology Primary-5 | Primary labels | {pathology['accuracy']:.4f} | {pathology['macro_f1']:.4f} | Main external pathology result |",
-            f"| Cascade/OOD | {cascade['diagnostic_subset_records']} diagnostic records | coverage {cascade['coverage']:.4f} | selective-risk metrics | Safety annex |",
+            f"| Arrhythmia Primary-9 | {primary9['records']} records | {primary9['accuracy']:.4f} | {primary9['macro_f1']:.4f} | Recomputed full-support inference |",
+            f"| Pathology Primary-5 | Historical aggregate | n/a | n/a | Legacy, not reproduced (reported {pathology['accuracy']:.5f}/{pathology['macro_f1']:.5f}) |",
+            f"| Cascade/OOD | Historical aggregate | n/a | n/a | Safety annex only; legacy, not reproduced (n={cascade['diagnostic_subset_records']}, coverage={cascade['coverage']:.4f}) |",
         ]
     )
     out = Path("reports/tables/external_validation_metrics.md")
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text("# External Validation Metrics\n\n" + table + "\n", encoding="utf-8")
+    out.write_text(
+        "# External Validation Metrics\n\n"
+        "Only Primary-9 was recomputed from the distributed checkpoint and all 672 source records. "
+        "Pathology and Cascade/OOD are preserved historical summaries, not current reproduced results.\n\n"
+        + table
+        + "\n",
+        encoding="utf-8",
+    )
     print(out)
     return 0
 

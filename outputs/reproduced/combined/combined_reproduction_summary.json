@@ -1,0 +1,49 @@
+{
+  "protocol": "REPRODUCED_PRIMARY9_WITH_LEGACY_ANNEXES_V1",
+  "label_set": "final external validation label set",
+  "evaluation_scope": "Frozen 672-record sample resolved to PhysioNet Challenge 2021 v1.0.3 training paths; not the official hidden Challenge test set. Checkpoint training overlap is unestablished.",
+  "external_training_allowed": false,
+  "external_threshold_tuning_allowed": false,
+  "arrhythmia_primary9": {
+    "module": "arrhythmia_primary9",
+    "evidence_status": "REPRODUCED_FULL_672_INFERENCE",
+    "records": 672,
+    "correct_predictions": 466,
+    "accuracy": 0.6934523809523809,
+    "macro_f1": 0.6888407765536525,
+    "weighted_f1": 0.6895899672373766,
+    "classes": [
+      "AFIB",
+      "SB",
+      "STACH",
+      "NSR",
+      "PVC",
+      "RBBB",
+      "LBBB",
+      "PAC",
+      "1AVB"
+    ]
+  },
+  "pathology_primary5": {
+    "module": "pathology_primary5",
+    "evidence_status": "LEGACY_NOT_REPRODUCED",
+    "accuracy": 0.90256,
+    "macro_f1": 0.66874,
+    "classes": [
+      "IMI",
+      "ALMI",
+      "ILMI",
+      "LAE",
+      "ISC_"
+    ]
+  },
+  "cascade_annex": {
+    "module": "cascade_safety_annex",
+    "role": "safety_annex",
+    "evidence_status": "LEGACY_NOT_REPRODUCED",
+    "diagnostic_subset_records": 211,
+    "coverage": 0.5071090047393365,
+    "quarantine_rate": 0.4928909952606635,
+    "accepted_predictions": 107
+  }
+}

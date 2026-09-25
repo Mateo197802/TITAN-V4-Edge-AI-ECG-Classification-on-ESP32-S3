@@ -13,6 +13,15 @@ def test_external_validation_label_set_is_neutral_and_complete():
     rows = list(csv.DictReader(labels_path.open("r", newline="", encoding="utf-8")))
     assert len(rows) == 672
     assert "rhythm_label" in rows[0]
+    assert set(rows[0]) == {
+        "record_id",
+        "source",
+        "split",
+        "rhythm_label",
+        "dx_codes",
+        "dx_rhythm_label_names",
+    }
+    assert {row["split"] for row in rows} == {"test"}
     disallowed_columns = {
         "original_rhythm_label",
         "final_rhythm_label",
@@ -32,3 +41,10 @@ def test_reportable_primary9_input_has_672_records():
     payload = json.loads((ROOT / "data/external_validation/primary9_external_validation_input.json").read_text(encoding="utf-8"))
     assert payload["records_found"] == 672
     assert payload["total_evaluated"] == 672
+    assert payload["evidence_status"] == "LEGACY_SUPERSEDED_NOT_REPRODUCED_FROM_CURRENT_LABELS"
+
+
+def test_validation_summary_documents_current_source_mapping():
+    summary = json.loads((ROOT / "data/external_validation/validation_set_summary.json").read_text(encoding="utf-8"))
+    assert summary["evidence_status"] == "CURRENT_672_RECORD_INDEX_AND_SOURCE_MAPPING"
+    assert sum(summary["class_distribution_final"].values()) == 672

@@ -1,4 +1,6 @@
 {
+  "evidence_status": "LEGACY_SUPERSEDED_NOT_REPRODUCED_FROM_CURRENT_LABELS",
+  "superseded_by": "outputs/reproduced/primary9/primary9_recomputed_report.json",
   "records_found": 672,
   "total_evaluated": 672,
   "accuracy": 0.9002976190476191,

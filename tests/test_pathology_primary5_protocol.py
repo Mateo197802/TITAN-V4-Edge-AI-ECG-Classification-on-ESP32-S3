@@ -18,4 +18,5 @@ def test_pathology_external_metrics_are_exact():
     assert report["macro_f1"] == 0.66874
     assert report["external_training_allowed"] is False
     assert report["external_threshold_tuning_allowed"] is False
+    assert report["evidence_status"] == "LEGACY_NOT_REPRODUCED_FROM_RECORD_LEVEL_PREDICTIONS"
 

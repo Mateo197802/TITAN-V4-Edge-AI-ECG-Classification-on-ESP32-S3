@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 title: "NeuroGuardian TITAN V4 ECG External Validation"
-message: "If you use this software or its reported results, cite this repository. No associated manuscript DOI is currently provided. Dataset citations do not establish the provenance or redistribution rights of the included record-level labels."
+message: "Software source is MIT-licensed; project research artifacts and model weights have a separate CC BY 4.0 notice. See LICENSE_SCOPE.md. If you use this software or its results, cite this repository and the exact PhysioNet Challenge 2021 v1.0.3 release described in REFERENCES.md. Primary-9 metrics were recomputed from the distributed checkpoint; training from scratch and checkpoint train/test independence are not claimed. No associated manuscript DOI is currently provided."
 version: "0.1.0"
 date-released: "2026-06-05"
 url: "https://github.com/Mateo197802/TITAN-V4-Edge-AI-ECG-Classification-on-ESP32-S3"

@@ -23,12 +23,12 @@ def main() -> int:
     parser.add_argument(
         "--out",
         type=Path,
-        default=Path("outputs/gold_master_external_validation/combined/combined_external_validation_summary.json"),
+        default=Path("outputs/reproduced/combined/combined_reproduction_summary.json"),
     )
     args = parser.parse_args()
 
     primary9 = primary9_summary(
-        load_json("outputs/gold_master_external_validation/arrhythmia_primary9/primary9_external_validation_report.json")
+        load_json("outputs/reproduced/primary9/primary9_recomputed_report.json")
     )
     pathology = pathology_summary(
         load_json("outputs/gold_master_external_validation/pathology_primary5/pathology_primary5_external_summary.json")

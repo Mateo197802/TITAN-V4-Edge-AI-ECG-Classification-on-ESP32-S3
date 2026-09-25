@@ -13,4 +13,5 @@ secrets/
 *.pem
 *.key
 id_rsa*
+data/cache/
 

@@ -8,6 +8,14 @@ version = "0.1.0"
 description = "TITAN V4 ECG external validation evidence package"
 license = "MIT"
 requires-python = ">=3.12"
+dependencies = [
+    "numpy==2.4.6",
+    "pandas==3.0.3",
+    "scipy==1.18.1",
+    "scikit-learn==1.9.0",
+    "torch==2.12.1",
+    "wfdb==4.3.1",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]

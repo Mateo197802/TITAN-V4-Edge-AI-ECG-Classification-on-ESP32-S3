@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "evaluation_status": "FULL_672",
+  "record_count": 672,
+  "model": {
+    "architecture": "TitanV4Lite",
+    "checkpoint": "gold_master_primary9_model.pth",
+    "sha256": "BC7BA03D0D6D40E823FDB9BB261EBE29AE8B7A74C97D1C98E7140BCA4D2D305B"
+  },
+  "label_file": {
+    "name": "final_external_validation_labels.csv",
+    "sha256": "765B7FEE68940D577384DAFFCF01D7FD7374FD9E019DCC291BB30E574E6212F4"
+  },
+  "source_manifest": {
+    "name": "record_source_manifest.csv",
+    "sha256": "E224686569E54F471AA4A5FDBAC0CE2123C43BC8F5CD0637B0C389B75692CFB0"
+  },
+  "source_dataset": {
+    "name": "PhysioNet/Computing in Cardiology Challenge 2021",
+    "version": "1.0.3",
+    "url": "https://physionet.org/files/challenge-2021/1.0.3",
+    "license": "CC BY 4.0; see the source release terms and REFERENCES.md"
+  },
+  "preprocessing": {
+    "input_leads": [
+      "I",
+      "II",
+      "III",
+      "AVR",
+      "AVL",
+      "AVF"
+    ],
+    "target_sampling_rate_hz": 125,
+    "window_seconds": 10.0,
+    "window_start_seconds": 0,
+    "bandpass_hz": [
+      0.5,
+      45.0
+    ],
+    "butterworth_order": 3,
+    "filter": "causal scipy.signal.lfilter with two-second zero-padded context",
+    "resampling": "scipy.signal.resample_poly",
+    "normalization": "per-lead z-score over the 10-second window"
+  },
+  "runtime": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "torch": "2.12.1+cpu",
+    "numpy": "2.4.6",
+    "scipy": "1.18.1",
+    "scikit_learn": "1.9.0",
+    "wfdb": "4.3.1",
+    "device": "cpu",
+    "torch_threads": 1,
+    "deterministic_algorithms": true
+  },
+  "code_files": {
+    "scripts/run_primary9_inference.py": "81F588B669DF3B5B946AB26BFC5662934EE6874361BF13067E25B774D25964DD",
+    "scripts/build_primary9_evaluation_labels.py": "233D891426C35AB0EC908C101DEEF00043CC0AB0196A7F72C5B664B070A449DB",
+    "src/titan_v4/reproducibility/inference.py": "65C0383C8544F6C93BA0FD8EE3A0ECDDCA3A2A605248086E9C2EF30396F8EE57",
+    "src/titan_v4/reproducibility/labels.py": "51E67CCCDBC04FB61A623AB064DA0BD4986A16164CAFFD226BB72BC1E3CCC9EA",
+    "src/titan_v4/reproducibility/physionet.py": "53FE9AB0A4465D9275B08684CDDA21D95A7B7F59A171C9EB2DBE92DAB40F86F1",
+    "src/titan_v4/models/titan_v4_net.py": "5A3C980F44C71DF1F075DDF7592DD61A88C99690C739B467A0964291B1FAE696",
+    "src/titan_v4/data/primary9_registry.py": "61ED35A31A5CC9A173DB84B93117905BFC766E042BF362912D9A48E35D2AFBCF",
+    "src/titan_v4/data/label_registry.py": "A9C3360C436767C98FA12E81113836320B6B7258677987EF618DF003E8EEE94B"
+  },
+  "source_files": "source_files_sha256.csv",
+  "outputs": {
+    "primary9_record_predictions.csv": "A3CFEDC54F3CACF4CD130813A6D5923931D048BCEC10D9044FBB05B23D709168",
+    "primary9_recomputed_report.json": "3373E2A1F81AF9EF02646A95E3E34403033046F85D4398D769E04FDE0D4BADC4",
+    "source_files_sha256.csv": "945B5BC286BE9A12EA89FFDA05FFC37E914DA99F32C9995B6524C15E280AE879"
+  },
+  "source_file_count": 1344,
+  "source_dataset_counts": {
+    "chapman_shaoxing": 70,
+    "cpsc_2018": 56,
+    "cpsc_2018_extra": 42,
+    "georgia": 56,
+    "ningbo": 70,
+    "ptb-xl": 378
+  }
+}

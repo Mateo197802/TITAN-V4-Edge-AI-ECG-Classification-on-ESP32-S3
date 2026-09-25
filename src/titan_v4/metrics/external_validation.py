@@ -73,8 +73,11 @@ def primary9_summary(report: dict[str, Any]) -> dict[str, Any]:
         raise ValueError(f"Primary-9 report missing fields: {missing}")
     if int(report["total_records"]) != 672:
         raise ValueError("Primary-9 external validation must evaluate exactly 672 records")
+    if report.get("evaluation_status") != "FULL_672":
+        raise ValueError("Primary-9 report is not a completed full-support 672-record inference run")
     return {
         "module": "arrhythmia_primary9",
+        "evidence_status": "REPRODUCED_FULL_672_INFERENCE",
         "records": int(report["total_records"]),
         "correct_predictions": int(report["correct_predictions"]),
         "accuracy": float(report["accuracy"]),
@@ -94,6 +97,7 @@ def pathology_summary(report: dict[str, Any]) -> dict[str, Any]:
         raise ValueError(f"Unexpected Primary-5 pathology class order: {classes}")
     return {
         "module": "pathology_primary5",
+        "evidence_status": "LEGACY_NOT_REPRODUCED",
         "accuracy": float(report["accuracy"]),
         "macro_f1": float(report["macro_f1"]),
         "classes": list(PATHOLOGY5_CLASSES),
@@ -104,6 +108,7 @@ def cascade_summary(report: dict[str, Any]) -> dict[str, Any]:
     return {
         "module": "cascade_safety_annex",
         "role": "safety_annex",
+        "evidence_status": "LEGACY_NOT_REPRODUCED",
         "diagnostic_subset_records": int(report["diagnostic_subset_records"]),
         "coverage": float(report["coverage"]),
         "quarantine_rate": float(report["quarantine_rate"]),
@@ -113,8 +118,12 @@ def cascade_summary(report: dict[str, Any]) -> dict[str, Any]:
 
 def combined_summary(primary9: dict[str, Any], pathology: dict[str, Any], cascade: dict[str, Any]) -> dict[str, Any]:
     return {
-        "protocol": "COMBINED_EXTERNAL_VALIDATION_SUMMARY_V1",
+        "protocol": "REPRODUCED_PRIMARY9_WITH_LEGACY_ANNEXES_V1",
         "label_set": "final external validation label set",
+        "evaluation_scope": (
+            "Frozen 672-record sample resolved to PhysioNet Challenge 2021 v1.0.3 training paths; "
+            "not the official hidden Challenge test set. Checkpoint training overlap is unestablished."
+        ),
         "external_training_allowed": False,
         "external_threshold_tuning_allowed": False,
         "arrhythmia_primary9": primary9,

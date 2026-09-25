@@ -1,35 +1,54 @@
-# Repository Audit Report
+# TITAN V4 Repository and Reproducibility Audit
 
 Audit date: 2026-09-24
+
 Repository: `Mateo197802/TITAN-V4-Edge-AI-ECG-Classification-on-ESP32-S3`
-Audited baseline: `3a2ef71b35e0d9d05dca511120f976fc27f7fab9`
-Audit changes are prepared on branch `codex/audit-fixes` against this baseline.
+Working branch: `codex/audit-fixes`
 
-## Findings and Changes
+## Corrections Made
 
-- The default firmware profile exposed unauthenticated routes for raw ECG windows and model results. Those routes now default to disabled; only explicitly named private-hotspot profiles enable them. They still have no authentication and must remain on an isolated network.
-- CEDIA SSH scripts accepted unknown host keys. They now load system/configured known hosts and reject unknown keys. No remote login or SLURM job was run.
-- Personal workstation paths and account identifiers were present in checked-in summaries/scripts. They were removed from the current working tree. They remain in the repository's existing public Git history; that history was not rewritten.
-- The artifact hash manifest failed on Windows line endings and contained stale entries. Text hashing is now LF-normalized, binary hashing remains byte-exact, and the checked-in manifest covers 114 repository files.
-- A recorder test used a stale path, pytest had duplicate module-name collection, and the model-header generator did not search the tracked TFLite model location. These were corrected and covered by the test suite.
-- The previous `LICENSE` text was not a recognized open-source license. The repository now uses the standard MIT license for original software source code only; `LICENSE_SCOPE.md` excludes datasets, labels, models, recordings, results, and evidence documents.
-- The validation-label table contains 312 `data_test` rows without source/version/license evidence. The remaining source groups also lack per-record upstream mappings and redistribution clearance. These are documented in `DATA_PROVENANCE.md` and remain release blockers for redistributing row-level data.
+- Implemented an end-to-end Primary-9 inference runner that loads the distributed checkpoint, downloads the exact 672 PhysioNet records, verifies source IDs and headers, applies documented signal preprocessing, and writes prediction-level probabilities, metrics, waveform hashes, and a run manifest.
+- Replaced the former label table with a minimal 672-row table regenerated from official Challenge 2021 v1.0.3 WFDB headers. All 312 records formerly marked `data_test` now resolve to exact upstream record paths via source prefix plus official `RECORDS` indexes.
+- Compared the rebuilt 672 record labels with CEDIA's external manifest in a read-only session: same record IDs and zero label disagreements. The earlier labels disagreed on 129 records; the previous 605/672 score is superseded.
+- Updated current result documents and scripts to use recomputed Primary-9 inference. Pathology Primary-5 and Cascade/OOD summaries remain preserved but are explicitly marked legacy and are excluded from current results.
+- Added versioned PhysioNet dataset attribution and separated software MIT terms from CC BY 4.0 research artifacts. Third-party data/models remain under their own rights and terms.
+- Pinned the firmware's previously missing TensorFlow Lite dependency to an immutable upstream commit, removed incompatible/permissive compiler flags, fixed deletion of a non-owned static interpreter, and compiled the safe `esp32s3` profile against a project-local ESP32-S3-DevKitC-1-N8R8 definition with 8 MB octal PSRAM. The profile matches the 4 MB tensor-arena requirement; the physical board was not connected. Build warnings from bundled third-party LCD drivers are disclosed in `reports/evidence/firmware-build.md`.
+- Preserved the earlier security fixes: sensitive HTTP routes are disabled by default, and CEDIA SSH rejects unknown host keys. Historical local path disclosures remain in public Git history; that history was not rewritten.
+
+## Recomputed Primary-9 Result
+
+The distributed checkpoint (`BC7BA03D0D6D40E823FDB9BB261EBE29AE8B7A74C97D1C98E7140BCA4D2D305B`) was evaluated on all 672 records:
+
+| Metric | Result |
+|---|---:|
+| Correct | 466 / 672 |
+| Accuracy | 0.693452380952 |
+| Macro-F1 | 0.688840776554 |
+| Weighted-F1 | 0.689589967237 |
+
+Per-record predictions, confusion matrix, source waveform hashes, input hashes, environment, preprocessing, and inference-code hashes are stored under `outputs/reproduced/primary9/`.
+
+## CEDIA Cross-Check
+
+CEDIA was accessed read-only. Its external record-ID set matches the local 672-row evaluation set, and label disagreement is zero after rebuilding from official source headers. CEDIA's train/validation manifests and overlap report belong to a separate pipeline. Its student checkpoint hashes do not match the checkpoint evaluated here, so its train/test zero-overlap finding is not used to claim independence for this repository model. A CEDIA teacher/boundary artifact matches the repository's separate protected baseline, not the evaluated Primary-9 checkpoint. No remote files were changed and no SLURM job or hardware run was launched. See [cross-check evidence](reports/evidence/cedia-readonly-crosscheck.md).
+
+## Dataset and Citation Review
+
+The exact inference source is PhysioNet/Computing in Cardiology Challenge 2021 v1.0.3 (DOI `10.13026/34va-7q14`), under CC BY 4.0 for its files. Its training package contains the resolved source families recorded in the manifest. The original 2020-2021 database/Challenge papers remain appropriate dataset/method citations; they are supplemented by the exact version DOI and the current recommended PhysioNet citation. See `REFERENCES.md`.
+
+The project-local `split=test` is not the official hidden Challenge test set. The exact training manifest and offline teacher sidecars for the distributed checkpoint are unavailable, so from-scratch training and checkpoint train/evaluation independence are not established. No source-held-out claim is made.
+
+## Licensing and Security
+
+Original software source is under MIT. Project-authored model weights, results, and derived label/prediction artifacts have a separate CC BY 4.0 notice. That grant applies only to project authors' rights and excludes third-party models and data; it is not an institutional or legal opinion. The downloaded ECG waveforms are not checked into Git. A scan of the working tree and Git history found no matches for common API-token/private-key formats, and the current working tree contains no local absolute user paths. Historical public Git commits still contain personal filesystem-path disclosures; no full-history rewrite or credential revocation was performed.
 
 ## Verification
 
-- `python -m pytest -q`: 35 passed on CPython 3.12.10.
-- `python scripts/build_artifact_hashes.py`: manifest matches 114 files.
-- `python scripts/verify_artifact_hashes.py`: passed, no failures.
-- Primary-9, Pathology Primary-5, and combined aggregate scripts ran successfully. They reproduce packaged JSON summaries; they do not run inference or retrain the checkpoint.
-- `python -m compileall -q cedia scripts src tests hardware/esp32`: passed.
-- Firmware compilation, physical-device tests, signal-chain equivalence, and CEDIA connectivity were not verified.
+Verification on 2026-09-24:
 
-## Security Scope
+- Official release record index, source manifest, and label checks passed for all 672 records; WFDB labels were checked offline.
+- Full offline inference regenerated all 672 prediction rows and reproduced the metrics above.
+- `python -m pytest -q`: 64 passed. `compileall` passed for CEDIA scripts, project code, tests, and hardware tooling.
+- Artifact hash verifier passed for 140 repository files. The safe ESP32-S3 firmware compile passed; measured resources and binary hash are in `reports/evidence/firmware-build.md`.
 
-The source review found three baseline issues: two medium-severity findings (unauthenticated sensitive HTTP routes enabled by some profiles; permissive SSH host-key handling) and one low-severity finding (local account/path identifiers). Their current-tree changes and remaining boundaries are described above.
-
-Tracked text in the complete three-commit Git history was checked for private-key PEM headers and common GitHub, AWS access-key-ID, Slack, Google API-key, and OpenAI token prefixes; no matches were found. The source scanner also found no actual password/private-key material in the checked-out source files. Binary blobs and unrecognized secret formats are not covered by that regex pass. This is not a guarantee against every secret format. The local path disclosure remains in old public commits, and this audit did not rewrite remote history or revoke credentials.
-
-## Readiness
-
-Code tests and packaged aggregate checks pass, and the original software source has an MIT license. This is not a fully reproducible scientific release or a rights-cleared public data release: resolve the `data_test` provenance and row-level data permissions, document exact training/evaluation source versions and manifests, and decide whether to remove historical personal-path disclosures through a coordinated history rewrite.
+Physical ESP32-S3 validation, firmware/offline signal equivalence, checkpoint training reconstruction, and source-held-out independence were not established.
