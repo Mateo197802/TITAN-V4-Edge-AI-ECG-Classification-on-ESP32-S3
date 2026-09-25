@@ -11,12 +11,13 @@ The repository contains distinct performance figures from different checkpoints,
 | CEDIA internal validation | Accuracy 89.84%; macro-F1 73.90%; weighted-F1 90.30% | 58,855 windows; separate CEDIA checkpoint |
 | Distributed-checkpoint training summary | Best validation macro-F1 89.48% | 706 windows; model-selection metadata only |
 | Recomputed repository-checkpoint diagnostic | Accuracy 69.35%; macro-F1 68.88%; weighted-F1 68.96% | 672 records; reproducible custom single-label diagnostic, not official Challenge score |
-| Historical Primary-9 aggregate | Accuracy 90.03%; macro-F1 87.82% | 672 rows; unverified aggregate, prior labels differ on 129 records |
-| Historical Pathology Primary-5 aggregate | Per-label accuracy 90.26%; macro-F1 66.87% | Unverified; prediction rows, checkpoint and threshold provenance unavailable |
+| Current checkpoint scored against the prior Primary-9 labels | 568/672 correct; accuracy 84.52%; macro-F1 82.35% | Same published checkpoint predictions, historical label table; does not reproduce the stored 605/672 aggregate |
+| Historical Primary-9 aggregate | Accuracy 90.03%; macro-F1 87.82% | 672 rows; original predictions and checkpoint lineage unavailable; unverified, not disproven |
+| Historical Pathology Primary-5 aggregate | Per-label accuracy 90.26%; macro-F1 66.87% | Unverified; no record-level prediction/target pair or checkpoint/threshold lineage |
 
 See [metric reconciliation](reports/evidence/metric-reconciliation.md) for evidence boundaries. The 672 records resolve to the public `training/` partition in Challenge 2021 v1.0.3, not the hidden Challenge test set; checkpoint overlap is unknown. The 466/672 report is reproducible under its project-specific single-label rule, not proof of independent external performance. PhysioNet Challenge 2021 is multi-label and uses its own weighted scoring metric.
 
-Pathology Primary-5 and Cascade/OOD outputs are archived historical aggregates, not reproduced from record-level predictions. See [Primary-9 diagnostic](reports/results/arrhythmia_primary9_external.md), [pathology evidence](reports/results/pathology_primary5_external.md), and the [legacy evidence index](outputs/gold_master_external_validation/README.md).
+Pathology Primary-5 and Cascade/OOD outputs are archived historical aggregates, not reproduced from record-level predictions. CEDIA contains a separate pathology-supervised checkpoint and label map, but no matching Primary-5 prediction report; this is documented without attributing the historical metric to that model. See [Primary-9 diagnostic](reports/results/arrhythmia_primary9_external.md), [pathology evidence](reports/results/pathology_primary5_external.md), and the [legacy evidence index](outputs/gold_master_external_validation/README.md).
 
 ## Run It
 
@@ -31,6 +32,8 @@ python scripts/build_validation_record_index.py --check
 python scripts/build_record_source_manifest.py --check
 python scripts/build_primary9_evaluation_labels.py --check
 python scripts/run_primary9_inference.py --download-workers 6 --batch-size 32
+python scripts/compare_primary9_historical_labels.py
+python scripts/audit_pathology_reproducibility.py
 python scripts/run_primary9_external_validation.py
 python scripts/run_combined_external_validation.py --write
 python scripts/build_result_tables.py
@@ -41,6 +44,8 @@ python scripts/verify_artifact_hashes.py
 The first two source checks query the pinned PhysioNet 1.0.3 record indexes. The label check downloads only WFDB headers; inference downloads signal files as needed. `--offline` can be passed to the label/inference scripts after the files are cached. A smoke test with `--limit N` is not a reportable full evaluation.
 
 The run writes `primary9_record_predictions.csv`, `primary9_recomputed_report.json`, `source_files_sha256.csv`, and `run_manifest.json`. The manifest records dependency versions, dataset/checkpoint/label/source hashes, preprocessing settings, and hashes for the code files used. Rerunning the command recomputes all metrics from the distributed checkpoint; it does not merely summarize the stored JSON.
+
+The legacy-label comparator verifies those predictions against both the rebuilt and exact historical label tables, and writes the 672-row comparison plus metrics under `outputs/reviewer_verification/arrhythmia_primary9/`. The pathology audit writes a machine-readable readiness report; it deliberately does not compute a score without record-level targets and predictions. CEDIA evidence is a sanitized, read-only snapshot in `reports/evidence/cedia-pathology-crosscheck.json` and is not treated as a reproducible evaluation.
 
 ## Evidence Boundaries
 

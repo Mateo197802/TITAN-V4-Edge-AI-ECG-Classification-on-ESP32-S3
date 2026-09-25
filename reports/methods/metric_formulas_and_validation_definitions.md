@@ -1,6 +1,6 @@
 # Metric Formulas And Validation Definitions
 
-The current computed Primary-9 report is `outputs/reproduced/primary9/primary9_recomputed_report.json`. Only that full 672-record inference is a current reproduced performance result. Pathology Primary-5 and Cascade/OOD formulas remain relevant to archived reports but those legacy results are not reproduced by this workflow.
+The current computed Primary-9 report is `outputs/reproduced/primary9/primary9_recomputed_report.json`. It is a reproduced 672-record project-specific diagnostic, not independent external validation. `scripts/compare_primary9_historical_labels.py` evaluates those exact predictions against the prior labels as a separate sensitivity-to-label-table check. Pathology Primary-5 and Cascade/OOD formulas remain relevant to archived reports, but the historical scores are not reproduced without matched record-level targets and predictions.
 
 ## Accuracy
 

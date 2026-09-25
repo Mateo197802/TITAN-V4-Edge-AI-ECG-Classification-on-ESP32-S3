@@ -1,0 +1,63 @@
+{
+  "protocol": "CEDIA_PATHOLOGY_CANDIDATE_CROSSCHECK_V1",
+  "audit_date": "2026-09-25",
+  "source_scope": "CEDIA ~/V4_CEDIA, inspected read-only; source files and model weights are not redistributed here",
+  "evidence_status": "SEPARATE_SUPERVISED_CANDIDATE_FOUND; HISTORICAL_PRIMARY5_METRIC_NOT_REPRODUCED",
+  "pathology_label_map": {
+    "filename": "DATA/ptb-xl/ptbxl_pathology_label_map.json",
+    "sha256": "e5f677944efc18db42248db4130fe51dc9ae863a68b8056a3542f52b786b8409",
+    "size_bytes": 1862823,
+    "adapter": "ptbxl_scp_pathology",
+    "class_names": [
+      "IMI",
+      "ASMI",
+      "LVH",
+      "ISC_",
+      "ISCAL",
+      "NST_",
+      "ILMI",
+      "AMI",
+      "ALMI",
+      "LAE"
+    ],
+    "records_with_any_target_class": 2580,
+    "excluded_records_without_a_target_class": 19219,
+    "source_dataset_version_recorded_in_map": null,
+    "source_metadata_path": "redacted; the original map contains a workstation-specific path"
+  },
+  "model": {
+    "filename": "03_OUTPUTS/titan_v4_lite_weights_best.pth",
+    "checkpoint_sha256": "e9a44e4eea8ebb8f89d5e32909ae4afcc96442d1fa8eacb1e57a73bfa498353b",
+    "size_bytes": 87743746,
+    "training_summary_filename": "03_OUTPUTS/training_summary.json",
+    "training_summary_sha256": "01629aca2287d2ae58c71f51e9e80a19a3fa77c48438fe93d59995d10b8ab81d",
+    "training_summary_size_bytes": 2614,
+    "pathology_head_present": true,
+    "pathology_loss_weight": 0.2,
+    "pathology_labeled_windows": 1811,
+    "pathology_records_labelled": 2580,
+    "train_windows": 455756,
+    "validation_windows": 58855,
+    "same_as_distributed_repository_checkpoint": false
+  },
+  "coverage_crosswalk_to_public_672_record_cohort": {
+    "ptbxl_records_in_cohort": 378,
+    "records_found_in_sidecar_with_any_target_class": 153,
+    "records_found_in_sidecar_excluded_as_no_target": 224,
+    "records_not_found_in_sidecar": 1,
+    "primary5_label_assignments_by_class": {
+      "IMI": 39,
+      "ALMI": 4,
+      "ILMI": 13,
+      "LAE": 16,
+      "ISC_": 26
+    },
+    "crosswalk": "HRnnnnn record IDs were mapped to the corresponding records100/shard/nnnnn_lr path in the CEDIA sidecar",
+    "interpretation": "Coverage inventory only; no per-record model scores, thresholding, or performance metric was computed."
+  },
+  "output_inventory": {
+    "scope": "Read-only filename search under CEDIA 03_OUTPUTS for pathology, morphology, Primary-5 and pathology-prediction/report artifacts",
+    "pathology_prediction_or_primary5_artifact_found": false
+  },
+  "conclusion": "CEDIA contains a separately trained pathology-capable checkpoint and a PTB-XL label map. Their checkpoint hash does not match the distributed repository checkpoint, the label-map version is not recorded in the sidecar, and no matching pathology prediction/metric artifact was found. This is a candidate for a separately defined follow-up evaluation, not evidence that the historical 90.26%/66.87% aggregate is reproduced."
+}

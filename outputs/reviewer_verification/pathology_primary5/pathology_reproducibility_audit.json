@@ -1,0 +1,132 @@
+{
+  "protocol": "PATHOLOGY_PRIMARY5_REPRODUCIBILITY_AUDIT_V1",
+  "evidence_status": "HISTORICAL_METRIC_NOT_REPRODUCIBLE_FROM_AVAILABLE_ARTIFACTS",
+  "evaluation_performed": false,
+  "reason": "The checked artifacts do not provide a record-level target/prediction pair for scoring the historical claim.",
+  "historical_claim": {
+    "reported_per_label_accuracy": 0.90256,
+    "accuracy_definition": "legacy reported per-label accuracy; prediction and reference rows are unavailable",
+    "reported_macro_f1": 0.66874,
+    "label_set": [
+      "IMI",
+      "ALMI",
+      "ILMI",
+      "LAE",
+      "ISC_"
+    ],
+    "checkpoint_sha256": "not recorded"
+  },
+  "distributed_checkpoint": {
+    "filename": "gold_master_primary9_model.pth",
+    "sha256": "BC7BA03D0D6D40E823FDB9BB261EBE29AE8B7A74C97D1C98E7140BCA4D2D305B",
+    "training_metadata": {
+      "head_present_in_model_configuration": true,
+      "classes": [
+        "IMI",
+        "ASMI",
+        "LVH",
+        "ISC_",
+        "ISCAL",
+        "NST_",
+        "ILMI",
+        "AMI",
+        "ALMI",
+        "LAE"
+      ],
+      "loss_weight": 0.0,
+      "training_windows_with_pathology_labels": 0,
+      "sidecar_included_with_release": false
+    }
+  },
+  "checked_candidate_reference_table": {
+    "filename": "final_external_validation_labels.csv",
+    "sha256": "05BF74EC92EA1113BF2395D485A22D299543CD23F814221E94359C7564A3735D",
+    "record_count": 672,
+    "records_with_any_primary5_pathology_label": 0,
+    "note": "This table is not asserted to be the unavailable original pathology reference table."
+  },
+  "historical_record_level_prediction_file": {
+    "expected_filename": "pathology_primary5_predictions.csv",
+    "available": false,
+    "sha256": null
+  },
+  "missing_evidence": [
+    "record-level per-class pathology scores/predictions for the historical evaluation",
+    "record-level Primary-5 reference labels in the checked 672-record candidate table",
+    "checkpoint hash for the historical aggregate",
+    "per-class thresholds and calibration split for the historical aggregate"
+  ],
+  "interpretation": "The 90.26% per-label accuracy and 66.87% macro-F1 remain unverified historical aggregates. The current checkpoint's training summary reports pathology loss weight 0 and zero pathology-labeled windows, but this metadata alone does not establish the full prior weight lineage. It is not valid to score the historical claim by inventing negative labels or reusing rhythm-only labels.",
+  "scope": {
+    "historical_metric_reproduced": false,
+    "current_checkpoint_pathology_performance_claim": false,
+    "clinical_validation": false
+  },
+  "separate_cedia_candidate": {
+    "protocol": "CEDIA_PATHOLOGY_CANDIDATE_CROSSCHECK_V1",
+    "audit_date": "2026-09-25",
+    "source_scope": "CEDIA ~/V4_CEDIA, inspected read-only; source files and model weights are not redistributed here",
+    "evidence_status": "SEPARATE_SUPERVISED_CANDIDATE_FOUND; HISTORICAL_PRIMARY5_METRIC_NOT_REPRODUCED",
+    "pathology_label_map": {
+      "filename": "DATA/ptb-xl/ptbxl_pathology_label_map.json",
+      "sha256": "e5f677944efc18db42248db4130fe51dc9ae863a68b8056a3542f52b786b8409",
+      "size_bytes": 1862823,
+      "adapter": "ptbxl_scp_pathology",
+      "class_names": [
+        "IMI",
+        "ASMI",
+        "LVH",
+        "ISC_",
+        "ISCAL",
+        "NST_",
+        "ILMI",
+        "AMI",
+        "ALMI",
+        "LAE"
+      ],
+      "records_with_any_target_class": 2580,
+      "excluded_records_without_a_target_class": 19219,
+      "source_dataset_version_recorded_in_map": null,
+      "source_metadata_path": "redacted; the original map contains a workstation-specific path"
+    },
+    "model": {
+      "filename": "03_OUTPUTS/titan_v4_lite_weights_best.pth",
+      "checkpoint_sha256": "e9a44e4eea8ebb8f89d5e32909ae4afcc96442d1fa8eacb1e57a73bfa498353b",
+      "size_bytes": 87743746,
+      "training_summary_filename": "03_OUTPUTS/training_summary.json",
+      "training_summary_sha256": "01629aca2287d2ae58c71f51e9e80a19a3fa77c48438fe93d59995d10b8ab81d",
+      "training_summary_size_bytes": 2614,
+      "pathology_head_present": true,
+      "pathology_loss_weight": 0.2,
+      "pathology_labeled_windows": 1811,
+      "pathology_records_labelled": 2580,
+      "train_windows": 455756,
+      "validation_windows": 58855,
+      "same_as_distributed_repository_checkpoint": false
+    },
+    "coverage_crosswalk_to_public_672_record_cohort": {
+      "ptbxl_records_in_cohort": 378,
+      "records_found_in_sidecar_with_any_target_class": 153,
+      "records_found_in_sidecar_excluded_as_no_target": 224,
+      "records_not_found_in_sidecar": 1,
+      "primary5_label_assignments_by_class": {
+        "IMI": 39,
+        "ALMI": 4,
+        "ILMI": 13,
+        "LAE": 16,
+        "ISC_": 26
+      },
+      "crosswalk": "HRnnnnn record IDs were mapped to the corresponding records100/shard/nnnnn_lr path in the CEDIA sidecar",
+      "interpretation": "Coverage inventory only; no per-record model scores, thresholding, or performance metric was computed."
+    },
+    "output_inventory": {
+      "scope": "Read-only filename search under CEDIA 03_OUTPUTS for pathology, morphology, Primary-5 and pathology-prediction/report artifacts",
+      "pathology_prediction_or_primary5_artifact_found": false
+    },
+    "conclusion": "CEDIA contains a separately trained pathology-capable checkpoint and a PTB-XL label map. Their checkpoint hash does not match the distributed repository checkpoint, the label-map version is not recorded in the sidecar, and no matching pathology prediction/metric artifact was found. This is a candidate for a separately defined follow-up evaluation, not evidence that the historical 90.26%/66.87% aggregate is reproduced.",
+    "matches_distributed_checkpoint": false,
+    "historical_primary5_claim_linked": false
+  },
+  "historical_report_sha256": "7A043C3AEF699B7C823948694E825BAC77DEA80C4213289E0394D278EF4A90C2",
+  "training_summary_sha256": "92542237189119629AC1DEBB52592BAFDD21E34347ED61D093212D57FB79DD1E"
+}

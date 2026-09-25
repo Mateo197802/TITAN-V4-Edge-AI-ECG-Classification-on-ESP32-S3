@@ -17,6 +17,8 @@ python scripts/build_validation_record_index.py --check
 python scripts/build_record_source_manifest.py --check
 python scripts/build_primary9_evaluation_labels.py --check
 python scripts/run_primary9_inference.py --download-workers 6 --batch-size 32
+python scripts/compare_primary9_historical_labels.py
+python scripts/audit_pathology_reproducibility.py
 python scripts/run_primary9_external_validation.py
 python scripts/run_combined_external_validation.py --write
 python scripts/build_result_tables.py
@@ -44,7 +46,9 @@ The result is a reproducible inference/evaluation run on records from the public
 
 The read-only CEDIA record/label cross-check and checkpoint-hash comparison are documented in [CEDIA cross-check evidence](reports/evidence/cedia-readonly-crosscheck.md).
 
-The older 605/672 Primary-9 report is retained as an unverified historical aggregate, not a disproven result: its old labels disagree with the rebuilt labels on 129 rows, and the original per-record predictions are unavailable. Pathology Primary-5 and Cascade/OOD remain legacy summaries because their full record-level predictions have not been independently recomputed. None is interchangeable with the 672-record diagnostic. CEDIA's internal window-level validation is a separate checkpoint and is documented independently.
+The older 605/672 Primary-9 report is retained as an unverified historical aggregate, not a disproven result: its labels differ from the rebuilt labels on 129 rows, and its original predictions are unavailable. The comparator scores the current checkpoint against the old labels (568/672; accuracy 84.52%, macro-F1 82.35%, weighted-F1 84.64%) but does not reproduce 605/672. The per-record crosswalk and hashes are in `outputs/reviewer_verification/arrhythmia_primary9/`.
+
+The 90.26% Pathology Primary-5 per-label accuracy and 66.87% macro-F1 remain unverified. The distributed checkpoint's training summary records zero pathology-labeled windows and loss weight 0; the checked 672-row candidate label table contains no Primary-5 targets. CEDIA has a separate supervised checkpoint and PTB-XL label map, but its checkpoint hash differs and no matching Primary-5 predictions or metrics were found. The audit report is `outputs/reviewer_verification/pathology_primary5/pathology_reproducibility_audit.json`; read-only CEDIA evidence is summarized in `reports/evidence/cedia-pathology-crosscheck.json`. Do not treat that CEDIA map's coverage as performance evidence. Cascade/OOD remains an archived safety annex, not a recomputed result.
 
 ## Firmware Build Check
 
