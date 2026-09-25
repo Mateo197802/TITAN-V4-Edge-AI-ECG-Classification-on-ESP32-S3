@@ -18,7 +18,7 @@ from titan_v4.metrics.external_validation import (
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Build the combined external validation summary.")
+    parser = argparse.ArgumentParser(description="Build the combined metric-evidence status summary.")
     parser.add_argument("--write", action="store_true", help="Write the combined summary JSON to disk.")
     parser.add_argument(
         "--out",

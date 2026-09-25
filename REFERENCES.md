@@ -16,6 +16,7 @@ These publication dates are not obsolete citations: the original papers identify
 
 ## Methods and Tooling
 
+- PhysioNet/CinC Challenge 2021 official evaluation code and scoring files: [evaluation-2021](https://github.com/physionetchallenges/evaluation-2021). Challenge recordings may have one or more labels; its official weighted score is not ordinary single-label accuracy.
 - SciPy `resample_poly`: [API documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.resample_poly.html).
 - WFDB Python package: [documentation](https://wfdb.readthedocs.io/).
 - Paramiko SSH client and host-key policy: [API documentation](https://docs.paramiko.org/en/latest/api/client.html).

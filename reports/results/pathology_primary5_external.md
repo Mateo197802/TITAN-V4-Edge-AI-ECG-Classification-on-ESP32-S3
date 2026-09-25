@@ -1,5 +1,5 @@
-# Pathology Primary-5: Legacy Aggregate
+# Pathology Primary-5: Unverified Historical Aggregate
 
-The historical output package reported per-label accuracy 0.90256 and macro-F1 0.66874 for IMI, ALMI, ILMI, LAE, and ISC_. This aggregate is retained for provenance only. The repository does not contain the complete per-record pathology predictions and reference labels needed to recompute it with the current validation cohort, so it is **not a reproduced result** and is excluded from the current Primary-9 claim.
+The archived report lists 0.90256 per-label accuracy and 0.66874 macro-F1 for IMI, ALMI, ILMI, LAE, and ISC_. The reported accuracy is an average over binary-label accuracies, not ordinary record-level accuracy. Its per-record predictions, reference rows, checkpoint hash, and threshold provenance are unavailable; it is not an independently reproduced result.
 
-Do not cite the legacy values as independently verified performance. The original stored summary is `outputs/gold_master_external_validation/pathology_primary5/pathology_primary5_external_summary.json`; its status is recorded in that directory's README.
+The distributed repository checkpoint's included training summary records pathology loss weight 0.0 and zero pathology-labeled windows. Therefore, the historical aggregate cannot be attributed to that distributed checkpoint from the available evidence. Do not cite these values as verified performance for the current checkpoint. The stored summary is `outputs/gold_master_external_validation/pathology_primary5/pathology_primary5_external_summary.json`; see [metric reconciliation](../evidence/metric-reconciliation.md).

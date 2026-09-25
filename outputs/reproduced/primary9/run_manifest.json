@@ -1,6 +1,11 @@
 {
   "schema_version": 1,
-  "evaluation_status": "FULL_672",
+  "evaluation_status": "FULL_672_DIAGNOSTIC_ONLY",
+  "evaluation_scope": "Custom single-label argmax evaluation on 672 records resolving to PhysioNet Challenge 2021 v1.0.3 training paths; not the official Challenge metric or hidden test set. Checkpoint overlap is unknown.",
+  "label_semantics": "One project-selected class derived from multi-label WFDB Dx codes.",
+  "official_challenge_metric": false,
+  "external_validation_claim": false,
+  "clinical_validation": false,
   "record_count": 672,
   "model": {
     "architecture": "TitanV4Lite",
@@ -55,7 +60,7 @@
     "deterministic_algorithms": true
   },
   "code_files": {
-    "scripts/run_primary9_inference.py": "81F588B669DF3B5B946AB26BFC5662934EE6874361BF13067E25B774D25964DD",
+    "scripts/run_primary9_inference.py": "70F785D9921D0569FC9F4753C6993F138CD2D54DD2D07CBF1AC61CD2CB41B7FE",
     "scripts/build_primary9_evaluation_labels.py": "233D891426C35AB0EC908C101DEEF00043CC0AB0196A7F72C5B664B070A449DB",
     "src/titan_v4/reproducibility/inference.py": "65C0383C8544F6C93BA0FD8EE3A0ECDDCA3A2A605248086E9C2EF30396F8EE57",
     "src/titan_v4/reproducibility/labels.py": "51E67CCCDBC04FB61A623AB064DA0BD4986A16164CAFFD226BB72BC1E3CCC9EA",
@@ -67,7 +72,7 @@
   "source_files": "source_files_sha256.csv",
   "outputs": {
     "primary9_record_predictions.csv": "A3CFEDC54F3CACF4CD130813A6D5923931D048BCEC10D9044FBB05B23D709168",
-    "primary9_recomputed_report.json": "3373E2A1F81AF9EF02646A95E3E34403033046F85D4398D769E04FDE0D4BADC4",
+    "primary9_recomputed_report.json": "969650D0FA3B7B723901B1C0495D5FE47F6D7B92987A153F18E158EBFD3DF37B",
     "source_files_sha256.csv": "945B5BC286BE9A12EA89FFDA05FFC37E914DA99F32C9995B6524C15E280AE879"
   },
   "source_file_count": 1344,

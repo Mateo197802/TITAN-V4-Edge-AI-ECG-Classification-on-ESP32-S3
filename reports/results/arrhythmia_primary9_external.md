@@ -1,17 +1,17 @@
-# Arrhythmia Primary-9 Recomputed Inference
+# Arrhythmia Primary-9 Single-Label Diagnostic
 
 ## Evaluation Definition
 
-This is CPU inference with the distributed `gold_master_primary9_model.pth` on the frozen 672-record label set, using the versioned WFDB signals and preprocessing contract in [REPRODUCIBILITY.md](../../REPRODUCIBILITY.md). Every record resolves to the `training/` partition of PhysioNet Challenge 2021 v1.0.3. This is not the official hidden Challenge test set, and the checkpoint training overlap is not established.
+This is a reproducible CPU inference diagnostic with the distributed `gold_master_primary9_model.pth` on 672 versioned WFDB records, using the signal contract in [REPRODUCIBILITY.md](../../REPRODUCIBILITY.md). Every record resolves to the `training/` partition of PhysioNet Challenge 2021 v1.0.3. The checkpoint's training overlap is unknown. This is not the official hidden Challenge test set or the official Challenge score.
 
-Labels are reconstructed from the WFDB header `Dx` codes using the documented ordered-primary-rhythm rule. The 672 labels match the read-only CEDIA external manifest. No training or threshold tuning is performed on this evaluation set.
+The upstream recordings can have multiple diagnoses. This project diagnostic reduces each WFDB `Dx` header to one label using the documented ordered-primary-rhythm rule. Its 672 labels match CEDIA's external manifest, which confirms agreement between project tables but is not an independent clinical review. No training or threshold tuning is performed on these records.
 
 ## Results
 
 | Metric | Value |
 |---|---:|
 | Records | 672 |
-| Correct predictions | 466 |
+| Correct predictions under the project single-label rule | 466 |
 | Accuracy | 0.693452380952 |
 | Macro-F1 | 0.688840776554 |
 | Weighted-F1 | 0.689589967237 |
@@ -30,4 +30,4 @@ Labels are reconstructed from the WFDB header `Dx` codes using the documented or
 
 The full 9x9 confusion matrix and per-record probabilities are in `outputs/reproduced/primary9/primary9_recomputed_report.json` and `primary9_record_predictions.csv`. The checkpoint SHA-256 is `BC7BA03D0D6D40E823FDB9BB261EBE29AE8B7A74C97D1C98E7140BCA4D2D305B`; label-table SHA-256 is `765B7FEE68940D577384DAFFCF01D7FD7374FD9E019DCC291BB30E574E6212F4`; source-manifest SHA-256 is `E224686569E54F471AA4A5FDBAC0CE2123C43BC8F5CD0637B0C389B75692CFB0`.
 
-The former 605/672 (0.90030 accuracy) result is superseded: its bundled labels did not agree with the source-header label policy for 129 records. It remains only in the legacy folder and is not a current result.
+The former 605/672 (0.90030 accuracy) aggregate used a prior 672-row label table that differs from the rebuilt table on 129 rows. It has no accompanying per-record predictions or verified lineage, so it is unverified and not comparable to this diagnostic; it has not been proven false. The 89-90% values in CEDIA/internal training evidence refer to different validation units or checkpoints. See [metric reconciliation](../evidence/metric-reconciliation.md).

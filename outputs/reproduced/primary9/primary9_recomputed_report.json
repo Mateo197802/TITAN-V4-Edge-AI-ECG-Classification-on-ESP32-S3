@@ -185,8 +185,13 @@
       43
     ]
   ],
-  "label_set": "final external validation label set",
-  "evaluation_status": "FULL_672",
+  "label_set": "frozen 672-record source-header single-label diagnostic set",
+  "evaluation_status": "FULL_672_DIAGNOSTIC_ONLY",
+  "evaluation_scope": "Custom single-label argmax evaluation on 672 records resolving to PhysioNet Challenge 2021 v1.0.3 training paths; not the official Challenge metric or hidden test set. Checkpoint overlap is unknown.",
+  "label_form": "One project-selected class derived from multi-label WFDB Dx codes.",
+  "official_challenge_metric": false,
+  "external_validation_claim": false,
+  "clinical_validation": false,
   "checkpoint_sha256": "BC7BA03D0D6D40E823FDB9BB261EBE29AE8B7A74C97D1C98E7140BCA4D2D305B",
   "label_csv_sha256": "765B7FEE68940D577384DAFFCF01D7FD7374FD9E019DCC291BB30E574E6212F4",
   "source_manifest_sha256": "E224686569E54F471AA4A5FDBAC0CE2123C43BC8F5CD0637B0C389B75692CFB0",

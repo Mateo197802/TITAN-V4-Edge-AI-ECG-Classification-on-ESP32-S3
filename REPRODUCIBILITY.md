@@ -1,10 +1,10 @@
 # Reproducibility Protocol
 
-## Reproduced Experiment
+## Reproducible Diagnostic Computation
 
-This protocol recomputes CPU inference for the exact distributed Primary-9 checkpoint on the frozen 672-record label set. It verifies the source record paths against PhysioNet's pinned Challenge 2021 v1.0.3 `RECORDS` indexes, reconstructs labels from versioned WFDB headers, reads the ECG signals, applies the packaged preprocessing, runs the checkpoint, and computes metrics from the per-record predictions.
+This protocol recomputes CPU inference for the exact distributed Primary-9 checkpoint on a frozen 672-record project diagnostic set. It verifies source paths against PhysioNet's pinned Challenge 2021 v1.0.3 `RECORDS` indexes, reconstructs one project-selected rhythm label from multi-label WFDB headers, reads the ECG signals, applies the packaged preprocessing, runs the checkpoint, and computes ordinary accuracy/F1 from per-record predictions. This is a reproducible custom single-label diagnostic; it is not the official Challenge metric and does not establish independent external validation.
 
-It does not retrain the checkpoint. `outputs/reproduced/primary9/run_manifest.json` records the Python and library versions, CPU/determinism settings, hashes of the checkpoint, labels, source manifest, inference-code files, downloaded WFDB files, predictions, and report. The report records the evaluation status and fixed model/data hashes. A complete run reports 672 records and is the only current Primary-9 performance result.
+It does not retrain the checkpoint. `outputs/reproduced/primary9/run_manifest.json` records the Python and library versions, CPU/determinism settings, hashes of the checkpoint, labels, source manifest, inference-code files, downloaded WFDB files, predictions, and report. A complete run reports 672 records and identifies its diagnostic-only status. Internal validation values, the historical 605/672 aggregate, and the pathology aggregate are separate, non-comparable evidence; see [metric reconciliation](reports/evidence/metric-reconciliation.md).
 
 ## Clean-Checkout Commands
 
@@ -28,7 +28,7 @@ Internet access is needed for the PhysioNet source-index and WFDB downloads. The
 
 The hash verifier covers the checked-in artifact inventory. It is complementary to, not a replacement for, recomputing the inference. For an independent check, compare the regenerated prediction CSV and metrics with the checked-in files and inspect the run manifest and source-file hash inventory.
 
-## Frozen Signal and Label Contract
+## Frozen Signal and Diagnostic Label Contract
 
 - Input: the six frontal leads I, II, III, aVR, aVL, aVF from the first ten seconds.
 - Sampling: versioned WFDB physical signals, resampled to 125 Hz.
@@ -36,7 +36,7 @@ The hash verifier covers the checked-in artifact inventory. It is complementary 
 - Normalization: per-lead z-score over the ten-second window.
 - Output: argmax across AFIB, SB, STACH, NSR, PVC, RBBB, LBBB, PAC, and 1AVB.
 - Labels: the first non-NSR Primary-9 class in WFDB `Dx` code order; prolonged-PR code `164947007` is a 1AVB fallback only when no non-normal rhythm is present.
-- Evaluation: accuracy, macro-F1, weighted-F1, class-level metrics, and a 9x9 confusion matrix, computed from all per-record predictions. No threshold tuning or training is performed on this evaluation set.
+- Evaluation: ordinary single-label accuracy, macro-F1, weighted-F1, class-level metrics, and a 9x9 confusion matrix, computed from all per-record predictions. No threshold tuning or training is performed on this set. The upstream Challenge labels are multi-label, and its official evaluator uses a distinct weighted metric; this report is not an official Challenge score.
 
 ## Current Evidence and Non-Claims
 
@@ -44,7 +44,7 @@ The result is a reproducible inference/evaluation run on records from the public
 
 The read-only CEDIA record/label cross-check and checkpoint-hash comparison are documented in [CEDIA cross-check evidence](reports/evidence/cedia-readonly-crosscheck.md).
 
-The older 605/672 Primary-9 report is retained as an explicitly superseded historical artifact. Pathology Primary-5 and Cascade/OOD are also retained as legacy summaries because their full record-level predictions have not been independently recomputed in this workflow. They are excluded from the current reproduced-results claim.
+The older 605/672 Primary-9 report is retained as an unverified historical aggregate, not a disproven result: its old labels disagree with the rebuilt labels on 129 rows, and the original per-record predictions are unavailable. Pathology Primary-5 and Cascade/OOD remain legacy summaries because their full record-level predictions have not been independently recomputed. None is interchangeable with the 672-record diagnostic. CEDIA's internal window-level validation is a separate checkpoint and is documented independently.
 
 ## Firmware Build Check
 

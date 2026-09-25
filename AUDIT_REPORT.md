@@ -1,6 +1,6 @@
 # TITAN V4 Repository and Reproducibility Audit
 
-Audit date: 2026-09-24
+Audit date: 2026-09-25
 
 Repository: `Mateo197802/TITAN-V4-Edge-AI-ECG-Classification-on-ESP32-S3`
 Working branch: `codex/audit-fixes`
@@ -9,15 +9,16 @@ Working branch: `codex/audit-fixes`
 
 - Implemented an end-to-end Primary-9 inference runner that loads the distributed checkpoint, downloads the exact 672 PhysioNet records, verifies source IDs and headers, applies documented signal preprocessing, and writes prediction-level probabilities, metrics, waveform hashes, and a run manifest.
 - Replaced the former label table with a minimal 672-row table regenerated from official Challenge 2021 v1.0.3 WFDB headers. All 312 records formerly marked `data_test` now resolve to exact upstream record paths via source prefix plus official `RECORDS` indexes.
-- Compared the rebuilt 672 record labels with CEDIA's external manifest in a read-only session: same record IDs and zero label disagreements. The earlier labels disagreed on 129 records; the previous 605/672 score is superseded.
-- Updated current result documents and scripts to use recomputed Primary-9 inference. Pathology Primary-5 and Cascade/OOD summaries remain preserved but are explicitly marked legacy and are excluded from current results.
+- Compared the rebuilt 672 project labels with CEDIA's external manifest in a read-only session: same record IDs and no table disagreements. This is agreement between project tables, not an independent clinical review. The previous labels differ on 129 rows.
+- Reconciled internal validation, the historical 605/672 aggregate, the 466/672 single-label diagnostic, and the pathology summary as separate evidence. The 605/672 aggregate is unverified and not comparable, not proven false. Pathology and Cascade/OOD remain unverified historical aggregates.
+- Updated the 672-record inference report's status to a reproducible project-specific single-label diagnostic. It is not the official PhysioNet Challenge score or a verified independent external test result.
 - Added versioned PhysioNet dataset attribution and separated software MIT terms from CC BY 4.0 research artifacts. Third-party data/models remain under their own rights and terms.
 - Pinned the firmware's previously missing TensorFlow Lite dependency to an immutable upstream commit, removed incompatible/permissive compiler flags, fixed deletion of a non-owned static interpreter, and compiled the safe `esp32s3` profile against a project-local ESP32-S3-DevKitC-1-N8R8 definition with 8 MB octal PSRAM. The profile matches the 4 MB tensor-arena requirement; the physical board was not connected. Build warnings from bundled third-party LCD drivers are disclosed in `reports/evidence/firmware-build.md`.
 - Preserved the earlier security fixes: sensitive HTTP routes are disabled by default, and CEDIA SSH rejects unknown host keys. Historical local path disclosures remain in public Git history; that history was not rewritten.
 
-## Recomputed Primary-9 Result
+## Metric Reconciliation
 
-The distributed checkpoint (`BC7BA03D0D6D40E823FDB9BB261EBE29AE8B7A74C97D1C98E7140BCA4D2D305B`) was evaluated on all 672 records:
+The distributed checkpoint (`BC7BA03D0D6D40E823FDB9BB261EBE29AE8B7A74C97D1C98E7140BCA4D2D305B`) was run on all 672 records under a project-specific single-label rule:
 
 | Metric | Result |
 |---|---:|
@@ -28,13 +29,19 @@ The distributed checkpoint (`BC7BA03D0D6D40E823FDB9BB261EBE29AE8B7A74C97D1C98E71
 
 Per-record predictions, confusion matrix, source waveform hashes, input hashes, environment, preprocessing, and inference-code hashes are stored under `outputs/reproduced/primary9/`.
 
+This 69.35% result is computationally reproducible under that rule, but it does not establish the original 90.03% historical aggregate was false. The old per-record predictions and exact lineage are missing, and the two label tables differ on 129 rows. Applying the current predictions against the exact prior label table yields 568/672, not the historical 605/672.
+
+CEDIA's separate internal report records 89.84% accuracy, 73.90% macro-F1 and 90.30% weighted-F1 on 58,855 windows using a different checkpoint. The distributed checkpoint's training summary records 89.48% best validation macro-F1 on 706 windows. Neither is a 672-record independent test. Pathology's historical 90.26% per-label accuracy and 66.87% macro-F1 are likewise not reproduced, and the included distributed-checkpoint summary records zero pathology-labeled training windows and pathology loss weight 0. See [metric reconciliation](reports/evidence/metric-reconciliation.md).
+
 ## CEDIA Cross-Check
 
 CEDIA was accessed read-only. Its external record-ID set matches the local 672-row evaluation set, and label disagreement is zero after rebuilding from official source headers. CEDIA's train/validation manifests and overlap report belong to a separate pipeline. Its student checkpoint hashes do not match the checkpoint evaluated here, so its train/test zero-overlap finding is not used to claim independence for this repository model. A CEDIA teacher/boundary artifact matches the repository's separate protected baseline, not the evaluated Primary-9 checkpoint. No remote files were changed and no SLURM job or hardware run was launched. See [cross-check evidence](reports/evidence/cedia-readonly-crosscheck.md).
 
+The CEDIA root validation report and checkpoint hashes were also read-only inspected and summarized without user paths in `reports/evidence/cedia-validation-summary.json`.
+
 ## Dataset and Citation Review
 
-The exact inference source is PhysioNet/Computing in Cardiology Challenge 2021 v1.0.3 (DOI `10.13026/34va-7q14`), under CC BY 4.0 for its files. Its training package contains the resolved source families recorded in the manifest. The original 2020-2021 database/Challenge papers remain appropriate dataset/method citations; they are supplemented by the exact version DOI and the current recommended PhysioNet citation. See `REFERENCES.md`.
+The exact inference source is PhysioNet/Computing in Cardiology Challenge 2021 v1.0.3 (DOI `10.13026/34va-7q14`), under CC BY 4.0 for its files. Challenge labels may be multi-label and the official evaluator uses a weighted Challenge metric; TITAN's current 672-row report reduces labels to one project-selected class and reports ordinary accuracy/F1. The original 2020-2021 database/Challenge papers remain appropriate dataset/method citations; they are supplemented by the exact version DOI and the current recommended PhysioNet citation. See `REFERENCES.md`.
 
 The project-local `split=test` is not the official hidden Challenge test set. The exact training manifest and offline teacher sidecars for the distributed checkpoint are unavailable, so from-scratch training and checkpoint train/evaluation independence are not established. No source-held-out claim is made.
 
@@ -44,11 +51,11 @@ Original software source is under MIT. Project-authored model weights, results, 
 
 ## Verification
 
-Verification on 2026-09-24:
+Verification on 2026-09-25:
 
 - Official release record index, source manifest, and label checks passed for all 672 records; WFDB labels were checked offline.
-- Full offline inference regenerated all 672 prediction rows and reproduced the metrics above.
-- `python -m pytest -q`: 64 passed. `compileall` passed for CEDIA scripts, project code, tests, and hardware tooling.
-- Artifact hash verifier passed for 140 repository files. The safe ESP32-S3 firmware compile passed; measured resources and binary hash are in `reports/evidence/firmware-build.md`.
+- Full offline inference regenerated all 672 prediction rows and reproduced the project-specific single-label diagnostic above; it is not the official Challenge metric.
+- `python -m pytest -q`: 66 passed. `compileall` passed for CEDIA scripts, project code, tests, and hardware tooling.
+- Artifact hash verifier passed for 142 repository files. The safe ESP32-S3 firmware compile passed; measured resources and binary hash are in `reports/evidence/firmware-build.md`.
 
 Physical ESP32-S3 validation, firmware/offline signal equivalence, checkpoint training reconstruction, and source-held-out independence were not established.

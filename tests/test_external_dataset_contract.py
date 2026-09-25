@@ -41,7 +41,7 @@ def test_reportable_primary9_input_has_672_records():
     payload = json.loads((ROOT / "data/external_validation/primary9_external_validation_input.json").read_text(encoding="utf-8"))
     assert payload["records_found"] == 672
     assert payload["total_evaluated"] == 672
-    assert payload["evidence_status"] == "LEGACY_SUPERSEDED_NOT_REPRODUCED_FROM_CURRENT_LABELS"
+    assert payload["evidence_status"] == "LEGACY_UNVERIFIED_NOT_COMPARABLE"
 
 
 def test_validation_summary_documents_current_source_mapping():

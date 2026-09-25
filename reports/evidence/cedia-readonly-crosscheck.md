@@ -1,6 +1,6 @@
 # CEDIA Read-Only Cross-Check
 
-Audit date: 2026-09-24. The TITAN artifacts under the Mateo Gavilanes CEDIA directory were inspected read-only. No remote files were changed and no SLURM job was submitted.
+Audit date: 2026-09-25. The TITAN artifacts under the Mateo Gavilanes CEDIA directory were inspected read-only. No remote files were changed and no SLURM job was submitted.
 
 ## Label/ID Comparison
 
@@ -27,3 +27,9 @@ A read-only inventory of `~/V4_CEDIA` found no file with the evaluated checkpoin
 The repository's distributed-checkpoint summary reports 3,785 train windows, 706 validation windows, three epochs, and best epoch 2. The corresponding exact training and validation record manifests and offline teacher-sidecar arrays are not present in this repository; their original paths were removed from the summary.
 
 CEDIA's `03_OUTPUTS/20260521_PRIMARY9_DISTILLED_STUDENT_V1/training_summary.json` (SHA-256 `3B32526A45D1FE8DBAE1F63CCE78636622F900726F4AB25516FA1C9BA6D3BC14`) reports 3,042 train windows, 543 validation windows, 32 epochs, and best epoch 22. Its student-best/student-final weights have the hashes above. These counts, run settings, and checkpoint hashes are different from this repository's distributed checkpoint. The CEDIA training files therefore do not fill the missing lineage for this checkpoint; they must not be substituted as if they were the same experiment.
+
+## CEDIA Internal Validation Metric
+
+The separate CEDIA root run at `03_OUTPUTS/validation_report.json` reports 89.836% accuracy, 73.898% macro-F1, and 90.301% weighted-F1 over 58,855 validation windows. Its `training_summary.json` reports 455,756 training windows, 33 epochs, and best epoch 25. The checkpoint SHA-256 is `e9a44e4eea8ebb8f89d5e32909ae4afcc96442d1fa8eacb1e57a73bfa498353b`; it is a different file from the distributed repository checkpoint (SHA-256 `BC7BA03D0D6D40E823FDB9BB261EBE29AE8B7A74C97D1C98E7140BCA4D2D305B`). The remote report is an internal window-level aggregate, not a prediction-level reproduction of the public 672-record checkpoint. Sanitized values and source hashes are preserved in [cedia-validation-summary.json](cedia-validation-summary.json).
+
+The repository checkpoint's own training summary records 3,785 train windows, 706 validation windows, and best validation macro-F1 0.89478. This is a checkpoint-selection metric; prediction-level validation artifacts and the exact record manifests are not included. These internal validation figures are separate from both the 672-record diagnostic and the unverified historical 605/672 aggregate. The label match with CEDIA confirms agreement between two project label tables, not an independent clinical review.

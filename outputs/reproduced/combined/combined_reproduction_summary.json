@@ -1,17 +1,20 @@
 {
-  "protocol": "REPRODUCED_PRIMARY9_WITH_LEGACY_ANNEXES_V1",
-  "label_set": "final external validation label set",
-  "evaluation_scope": "Frozen 672-record sample resolved to PhysioNet Challenge 2021 v1.0.3 training paths; not the official hidden Challenge test set. Checkpoint training overlap is unestablished.",
+  "protocol": "METRIC_EVIDENCE_RECONCILIATION_V1",
+  "label_set": "frozen 672-record source-header single-label diagnostic set",
+  "evaluation_scope": "Primary-9 values are reproducible custom single-label diagnostics on records resolved to PhysioNet Challenge 2021 v1.0.3 training paths, not the official Challenge metric or hidden test set. Checkpoint training overlap is unestablished; legacy and CEDIA window-level results use different evidence.",
+  "metrics_comparable_across_protocols": false,
   "external_training_allowed": false,
   "external_threshold_tuning_allowed": false,
   "arrhythmia_primary9": {
     "module": "arrhythmia_primary9",
-    "evidence_status": "REPRODUCED_FULL_672_INFERENCE",
+    "evidence_status": "REPRODUCED_SINGLE_LABEL_DIAGNOSTIC_NOT_EXTERNAL_VALIDATION",
     "records": 672,
     "correct_predictions": 466,
     "accuracy": 0.6934523809523809,
     "macro_f1": 0.6888407765536525,
     "weighted_f1": 0.6895899672373766,
+    "official_challenge_metric": false,
+    "external_validation_claim": false,
     "classes": [
       "AFIB",
       "SB",
@@ -28,6 +31,7 @@
     "module": "pathology_primary5",
     "evidence_status": "LEGACY_NOT_REPRODUCED",
     "accuracy": 0.90256,
+    "accuracy_definition": "legacy per-label accuracy; source predictions and labels are unavailable",
     "macro_f1": 0.66874,
     "classes": [
       "IMI",

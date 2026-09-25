@@ -1,0 +1,28 @@
+{
+  "evidence_status": "READ_ONLY_CEDIA_INTERNAL_VALIDATION_SUMMARY",
+  "source_files_relative_to_cedia_v4_directory": {
+    "validation_report": "03_OUTPUTS/validation_report.json",
+    "training_summary": "03_OUTPUTS/training_summary.json",
+    "checkpoint": "03_OUTPUTS/titan_v4_lite_weights_best.pth"
+  },
+  "source_sha256": {
+    "validation_report": "2ccfee6865fc1ac45112325410aadf7bc22a3de90c27ba7b9cf6f94695e86388",
+    "training_summary": "01629aca2287d2ae58c71f51e9e80a19a3fa77c48438fe93d59995d10b8ab81d",
+    "checkpoint": "e9a44e4eea8ebb8f89d5e32909ae4afcc96442d1fa8eacb1e57a73bfa498353b"
+  },
+  "validation_windows": 58855,
+  "training_windows": 455756,
+  "epochs_ran": 33,
+  "best_epoch": 25,
+  "accuracy": 0.898360377198199,
+  "macro_f1": 0.7389792385158559,
+  "weighted_f1": 0.9030092881938856,
+  "model_lineage": "CEDIA checkpoint; does not match the distributed repository checkpoint",
+  "evaluation_unit": "window-level internal validation",
+  "not_established": [
+    "record-level predictions for independent recomputation",
+    "equivalence to the distributed repository checkpoint",
+    "equivalence to the 672-record single-label diagnostic"
+  ],
+  "access_mode": "read-only; no remote files changed and no job submitted"
+}

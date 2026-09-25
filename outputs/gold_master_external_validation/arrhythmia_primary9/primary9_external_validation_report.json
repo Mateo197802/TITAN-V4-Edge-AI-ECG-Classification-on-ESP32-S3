@@ -1,8 +1,10 @@
 {
   "protocol": "PRIMARY9_EXTERNAL_VALIDATION_V1",
-  "label_set": "final external validation label set",
-  "evidence_status": "LEGACY_SUPERSEDED_NOT_REPRODUCED_FROM_CURRENT_LABELS",
-  "superseded_by": "outputs/reproduced/primary9/primary9_recomputed_report.json",
+  "label_set": "historical 672-record single-label report using the prior project label table",
+  "evidence_status": "LEGACY_UNVERIFIED_NOT_COMPARABLE",
+  "comparison_status": "NOT_COMPARABLE_TO_REBUILT_SINGLE_LABEL_DIAGNOSTIC",
+  "labels_disagreement_with_rebuilt": 129,
+  "reproduction_gap": "Per-record predictions and exact evaluation lineage are unavailable; the historical score has not been proven false.",
   "external_training_allowed": false,
   "external_threshold_tuning_allowed": false,
   "total_records": 672,

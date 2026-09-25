@@ -11,7 +11,7 @@ from titan_v4.metrics.external_validation import load_json, primary9_summary
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Read and validate the Primary-9 external validation report.")
+    parser = argparse.ArgumentParser(description="Summarize the Primary-9 single-label diagnostic report.")
     parser.add_argument(
         "--report",
         type=Path,

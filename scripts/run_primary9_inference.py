@@ -207,8 +207,16 @@ def main() -> int:
     full_support = args.limit is None
     report.update(
         {
-            "label_set": "final external validation label set",
-            "evaluation_status": "FULL_672" if full_support else "SMOKE_TEST_NOT_REPORTABLE",
+            "label_set": "frozen 672-record source-header single-label diagnostic set",
+            "evaluation_status": "FULL_672_DIAGNOSTIC_ONLY" if full_support else "SMOKE_TEST_NOT_REPORTABLE",
+            "evaluation_scope": (
+                "Custom single-label argmax evaluation on 672 records resolving to PhysioNet Challenge 2021 v1.0.3 "
+                "training paths; not the official Challenge metric or hidden test set. Checkpoint overlap is unknown."
+            ),
+            "label_form": "One project-selected class derived from multi-label WFDB Dx codes.",
+            "official_challenge_metric": False,
+            "external_validation_claim": False,
+            "clinical_validation": False,
             "checkpoint_sha256": sha256_file(args.checkpoint),
             "label_csv_sha256": sha256_file(args.labels),
             "source_manifest_sha256": sha256_file(args.source_manifest),
@@ -267,6 +275,11 @@ def main() -> int:
     run_manifest = {
         "schema_version": 1,
         "evaluation_status": report["evaluation_status"],
+        "evaluation_scope": report["evaluation_scope"],
+        "label_semantics": report["label_form"],
+        "official_challenge_metric": report["official_challenge_metric"],
+        "external_validation_claim": report["external_validation_claim"],
+        "clinical_validation": report["clinical_validation"],
         "record_count": len(label_rows),
         "model": {
             "architecture": "TitanV4Lite",

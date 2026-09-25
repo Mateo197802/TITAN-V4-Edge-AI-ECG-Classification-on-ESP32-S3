@@ -72,17 +72,21 @@ def primary9_summary(report: dict[str, Any]) -> dict[str, Any]:
     if missing:
         raise ValueError(f"Primary-9 report missing fields: {missing}")
     if int(report["total_records"]) != 672:
-        raise ValueError("Primary-9 external validation must evaluate exactly 672 records")
-    if report.get("evaluation_status") != "FULL_672":
-        raise ValueError("Primary-9 report is not a completed full-support 672-record inference run")
+        raise ValueError("Primary-9 diagnostic must evaluate exactly 672 records")
+    if report.get("evaluation_status") != "FULL_672_DIAGNOSTIC_ONLY":
+        raise ValueError("Primary-9 report is not a completed full-support diagnostic run")
+    if report.get("official_challenge_metric") is not False or report.get("external_validation_claim") is not False:
+        raise ValueError("Primary-9 single-label diagnostic must not be represented as official external validation")
     return {
         "module": "arrhythmia_primary9",
-        "evidence_status": "REPRODUCED_FULL_672_INFERENCE",
+        "evidence_status": "REPRODUCED_SINGLE_LABEL_DIAGNOSTIC_NOT_EXTERNAL_VALIDATION",
         "records": int(report["total_records"]),
         "correct_predictions": int(report["correct_predictions"]),
         "accuracy": float(report["accuracy"]),
         "macro_f1": float(report["macro_f1"]),
         "weighted_f1": float(report["weighted_f1"]),
+        "official_challenge_metric": False,
+        "external_validation_claim": False,
         "classes": list(PRIMARY9_CLASSES),
     }
 
@@ -99,6 +103,7 @@ def pathology_summary(report: dict[str, Any]) -> dict[str, Any]:
         "module": "pathology_primary5",
         "evidence_status": "LEGACY_NOT_REPRODUCED",
         "accuracy": float(report["accuracy"]),
+        "accuracy_definition": "legacy per-label accuracy; source predictions and labels are unavailable",
         "macro_f1": float(report["macro_f1"]),
         "classes": list(PATHOLOGY5_CLASSES),
     }
@@ -118,12 +123,14 @@ def cascade_summary(report: dict[str, Any]) -> dict[str, Any]:
 
 def combined_summary(primary9: dict[str, Any], pathology: dict[str, Any], cascade: dict[str, Any]) -> dict[str, Any]:
     return {
-        "protocol": "REPRODUCED_PRIMARY9_WITH_LEGACY_ANNEXES_V1",
-        "label_set": "final external validation label set",
+        "protocol": "METRIC_EVIDENCE_RECONCILIATION_V1",
+        "label_set": "frozen 672-record source-header single-label diagnostic set",
         "evaluation_scope": (
-            "Frozen 672-record sample resolved to PhysioNet Challenge 2021 v1.0.3 training paths; "
-            "not the official hidden Challenge test set. Checkpoint training overlap is unestablished."
+            "Primary-9 values are reproducible custom single-label diagnostics on records resolved to "
+            "PhysioNet Challenge 2021 v1.0.3 training paths, not the official Challenge metric or hidden test set. "
+            "Checkpoint training overlap is unestablished; legacy and CEDIA window-level results use different evidence."
         ),
+        "metrics_comparable_across_protocols": False,
         "external_training_allowed": False,
         "external_threshold_tuning_allowed": False,
         "arrhythmia_primary9": primary9,

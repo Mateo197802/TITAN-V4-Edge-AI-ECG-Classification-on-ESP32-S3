@@ -2,21 +2,21 @@
 
 Reproducible inference and evidence package for the distributed TITAN V4 Primary-9 checkpoint, with ESP32-S3 firmware and archived engineering reports. This repository is research software and is not a medical device.
 
-## Recomputed Primary-9 Result
+## Performance Evidence
 
-The repository now includes a full CPU inference run over the frozen 672-record evaluation label set. ECG signals are fetched from the versioned PhysioNet/Computing in Cardiology Challenge 2021 release, and the per-record predictions and probabilities are included under `outputs/reproduced/primary9/`.
+The repository contains distinct performance figures from different checkpoints, units and protocols. They must not be combined or substituted for one another.
 
-| Metric | Recomputed value |
-|---|---:|
-| Records | 672 |
-| Correct | 466 |
-| Accuracy | 0.693452 |
-| Macro-F1 | 0.688841 |
-| Weighted-F1 | 0.689590 |
+| Evidence | Metrics | Scope |
+|---|---|---|
+| CEDIA internal validation | Accuracy 89.84%; macro-F1 73.90%; weighted-F1 90.30% | 58,855 windows; separate CEDIA checkpoint |
+| Distributed-checkpoint training summary | Best validation macro-F1 89.48% | 706 windows; model-selection metadata only |
+| Recomputed repository-checkpoint diagnostic | Accuracy 69.35%; macro-F1 68.88%; weighted-F1 68.96% | 672 records; reproducible custom single-label diagnostic, not official Challenge score |
+| Historical Primary-9 aggregate | Accuracy 90.03%; macro-F1 87.82% | 672 rows; unverified aggregate, prior labels differ on 129 records |
+| Historical Pathology Primary-5 aggregate | Per-label accuracy 90.26%; macro-F1 66.87% | Unverified; prediction rows, checkpoint and threshold provenance unavailable |
 
-These 672 records resolve to the public `training/` partition in Challenge 2021 v1.0.3. The local `split=test` field is a project label, not the Challenge's hidden test set. The exact training manifest for this checkpoint is not available, so independence from checkpoint training is not claimed. The older 605/672 aggregate has been superseded and is retained only as a marked legacy artifact.
+See [metric reconciliation](reports/evidence/metric-reconciliation.md) for evidence boundaries. The 672 records resolve to the public `training/` partition in Challenge 2021 v1.0.3, not the hidden Challenge test set; checkpoint overlap is unknown. The 466/672 report is reproducible under its project-specific single-label rule, not proof of independent external performance. PhysioNet Challenge 2021 is multi-label and uses its own weighted scoring metric.
 
-Pathology Primary-5 and Cascade/OOD numbers in the historical report folder have not been recomputed from record-level predictions. They are not presented as current results. See [results and claim boundaries](reports/results/arrhythmia_primary9_external.md) and the [legacy evidence index](outputs/gold_master_external_validation/README.md).
+Pathology Primary-5 and Cascade/OOD outputs are archived historical aggregates, not reproduced from record-level predictions. See [Primary-9 diagnostic](reports/results/arrhythmia_primary9_external.md), [pathology evidence](reports/results/pathology_primary5_external.md), and the [legacy evidence index](outputs/gold_master_external_validation/README.md).
 
 ## Run It
 
@@ -44,7 +44,7 @@ The run writes `primary9_record_predictions.csv`, `primary9_recomputed_report.js
 
 ## Evidence Boundaries
 
-- Inference and the 672-record evaluation are reproducible from this checkout and the cited public dataset release.
+- The 672-record single-label diagnostic is computationally reproducible from this checkout and the cited public dataset release; it is not an official Challenge metric or an independent external-validation claim.
 - Training the checkpoint from scratch is not currently a reproducible claim: the exact training/validation manifests and offline teacher-sidecar arrays are not included.
 - A read-only CEDIA comparison confirmed that the local 672 record IDs and labels match its external manifest. CEDIA's train/validation manifests and checkpoint files do not establish the lineage or training overlap of the checkpoint distributed here; see the [cross-check evidence](reports/evidence/cedia-readonly-crosscheck.md).
 - The safe `esp32s3` firmware profile compiles with the pinned PlatformIO toolchain; the reproducible command and measured image sizes are in [firmware build evidence](reports/evidence/firmware-build.md). No physical-board flash, signal-chain equivalence, or on-device clinical performance is claimed.
