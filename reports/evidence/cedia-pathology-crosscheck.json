@@ -2,7 +2,7 @@
   "protocol": "CEDIA_PATHOLOGY_CANDIDATE_CROSSCHECK_V1",
   "audit_date": "2026-09-25",
   "source_scope": "CEDIA ~/V4_CEDIA, inspected read-only; source files and model weights are not redistributed here",
-  "evidence_status": "SEPARATE_SUPERVISED_CANDIDATE_FOUND; HISTORICAL_PRIMARY5_METRIC_NOT_REPRODUCED",
+  "evidence_status": "SEPARATE_SUPERVISED_CANDIDATE_EVALUATED; HISTORICAL_PRIMARY5_METRIC_NOT_REPRODUCED",
   "pathology_label_map": {
     "filename": "DATA/ptb-xl/ptbxl_pathology_label_map.json",
     "sha256": "e5f677944efc18db42248db4130fe51dc9ae863a68b8056a3542f52b786b8409",
@@ -56,8 +56,21 @@
     "interpretation": "Coverage inventory only; no per-record model scores, thresholding, or performance metric was computed."
   },
   "output_inventory": {
-    "scope": "Read-only filename search under CEDIA 03_OUTPUTS for pathology, morphology, Primary-5 and pathology-prediction/report artifacts",
-    "pathology_prediction_or_primary5_artifact_found": false
+    "scope": "Initial read-only filename search under CEDIA 03_OUTPUTS before the staged follow-up evaluation",
+    "pathology_prediction_or_primary5_artifact_found_at_initial_inventory": false
   },
-  "conclusion": "CEDIA contains a separately trained pathology-capable checkpoint and a PTB-XL label map. Their checkpoint hash does not match the distributed repository checkpoint, the label-map version is not recorded in the sidecar, and no matching pathology prediction/metric artifact was found. This is a candidate for a separately defined follow-up evaluation, not evidence that the historical 90.26%/66.87% aggregate is reproduced."
+  "follow_up_evaluation": {
+    "report": "../../outputs/reviewer_verification/pathology_primary5/cedia_ptbxl_v1_0_3_20260925/pathology_primary5_report.json",
+    "test_records": 406,
+    "calibration_records": 273,
+    "mean_per_label_accuracy": 0.7157635467980296,
+    "macro_f1": 0.41369591347184287,
+    "fixed_0_50_mean_per_label_accuracy": 0.7315270935960592,
+    "fixed_0_50_macro_f1": 0.4176266358935374,
+    "fixed_0_65_mean_per_label_accuracy": 0.7990147783251231,
+    "fixed_0_65_macro_f1": 0.4202665494351573,
+    "historical_primary5_metric_reproduced": false,
+    "full_inference_checkpoint_redistributed": false
+  },
+  "conclusion": "The CEDIA checkpoint was evaluated separately after the initial read-only inventory. The score table supports recomputation of the new metrics, but the result does not reproduce or identify the historical 90.26%/66.87% run. The historical checkpoint, cohort, and threshold lineage remain unavailable."
 }

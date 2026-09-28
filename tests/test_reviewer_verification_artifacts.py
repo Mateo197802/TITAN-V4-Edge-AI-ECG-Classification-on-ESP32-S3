@@ -42,4 +42,31 @@ def test_pathology_audit_keeps_cedia_checkpoint_separate_from_published_checkpoi
     assert cedia["model"]["pathology_loss_weight"] == 0.2
     assert cedia["matches_distributed_checkpoint"] is False
     assert cedia["historical_primary5_claim_linked"] is False
-    assert cedia["output_inventory"]["pathology_prediction_or_primary5_artifact_found"] is False
+    assert cedia["output_inventory"]["pathology_prediction_or_primary5_artifact_found_at_initial_inventory"] is False
+    follow_up = cedia["follow_up_evaluation"]
+    assert follow_up["test_records"] == 406
+    assert follow_up["mean_per_label_accuracy"] == 0.7157635467980296
+    assert follow_up["macro_f1"] == 0.41369591347184287
+    assert follow_up["historical_primary5_metric_reproduced"] is False
+
+
+def test_cedia_pathology_output_manifest_covers_and_hashes_every_result_file():
+    evidence_dir = ROOT / "outputs/reviewer_verification/pathology_primary5/cedia_ptbxl_v1_0_3_20260925"
+    manifest_path = evidence_dir / "SHA256SUMS.csv"
+    with manifest_path.open("r", newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle))
+
+    expected_files = {
+        "pathology_input_records.csv",
+        "pathology_primary5_per_class.csv",
+        "pathology_primary5_predictions.csv",
+        "pathology_primary5_report.json",
+        "pathology_primary5_scores.csv",
+        "reportable_pathology_selection.json",
+    }
+    assert {row["relative_path"] for row in rows} == expected_files
+    for row in rows:
+        artifact_path = (evidence_dir / row["relative_path"]).resolve()
+        assert artifact_path.parent == evidence_dir.resolve()
+        assert sha256_file(artifact_path).lower() == row["sha256"].lower()
+        assert artifact_path.stat().st_size == int(row["size_bytes"])

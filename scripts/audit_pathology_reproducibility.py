@@ -18,6 +18,7 @@ DEFAULT_CHECKPOINT = ROOT / "models/gold_master/gold_master_primary9_model.pth"
 DEFAULT_LABELS = ROOT / "outputs/gold_master_external_validation/validation_set/final_external_validation_labels.csv"
 DEFAULT_PREDICTIONS = ROOT / "outputs/gold_master_external_validation/pathology_primary5/pathology_primary5_predictions.csv"
 DEFAULT_CEDIA_EVIDENCE = ROOT / "reports/evidence/cedia-pathology-crosscheck.json"
+DEFAULT_CEDIA_EVALUATION_REPORT = ROOT / "outputs/reviewer_verification/pathology_primary5/cedia_ptbxl_v1_0_3_20260925/pathology_primary5_report.json"
 DEFAULT_OUTPUT = ROOT / "outputs/reviewer_verification/pathology_primary5/pathology_reproducibility_audit.json"
 
 
@@ -29,6 +30,7 @@ def main() -> int:
     parser.add_argument("--candidate-labels", type=Path, default=DEFAULT_LABELS)
     parser.add_argument("--historical-predictions", type=Path, default=DEFAULT_PREDICTIONS)
     parser.add_argument("--cedia-evidence", type=Path, default=DEFAULT_CEDIA_EVIDENCE)
+    parser.add_argument("--cedia-evaluation-report", type=Path, default=DEFAULT_CEDIA_EVALUATION_REPORT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args()
 
@@ -41,6 +43,11 @@ def main() -> int:
         label_path=args.candidate_labels,
         prediction_path=args.historical_predictions,
         cedia_candidate=json.loads(args.cedia_evidence.read_text(encoding="utf-8")),
+        cedia_evaluation=(
+            json.loads(args.cedia_evaluation_report.read_text(encoding="utf-8"))
+            if args.cedia_evaluation_report.is_file()
+            else None
+        ),
     )
     report["historical_report_sha256"] = sha256_file(args.historical_report)
     report["training_summary_sha256"] = sha256_file(args.training_summary)

@@ -26,6 +26,14 @@ The deterministic project label rule follows the ordered SNOMED `Dx` codes in th
 
 Run `python scripts/build_validation_record_index.py --check`, `python scripts/build_record_source_manifest.py --check`, and `python scripts/build_primary9_evaluation_labels.py --check` to verify the index, official source mappings, and labels. The last command downloads only WFDB headers unless `--offline` is specified. The inference run separately records SHA-256 hashes and byte sizes for the waveform/header files it actually reads.
 
+## CEDIA Pathology Evaluation Data
+
+The separate pathology evaluation uses the CEDIA copy of PTB-XL v1.0.3. The pinned `ptbxl_database.csv` SHA-256 is `7600de9c1b27d181d850b3c6038a35d7c3ddb6bb33b702e3a20252a6859d216b`; `scp_statements.csv` SHA-256 is `ad05b0b1fcae83bb1230755ad9cfc7c96f303feddc08a4a9ad5bdc9ca63bac8f`. Of the release's records, 4,392 low-resolution signals were present in the inspected CEDIA copy. Pathology targets were derived from official `scp_codes` with the versioned repository label registry; all 2,580 labeled rows in the CEDIA sidecar matched exactly. No ECG waveform or patient identifier is checked into this repository.
+
+The CEDIA checkpoint split refers to PTB-XL records both as numeric `records100/.../#####_lr` paths and as Challenge `ptb-xl/g*/HR#####` aliases. The numeric suffix was used as the PTB-XL `ecg_id` for record/patient overlap checks. The report records alias counts, the seven train/validation record-ID overlaps, excluded patients, and signal/header hashes. The final 406-record test cohort is patient-disjoint from the saved checkpoint train/validation IDs after alias resolution; this remains an evaluation within the PTB-XL source family and is not source-held-out validation. Two unreadable calibration records were excluded before threshold selection and are identified in the input manifest.
+
+The complete split, support counts, output hashes, and limitations are in the [CEDIA pathology evidence package](outputs/reviewer_verification/pathology_primary5/cedia_ptbxl_v1_0_3_20260925/README.md). Cite the exact [PTB-XL v1.0.3 release](https://physionet.org/content/ptb-xl/1.0.3/) and its original dataset paper. The upstream release lists CC BY 4.0; that upstream license and attribution do not resolve rights to the separately trained CEDIA checkpoint.
+
 ## Attribution and Redistribution
 
 The evaluation labels and the source-derived validation artifacts are provided under CC BY 4.0 with attribution to the PhysioNet Challenge 2021 versioned release and its cited source papers. See [LICENSE-ARTIFACTS.md](LICENSE-ARTIFACTS.md) and [REFERENCES.md](REFERENCES.md). The upstream dataset retains its own license and attribution requirements. This notice does not relicense any upstream ECG waveform, dataset, publication, or third-party asset.

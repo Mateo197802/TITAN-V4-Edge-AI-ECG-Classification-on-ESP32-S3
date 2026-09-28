@@ -30,6 +30,37 @@ Internet access is needed for the PhysioNet source-index and WFDB downloads. The
 
 The hash verifier covers the checked-in artifact inventory. It is complementary to, not a replacement for, recomputing the inference. For an independent check, compare the regenerated prediction CSV and metrics with the checked-in files and inspect the run manifest and source-file hash inventory.
 
+## CEDIA Pathology Checkpoint Evaluation
+
+This is a separate, post hoc evaluation of the CEDIA checkpoint, not the distributed Primary-9 checkpoint and not a reproduction of the historical 90.256% / 66.874% aggregate. The checkpoint is loaded as `TitanV4Max` and strict state-dict loading is required. PTB-XL v1.0.3 metadata and SCP mappings are pinned by SHA-256; all 2,580 pathology-sidecar vectors were reconstructed exactly. The CEDIA split also contains PTB-XL `HR#####` aliases. These were mapped to the corresponding `ecg_id` before patient exclusion; seven train/validation record IDs overlap, and those records are not used for calibration or test. The final cohort has 273 calibration and 406 test records, with test patients excluded from both checkpoint splits. Two unreadable calibration signals are listed with hashes and error types in the input manifest.
+
+The primary metric uses per-class F1 thresholds selected on calibration records only and then frozen for test scoring. Fixed 0.50 and 0.65 thresholds are reported as sensitivity checks. The measured result is 71.58% mean per-label accuracy and 41.37% macro-F1; fixed 0.65 gives 79.90% and 42.03%. The legacy JSON's `configured_macro_f1_reference: 0.65` is not evidence that 0.65 was the historical prediction threshold. The detailed per-record table is `outputs/reviewer_verification/pathology_primary5/cedia_ptbxl_v1_0_3_20260925/pathology_primary5_scores.csv`.
+
+Anyone can recompute the saved metrics from the checked-in row-level scores without the checkpoint:
+
+```powershell
+python src/titan_v4/evaluation/pathology_primary5_protocol.py `
+  --predictions_csv outputs/reviewer_verification/pathology_primary5/cedia_ptbxl_v1_0_3_20260925/pathology_primary5_scores.csv `
+  --out_dir <temporary-directory> `
+  --fixed-threshold 0.50 --fixed-threshold 0.65
+```
+
+The report, prediction rows, input-file hashes, and output checksums are in the same evidence directory. The aggregation command reproduces the reported values within floating-point tolerance. Full signal-to-prediction inference requires the CEDIA checkpoint with SHA-256 `e9a44e4eea8ebb8f89d5e32909ae4afcc96442d1fa8eacb1e57a73bfa498353b`, PTB-XL v1.0.3 signals, the CEDIA source files, and the runtime versions recorded in the report. The checkpoint and CEDIA source tree are not redistributed, so the inference run is not yet standalone for an outside reviewer; the model's redistribution rights must be confirmed separately. The run is exploratory and is not a prespecified or source-held-out clinical validation.
+
+An authorized reviewer with those exact files can rerun inference with the committed evaluator (provide paths to the local CEDIA project; it reads PTB-XL from `<project-root>/DATA/ptb-xl/`):
+
+```bash
+python scripts/evaluate_cedia_pathology_validation.py \
+  --project-root /data/V4_CEDIA \
+  --weights /data/V4_CEDIA/03_OUTPUTS/titan_v4_lite_weights_best.pth \
+  --training-summary /data/V4_CEDIA/03_OUTPUTS/training_summary.json \
+  --split-metadata /data/V4_CEDIA/03_OUTPUTS/split_metadata.json \
+  --cedia-code-dir /data/V4_CEDIA/01_CODIGO_FUENTE/AUDITORIA \
+  --output-dir /data/titan-v4-pathology-results
+```
+
+The measured environment was Python 3.10.14, PyTorch 2.1.2, NumPy 1.26.4, scikit-learn 1.3.2, SciPy 1.13.1, and WFDB 4.1.2 on CPU. The machine-readable report also records exact input and code hashes.
+
 ## Frozen Signal and Diagnostic Label Contract
 
 - Input: the six frontal leads I, II, III, aVR, aVL, aVF from the first ten seconds.
@@ -48,7 +79,7 @@ The read-only CEDIA record/label cross-check and checkpoint-hash comparison are 
 
 The older 605/672 Primary-9 report is retained as an unverified historical aggregate, not a disproven result: its labels differ from the rebuilt labels on 129 rows, and its original predictions are unavailable. The comparator scores the current checkpoint against the old labels (568/672; accuracy 84.52%, macro-F1 82.35%, weighted-F1 84.64%) but does not reproduce 605/672. The per-record crosswalk and hashes are in `outputs/reviewer_verification/arrhythmia_primary9/`.
 
-The 90.26% Pathology Primary-5 per-label accuracy and 66.87% macro-F1 remain unverified. The distributed checkpoint's training summary records zero pathology-labeled windows and loss weight 0; the checked 672-row candidate label table contains no Primary-5 targets. CEDIA has a separate supervised checkpoint and PTB-XL label map, but its checkpoint hash differs and no matching Primary-5 predictions or metrics were found. The audit report is `outputs/reviewer_verification/pathology_primary5/pathology_reproducibility_audit.json`; read-only CEDIA evidence is summarized in `reports/evidence/cedia-pathology-crosscheck.json`. Do not treat that CEDIA map's coverage as performance evidence. Cascade/OOD remains an archived safety annex, not a recomputed result.
+The 90.26% Pathology Primary-5 per-label accuracy and 66.87% macro-F1 remain unverified historical aggregates. The distributed checkpoint's training summary records zero pathology-labeled windows and loss weight 0; the checked 672-row candidate label table contains no Primary-5 targets. The separate CEDIA checkpoint's measured result is documented above and does not establish the historical checkpoint, thresholds, or cohort. The audit report is `outputs/reviewer_verification/pathology_primary5/pathology_reproducibility_audit.json`; read-only CEDIA provenance is summarized in `reports/evidence/cedia-pathology-crosscheck.json`. Cascade/OOD remains an archived safety annex, not a recomputed result.
 
 ## Firmware Build Check
 

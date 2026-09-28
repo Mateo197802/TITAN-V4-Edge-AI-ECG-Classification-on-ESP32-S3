@@ -33,6 +33,7 @@ def build_audit(
     label_path: Path,
     prediction_path: Path,
     cedia_candidate: dict[str, Any] | None = None,
+    cedia_evaluation: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     label_rows, candidate_labeled_records = _count_primary5_labels(label_path)
     pathology_stats = training.get("pathology_pos_weight_stats") or {}
@@ -107,4 +108,23 @@ def build_audit(
             ),
             "historical_primary5_claim_linked": False,
         }
+        if cedia_evaluation is not None:
+            fixed = cedia_evaluation.get("fixed_threshold_sensitivities", {})
+            report["separate_cedia_candidate"]["follow_up_evaluation"] = {
+                "dataset_version": cedia_evaluation.get("dataset", {}).get("version"),
+                "checkpoint_sha256": cedia_evaluation.get("checkpoint", {}).get("sha256"),
+                "calibration_records": cedia_evaluation.get("calibration_records"),
+                "test_records": cedia_evaluation.get("test_records"),
+                "mean_per_label_accuracy": cedia_evaluation.get("per_label_accuracy"),
+                "macro_f1": cedia_evaluation.get("macro_f1"),
+                "fixed_threshold_sensitivities": {
+                    threshold: {
+                        "mean_per_label_accuracy": metrics.get("per_label_accuracy"),
+                        "macro_f1": metrics.get("macro_f1"),
+                    }
+                    for threshold, metrics in fixed.items()
+                },
+                "historical_primary5_metric_reproduced": False,
+                "checkpoint_and_source_redistributed": False,
+            }
     return report
