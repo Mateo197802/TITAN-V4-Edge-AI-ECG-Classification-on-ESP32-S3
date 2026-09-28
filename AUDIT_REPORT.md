@@ -1,6 +1,6 @@
 # TITAN V4 Repository and Reproducibility Audit
 
-Audit update date: 2026-09-27
+Audit update date: 2026-09-28
 
 Repository: `Mateo197802/TITAN-V4-Edge-AI-ECG-Classification-on-ESP32-S3`
 Working branch: `codex/audit-fixes`
@@ -12,6 +12,7 @@ Working branch: `codex/audit-fixes`
 - Compared the rebuilt 672 project labels with CEDIA's external manifest in a read-only session: same record IDs and no table disagreements. This is agreement between project tables, not an independent clinical review. The previous labels differ on 129 rows.
 - Re-audited a separate CEDIA Primary-9 run that had been labeled `clean_external_test`: its output targets differ from the canonical manifest on exactly 50 rows, matching an AI-generated target-override table whose values equal the model predictions on all 50. The run has no checkpoint SHA and is excluded as independent evidence; see `reports/evidence/cedia-primary9-target-override-audit.json`.
 - Reconciled internal validation, the historical 605/672 aggregate, the 466/672 single-label diagnostic, and the pathology results as separate evidence. The current checkpoint yields 568/672 against the exact historical Primary-9 labels, not 605/672; absent historical predictions mean 605 remains unverified, not disproven. A distinct CEDIA pathology checkpoint has now been evaluated with per-record outputs; it does not reproduce the historical pathology aggregate.
+- Expanded the read-only historical-artifact search across CEDIA V4 outputs/source/launch directories, the separate V4.5 project and archives, reachable Git history, LFS references, and detached Git blobs. Two more saved 672-row CEDIA Primary-9 manifests were found; reaggregation against prior labels yields 375/672 and 399/672, not 605/672. Both contain the same 50 target changes associated with the AI-generated override table, and neither report records the evaluated checkpoint hash. No historical Primary-5 prediction/target pairs, linked thresholds, or checkpoint were recovered. See `reports/evidence/historical-metric-search-2026-09-28.json`.
 - Updated the 672-record inference report's status to a reproducible project-specific single-label diagnostic. It is not the official PhysioNet Challenge score or a verified independent external test result.
 - Added versioned PhysioNet dataset attribution and separated software MIT terms from CC BY 4.0 research artifacts. Third-party data/models remain under their own rights and terms.
 - Pinned the firmware's previously missing TensorFlow Lite dependency to an immutable upstream commit, removed incompatible/permissive compiler flags, fixed deletion of a non-owned static interpreter, and compiled the safe `esp32s3` profile against a project-local ESP32-S3-DevKitC-1-N8R8 definition with 8 MB octal PSRAM. The profile matches the 4 MB tensor-arena requirement; the physical board was not connected. Build warnings from bundled third-party LCD drivers are disclosed in `reports/evidence/firmware-build.md`.
@@ -50,18 +51,26 @@ The separate pathology follow-up uses PhysioNet PTB-XL v1.0.3 (DOI `10.13026/kfz
 
 The project-local `split=test` is not the official hidden Challenge test set. The exact training manifest and offline teacher sidecars for the distributed checkpoint are unavailable, so from-scratch training and checkpoint train/evaluation independence are not established. No source-held-out claim is made.
 
+## Expanded Historical Artifact Search
+
+On 2026-09-28, a read-only search examined 482 text files (76,414,025 bytes) across the CEDIA V4 output, audit, source and launcher scopes; no exact historical metric strings were found. CEDIA V4.5 was searched separately and was not substituted for V4 evidence. Reachable Git history and LFS references contained no historical prediction rows. Eleven detached Git blobs were inspected; the only larger candidate was an evaluation script, not a prediction artifact. No remote files or Git objects were changed.
+
+For Primary-9, the historical 605/672 aggregate remains unreproduced. The distributed checkpoint scores 568/672 against the previous labels. Two additional saved CEDIA 672-row runs score 375/672 and 399/672 against those labels, and 338/672 and 346/672 against rebuilt source labels. Their own reports give 328/672 and 340/672. Each run has 50 changed targets that match the AI-generated override table, and neither report records the exact checkpoint SHA. Five aggregate-only logs report 55.06% accuracy and 44.98% macro-F1 but have no row-level predictions or checkpoint hashes.
+
+For Pathology Primary-5, the only historical evidence recovered is the stored aggregate (90.256% mean per-label accuracy; 66.874% macro-F1). No row-level targets/predictions, checkpoint hash, cohort manifest, or linked threshold file was found. The separately supervised CEDIA checkpoint result is 71.58% / 41.37% with calibrated thresholds on a different 406-record test set; it is not a reconstruction of the historical experiment. Both historical aggregates remain unreproduced, not refuted. File hashes and exact search coverage are in `reports/evidence/historical-metric-search-2026-09-28.json`.
+
 ## Licensing and Security
 
 Original software source is under MIT. Project-authored model weights, results, and derived label/prediction artifacts have a separate CC BY 4.0 notice. That grant applies only to project authors' rights and excludes third-party models and data; it is not an institutional or legal opinion. The downloaded ECG waveforms are not checked into Git. A scan of the working tree and Git history found no matches for common API-token/private-key formats, and the current working tree contains no local absolute user paths. Historical public Git commits still contain personal filesystem-path disclosures; no full-history rewrite or credential revocation was performed.
 
 ## Verification
 
-Verification on 2026-09-27 (CEDIA evaluation artifacts generated on 2026-09-25):
+Verification on 2026-09-28 (CEDIA evaluation artifacts generated on 2026-09-25 and earlier):
 
 - Official release record index, source manifest, and label checks passed for all 672 records; WFDB labels were checked offline.
 - Full offline inference regenerated all 672 prediction rows and reproduced the project-specific single-label diagnostic above; against the old labels it yields 568/672. This is not the official Challenge metric.
 - The historical-label comparator and pathology evidence audit ran from their documented commands. The former verifies checkpoint, label, source-manifest and prediction hashes. The pathology evidence audit retains the 90.26%/66.87% historical claim as unverified. Final CPU Slurm job 27828 reran the distinct CEDIA checkpoint evaluation; local metric re-aggregation reproduced the saved scores, the six CEDIA output hashes and byte sizes matched `SHA256SUMS.csv`, and the checkpoint, PTB-XL metadata, and CEDIA source hashes matched the run report.
 - `python -m pytest -q`: 91 passed. `compileall` passed for project code, scripts, and tests.
-- Repository artifact hash verifier passed for 168 files. The safe ESP32-S3 firmware compile passed; measured resources and binary hash are in `reports/evidence/firmware-build.md`.
+- Repository artifact hash verifier passed for 170 files after this search evidence update. The safe ESP32-S3 firmware compile passed; measured resources and binary hash are in `reports/evidence/firmware-build.md`.
 
 Physical ESP32-S3 validation, firmware/offline signal equivalence, checkpoint training reconstruction, and source-held-out independence were not established.
