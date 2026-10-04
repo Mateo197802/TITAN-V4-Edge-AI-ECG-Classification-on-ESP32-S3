@@ -1,17 +1,27 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools==81.0.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "neuroguardian-titan-v4-ecg"
 version = "0.1.0"
 description = "TITAN V4 ECG external validation evidence package"
-requires-python = ">=3.10"
+license = "MIT"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy==2.4.6",
+    "pandas==3.0.3",
+    "scipy==1.18.1",
+    "scikit-learn==1.9.0",
+    "torch==2.12.1",
+    "wfdb==4.3.1",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "hardware/esp32/tests"]
 pythonpath = ["src"]
+addopts = "--import-mode=importlib"
 

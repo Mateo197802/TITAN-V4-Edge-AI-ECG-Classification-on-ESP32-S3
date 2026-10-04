@@ -1,0 +1,927 @@
+{
+  "protocol": "PRIMARY9_CURRENT_CHECKPOINT_VS_HISTORICAL_LABELS_V1",
+  "evidence_status": "CURRENT_CHECKPOINT_SCORED_ON_BOTH_LABEL_TABLES; HISTORICAL_605_RESULT_NOT_REPRODUCED",
+  "record_count": 672,
+  "current_checkpoint_vs_rebuilt_labels": {
+    "classes": [
+      "AFIB",
+      "SB",
+      "STACH",
+      "NSR",
+      "PVC",
+      "RBBB",
+      "LBBB",
+      "PAC",
+      "1AVB"
+    ],
+    "total_records": 672,
+    "correct_predictions": 466,
+    "accuracy": 0.6934523809523809,
+    "macro_f1": 0.6888407765536525,
+    "weighted_f1": 0.6895899672373766,
+    "classification_report": {
+      "AFIB": {
+        "precision": 0.5070422535211268,
+        "recall": 0.782608695652174,
+        "f1-score": 0.6153846153846154,
+        "support": 46.0
+      },
+      "SB": {
+        "precision": 0.8205128205128205,
+        "recall": 0.8421052631578947,
+        "f1-score": 0.8311688311688312,
+        "support": 38.0
+      },
+      "STACH": {
+        "precision": 0.7933333333333333,
+        "recall": 0.8095238095238095,
+        "f1-score": 0.8013468013468014,
+        "support": 147.0
+      },
+      "NSR": {
+        "precision": 0.4375,
+        "recall": 0.5526315789473685,
+        "f1-score": 0.4883720930232558,
+        "support": 38.0
+      },
+      "PVC": {
+        "precision": 0.7692307692307693,
+        "recall": 0.5970149253731343,
+        "f1-score": 0.6722689075630253,
+        "support": 134.0
+      },
+      "RBBB": {
+        "precision": 0.6166666666666667,
+        "recall": 0.7872340425531915,
+        "f1-score": 0.6915887850467289,
+        "support": 47.0
+      },
+      "LBBB": {
+        "precision": 0.5918367346938775,
+        "recall": 0.9666666666666667,
+        "f1-score": 0.7341772151898734,
+        "support": 30.0
+      },
+      "PAC": {
+        "precision": 0.8117647058823529,
+        "recall": 0.4726027397260274,
+        "f1-score": 0.5974025974025974,
+        "support": 146.0
+      },
+      "1AVB": {
+        "precision": 0.6515151515151515,
+        "recall": 0.9347826086956522,
+        "f1-score": 0.7678571428571429,
+        "support": 46.0
+      },
+      "accuracy": 0.6934523809523809,
+      "macro avg": {
+        "precision": 0.6666002705951221,
+        "recall": 0.7494633700328799,
+        "f1-score": 0.6888407765536525,
+        "support": 672.0
+      },
+      "weighted avg": {
+        "precision": 0.7232903769658515,
+        "recall": 0.6934523809523809,
+        "f1-score": 0.6895899672373766,
+        "support": 672.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        36,
+        0,
+        2,
+        0,
+        1,
+        2,
+        5,
+        0,
+        0
+      ],
+      [
+        0,
+        32,
+        0,
+        2,
+        0,
+        0,
+        0,
+        3,
+        1
+      ],
+      [
+        8,
+        0,
+        119,
+        2,
+        5,
+        6,
+        3,
+        1,
+        3
+      ],
+      [
+        0,
+        3,
+        1,
+        21,
+        0,
+        4,
+        2,
+        4,
+        3
+      ],
+      [
+        14,
+        1,
+        4,
+        7,
+        80,
+        4,
+        7,
+        8,
+        9
+      ],
+      [
+        4,
+        1,
+        0,
+        2,
+        1,
+        37,
+        1,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        29,
+        0,
+        0
+      ],
+      [
+        7,
+        2,
+        24,
+        14,
+        17,
+        6,
+        1,
+        69,
+        6
+      ],
+      [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        43
+      ]
+    ]
+  },
+  "current_checkpoint_vs_historical_labels": {
+    "classes": [
+      "AFIB",
+      "SB",
+      "STACH",
+      "NSR",
+      "PVC",
+      "RBBB",
+      "LBBB",
+      "PAC",
+      "1AVB"
+    ],
+    "total_records": 672,
+    "correct_predictions": 568,
+    "accuracy": 0.8452380952380952,
+    "macro_f1": 0.8235192633143207,
+    "weighted_f1": 0.8464121850784995,
+    "classification_report": {
+      "AFIB": {
+        "precision": 0.9154929577464789,
+        "recall": 0.8552631578947368,
+        "f1-score": 0.8843537414965986,
+        "support": 76.0
+      },
+      "SB": {
+        "precision": 0.8205128205128205,
+        "recall": 0.8421052631578947,
+        "f1-score": 0.8311688311688312,
+        "support": 38.0
+      },
+      "STACH": {
+        "precision": 0.9133333333333333,
+        "recall": 0.9133333333333333,
+        "f1-score": 0.9133333333333333,
+        "support": 150.0
+      },
+      "NSR": {
+        "precision": 0.8333333333333334,
+        "recall": 0.6451612903225806,
+        "f1-score": 0.7272727272727273,
+        "support": 62.0
+      },
+      "PVC": {
+        "precision": 0.9230769230769231,
+        "recall": 0.8571428571428571,
+        "f1-score": 0.8888888888888888,
+        "support": 112.0
+      },
+      "RBBB": {
+        "precision": 0.7,
+        "recall": 0.7777777777777778,
+        "f1-score": 0.7368421052631579,
+        "support": 54.0
+      },
+      "LBBB": {
+        "precision": 0.5918367346938775,
+        "recall": 0.9666666666666667,
+        "f1-score": 0.7341772151898734,
+        "support": 30.0
+      },
+      "PAC": {
+        "precision": 0.8235294117647058,
+        "recall": 0.813953488372093,
+        "f1-score": 0.8187134502923976,
+        "support": 86.0
+      },
+      "1AVB": {
+        "precision": 0.8636363636363636,
+        "recall": 0.890625,
+        "f1-score": 0.8769230769230769,
+        "support": 64.0
+      },
+      "accuracy": 0.8452380952380952,
+      "macro avg": {
+        "precision": 0.8205279864553151,
+        "recall": 0.8402254260742156,
+        "f1-score": 0.8235192633143207,
+        "support": 672.0
+      },
+      "weighted avg": {
+        "precision": 0.8548505844416814,
+        "recall": 0.8452380952380952,
+        "f1-score": 0.8464121850784995,
+        "support": 672.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        65,
+        0,
+        2,
+        0,
+        1,
+        2,
+        6,
+        0,
+        0
+      ],
+      [
+        0,
+        32,
+        0,
+        2,
+        0,
+        0,
+        0,
+        3,
+        1
+      ],
+      [
+        0,
+        0,
+        137,
+        2,
+        0,
+        6,
+        1,
+        1,
+        3
+      ],
+      [
+        0,
+        3,
+        1,
+        40,
+        1,
+        5,
+        2,
+        7,
+        3
+      ],
+      [
+        0,
+        1,
+        3,
+        0,
+        96,
+        3,
+        7,
+        1,
+        1
+      ],
+      [
+        4,
+        1,
+        0,
+        2,
+        1,
+        42,
+        1,
+        2,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        29,
+        0,
+        0
+      ],
+      [
+        0,
+        2,
+        7,
+        2,
+        4,
+        1,
+        0,
+        70,
+        0
+      ],
+      [
+        2,
+        0,
+        0,
+        0,
+        1,
+        0,
+        3,
+        1,
+        57
+      ]
+    ]
+  },
+  "historical_stored_aggregate": {
+    "correct_predictions": 605,
+    "accuracy": 0.9002976190476191,
+    "macro_f1": 0.8781916793252358,
+    "weighted_f1": 0.9008533778242968,
+    "original_record_level_predictions_available": false,
+    "exact_checkpoint_and_evaluation_lineage_available": false
+  },
+  "label_table_comparison": {
+    "different_label_count": 129,
+    "different_label_record_ids": [
+      {
+        "source_label": "data_test",
+        "record_id": "HR00271"
+      },
+      {
+        "source_label": "data_test",
+        "record_id": "HR00436"
+      },
+      {
+        "source_label": "data_test",
+        "record_id": "HR00646"
+      },
+      {
+        "source_label": "data_test",
+        "record_id": "HR00704"
+      },
+      {
+        "source_label": "data_test",
+        "record_id": "HR00855"
+      },
+      {
+        "source_label": "data_test",
+        "record_id": "HR02103"
+      },
+      {
+        "source_label": "training/chapman_shaoxing",
+        "record_id": "JS00024"
+      },
+      {
+        "source_label": "training/chapman_shaoxing",
+        "record_id": "JS00041"
+      },
+      {
+        "source_label": "training/chapman_shaoxing",
+        "record_id": "JS01072"
+      },
+      {
+        "source_label": "training/chapman_shaoxing",
+        "record_id": "JS01090"
+      },
+      {
+        "source_label": "training/chapman_shaoxing",
+        "record_id": "JS02102"
+      },
+      {
+        "source_label": "training/chapman_shaoxing",
+        "record_id": "JS02121"
+      },
+      {
+        "source_label": "training/chapman_shaoxing",
+        "record_id": "JS05279"
+      },
+      {
+        "source_label": "training/chapman_shaoxing",
+        "record_id": "JS06281"
+      },
+      {
+        "source_label": "training/chapman_shaoxing",
+        "record_id": "JS07364"
+      },
+      {
+        "source_label": "training/chapman_shaoxing",
+        "record_id": "JS09432"
+      },
+      {
+        "source_label": "training/chapman_shaoxing",
+        "record_id": "JS10411"
+      },
+      {
+        "source_label": "training/cpsc_2018",
+        "record_id": "A1758"
+      },
+      {
+        "source_label": "training/cpsc_2018",
+        "record_id": "A2006"
+      },
+      {
+        "source_label": "training/cpsc_2018",
+        "record_id": "A2049"
+      },
+      {
+        "source_label": "training/cpsc_2018",
+        "record_id": "A2050"
+      },
+      {
+        "source_label": "training/cpsc_2018",
+        "record_id": "A3018"
+      },
+      {
+        "source_label": "training/cpsc_2018",
+        "record_id": "A3025"
+      },
+      {
+        "source_label": "training/cpsc_2018",
+        "record_id": "A3027"
+      },
+      {
+        "source_label": "training/cpsc_2018",
+        "record_id": "A3046"
+      },
+      {
+        "source_label": "training/cpsc_2018",
+        "record_id": "A4003"
+      },
+      {
+        "source_label": "training/cpsc_2018",
+        "record_id": "A4040"
+      },
+      {
+        "source_label": "training/cpsc_2018",
+        "record_id": "A4057"
+      },
+      {
+        "source_label": "training/cpsc_2018",
+        "record_id": "A5016"
+      },
+      {
+        "source_label": "training/cpsc_2018",
+        "record_id": "A5024"
+      },
+      {
+        "source_label": "training/cpsc_2018",
+        "record_id": "A5032"
+      },
+      {
+        "source_label": "training/cpsc_2018",
+        "record_id": "A5044"
+      },
+      {
+        "source_label": "training/cpsc_2018_extra",
+        "record_id": "Q0010"
+      },
+      {
+        "source_label": "training/cpsc_2018_extra",
+        "record_id": "Q0026"
+      },
+      {
+        "source_label": "training/cpsc_2018_extra",
+        "record_id": "Q0040"
+      },
+      {
+        "source_label": "training/cpsc_2018_extra",
+        "record_id": "Q0046"
+      },
+      {
+        "source_label": "training/cpsc_2018_extra",
+        "record_id": "Q1046"
+      },
+      {
+        "source_label": "training/cpsc_2018_extra",
+        "record_id": "Q1062"
+      },
+      {
+        "source_label": "training/cpsc_2018_extra",
+        "record_id": "Q1083"
+      },
+      {
+        "source_label": "training/cpsc_2018_extra",
+        "record_id": "Q1087"
+      },
+      {
+        "source_label": "training/cpsc_2018_extra",
+        "record_id": "Q1089"
+      },
+      {
+        "source_label": "training/cpsc_2018_extra",
+        "record_id": "Q2079"
+      },
+      {
+        "source_label": "training/cpsc_2018_extra",
+        "record_id": "Q2093"
+      },
+      {
+        "source_label": "training/cpsc_2018_extra",
+        "record_id": "Q2100"
+      },
+      {
+        "source_label": "training/cpsc_2018_extra",
+        "record_id": "Q2116"
+      },
+      {
+        "source_label": "training/cpsc_2018_extra",
+        "record_id": "Q2121"
+      },
+      {
+        "source_label": "training/cpsc_2018_extra",
+        "record_id": "Q2135"
+      },
+      {
+        "source_label": "training/cpsc_2018_extra",
+        "record_id": "Q3108"
+      },
+      {
+        "source_label": "training/cpsc_2018_extra",
+        "record_id": "Q3117"
+      },
+      {
+        "source_label": "training/cpsc_2018_extra",
+        "record_id": "Q3122"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E00619"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E02063"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E05011"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E05022"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E05028"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E05039"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E06010"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E06023"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E06026"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E06036"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E07027"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E08002"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E08025"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E08026"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E08030"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E08045"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E08046"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E08053"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E10039"
+      },
+      {
+        "source_label": "training/georgia",
+        "record_id": "E10041"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS10680"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS10718"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS10720"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS10722"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS10724"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS10725"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS18663"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20650"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20653"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20654"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20657"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20667"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20668"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20669"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20676"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20677"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20680"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20681"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20682"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20683"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20684"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20685"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20689"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20691"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20693"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20694"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20696"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20697"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20698"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20700"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20701"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20703"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20704"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20711"
+      },
+      {
+        "source_label": "training/ningbo",
+        "record_id": "JS20714"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR01004"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR01011"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR01017"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR01033"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR01039"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR04002"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR04027"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR04039"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR04049"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR04058"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR07001"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR07024"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR07036"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR10017"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR10051"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR11037"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR11040"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR11073"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR13019"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR15031"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR15032"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR16020"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR20063"
+      },
+      {
+        "source_label": "training/ptb-xl",
+        "record_id": "HR21008"
+      }
+    ],
+    "current_checkpoint_correct_on_historical_labels": 568,
+    "historical_aggregate_correct_prediction_gap": -37
+  },
+  "interpretation": "This recomputes the distributed checkpoint's predictions against the exact historical label table. It does not recreate the historical aggregate because its original predictions and evaluation lineage are unavailable. The result neither proves nor disproves that an earlier, different model and protocol produced that aggregate.",
+  "scope": {
+    "official_challenge_metric": false,
+    "independent_external_validation_claim": false,
+    "checkpoint_training_overlap": "unknown",
+    "upstream_partition": "PhysioNet Challenge 2021 v1.0.3 training"
+  },
+  "checkpoint_sha256": "BC7BA03D0D6D40E823FDB9BB261EBE29AE8B7A74C97D1C98E7140BCA4D2D305B",
+  "prediction_csv_sha256": "A3CFEDC54F3CACF4CD130813A6D5923931D048BCEC10D9044FBB05B23D709168",
+  "current_label_csv_sha256": "765B7FEE68940D577384DAFFCF01D7FD7374FD9E019DCC291BB30E574E6212F4",
+  "historical_label_csv_sha256": "05BF74EC92EA1113BF2395D485A22D299543CD23F814221E94359C7564A3735D",
+  "historical_aggregate_json_sha256": "80C39EE0B93AA151424A998C6F15662AE5E83ACD7E5EA3A8A230EFAD051A6123",
+  "source_manifest_sha256": "E224686569E54F471AA4A5FDBAC0CE2123C43BC8F5CD0637B0C389B75692CFB0",
+  "inference_run_manifest_sha256": "BD635B6FBC9F8423245FDF320905A1426BFB6E0796486793AD4D004760E4CC86",
+  "comparison_csv_sha256": "ECAAFB793886B37A7BD4ABCF74CA008C4348EB332098AE183B5D9BA7DCAF903B"
+}

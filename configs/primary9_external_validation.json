@@ -3,6 +3,11 @@
   "classes": ["AFIB", "SB", "STACH", "NSR", "PVC", "RBBB", "LBBB", "PAC", "1AVB"],
   "external_records": 672,
   "label_set": "final external validation label set",
+  "upstream_dataset": "PhysioNet/Computing in Cardiology Challenge 2021 v1.0.3",
+  "upstream_partition": "training",
+  "official_hidden_challenge_test_set": false,
+  "checkpoint_training_overlap": "not established",
+  "report_path": "outputs/reproduced/primary9/primary9_recomputed_report.json",
   "external_training_allowed": false,
   "external_threshold_tuning_allowed": false
 }

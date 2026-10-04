@@ -1,22 +1,13 @@
 import argparse
-import os
 import posixpath
 import tarfile
+import tempfile
 import time
 from pathlib import Path
 
 import paramiko
 
-
-HOSTNAME = "hpc.cedia.edu.ec"
-USERNAME = "kevin.landazuri__yachaytech.edu.ec"
-KEY_FILE = os.path.expanduser(r"~/.ssh/cedia_rsa")
-
-PROJECT_ROOT = Path(
-    r"c:\Users\intel\OneDrive - yachaytech.edu.ec\Escritorio\UITEY\Semestre VII\Matematica superior\Proyecto final"
-)
-LOCAL_V4 = PROJECT_ROOT / "V4" / "V4 CEDIA"
-REMOTE_V4 = "/home/kevin.landazuri__yachaytech.edu.ec/Mateo Gavilanes/V4_CEDIA"
+from cedia.ssh_config import connect_ssh, required_env
 
 DELTA_DIRS = [
     "DATA/ptb-xl",
@@ -38,10 +29,10 @@ def progress(done: int, total: int, label: str) -> None:
     print(f"[{bar}] {done}/{total} {label}", flush=True)
 
 
-def iter_delta_files() -> list[Path]:
+def iter_delta_files(local_v4: Path) -> list[Path]:
     files: list[Path] = []
     for rel_dir in DELTA_DIRS:
-        base = LOCAL_V4 / Path(rel_dir)
+        base = local_v4 / Path(rel_dir)
         if not base.exists():
             raise FileNotFoundError(str(base))
         for path in sorted(base.rglob("*")):
@@ -52,12 +43,12 @@ def iter_delta_files() -> list[Path]:
     return files
 
 
-def build_archive(files: list[Path]) -> Path:
-    archive_path = Path(r"C:\tmp") / f"titan_v4_cedia_data_delta_{int(time.time())}.tar.gz"
+def build_archive(files: list[Path], local_v4: Path) -> Path:
+    archive_path = Path(tempfile.gettempdir()) / f"titan_v4_cedia_data_delta_{int(time.time())}.tar.gz"
     archive_path.parent.mkdir(parents=True, exist_ok=True)
     with tarfile.open(archive_path, "w:gz") as tar:
         for idx, path in enumerate(files, start=1):
-            arcname = path.relative_to(LOCAL_V4).as_posix()
+            arcname = path.relative_to(local_v4).as_posix()
             tar.add(path, arcname=arcname)
             if idx == 1 or idx == len(files) or idx % 500 == 0:
                 progress(idx, len(files), "archive")
@@ -80,7 +71,7 @@ def run_remote(ssh: paramiko.SSHClient, command: str) -> None:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Sincroniza delta de datos curados a CEDIA.")
+    parser = argparse.ArgumentParser(description="Sincroniza archivos de datos ECG a CEDIA.")
     parser.add_argument(
         "--virtual_only",
         action="store_true",
@@ -91,19 +82,22 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+    local_v4 = Path(required_env("TITAN_CEDIA_LOCAL_V4")).expanduser().resolve()
+    remote_v4 = required_env("TITAN_CEDIA_REMOTE_V4")
+    if not local_v4.is_dir():
+        raise FileNotFoundError(f"Local CEDIA project directory does not exist: {local_v4}")
+
     global DELTA_DIRS
     if args.virtual_only:
         DELTA_DIRS = ["DATA/virtual_windows"]
-    files = iter_delta_files()
+    files = iter_delta_files(local_v4)
     print(f"Archivos del delta: {len(files)}")
-    archive_path = build_archive(files)
+    archive_path = build_archive(files, local_v4)
 
-    remote_sync_dir = posixpath.join(REMOTE_V4, "_sync")
+    remote_sync_dir = posixpath.join(remote_v4, "_sync")
     remote_archive = posixpath.join(remote_sync_dir, archive_path.name)
 
-    ssh = paramiko.SSHClient()
-    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect(HOSTNAME, username=USERNAME, key_filename=KEY_FILE, timeout=30)
+    ssh = connect_ssh()
     try:
         run_remote(ssh, f"mkdir -p {quote_remote(remote_sync_dir)}")
         sftp = ssh.open_sftp()
@@ -115,7 +109,7 @@ def main() -> None:
         print("[########################] upload archive OK", flush=True)
         run_remote(
             ssh,
-            f"cd {quote_remote(REMOTE_V4)} && tar -xzf {quote_remote(remote_archive)}",
+            f"cd {quote_remote(remote_v4)} && tar -xzf {quote_remote(remote_archive)}",
         )
         print("[########################] extract remote OK", flush=True)
     finally:

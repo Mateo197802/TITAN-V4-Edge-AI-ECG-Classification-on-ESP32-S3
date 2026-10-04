@@ -26,7 +26,10 @@ import torch.nn as nn
 import sys
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
-from model_core import ResBlock, Config
+if __package__:
+    from .model_core import ResBlock, Config
+else:
+    from model_core import ResBlock, Config
 
 
 class TitanV4Lite(nn.Module):

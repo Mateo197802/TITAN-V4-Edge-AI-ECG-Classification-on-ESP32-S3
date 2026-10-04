@@ -1,5 +1,6 @@
 {
   "protocol": "CASCADE_SAFETY_ANNEX_V1",
+  "evidence_status": "LEGACY_NOT_REPRODUCED_FROM_RECORD_LEVEL_PREDICTIONS",
   "role": "safety_annex",
   "diagnostic_subset_records": 211,
   "coverage": 0.5071090047393365,

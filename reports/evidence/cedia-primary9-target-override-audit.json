@@ -1,0 +1,89 @@
+{
+  "protocol": "CEDIA_PRIMARY9_EXTERNAL_TARGET_OVERRIDE_AUDIT_V1",
+  "audit_date": "2026-09-27",
+  "evidence_status": "CEDIA_REPORTED_EXTERNAL_METRIC_EXCLUDED_AFTER_TARGET_OVERRIDE_DISCOVERY",
+  "source_scope": "CEDIA V4_CEDIA artifacts inspected read-only. Row-level remote files, recordings, and model weights are not redistributed.",
+  "source_artifacts": {
+    "canonical_external_manifest": {
+      "relative_path": "DATA/DATASETS_CURADOS/RHYTHM_PRIMARY9_DISTILL/manifest_external_test.csv",
+      "sha256": "8e0855c7254bb024dd2d3eead1ad569ae33d7fb1588545fd22f3b1e463928e60"
+    },
+    "public_rebuilt_labels": {
+      "relative_path": "data/external_validation/final_external_validation_labels.csv",
+      "sha256": "765b7fee68940d577384daffcf01d7fd7374fd9e019dcc291bb30e574e6212f4"
+    },
+    "public_historical_labels": {
+      "relative_path": "outputs/gold_master_external_validation/validation_set/final_external_validation_labels.csv",
+      "sha256": "05bf74ec92ea1113bf2395d485a22d299543cd23f814221e94359c7564a3735d"
+    },
+    "reported_evaluation": {
+      "relative_path": "04_EVIDENCIA_AUDITORIA/primary9_teacher_external_clean/primary9_teacher_external_clean_report.json",
+      "sha256": "3cf071eb1a44b7809bf4c4e60e8071a2d57c1ac94f1c997a1d80aafe04fea64d"
+    },
+    "record_level_output_manifest": {
+      "relative_path": "04_EVIDENCIA_AUDITORIA/primary9_teacher_external_clean/primary9_full_672_audit_manifest.csv",
+      "sha256": "4122470aa14b610c3828231318dcee512b41c1cc1089e62371795cacf34cb7f1"
+    },
+    "calibration_thresholds": {
+      "relative_path": "04_EVIDENCIA_AUDITORIA/per_class_calibration_teacher/per_class_raw_thresholds.json",
+      "sha256": "ee88ba01a960537f235bae8fc2efb79f04b98722eeb085b2e2f2c5944a708679",
+      "calibration_records": 338
+    },
+    "automatic_target_override_table": {
+      "sha256": "79a07caedf2f71ed2bcb55b82860908929e44198eac67c247d49b7bfe41367b1",
+      "rows": 50
+    },
+    "inspected_evaluator_source": {
+      "relative_path": "01_CODIGO_FUENTE/evaluate_primary9_clean.py",
+      "sha256": "7d5e650d3e58414f0195402df19cc1a811a75823ca746b0bb1b285cf2d8657e5",
+      "note": "The source reads a restricted CEDIA target-override table when available. Its file name and row-level content are not redistributed. The evaluation report does not hash its exact executed source or identify its checkpoint."
+    }
+  },
+  "reported_metrics_not_accepted_as_independent_performance": {
+    "record_count": 672,
+    "calibration_records": 338,
+    "reported_accuracy": 0.5476190476190477,
+    "reported_macro_f1": 0.469413981495101,
+    "reported_weighted_f1": 0.5020454541087657,
+    "reported_status": "clean_external_test",
+    "checkpoint_sha256": null
+  },
+  "target_reconciliation": {
+    "shared_record_ids_with_canonical_manifest": 672,
+    "output_target_matches_canonical_manifest": 622,
+    "output_target_differences": 50,
+    "difference_ids_equal_override_table_ids": true,
+    "override_notes_all_report_ai_generated_values": true,
+    "override_values_equal_model_predictions": 50,
+    "output_targets_equal_override_values": 50,
+    "interpretation": "All 50 evaluation-target changes correspond exactly to the 50 override-table rows. Every row states that its value was generated automatically by AI, and each override equals the model prediction; these are not evidenced as independent expert labels."
+  },
+  "fixed_prediction_reaggregations": {
+    "against_report_targets": {
+      "correct": 368,
+      "records": 672,
+      "accuracy": 0.5476190476190477
+    },
+    "against_rebuilt_source_header_labels": {
+      "correct": 381,
+      "records": 672,
+      "accuracy": 0.5669642857142857
+    },
+    "against_historical_label_table": {
+      "correct": 421,
+      "records": 672,
+      "accuracy": 0.6264880952380952
+    },
+    "historical_aggregate": {
+      "reported_correct": 605,
+      "reproduced": false
+    }
+  },
+  "interpretation": "The CEDIA report's clean_external_test flag is contradicted by automatic replacement of 50 test targets. Its exact checkpoint is not recorded, and its fixed predictions do not reproduce the historical 605/672 aggregate under either available label table. This run is excluded as independent performance evidence and is not linked to the historical aggregate.",
+  "scope": {
+    "historical_605_result_reproduced": false,
+    "historical_605_result_disproved": false,
+    "independent_external_validation_claim": false,
+    "clinical_validation": false
+  }
+}

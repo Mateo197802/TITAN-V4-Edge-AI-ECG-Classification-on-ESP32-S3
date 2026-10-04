@@ -1,0 +1,433 @@
+{
+  "schema_version": 1,
+  "report_date": "2026-10-03",
+  "evaluation_scope": "Fixed row-level predictions from the packaged local inference, re-scored against the original and updated 672-row label columns without retraining or threshold changes.",
+  "classes": [
+    "AFIB",
+    "SB",
+    "STACH",
+    "NSR",
+    "PVC",
+    "RBBB",
+    "LBBB",
+    "PAC",
+    "1AVB"
+  ],
+  "checkpoint": {
+    "sha256": "BC7BA03D0D6D40E823FDB9BB261EBE29AE8B7A74C97D1C98E7140BCA4D2D305B",
+    "run_manifest_sha256": "43CBE88341E5059C8B92E37B73961DE44A82A99E782285C21BD9B88BB57A1932"
+  },
+  "source_original_label_manifest": {
+    "path_from_cedia": "DATASETS_CURADOS/RHYTHM_PRIMARY_V2/manifest_external_test.csv",
+    "sha256": "8190EC19F4887D4618213CBF95B9DA3B68948DDDAB4F0233D975EBA5938E5B8C",
+    "records": 672,
+    "records_matching": 672,
+    "source_label_field": "rhythm_label_name",
+    "matched_label_field": "original_rhythm_label",
+    "raw_manifest_includes_demographics_or_absolute_paths": true
+  },
+  "input_artifacts": {
+    "checkpoint": {
+      "path_from_repo": "models/gold_master/gold_master_primary9_model.pth",
+      "sha256": "BC7BA03D0D6D40E823FDB9BB261EBE29AE8B7A74C97D1C98E7140BCA4D2D305B"
+    },
+    "predictions": {
+      "path_from_repo": "outputs/reviewer_verification/arrhythmia_primary9/cedia_gold_2026-05-26/fresh_inference/primary9_record_predictions.csv",
+      "sha256": "5698B07E906F49EB517D5EC1CFB99A1B70AC7700716064C59D3BCAED4C18F2C2"
+    },
+    "label_history": {
+      "path_from_repo": "outputs/reviewer_verification/arrhythmia_primary9/cedia_gold_2026-05-26/primary9_label_history_672.csv",
+      "sha256": "7D1943A1FBAB9511047EB2D649CF0904E2D6535809C02FA1E4C5E3A648CD9F8D"
+    },
+    "target_updates": {
+      "path_from_repo": "outputs/reviewer_verification/arrhythmia_primary9/cedia_gold_2026-05-26/primary9_target_updates_129.csv",
+      "sha256": "B2764109A0933B32488812C103E79F16B9C598E84BC9841F946DC4F76A2C760E"
+    },
+    "source_projection": {
+      "path_from_repo": "outputs/reviewer_verification/arrhythmia_primary9/cedia_gold_2026-05-26/primary9_cedia_gold_source_projection.json",
+      "sha256": "8AAFD649C873E3641EEAC5377B70E53B163453CE139579EDC05F54C245ED7ADE"
+    },
+    "run_manifest": {
+      "path_from_repo": "outputs/reviewer_verification/arrhythmia_primary9/cedia_gold_2026-05-26/fresh_inference/run_manifest.json",
+      "sha256": "43CBE88341E5059C8B92E37B73961DE44A82A99E782285C21BD9B88BB57A1932"
+    }
+  },
+  "label_change_audit": {
+    "records": 672,
+    "changed_labels": 129,
+    "target_update_rows": 129,
+    "updated_labels_equal_historical_cedia_top1": 129,
+    "local_checkpoint_predictions_matching_historical_cedia_top1_on_updated_rows": 110,
+    "interpretation": "Label equality with the recorded Top-1 is a value-level match; it does not establish how the update decisions were made."
+  },
+  "fixed_checkpoint_results": {
+    "original_external_labels": {
+      "records": 672,
+      "correct": 466,
+      "accuracy": 0.6934523809523809,
+      "macro_f1": 0.6888407765536524,
+      "weighted_f1": 0.6895899672373766,
+      "per_class": [
+        {
+          "precision": 0.5070422535211268,
+          "recall": 0.782608695652174,
+          "f1": 0.6153846153846154,
+          "support": 46
+        },
+        {
+          "precision": 0.8205128205128205,
+          "recall": 0.8421052631578947,
+          "f1": 0.8311688311688312,
+          "support": 38
+        },
+        {
+          "precision": 0.7933333333333333,
+          "recall": 0.8095238095238095,
+          "f1": 0.8013468013468015,
+          "support": 147
+        },
+        {
+          "precision": 0.4375,
+          "recall": 0.5526315789473685,
+          "f1": 0.4883720930232558,
+          "support": 38
+        },
+        {
+          "precision": 0.7692307692307693,
+          "recall": 0.5970149253731343,
+          "f1": 0.6722689075630253,
+          "support": 134
+        },
+        {
+          "precision": 0.6166666666666667,
+          "recall": 0.7872340425531915,
+          "f1": 0.691588785046729,
+          "support": 47
+        },
+        {
+          "precision": 0.5918367346938775,
+          "recall": 0.9666666666666667,
+          "f1": 0.7341772151898733,
+          "support": 30
+        },
+        {
+          "precision": 0.8117647058823529,
+          "recall": 0.4726027397260274,
+          "f1": 0.5974025974025974,
+          "support": 146
+        },
+        {
+          "precision": 0.6515151515151515,
+          "recall": 0.9347826086956522,
+          "f1": 0.7678571428571428,
+          "support": 46
+        }
+      ],
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          36,
+          0,
+          2,
+          0,
+          1,
+          2,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          32,
+          0,
+          2,
+          0,
+          0,
+          0,
+          3,
+          1
+        ],
+        [
+          8,
+          0,
+          119,
+          2,
+          5,
+          6,
+          3,
+          1,
+          3
+        ],
+        [
+          0,
+          3,
+          1,
+          21,
+          0,
+          4,
+          2,
+          4,
+          3
+        ],
+        [
+          14,
+          1,
+          4,
+          7,
+          80,
+          4,
+          7,
+          8,
+          9
+        ],
+        [
+          4,
+          1,
+          0,
+          2,
+          1,
+          37,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          29,
+          0,
+          0
+        ],
+        [
+          7,
+          2,
+          24,
+          14,
+          17,
+          6,
+          1,
+          69,
+          6
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          43
+        ]
+      ]
+    },
+    "updated_external_labels": {
+      "records": 672,
+      "correct": 568,
+      "accuracy": 0.8452380952380952,
+      "macro_f1": 0.8235192633143206,
+      "weighted_f1": 0.8464121850784994,
+      "per_class": [
+        {
+          "precision": 0.9154929577464789,
+          "recall": 0.8552631578947368,
+          "f1": 0.8843537414965986,
+          "support": 76
+        },
+        {
+          "precision": 0.8205128205128205,
+          "recall": 0.8421052631578947,
+          "f1": 0.8311688311688312,
+          "support": 38
+        },
+        {
+          "precision": 0.9133333333333333,
+          "recall": 0.9133333333333333,
+          "f1": 0.9133333333333333,
+          "support": 150
+        },
+        {
+          "precision": 0.8333333333333334,
+          "recall": 0.6451612903225806,
+          "f1": 0.7272727272727272,
+          "support": 62
+        },
+        {
+          "precision": 0.9230769230769231,
+          "recall": 0.8571428571428571,
+          "f1": 0.888888888888889,
+          "support": 112
+        },
+        {
+          "precision": 0.7,
+          "recall": 0.7777777777777778,
+          "f1": 0.7368421052631577,
+          "support": 54
+        },
+        {
+          "precision": 0.5918367346938775,
+          "recall": 0.9666666666666667,
+          "f1": 0.7341772151898733,
+          "support": 30
+        },
+        {
+          "precision": 0.8235294117647058,
+          "recall": 0.813953488372093,
+          "f1": 0.8187134502923977,
+          "support": 86
+        },
+        {
+          "precision": 0.8636363636363636,
+          "recall": 0.890625,
+          "f1": 0.8769230769230768,
+          "support": 64
+        }
+      ],
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          65,
+          0,
+          2,
+          0,
+          1,
+          2,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          32,
+          0,
+          2,
+          0,
+          0,
+          0,
+          3,
+          1
+        ],
+        [
+          0,
+          0,
+          137,
+          2,
+          0,
+          6,
+          1,
+          1,
+          3
+        ],
+        [
+          0,
+          3,
+          1,
+          40,
+          1,
+          5,
+          2,
+          7,
+          3
+        ],
+        [
+          0,
+          1,
+          3,
+          0,
+          96,
+          3,
+          7,
+          1,
+          1
+        ],
+        [
+          4,
+          1,
+          0,
+          2,
+          1,
+          42,
+          1,
+          2,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          29,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          7,
+          2,
+          4,
+          1,
+          0,
+          70,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          1,
+          0,
+          3,
+          1,
+          57
+        ]
+      ]
+    }
+  },
+  "historical_cedia_source_report": {
+    "original_reference": {
+      "total": 672,
+      "correct": 476,
+      "accuracy": 0.7083333333333334,
+      "macro_f1": 0.7068437247876616,
+      "weighted_f1": 0.7069750381508249
+    },
+    "original_reference_confusion_matrix_available": false,
+    "original_reference_metrics_recomputed_from_row_level_predictions": false,
+    "updated_reference": {
+      "total": 672,
+      "correct": 605,
+      "accuracy": 0.9002976190476191,
+      "macro_f1": 0.8781916793252358,
+      "weighted_f1": 0.9008533778242968
+    },
+    "updated_reference_metrics_recomputed_from_saved_confusion_matrix": true,
+    "updated_reference_confusion_matrix_available": true,
+    "prediction_rows_for_historical_cedia_report_available": false,
+    "checkpoint_sha256_recorded_in_historical_report": false
+  },
+  "historical_accuracy_reconciliation": {
+    "original_correct": 476,
+    "updated_records": 129,
+    "updated_rows_equal_recorded_top1": 129,
+    "updated_rows_differ_from_original_label": 129,
+    "final_correct_reconciled": 605,
+    "final_accuracy_reconciled": 0.9002976190476191,
+    "scope": "Aggregate arithmetic only; this does not reproduce the model inference run."
+  },
+  "clinical_review_provenance": {
+    "clinical_review_claimed_in_source_artifacts": false,
+    "source_update_rows_with_decisions_and_timestamps": 129,
+    "reviewer_identity_field_present": false,
+    "review_protocol_independently_verified": false,
+    "separate_p0_review_rows": 59,
+    "p0_review_rows_matching_gold_updates": 0,
+    "interpretation": "The 129-row source has decision and timestamp fields but no reviewer identity or review protocol, so it does not independently establish a clinical review process. The separate P0 review set covers other records."
+  }
+}
