@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "evaluation_status": "FULL_672_DIAGNOSTIC_ONLY",
+  "evaluation_scope": "Custom single-label argmax evaluation on 672 records resolving to PhysioNet Challenge 2021 v1.0.3 training paths; not the official Challenge metric or hidden test set. Checkpoint overlap is unknown.",
+  "label_semantics": "One project-selected class derived from multi-label WFDB Dx codes.",
+  "official_challenge_metric": false,
+  "external_validation_claim": false,
+  "clinical_validation": false,
+  "record_count": 672,
+  "model": {
+    "architecture": "TitanV4Lite",
+    "checkpoint": "../../../../../models/gold_master/gold_master_primary9_model.pth",
+    "sha256": "BC7BA03D0D6D40E823FDB9BB261EBE29AE8B7A74C97D1C98E7140BCA4D2D305B"
+  },
+  "label_file": {
+    "name": "../primary9_final_labels_672.csv",
+    "sha256": "D704F89B947ABD930451647DD54831A6973A9F194A1D8A2943D87C07EBDA3BE5"
+  },
+  "source_manifest": {
+    "name": "../../../../../data/external_validation/record_source_manifest.csv",
+    "sha256": "E224686569E54F471AA4A5FDBAC0CE2123C43BC8F5CD0637B0C389B75692CFB0"
+  },
+  "source_dataset": {
+    "name": "PhysioNet/Computing in Cardiology Challenge 2021",
+    "version": "1.0.3",
+    "url": "https://physionet.org/files/challenge-2021/1.0.3",
+    "license": "CC BY 4.0; see the source release terms and REFERENCES.md"
+  },
+  "preprocessing": {
+    "input_leads": [
+      "I",
+      "II",
+      "III",
+      "AVR",
+      "AVL",
+      "AVF"
+    ],
+    "target_sampling_rate_hz": 125,
+    "window_seconds": 10.0,
+    "window_start_seconds": 0,
+    "bandpass_hz": [
+      0.5,
+      45.0
+    ],
+    "butterworth_order": 3,
+    "filter": "causal scipy.signal.lfilter with two-second zero-padded context",
+    "resampling": "scipy.signal.resample_poly",
+    "normalization": "per-lead z-score over the 10-second window"
+  },
+  "runtime": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "torch": "2.12.1+cpu",
+    "numpy": "2.4.6",
+    "scipy": "1.18.1",
+    "scikit_learn": "1.9.0",
+    "wfdb": "4.3.1",
+    "device": "cpu",
+    "torch_threads": 1,
+    "deterministic_algorithms": true
+  },
+  "code_files": {
+    "scripts/run_primary9_inference.py": "70F785D9921D0569FC9F4753C6993F138CD2D54DD2D07CBF1AC61CD2CB41B7FE",
+    "scripts/build_primary9_evaluation_labels.py": "233D891426C35AB0EC908C101DEEF00043CC0AB0196A7F72C5B664B070A449DB",
+    "src/titan_v4/reproducibility/inference.py": "65C0383C8544F6C93BA0FD8EE3A0ECDDCA3A2A605248086E9C2EF30396F8EE57",
+    "src/titan_v4/reproducibility/labels.py": "51E67CCCDBC04FB61A623AB064DA0BD4986A16164CAFFD226BB72BC1E3CCC9EA",
+    "src/titan_v4/reproducibility/physionet.py": "53FE9AB0A4465D9275B08684CDDA21D95A7B7F59A171C9EB2DBE92DAB40F86F1",
+    "src/titan_v4/models/titan_v4_net.py": "139A68C1268B51D1A71A0554A09F5388A936AADB5D1DE4062FF69663713D4C2C",
+    "src/titan_v4/data/primary9_registry.py": "06C2DF445E9892EAC8A65476F708CB497C3F49DC71AC46BAE0B499B00B3F2C0A",
+    "src/titan_v4/data/label_registry.py": "19F325A5C04B8891624E3D4EED55F39F66FD79C2BAFD0A4E378DB6DD9FEBD686"
+  },
+  "source_files": "source_files_sha256.csv",
+  "outputs": {
+    "primary9_record_predictions.csv": "5698B07E906F49EB517D5EC1CFB99A1B70AC7700716064C59D3BCAED4C18F2C2",
+    "primary9_recomputed_report.json": "2747BC726C3D676287AD2630D2711A6BA66E57ACEC3A7531F7853475E50478A0",
+    "source_files_sha256.csv": "945B5BC286BE9A12EA89FFDA05FFC37E914DA99F32C9995B6524C15E280AE879"
+  },
+  "source_file_count": 1344,
+  "source_dataset_counts": {
+    "chapman_shaoxing": 70,
+    "cpsc_2018": 56,
+    "cpsc_2018_extra": 42,
+    "georgia": 56,
+    "ningbo": 70,
+    "ptb-xl": 378
+  },
+  "hash_semantics": "Text-file SHA-256 and sizes use UTF-8 universal-newline normalization; binary artifacts are hashed as raw bytes."
+}

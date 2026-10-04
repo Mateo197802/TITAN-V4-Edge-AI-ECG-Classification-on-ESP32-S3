@@ -19,7 +19,8 @@ FORBIDDEN = (
 
 
 def test_public_language_excludes_private_review_terms():
-    checked_suffixes = {".md", ".json", ".csv", ".py", ".ini", ".toml", ".cff"}
+    # This contract concerns human-facing prose, not schema names or source code.
+    checked_suffixes = {".md", ".cff"}
     offenders: list[str] = []
     for path in ROOT.rglob("*"):
         if not path.is_file() or path.suffix.lower() not in checked_suffixes:

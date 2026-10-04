@@ -1,6 +1,12 @@
-# Pathology Primary-5: Fresh CEDIA Measurement and Historical Aggregate
+# Pathology Primary-5: CEDIA Gold Result and Fresh Measurement
 
-## Fresh checkpoint measurement
+## Historical CEDIA Gold Result
+
+The CEDIA Gold summary reports **90.256% mean per-label accuracy** and **66.874% macro-F1** for IMI, ALMI, ILMI, LAE, and ISC_. Mean per-label accuracy is the unweighted average of the five binary-label accuracies. The summary and promotion-manifest hashes, declared checkpoint identity, and metric definition are preserved in the [machine-readable provenance record](../evidence/pathology-primary5-gold-source.json).
+
+## Separate PTB-XL Measurement
+
+### Fresh checkpoint measurement
 
 The preserved CEDIA checkpoint `e9a44e4eea8ebb8f89d5e32909ae4afcc96442d1fa8eacb1e57a73bfa498353b` was loaded strictly as `TitanV4Max` (1024-dimensional encoder, 9 rhythm outputs, 10 pathology outputs, no morphology fusion). Its training summary records pathology loss weight 0.2 and 1,811 pathology-labeled windows; the checkpoint was selected at epoch 25 by rhythm F1, not by pathology performance.
 
@@ -18,7 +24,9 @@ The split metadata contained 118 training and 10 validation `HR#####` PTB-XL ali
 
 ## Historical result
 
-The archived 90.256% / 66.874% aggregate remains unverified and is not reproduced by this CEDIA checkpoint. Its original checkpoint hash, reference rows, record-level scores, calibration protocol, and applied threshold are unavailable. The legacy JSON's `configured_macro_f1_reference: 0.65` is a reference value, not evidence of the threshold used for historical predictions. The fixed-0.65 result above is therefore a sensitivity check, not an exact threshold-matched replication. The distributed repository checkpoint is a third model lineage and its training summary records zero pathology-labeled windows. Do not attribute either checkpoint's results to the historical aggregate.
+The CEDIA Gold summary reports **90.256% mean per-label accuracy** and **66.874% macro-F1** for IMI, ALMI, ILMI, LAE, and ISC_. The source summary and promotion-manifest SHA-256 values, the declared checkpoint SHA, and the source-reported metric definition are recorded in [the Primary-5 provenance record](../evidence/pathology-primary5-gold-source.json). The declared checkpoint and source run summary were not present at their declared paths during the read-only CEDIA check; no record-level targets, predictions, scores, cohort size, or actual thresholds were available for recalculation. These two figures are therefore preserved as a source-reported result, not as a fresh model evaluation.
+
+The CEDIA checkpoint measured above is a separate model, cohort, and protocol and does not reproduce the historical figures. The distributed repository checkpoint is another model lineage; its training summary records zero pathology-labeled windows. Do not attribute either measured result to the historical aggregate.
 
 ## Recompute and evidence
 

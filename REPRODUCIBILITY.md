@@ -61,6 +61,18 @@ python scripts/evaluate_cedia_pathology_validation.py \
 
 The measured environment was Python 3.10.14, PyTorch 2.1.2, NumPy 1.26.4, scikit-learn 1.3.2, SciPy 1.13.1, and WFDB 4.1.2 on CPU. The machine-readable report also records exact input and code hashes.
 
+## Historical Gold Aggregate Checks
+
+The sanitized CEDIA Primary-9 package contains the 672 final labels, the 129 changed-label rows, the source report's confusion matrix and per-class values, plus a fresh repository inference with row-level probabilities and input hashes. Verify the saved aggregate arithmetic and the separate fresh run with:
+
+```powershell
+python scripts/verify_primary9_gold_evidence.py
+```
+
+The verifier recalculates the saved CEDIA matrix to 605/672, 90.0298% accuracy, 87.8192% macro-F1, and 90.0853% weighted-F1. It also checks that all 129 final update labels equal the Top-1 values recorded by CEDIA. The source report omits a checkpoint SHA. A fresh inference with the repository checkpoint, whose SHA matches the P9 Gold checkpoint available in CEDIA, and the same 672 final labels produces 568/672; its row-level files are in `outputs/reviewer_verification/arrhythmia_primary9/cedia_gold_2026-05-26/fresh_inference/`. That is a distinct signal-to-prediction result, not a reproduction of the CEDIA inference output.
+
+The historical Pathology Primary-5 source record is `reports/evidence/pathology-primary5-gold-source.json`. It preserves the CEDIA summary and promotion-manifest hashes, declared checkpoint SHA, labels, and metric definitions. The 90.256% / 66.874% values are present in the source summary, but no row-level targets, predictions, scores, or effective thresholds were available to recalculate them. The separate PTB-XL score table above does not calculate those historical values.
+
 ## Frozen Signal and Diagnostic Label Contract
 
 - Input: the six frontal leads I, II, III, aVR, aVL, aVF from the first ten seconds.
@@ -77,9 +89,9 @@ The result is a reproducible inference/evaluation run on records from the public
 
 The read-only CEDIA record/label cross-check and checkpoint-hash comparison are documented in [CEDIA cross-check evidence](reports/evidence/cedia-readonly-crosscheck.md).
 
-The older 605/672 Primary-9 report is retained as an unverified historical aggregate, not a disproven result: its labels differ from the rebuilt labels on 129 rows, and its original predictions are unavailable. The comparator scores the current checkpoint against the old labels (568/672; accuracy 84.52%, macro-F1 82.35%, weighted-F1 84.64%) but does not reproduce 605/672. The per-record crosswalk and hashes are in `outputs/reviewer_verification/arrhythmia_primary9/`.
+The historical CEDIA Primary-9 report has a saved confusion matrix that recalculates to 605/672, 90.03% accuracy, and 87.82% macro-F1. Its 129-row update table records final labels equal to its model Top-1 values. The fresh repository inference under the same final labels yields 568/672, with complete row-level predictions and hashes; it does not reproduce the CEDIA inference. The source report omits its checkpoint SHA. The package and verifier are in `outputs/reviewer_verification/arrhythmia_primary9/cedia_gold_2026-05-26/` and `scripts/verify_primary9_gold_evidence.py`.
 
-The 90.26% Pathology Primary-5 per-label accuracy and 66.87% macro-F1 remain unverified historical aggregates. The distributed checkpoint's training summary records zero pathology-labeled windows and loss weight 0; the checked 672-row candidate label table contains no Primary-5 targets. The separate CEDIA checkpoint's measured result is documented above and does not establish the historical checkpoint, thresholds, or cohort. The audit report is `outputs/reviewer_verification/pathology_primary5/pathology_reproducibility_audit.json`; read-only CEDIA provenance is summarized in `reports/evidence/cedia-pathology-crosscheck.json`. Cascade/OOD remains an archived safety annex, not a recomputed result.
+The 90.256% / 66.874% Pathology Primary-5 figures are preserved from the CEDIA Gold summary. Its promotion manifest declares checkpoint SHA-256 `843ed16c2a4dd53a193c7f37b9ce75542762ac9606e2701ea7128283e953607d`, but that file and the manifest-linked source run summary were absent at their declared paths on 2026-10-03. No row-level pathology evaluation data were present for recalculation. The separate CEDIA checkpoint result is documented above and is not the historical experiment. See `reports/evidence/pathology-primary5-gold-source.json` and `reports/evidence/cedia-pathology-crosscheck.json`.
 
 ## Firmware Build Check
 

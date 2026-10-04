@@ -1,6 +1,6 @@
 # TITAN V4 Repository and Reproducibility Audit
 
-Audit update date: 2026-09-28
+Audit update date: 2026-10-03
 
 Repository: `Mateo197802/TITAN-V4-Edge-AI-ECG-Classification-on-ESP32-S3`
 Working branch: `codex/audit-fixes`
@@ -74,3 +74,13 @@ Verification on 2026-09-28 (CEDIA evaluation artifacts generated on 2026-09-25 a
 - Repository artifact hash verifier passed for 170 files after this search evidence update. The safe ESP32-S3 firmware compile passed; measured resources and binary hash are in `reports/evidence/firmware-build.md`.
 
 Physical ESP32-S3 validation, firmware/offline signal equivalence, checkpoint training reconstruction, and source-held-out independence were not established.
+
+## Supplemental Gold Source Verification (2026-10-03)
+
+This read-only CEDIA verification adds the source artifacts that were located after the 2026-09-28 audit. The evidence bundle is under `outputs/reviewer_verification/arrhythmia_primary9/cedia_gold_2026-05-26/`; its `SHA256SUMS.csv` verifies the packaged files.
+
+For Primary-9, the CEDIA source report SHA-256 is `582590FA1809B089AD6123F21E18A98CFE3352D00AEB8B3A2D9A015EEAD3692C`. It records 476/672 before 129 label updates and 605/672 after them. Its saved 9x9 confusion matrix recalculates to 90.0298% accuracy, 87.8192% macro-F1, and 90.0853% weighted-F1. The 672-row final label manifest SHA-256 is `B302D33F35BB056757E76BF89CC4B9FE7A8811074D2D1A7BCF3E94DF451BA556`; the 129-row update source SHA-256 is `F66CE6D3122DFE92D7EF237B345DA48CA79AC67156768FF4F7322A417EE68661`. Every final label in those 129 changes equals the CEDIA-recorded model Top-1. The CEDIA Gold Primary-9 checkpoint SHA is `BC7BA03D0D6D40E823FDB9BB261EBE29AE8B7A74C97D1C98E7140BCA4D2D305B`; the source report itself does not record a checkpoint hash.
+
+A fresh run of the repository inference code with that checkpoint hash and the 672 final labels produces 568/672 (84.52% accuracy, 82.35% macro-F1). Its per-record table matches 110 of the 129 CEDIA Top-1 update values. The report matrix therefore verifies the historical aggregate arithmetic, while the available signal-to-prediction rerun does not regenerate the CEDIA predictions. Run `python scripts/verify_primary9_gold_evidence.py` to repeat the aggregate, label-support, row-update, run-manifest, and file-hash checks. The packaged CEDIA-derived CSVs omit age, sex, diagnosis codes, absolute paths, and free-text notes.
+
+For Pathology Primary-5, the source summary SHA-256 is `EBB44EB025397C018C9CBAEE9873C33317B5E16840C47DA6FD6B3944AD4D4E07`; it reports 90.256% mean per-label accuracy and 66.874% macro-F1. The promotion-manifest SHA-256 is `2AC090CC86192221C3F81F036D1AF0DDF9D402E3FD2BB4B1116A70FBC05CAA15` and declares checkpoint SHA `843ed16c2a4dd53a193c7f37b9ce75542762ac9606e2701ea7128283e953607d`. On 2026-10-03, neither that checkpoint nor the manifest-linked source run summary existed at its declared path. No record-level targets, predictions, score rows, cohort count, or effective thresholds were found with the Gold summary. The two pathology figures remain source-reported; the separate 71.58% / 41.37% PTB-XL evaluation is not substituted for them.
