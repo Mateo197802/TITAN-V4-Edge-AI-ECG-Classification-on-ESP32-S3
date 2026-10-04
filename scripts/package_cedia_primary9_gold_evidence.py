@@ -40,24 +40,26 @@ RUN_FILES = (
     "run_manifest.json",
     "source_files_sha256.csv",
 )
+ORIGINAL_MANIFEST_SHA256 = "8190EC19F4887D4618213CBF95B9DA3B68948DDDAB4F0233D975EBA5938E5B8C"
 BUNDLE_README = """# CEDIA Gold Primary-9 Evidence
 
 This bundle separates the archived CEDIA aggregate from a fresh inference run performed with the repository code.
 
 ## Archived CEDIA Result
 
-The source report records 605/672 correct, 90.0298% accuracy, 87.8192% macro-F1, and 90.0853% weighted-F1. The saved confusion matrix and per-class metrics are included in `primary9_cedia_gold_source_projection.json` and `primary9_cedia_per_class_metrics.csv`. The source artifact hashes are stored in the projection.
+The source report records two references for the same 672 records. Against original labels it reports 476/672 correct, 70.8333% accuracy, 70.6844% macro-F1, and 70.6975% weighted-F1. Against final updated labels it reports 605/672 correct, 90.0298% accuracy, 87.8192% macro-F1, and 90.0853% weighted-F1. Only the final-reference confusion matrix is saved and can be recalculated.
 
-The final label history has 672 rows. The target-update audit has 129 rows; each final label equals the CEDIA-recorded model Top-1. These rows are kept visible so the provenance of the reported targets can be checked. The source report does not record a checkpoint hash.
+The original labels come from `DATASETS_CURADOS/RHYTHM_PRIMARY_V2/manifest_external_test.csv`. All 672 IDs and labels are cross-checked against `original_rhythm_label` in the sanitized history. Its raw source manifest is not redistributed because it contains demographic fields and absolute paths. The target-update audit records CEDIA Top-1 separately from the original and final labels. The source report does not record a checkpoint hash or historical row-level predictions.
 
 ## Fresh Inference
 
-`fresh_inference/` contains predictions, probabilities, source-file hashes, a recomputed report, and a run manifest for the repository checkpoint whose SHA-256 matches the Primary-9 Gold checkpoint available in CEDIA. On the same 672 final labels this run returns 568/672, accuracy 84.5238%, macro-F1 82.3519%, and weighted-F1 84.6412%. It agrees with 110 of the 129 CEDIA Top-1 update values; it is a separate inference result, not the source of the archived matrix.
+`fresh_inference/` contains predictions, probabilities, source-file hashes, a recomputed report, and a run manifest for the repository checkpoint whose SHA-256 matches the Primary-9 Gold checkpoint available in CEDIA. The same predictions score 466/672 against original labels and 568/672 against final labels. The final-reference metrics are 84.5238% accuracy, 82.3519% macro-F1, and 84.6412% weighted-F1. This is a separate inference result, not the source of the archived matrix.
 
 Run the local verifier from the repository root:
 
 ```powershell
 python scripts/verify_primary9_gold_evidence.py
+python scripts/recompute_primary9_paired_reference.py
 ```
 
 To run inference again in PowerShell:
@@ -106,8 +108,66 @@ def _record_key(value: str) -> str:
     return PurePosixPath(normalized).name.casefold()
 
 
+def _original_label_manifest_provenance(
+    manifest_path: Path,
+    expected_labels: dict[str, str],
+    *,
+    expected_sha256: str = ORIGINAL_MANIFEST_SHA256,
+    expected_records: int = 672,
+) -> dict[str, object]:
+    rows = _read_csv(manifest_path)
+    if len(rows) != expected_records:
+        raise ValueError("CEDIA original-label manifest does not have the expected record count")
+    required_fields = {"record_id", "rhythm_label_name"}
+    if not required_fields.issubset(rows[0]):
+        raise ValueError("CEDIA original-label manifest is missing required fields")
+    if _sha256(manifest_path).casefold() != expected_sha256.casefold():
+        raise ValueError("CEDIA original-label manifest SHA-256 differs from the verified source")
+
+    source_labels: dict[str, str] = {}
+    for row in rows:
+        key = _record_key(row["record_id"])
+        if not key or key in source_labels:
+            raise ValueError("CEDIA original-label manifest has an empty or duplicate record ID")
+        source_labels[key] = row["rhythm_label_name"].strip()
+    expected = {_record_key(key): value for key, value in expected_labels.items()}
+    if source_labels.keys() != expected.keys():
+        raise ValueError("CEDIA original-label manifest record IDs do not match the final manifest")
+    if any(source_labels[key] != expected[key] for key in source_labels):
+        raise ValueError("CEDIA original labels do not match the original labels in the final manifest")
+
+    return {
+        "artifact": "CEDIA V4 Primary-9 original-label manifest, before final label updates",
+        "cedia_relative_path": "DATASETS_CURADOS/RHYTHM_PRIMARY_V2/manifest_external_test.csv",
+        "sha256": _sha256(manifest_path),
+        "records": len(rows),
+        "matched_record_ids": len(source_labels),
+        "source_label_field": "rhythm_label_name",
+        "matched_label_field": "original_rhythm_label",
+        "raw_manifest_includes_demographics_or_absolute_paths": True,
+    }
+
+
 def _json_write(path: Path, value: object) -> None:
     path.write_text(json.dumps(value, indent=2, ensure_ascii=False, allow_nan=False) + "\n", encoding="utf-8")
+
+
+def write_bundle_hash_manifest(output: Path) -> int:
+    checksum_rows: list[dict[str, object]] = []
+    for path in sorted(item for item in output.rglob("*") if item.is_file() and item.name != "SHA256SUMS.csv"):
+        digest, size_bytes = manifest_file_fingerprint(path)
+        checksum_rows.append(
+            {
+                "relative_path": path.relative_to(output).as_posix(),
+                "sha256": digest,
+                "bytes": size_bytes,
+            }
+        )
+    with (output / "SHA256SUMS.csv").open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=("relative_path", "sha256", "bytes"), lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(checksum_rows)
+    return len(checksum_rows)
 
 
 def package(args: argparse.Namespace) -> dict[str, object]:
@@ -149,6 +209,11 @@ def package(args: argparse.Namespace) -> dict[str, object]:
         label = labels_by_key.get(key)
         if label is None or label["rhythm_label"] != history["final_rhythm_label"]:
             raise ValueError("Inference labels do not match the CEDIA final label manifest")
+
+    original_manifest_provenance = _original_label_manifest_provenance(
+        args.cedia_original_manifest,
+        {key: row["original_rhythm_label"] for key, row in history_by_id.items()},
+    )
 
     updates: list[dict[str, str]] = []
     updates_by_id: dict[str, dict[str, str]] = {}
@@ -245,6 +310,7 @@ def package(args: argparse.Namespace) -> dict[str, object]:
             "license": "CC BY 4.0",
         },
         "source_artifacts": {
+            "cedia_original_label_manifest": original_manifest_provenance,
             "cedia_report": {
                 "artifact": "CEDIA V4 Gold Primary-9 source report, 2026-05-26",
                 "cedia_relative_path": "03_OUTPUTS/01_ARRHYTHMIA_RHYTHM_OUTPUTS/2026-05-26_FINAL_EXTERNAL_GATE/primary9_final_external_report.json",
@@ -288,6 +354,14 @@ def package(args: argparse.Namespace) -> dict[str, object]:
             "local_rerun_predictions_equal_cedia_model_top1": local_top1_matches,
             "local_rerun_updated_rows": len(updates),
         },
+        "label_review_crosscheck": {
+            "source_update_rows": len(raw_updates),
+            "rows_with_decision": sum(bool(row.get("label_update_decision", "").strip()) for row in raw_updates),
+            "rows_with_timestamp": sum(bool(row.get("label_update_timestamp", "").strip()) for row in raw_updates),
+            "reviewer_identity_field_present": any(
+                "reviewer" in field.casefold() for field in raw_updates[0]
+            ),
+        },
         "fresh_inference": {
             "checkpoint_sha256": local_run["model"]["sha256"],
             "records": local_report["total_records"],
@@ -305,23 +379,21 @@ def package(args: argparse.Namespace) -> dict[str, object]:
             "Excluded free-text update notes.",
         ],
     }
+    if args.cedia_p0_review_decisions:
+        p0_rows = _read_csv(args.cedia_p0_review_decisions)
+        p0_ids = [_record_key(row.get("record_id", "")) for row in p0_rows]
+        if any(not key for key in p0_ids) or len(set(p0_ids)) != len(p0_ids):
+            raise ValueError("Separate P0 review table has empty or duplicate record IDs")
+        source_projection["label_review_crosscheck"]["separate_p0_review"] = {
+            "cedia_relative_path": "DATASETS_CURADOS/RHYTHM_MANUAL_CURATION_QUEUE/ADJUDICATED_FIRST_PASS/p0_review_decisions.csv",
+            "sha256": _sha256(args.cedia_p0_review_decisions),
+            "records": len(p0_rows),
+            "records_matching_gold_updates": len(set(p0_ids) & set(updates_by_id)),
+        }
     _json_write(output / "primary9_cedia_gold_source_projection.json", source_projection)
     (output / "README.md").write_text(BUNDLE_README, encoding="utf-8")
 
-    checksum_rows: list[dict[str, object]] = []
-    for path in sorted(item for item in output.rglob("*") if item.is_file() and item.name != "SHA256SUMS.csv"):
-        digest, size_bytes = manifest_file_fingerprint(path)
-        checksum_rows.append(
-            {
-                "relative_path": path.relative_to(output).as_posix(),
-                "sha256": digest,
-                "bytes": size_bytes,
-            }
-        )
-    with (output / "SHA256SUMS.csv").open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=("relative_path", "sha256", "bytes"), lineterminator="\n")
-        writer.writeheader()
-        writer.writerows(checksum_rows)
+    write_bundle_hash_manifest(output)
 
     return {
         "output_dir": str(output),
@@ -340,7 +412,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Package sanitized CEDIA Primary-9 Gold source evidence and a fresh local rerun.")
     parser.add_argument("--cedia-report", type=Path, required=True)
     parser.add_argument("--cedia-manifest", type=Path, required=True)
+    parser.add_argument("--cedia-original-manifest", type=Path, required=True)
     parser.add_argument("--cedia-updates", type=Path, required=True)
+    parser.add_argument("--cedia-p0-review-decisions", type=Path)
     parser.add_argument("--per-class-metrics", type=Path, required=True)
     parser.add_argument("--labels", type=Path, required=True, help="The exact sanitized labels file used for the fresh local rerun.")
     parser.add_argument("--checkpoint", type=Path, default=ROOT / "models/gold_master/gold_master_primary9_model.pth")

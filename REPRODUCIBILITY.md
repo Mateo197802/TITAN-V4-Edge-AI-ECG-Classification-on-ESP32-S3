@@ -69,7 +69,15 @@ The sanitized CEDIA Primary-9 package contains the 672 final labels, the 129 cha
 python scripts/verify_primary9_gold_evidence.py
 ```
 
-The verifier recalculates the saved CEDIA matrix to 605/672, 90.0298% accuracy, 87.8192% macro-F1, and 90.0853% weighted-F1. It also checks that all 129 final update labels equal the Top-1 values recorded by CEDIA. The source report omits a checkpoint SHA. A fresh inference with the repository checkpoint, whose SHA matches the P9 Gold checkpoint available in CEDIA, and the same 672 final labels produces 568/672; its row-level files are in `outputs/reviewer_verification/arrhythmia_primary9/cedia_gold_2026-05-26/fresh_inference/`. That is a distinct signal-to-prediction result, not a reproduction of the CEDIA inference output.
+The verifier recalculates the saved CEDIA final-reference matrix to 605/672, 90.0298% accuracy, 87.8192% macro-F1, and 90.0853% weighted-F1. The report separately gives 476/672 on the original reference, without its original confusion matrix or historical row-level predictions. The 90.03% / 87.82% result is therefore tied to the final updated labels, not the original labels. The pre-update manifest is `DATASETS_CURADOS/RHYTHM_PRIMARY_V2/manifest_external_test.csv`, SHA-256 `8190EC19F4887D4618213CBF95B9DA3B68948DDDAB4F0233D975EBA5938E5B8C`; its 672 IDs and `rhythm_label_name` values were matched to the sanitized `original_rhythm_label` field. The raw manifest is not redistributed because it includes demographics and absolute paths.
+
+Regenerate the paired local-checkpoint scores against both reference columns and the per-class/hash files with:
+
+```powershell
+python scripts/recompute_primary9_paired_reference.py
+```
+
+That fixed checkpoint yields 466/672 on original labels and 568/672 on final labels. The row-level files are in `outputs/reviewer_verification/arrhythmia_primary9/cedia_gold_2026-05-26/fresh_inference/`; this is a distinct signal-to-prediction result, not a reproduction of the historical CEDIA inference. The source report omits a checkpoint SHA.
 
 The historical Pathology Primary-5 source record is `reports/evidence/pathology-primary5-gold-source.json`. It preserves the CEDIA summary and promotion-manifest hashes, declared checkpoint SHA, labels, and metric definitions. The 90.256% / 66.874% values are present in the source summary, but no row-level targets, predictions, scores, or effective thresholds were available to recalculate them. The separate PTB-XL score table above does not calculate those historical values.
 
@@ -89,7 +97,7 @@ The result is a reproducible inference/evaluation run on records from the public
 
 The read-only CEDIA record/label cross-check and checkpoint-hash comparison are documented in [CEDIA cross-check evidence](reports/evidence/cedia-readonly-crosscheck.md).
 
-The historical CEDIA Primary-9 report has a saved confusion matrix that recalculates to 605/672, 90.03% accuracy, and 87.82% macro-F1. Its 129-row update table records final labels equal to its model Top-1 values. The fresh repository inference under the same final labels yields 568/672, with complete row-level predictions and hashes; it does not reproduce the CEDIA inference. The source report omits its checkpoint SHA. The package and verifier are in `outputs/reviewer_verification/arrhythmia_primary9/cedia_gold_2026-05-26/` and `scripts/verify_primary9_gold_evidence.py`.
+The historical CEDIA Primary-9 report gives 476/672 on original labels and has a saved final-reference confusion matrix that recalculates to 605/672, 90.03% accuracy, and 87.82% macro-F1. Its 129-row update table records final labels equal to its model Top-1 values; this does not establish the label-decision process. The fixed repository inference gives 466/672 against original labels and 568/672 against final labels, with complete row-level predictions and hashes; it does not reproduce the CEDIA inference. See the [paired-reference evidence](reports/evidence/primary9-paired-reference-recomputation-2026-10-03.md), [run-reproduction record](reports/evidence/primary9-historical-report-reproduction-2026-10-03.md), and `scripts/verify_primary9_gold_evidence.py`.
 
 The 90.256% / 66.874% Pathology Primary-5 figures are preserved from the CEDIA Gold summary. Its promotion manifest declares checkpoint SHA-256 `843ed16c2a4dd53a193c7f37b9ce75542762ac9606e2701ea7128283e953607d`, but that file and the manifest-linked source run summary were absent at their declared paths on 2026-10-03. No row-level pathology evaluation data were present for recalculation. The separate CEDIA checkpoint result is documented above and is not the historical experiment. See `reports/evidence/pathology-primary5-gold-source.json` and `reports/evidence/cedia-pathology-crosscheck.json`.
 

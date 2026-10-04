@@ -7,6 +7,16 @@
     "license": "CC BY 4.0"
   },
   "source_artifacts": {
+    "cedia_original_label_manifest": {
+      "artifact": "CEDIA V4 Primary-9 original-label manifest, before final label updates",
+      "cedia_relative_path": "DATASETS_CURADOS/RHYTHM_PRIMARY_V2/manifest_external_test.csv",
+      "sha256": "8190EC19F4887D4618213CBF95B9DA3B68948DDDAB4F0233D975EBA5938E5B8C",
+      "records": 672,
+      "matched_record_ids": 672,
+      "source_label_field": "rhythm_label_name",
+      "matched_label_field": "original_rhythm_label",
+      "raw_manifest_includes_demographics_or_absolute_paths": true
+    },
     "cedia_report": {
       "artifact": "CEDIA V4 Gold Primary-9 source report, 2026-05-26",
       "cedia_relative_path": "03_OUTPUTS/01_ARRHYTHMIA_RHYTHM_OUTPUTS/2026-05-26_FINAL_EXTERNAL_GATE/primary9_final_external_report.json",
@@ -32,6 +42,18 @@
       "cedia_relative_path": "03_OUTPUTS/2026-05-26_GOLD_MASTER_EXTERNAL_GATE/01_GOLD_MASTER_PTH/gold_master_primary9_model.pth",
       "sha256": "BC7BA03D0D6D40E823FDB9BB261EBE29AE8B7A74C97D1C98E7140BCA4D2D305B",
       "source_report_records_checkpoint_sha256": false
+    }
+  },
+  "label_review_crosscheck": {
+    "source_update_rows": 129,
+    "rows_with_decision": 129,
+    "rows_with_timestamp": 129,
+    "reviewer_identity_field_present": false,
+    "separate_p0_review": {
+      "cedia_relative_path": "DATASETS_CURADOS/RHYTHM_MANUAL_CURATION_QUEUE/ADJUDICATED_FIRST_PASS/p0_review_decisions.csv",
+      "sha256": "8571E16B0D49E88D9215F414CD251B1074F069CD80ED8B958C06A51BD159E7AE",
+      "records": 59,
+      "records_matching_gold_updates": 0
     }
   },
   "endpoint": {
