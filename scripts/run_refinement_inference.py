@@ -56,6 +56,7 @@ def main():
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--device", default="cpu", choices=("cpu", "cuda"))
     parser.add_argument("--probability-tolerance", type=float, default=2e-5)
+    parser.add_argument("--prediction-column", choices=("phase3_prediction", "phase5_prediction", "prediction"), default="phase3_prediction")
     args = parser.parse_args()
     if args.output.exists():
         raise FileExistsError(f"Use a fresh output directory: {args.output}")
@@ -87,14 +88,14 @@ def main():
               "environment": {"python": platform.python_version(), "torch": torch.__version__,
                               "numpy": np.__version__, "device": args.device}}
     args.output.mkdir(parents=True)
-    fields = ("cohort", "dataset", "ecg_id", "reference", "phase3_prediction",
+    fields = ("cohort", "dataset", "ecg_id", "reference", args.prediction_column,
               *(f"prob_{label}" for label in PRIMARY9_CLASSES))
     with (args.output / "predictions.csv").open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         for index, row in enumerate(rows):
             output = {"cohort": row["cohort"], "dataset": row["dataset"], "ecg_id": row["ecg_id"],
-                      "reference": row["reference_label"], "phase3_prediction": labels[index]}
+                      "reference": row["reference_label"], args.prediction_column: labels[index]}
             output.update({f"prob_{label}": float(p[index,j]) for j,label in enumerate(PRIMARY9_CLASSES)})
             writer.writerow(output)
     (args.output / "report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")

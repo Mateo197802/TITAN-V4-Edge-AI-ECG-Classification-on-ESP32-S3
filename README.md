@@ -56,6 +56,8 @@ python scripts/run_refinement_inference.py
 
 ## Evidence Boundaries
 
+The [CEDIA training-loss ablation](outputs/reviewer_verification/loss_anchor_ablation_2026-10-12/README.md) executed six trials on the same original architecture. Its validation-selected candidate reached 82.52% accuracy / 81.03% macro-F1 and added 53 correct predictions across the fixed 2,171-record follow-up. Against historical final references it scored 571/672, versus the prior candidate's 576/672; both PTHs are preserved. The bundle includes training/refit evidence, all candidate validation probabilities, public-signal replay commands and both historical reference scores.
+
 The separate [historical-cohort target-gap audit](outputs/reviewer_verification/gold_target_gap_2026-10-12/README.md) reevaluates the research candidate on the actual 672 Challenge records: 576/672 (85.71% accuracy, 83.81% macro-F1) against the archived final references. It also identifies an exact CE/KL objective conflict in 1,007 training records and documents the unrun ablation needed to test its effect. This is not a reproduction of the historical 605/672 prediction run.
 
 - The 672-record single-label diagnostic is computationally reproducible from this checkout and the cited public dataset release; it is not an official Challenge metric or an independent external-validation claim.

@@ -1,0 +1,16 @@
+{
+  "validation_records": 1476,
+  "CPU_nrmse": {
+    "quality": 4.611530584952561e-06,
+    "biometrics": 0.05136822909116745,
+    "pathology": 0.06398559361696243
+  },
+  "CEDIA_nrmse": {
+    "quality": 4.611530584952561e-06,
+    "biometrics": 0.05136825516819954,
+    "pathology": 0.06398560851812363
+  },
+  "tolerance": 2e-05,
+  "passed": true,
+  "interpretation": "Output preservation relative to warm start, not measured clinical pathology accuracy."
+}

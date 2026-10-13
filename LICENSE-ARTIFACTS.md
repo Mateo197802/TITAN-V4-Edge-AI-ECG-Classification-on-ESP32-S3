@@ -10,6 +10,8 @@ Attribution: Isaac Mateo Gavilanes Chavez, NeuroGuardian TITAN V4 ECG, repositor
 
 The same CC BY 4.0 research-artifact notice covers the project-authored exploratory checkpoint and evidence in `outputs/reviewer_verification/gold_target_gap_2026-10-12/`; this does not replace or relicense upstream data.
 
+It also covers the project-authored initial/selected checkpoints and derived evidence in `outputs/reviewer_verification/loss_anchor_ablation_2026-10-12/`. Its training source remains MIT-licensed, and its input data retain the exact upstream attribution and release terms listed in the linked manifests.
+
 The evaluation labels and predictions are derived from the PhysioNet/Computing in Cardiology Challenge 2021 v1.0.3 release (DOI `10.13026/34va-7q14`); users must also retain upstream attribution and comply with the source release terms. This notice does not license or redistribute the source ECG recordings, third-party software, or third-party model assets. No source ECG waveforms are included in this repository.
 
 The grant applies only to rights held by the project authors. It does not grant rights held by another author, institution, dataset provider, or model provider. See [LICENSE_SCOPE.md](LICENSE_SCOPE.md) and [DATA_PROVENANCE.md](DATA_PROVENANCE.md).

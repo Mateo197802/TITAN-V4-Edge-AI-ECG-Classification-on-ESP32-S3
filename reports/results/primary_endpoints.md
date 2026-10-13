@@ -47,6 +47,12 @@ A separate CEDIA run warm-started from the phase-2 checkpoint and updated only t
 
 The [CEDIA refinement evidence bundle](../../outputs/reviewer_verification/partial_backbone_refinement_2026-10-12/README.md) contains the candidate checkpoint, per-record probabilities, confusion matrices, class recalls, record manifests, training configuration, execution logs, and hashes. `python scripts/verify_partial_backbone_evidence.py` verifies the bundle and recalculates metrics; `python scripts/run_refinement_inference.py` repeats inference from pinned public signals. Portable CPU inference reproduced all 2,171 CEDIA Top-1 predictions, and the training-input preparer rebuilt all three NPZ inputs byte-identically. Ten complementary weight mixtures were evaluated in validation without replacing the base candidate. This experiment is distinct from, and does not reproduce, the historical 605/672 aggregate.
 
+### Training-loss ablation
+
+CEDIA job 29344 selected a strict warm-start update of the two final residual blocks and rhythm head using validation only. It retained 1,143,751 parameters and the original six-lead 125 Hz input. Validation increased from 1,185/1,476 (80.28% accuracy; 78.93% macro-F1) to 1,218/1,476 (82.52%; 81.03%). The fixed follow-up comparisons increased from 1,712/2,171 to 1,765/2,171, adding 53 correct predictions. All six cohort scores improved relative to the preceding candidate.
+
+On the separate historical Challenge cohort, original-reference correct predictions increased from 479 to 493, while final-reference correct predictions decreased from 576 to 571. This does not achieve or recreate the reported historical 605/672 result. The [loss-ablation runbook](../../outputs/reviewer_verification/loss_anchor_ablation_2026-10-12/README.md) includes both scores, full per-record outputs, all candidate validation arrays, the selected/initial PTHs, bitwise refit evidence and portable signal replay. The prior candidate and Gold remain unchanged.
+
 ## Dataset and artifact citation
 
 For the 672-record arrhythmia evaluation, cite PhysioNet/Computing in Cardiology Challenge 2021 v1.0.3, DOI `10.13026/34va-7q14`. For the separate CEDIA pathology evaluation, cite PTB-XL v1.0.3. Complete bibliographic entries and license scope are in [REFERENCES.md](../../REFERENCES.md) and [LICENSE-ARTIFACTS.md](../../LICENSE-ARTIFACTS.md).

@@ -126,6 +126,18 @@ python scripts/prepare_refinement_training_inputs.py --output-dir data/cache/ref
 
 The inference runner downloads pinned records and checks source/header/tensor hashes. The preparer reconstructs frozen arrays for a CEDIA GPU refit; no labels are adjusted to match predictions. The [bundle runbook](outputs/reviewer_verification/partial_backbone_refinement_2026-10-12/README.md) explains environments, outputs, class results and the ten validation-only weight-interpolation comparisons. Its `posthoc672` is a new PTB-XL cohort, not the historical Challenge cohort. This bundle does not make the original Gold training lineage reproducible.
 
+## Training-Loss Ablation Replay
+
+The separate [loss-ablation bundle](outputs/reviewer_verification/loss_anchor_ablation_2026-10-12/README.md) records CEDIA job 29344, six predeclared trials, the validation selector, bitwise selected-model refit and unchanged signal/parameter contracts. Its selected PTH improves the current six follow-up comparisons but not the historical final-reference result. Both reference versions and both research models remain available.
+
+```bash
+python scripts/verify_loss_ablation_evidence.py
+python scripts/prepare_loss_ablation_training_inputs.py --output-dir data/cache/loss_ablation_training_inputs
+python scripts/run_refinement_inference.py --checkpoint outputs/reviewer_verification/loss_anchor_ablation_2026-10-12/model/selected.pth --expected-predictions outputs/reviewer_verification/loss_anchor_ablation_2026-10-12/results/followup_predictions.csv --prediction-column phase5_prediction --output data/cache/loss_ablation_reproduced
+```
+
+The preparer rebuilt all three original CEDIA NPZ inputs byte-identically. The inference replay matched all 2,171 CEDIA predictions from original public signals on CPU. See the bundle for the measured GPU training runtime, CEDIA submission command, source-file hashes and per-reference historical diagnostics; these are research follow-up runs, not a new independent clinical test.
+
 ## Artifact Inventory
 
 `outputs/reproduced/primary9/` contains:
