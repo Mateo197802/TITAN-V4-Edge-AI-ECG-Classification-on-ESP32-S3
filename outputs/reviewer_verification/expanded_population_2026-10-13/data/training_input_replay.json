@@ -1,0 +1,24 @@
+{
+  "source_records_rebuilt": 16011,
+  "prior_3083_tensors_targets_masks_preserved": true,
+  "all_rebuilt_files_bitwise_identical": true,
+  "checks": {
+    "path_extra.npz": {
+      "first_sha256": "6ea66c77efd95602eb06ef95c815036a17628a80d967ec45773060f6be19bde5",
+      "rebuilt_sha256": "6ea66c77efd95602eb06ef95c815036a17628a80d967ec45773060f6be19bde5"
+    },
+    "path_validation.npz": {
+      "first_sha256": "2f2ee2e93508a3a3688ee8b0d38f05d84922a35a97409d11d8d1c0a5cf39f1e5",
+      "rebuilt_sha256": "2f2ee2e93508a3a3688ee8b0d38f05d84922a35a97409d11d8d1c0a5cf39f1e5"
+    },
+    "path_extra_records.csv": {
+      "first_sha256": "b3dbf56562ce88e7940ba2cb4cc808ecf750a06cebe478b6612101b84f482c11",
+      "rebuilt_sha256": "b3dbf56562ce88e7940ba2cb4cc808ecf750a06cebe478b6612101b84f482c11"
+    },
+    "path_validation_records.csv": {
+      "first_sha256": "b9b1db142fea0b6e990d7b3f6d11840691a3f6d23a97d04131a3cc7a370a804a",
+      "rebuilt_sha256": "b9b1db142fea0b6e990d7b3f6d11840691a3f6d23a97d04131a3cc7a370a804a"
+    }
+  },
+  "original_path_targets_regenerated_sha256": "56abbd8058c306227e2b033745b40f81764358c3e51a7cb5b1abf67c6eef6912"
+}

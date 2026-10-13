@@ -53,6 +53,10 @@ CEDIA job 29344 selected a strict warm-start update of the two final residual bl
 
 On the separate historical Challenge cohort, original-reference correct predictions increased from 479 to 493, while final-reference correct predictions decreased from 576 to 571. This does not achieve or recreate the reported historical 605/672 result. The [loss-ablation runbook](../../outputs/reviewer_verification/loss_anchor_ablation_2026-10-12/README.md) includes both scores, full per-record outputs, all candidate validation arrays, the selected/initial PTHs, bitwise refit evidence and portable signal replay. The prior candidate and Gold remain unchanged.
 
+## Expanded Native-Population Continuation
+
+The [2026-10-13 expanded-population study](../../outputs/reviewer_verification/expanded_population_2026-10-13/README.md), CEDIA job 29418, preserves all original model dimensions and reference labels. Its rhythm-selected checkpoint scores 1,801/2,171 (82.96% accuracy, 82.41% macro-F1) in follow-up. Its distinct joint-selected checkpoint scores 1,797/2,171 (82.77%, 82.23%) and 94.56% mean label accuracy / 48.40% pathology macro-F1 on 1,022 native ECGs. The equally recalibrated control scores 46.45% pathology macro-F1; the prior 386-case-calibration score was 45.39%. Neither candidate is promoted over Gold or represented as a reproduction of the original historical aggregates. Original signals reproduce all final decisions, and the bundle contains the exact PTHs, expanded population, candidate validations, scripts, logs, both 672-reference comparisons and hashes.
+
 ## Dataset and artifact citation
 
 For the 672-record arrhythmia evaluation, cite PhysioNet/Computing in Cardiology Challenge 2021 v1.0.3, DOI `10.13026/34va-7q14`. For the separate CEDIA pathology evaluation, cite PTB-XL v1.0.3. Complete bibliographic entries and license scope are in [REFERENCES.md](../../REFERENCES.md) and [LICENSE-ARTIFACTS.md](../../LICENSE-ARTIFACTS.md).

@@ -56,6 +56,13 @@ python scripts/run_refinement_inference.py
 
 ## Evidence Boundaries
 
+The [expanded-population continuation](outputs/reviewer_verification/expanded_population_2026-10-13/README.md), CEDIA job 29418, adds 10,901 native Primary-5-negative training records and expands pathology calibration to 2,027 patient-disjoint fold-9 ECGs. It keeps the original architecture, six leads, 125 Hz and all comparison references. The rhythm-selected PTH reaches **82.96% accuracy / 82.41% macro-F1** on the fixed 2,171-case follow-up (one net additional correct case). The separate joint-selected PTH reaches **94.56% mean label accuracy / 48.40% pathology macro-F1**, versus 93.87% / 46.45% for the equally recalibrated frozen control; its rhythm accuracy is 82.77%. These are different real checkpoints, not combined best-head metrics. Both candidates and all earlier models are retained; the experiment does not achieve 90% / 87% or replace Gold.
+
+```bash
+python scripts/verify_expanded_evidence.py --bundle outputs/reviewer_verification/expanded_population_2026-10-13
+python scripts/run_joint_inference.py --bundle outputs/reviewer_verification/expanded_population_2026-10-13 --output data/cache/expanded_joint_reproduced
+```
+
 The [compatible-head checkpoint](outputs/reviewer_verification/compatible_heads_2026-10-13/README.md) is an actual single PTH reconstructed and evaluated in CEDIA job 29407 after twelve continued-fit controls in jobs 29368 and 29384. It preserves 1,143,751 parameters, four heads, six frontal leads and 125 Hz. Its fixed 2,171-record rhythm follow-up reaches **1,800/2,171, 82.91% accuracy / 82.10% macro-F1**, adding 16 correct predictions to phase6. Primary-5 follow-up instead declines to **93.13% mean label accuracy / 45.39% macro-F1**, versus phase6 94.44% / 48.51%. It is not promoted as an improvement of both tasks, and Gold/reference models remain unchanged. All rejected validation candidates, actual model predictions and source/protocol hashes are preserved.
 
 ```bash

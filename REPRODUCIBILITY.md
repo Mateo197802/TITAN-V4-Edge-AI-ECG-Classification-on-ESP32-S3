@@ -156,6 +156,16 @@ Training reconstruction commands and the exact GPU stack are provided in the bun
 
 ## Artifact Inventory
 
+The [expanded native-population study](outputs/reviewer_verification/expanded_population_2026-10-13/README.md) preserves the original network and comparison references, but separately calibrates pathology on all 2,027 eligible native fold-9 ECGs. Its own verifier understands the separate rhythm/pathology validation populations; the older joint verifier deliberately retains its 386-case/3,083-addition contract.
+
+```bash
+python scripts/verify_expanded_evidence.py --bundle outputs/reviewer_verification/expanded_population_2026-10-13
+python scripts/run_joint_inference.py --bundle outputs/reviewer_verification/expanded_population_2026-10-13 --output data/cache/expanded_joint_replay
+python scripts/replay_expanded_validation.py --bundle outputs/reviewer_verification/expanded_population_2026-10-13 --output data/cache/expanded_validation_replay
+```
+
+The study includes every candidate checkpoint required for validation replay, source-derived manifests and labels, both final models and full 2,171-case follow-up CSVs. Its runbook gives the expanded-input rebuild and CEDIA fitting procedure, source hashes and both 672-case historical-reference runs. The separate control isolates recalibration from fitting; selecting the best follow-up pathology value or mixing two checkpoints' endpoints is not permitted.
+
 The 2026-10-13 continuation provides three additional sealed experiments:
 [balanced joint fitting](outputs/reviewer_verification/balanced_joint_2026-10-13/README.md),
 [sequential head fitting](outputs/reviewer_verification/sequential_heads_2026-10-13/README.md),
