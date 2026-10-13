@@ -138,6 +138,22 @@ python scripts/run_refinement_inference.py --checkpoint outputs/reviewer_verific
 
 The preparer rebuilt all three original CEDIA NPZ inputs byte-identically. The inference replay matched all 2,171 CEDIA predictions from original public signals on CPU. See the bundle for the measured GPU training runtime, CEDIA submission command, source-file hashes and per-reference historical diagnostics; these are research follow-up runs, not a new independent clinical test.
 
+## Joint Rhythm/Pathology Replay
+
+The [joint fine-tuning runbook](outputs/reviewer_verification/joint_refinement_2026-10-12/README.md) describes corrected job 29350, the 3,083-record training-only expansion, six predeclared comparisons, thirty validation checkpoints and both selection objectives, which returned the same learned state. The complete official rhythm taxonomy masks unsupported statements, including statements absent from the project mapping. Both PTHs preserve the original architecture and were refitted deterministically on CEDIA. No comparison records or reference labels were replaced.
+
+```bash
+python scripts/verify_joint_evidence.py
+python scripts/verify_joint_sources.py
+python scripts/run_joint_inference.py --output data/cache/joint_reproduced
+python scripts/run_joint_inference.py --model rhythm_selected --output data/cache/joint_rhythm_reproduced
+python scripts/run_joint_historical.py --model rhythm_selected --output data/cache/joint_history_reproduced
+```
+
+The source verifier checks the target vectors, SCP codes, complete expansion selection, all 6,166 additional official file hashes and patient exclusions against pinned upstream metadata. The signal replay checks both task outputs from the same checkpoint. Pathology thresholds are fitted only on the 386 PTB-XL validation records, then frozen for the 1,022 PTB-XL follow-up records. Pathology mean binary accuracy and macro-F1 must not be conflated with each other or with nine-class rhythm accuracy. The historical scorer infers on all 672 source signals and computes both unchanged reference versions; it does not reconstruct the unavailable original Gold run.
+
+Training reconstruction commands and the exact GPU stack are provided in the bundle. Original teacher sidecars and the upstream initialization's lineage remain distinct from the fully recorded new fine-tuning run. Published quality/biometric preservation values are output consistency checks, not clinical-performance reports.
+
 ## Artifact Inventory
 
 `outputs/reproduced/primary9/` contains:

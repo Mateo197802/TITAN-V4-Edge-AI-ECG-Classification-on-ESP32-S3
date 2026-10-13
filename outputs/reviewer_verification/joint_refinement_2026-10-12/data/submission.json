@@ -1,0 +1,7 @@
+{
+  "exit_code": 0,
+  "stdout": "29350\n",
+  "stderr": "",
+  "input_manifest_sha256": "0914ace7c34d9312eb579865d6a2b30f1f2bead99b5f6f8c9fb4277d8985fbb7",
+  "remote_run": "V4_CEDIA/99_RESEARCH_RUNS/TITAN-V4-Joint-Taxonomy-Corrected-2026-10-13"
+}

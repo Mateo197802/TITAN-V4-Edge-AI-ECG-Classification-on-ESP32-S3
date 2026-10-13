@@ -56,6 +56,13 @@ python scripts/run_refinement_inference.py
 
 ## Evidence Boundaries
 
+The [joint rhythm/pathology experiment](outputs/reviewer_verification/joint_refinement_2026-10-12/README.md) completed its corrected CEDIA run, job 29350, on 2026-10-13. It added 3,083 training-only PTB-XL records and compared six fine-tuning strategies, without resetting the network, changing comparison references, or changing the original 1,143,751 parameters, four heads, six leads and 125 Hz input. Full official rhythm-taxonomy checks corrected 56 ambiguous additional training targets before this rerun. Both validation objectives selected the same learned state: **84.28% accuracy / 83.37% macro-F1 in validation**, **82.17% / 81.53% on the 2,171 fixed follow-up records**, and **94.44% mean per-label accuracy / 48.51% macro-F1 for Primary-5 on 1,022 PTB-XL records**. This does not achieve the overall rhythm 90% / approximately 87% target or improve the historical final-reference score; no result is promoted over Gold.
+
+```bash
+python scripts/verify_joint_evidence.py
+python scripts/run_joint_inference.py --model rhythm_selected --output data/cache/joint_rhythm_reproduced
+```
+
 The [CEDIA training-loss ablation](outputs/reviewer_verification/loss_anchor_ablation_2026-10-12/README.md) executed six trials on the same original architecture. Its validation-selected candidate reached 82.52% accuracy / 81.03% macro-F1 and added 53 correct predictions across the fixed 2,171-record follow-up. Against historical final references it scored 571/672, versus the prior candidate's 576/672; both PTHs are preserved. The bundle includes training/refit evidence, all candidate validation probabilities, public-signal replay commands and both historical reference scores.
 
 The separate [historical-cohort target-gap audit](outputs/reviewer_verification/gold_target_gap_2026-10-12/README.md) reevaluates the research candidate on the actual 672 Challenge records: 576/672 (85.71% accuracy, 83.81% macro-F1) against the archived final references. It also identifies an exact CE/KL objective conflict in 1,007 training records and documents the unrun ablation needed to test its effect. This is not a reproduction of the historical 605/672 prediction run.
