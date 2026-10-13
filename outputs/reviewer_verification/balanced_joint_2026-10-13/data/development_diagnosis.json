@@ -1,0 +1,9 @@
+{
+  "pathology_train_records": 5512,
+  "primary5_positive_train": 3539,
+  "primary5_negative_train": 1973,
+  "validation_records": 386,
+  "primary5_positive_validation": 93,
+  "diagnosis_data": "train and validation only, no follow-up decisions used",
+  "warm_start_sha256": "fd8a5d6ca95b7875e53305ef0fdc3962f2aa4d493fa16630befc7a75e1cb2249"
+}

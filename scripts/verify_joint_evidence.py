@@ -16,6 +16,8 @@ from train_joint import prefixes,protected_recalls
 from titan_v4.reproducibility.refinement import read_manifest,sha256
 from titan_v4.reproducibility.joint_refinement import PATHOLOGY_CLASSES,pathology_targets,calibrate_thresholds,pathology_metrics,unambiguous_rhythm_target
 from titan_v4.data.label_registry import SCP_TO_RHYTHM
+from titan_v4.reproducibility.balanced_refinement import select_candidates
+from titan_v4.reproducibility.head_composition import compose_head_states
 
 
 def key(r):return r.get('cohort',''),r['dataset'],r['ecg_id']
@@ -33,7 +35,9 @@ def recalc_validation(npz):
 
 
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--write',action='store_true');args=parser.parse_args()
+    global BUNDLE
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--write',action='store_true')
+    parser.add_argument('--bundle',type=Path,default=BUNDLE);args=parser.parse_args();BUNDLE=args.bundle
     torch.set_num_threads(2)
     protocol=json.loads((BUNDLE/'training/protocol.json').read_text())
     selection=json.loads((BUNDLE/'results/selection.json').read_text())
@@ -72,6 +76,11 @@ def main():
     if preparation['expansion']['overlapping_historical_patients']!=0 or preparation['expansion']['historical_aliases_matched']!=378:
         raise ValueError('Historical patient exclusion not established')
     base_npz=dict(np.load(BUNDLE/'results/baseline_validation.npz',allow_pickle=False));base=recalc_validation(base_npz)
+    for i,(dataset,rid) in enumerate(zip(base_npz['dataset'],base_npz['ecg_id'])):
+        reference=lookup[('validation','',str(dataset),str(rid))]
+        y,mask=pathology_targets(str(dataset),json.loads(reference['source_scp_codes']))
+        if not np.array_equal(base_npz['path_targets'][i],y) or not np.array_equal(base_npz['path_mask'][i],mask):
+            raise ValueError('Validation pathology reference differs from source-derived rows')
     for name,value in base.items():
         if selection['baseline'][name]!=value:raise ValueError('Baseline validation metrics differ')
     original=np.load(ROOT/'outputs/reviewer_verification/partial_backbone_refinement_2026-10-12/training/phase2_reference/validation_features.npz',allow_pickle=False)
@@ -104,14 +113,56 @@ def main():
     rhythm=[r for r in eligible if r['rhythm_score']>base['rhythm_score']+.002]
     expected={'joint_selected':max(joint,key=lambda r:(r['joint_score'],r['name'])) if joint else None,
               'rhythm_selected':max(rhythm,key=lambda r:(r['rhythm_score'],r['name'])) if rhythm else None}
+    if protocol['experiment'] in ('phase7_balanced_joint_continuation','phase8_sequential_head_repair','phase9_compatible_head_composition'):
+        declared={t['name']+f'_e{epoch:02d}':(t,epoch) for t in protocol['optimization']['trials'] for epoch in protocol['optimization']['checkpoints']}
+        if len(candidates)!=len(declared) or {r['name'] for r in candidates}!=set(declared):
+            raise ValueError('Predeclared candidate coverage differs')
+        if any((r['trial'],r['epoch'])!=declared[r['name']] for r in candidates):raise ValueError('Trial source or selected epoch differs')
+        reuse=json.loads((BUNDLE/'data/input_reuse.json').read_text())
+        submitted=json.loads(input_manifest.read_text())
+        if any(submitted[k]!=h for k,h in reuse['unchanged_inputs'].items()):raise ValueError('Frozen training or comparison input changed')
+        if any(sha256(BUNDLE/'data'/k)!=h for k,h in reuse['unchanged_published_data'].items()):raise ValueError('Reused reference rows changed')
+        expected=select_candidates(candidates,base,role='validation')
     if any(selection[name]!=value for name,value in expected.items()):raise ValueError('Validation-only selection differs')
     refit=json.loads((BUNDLE/'results/refit.json').read_text());start=c.load_model(BUNDLE/'training/start.pth');initial=start.state_dict()
+    reference=None
+    if protocol['experiment'] in ('phase8_sequential_head_repair','phase9_compatible_head_composition'):
+        if sha256(BUNDLE/'training/reference.pth')!=protocol['reference_sha256']:raise ValueError('Phase6 reference differs')
+        reference=c.load_model(BUNDLE/'training/reference.pth').state_dict()
+    if protocol['experiment']=='phase8_sequential_head_repair':
+        upstream=ROOT/'outputs/reviewer_verification/balanced_joint_2026-10-13/results'
+        upstream_selection=json.loads((upstream/'selection.json').read_text())
+        initialization=json.loads((BUNDLE/'data/initialization.json').read_text())
+        expected_start=max(upstream_selection['candidates'],key=lambda r:r['metrics']['macro_f1'])
+        declared_hash=json.loads((upstream/'SHA256SUMS.json').read_text())[expected_start['name']+'.pth']
+        if initialization['candidate']!=expected_start or declared_hash!=protocol['start_sha256'] or initialization['followup_scores_used_for_initialization']:
+            raise ValueError('Initialization differs from validation-only upstream choice')
+    composite_state=None
+    if protocol['experiment']=='phase9_compatible_head_composition':
+        parent=ROOT/'outputs/reviewer_verification/sequential_heads_2026-10-13/results'
+        upstream=json.loads((parent/'selection.json').read_text())
+        if json.loads((BUNDLE/'training/source_selection.json').read_text())!=upstream:raise ValueError('Head-source selection was altered')
+        r=max((v for v in upstream['candidates'] if v['eligible']),key=lambda v:(v['rhythm_score'],v['name']))
+        p=max(upstream['candidates'],key=lambda v:(v['pathology']['primary5_macro_f1'],v['name']))
+        inventory=json.loads((parent/'SHA256SUMS.json').read_text())
+        if inventory[r['name']+'.pth']!=protocol['start_sha256'] or inventory[p['name']+'.pth']!=protocol['path_source_sha256']:
+            raise ValueError('Chosen heads differ from recorded validation selection')
+        if sha256(BUNDLE/'training/path_source.pth')!=protocol['path_source_sha256']:raise ValueError('Pathology-source checkpoint changed')
+        composite_state=compose_head_states(initial,c.load_model(BUNDLE/'training/path_source.pth').state_dict())
     delta={}
     for name,record in expected.items():
         model=c.load_model(BUNDLE/'model'/(name+'.pth'))
         if sha256(BUNDLE/'model'/(name+'.pth'))!=selection['checkpoints'][name]:raise ValueError('Checkpoint differs')
         state=model.state_dict();allowed=prefixes(record['trial']['blocks'],record['trial']['path_train']) if record else ()
-        parameters=dict(model.named_parameters());changed=[k for k in initial if not torch.equal(initial[k],state[k])]
+        origin=initial
+        if protocol['experiment'] in ('phase8_sequential_head_repair','phase9_compatible_head_composition'):
+            if record:
+                allowed=('head_pathology.',)+(('head_rhythm.',) if record['trial']['rhythm_head_train'] else ())
+            else:origin=reference
+        if protocol['experiment']=='phase9_compatible_head_composition' and record:
+            if any(not torch.equal(state[k],composite_state[k]) for k in state):raise ValueError('Published PTH is not the reconstructed single model')
+        parameters=dict(model.named_parameters())
+        changed=[k for k in origin if not torch.equal(origin[k],state[k])]
         if set(initial)!=set(state) or any(k not in parameters or not k.startswith(allowed) or state[k].shape!=initial[k].shape for k in changed):
             raise ValueError('Frozen parameter, buffer, or architecture changed')
         if record and not refit[name].get('all_state_tensors_bitwise_equal'):raise ValueError('Refit not verified')

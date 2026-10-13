@@ -10,7 +10,8 @@ import tarfile
 
 ROOT=Path(__file__).resolve().parents[1]
 TRAINING=ROOT/'outputs/reviewer_verification/joint_refinement_2026-10-12/training'
-SSH=['ssh','-o','BatchMode=yes','-o','StrictHostKeyChecking=yes','-o','ConnectTimeout=8','cedia-kevin']
+SSH=['ssh','-o','BatchMode=yes','-o','StrictHostKeyChecking=yes','-o','ConnectTimeout=8',
+     '-o','ServerAliveInterval=30','-o','ServerAliveCountMax=3','cedia-kevin']
 
 
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -28,6 +29,8 @@ def main():
     parser.add_argument('--state-dir',type=Path,default=ROOT/'data/cache/joint_cedia_state')
     parser.add_argument('--path-inputs',type=Path)
     parser.add_argument('--raw-inputs',type=Path)
+    parser.add_argument('--training-dir',type=Path,default=TRAINING)
+    parser.add_argument('--reuse-remote-path-inputs',action='store_true',help='Copy exact pathology NPZs from source run and verify local hashes')
     parser.add_argument('--source-run',default='TITAN-V4-Same-Architecture-Partial-Backbone-2026-10-12')
     parser.add_argument('--run-name',default='TITAN-V4-Joint-Refinement-2026-10-12')
     args=parser.parse_args();args.state_dir.mkdir(parents=True,exist_ok=True)
@@ -36,14 +39,17 @@ def main():
         if state_file.exists():raise FileExistsError('Run already submitted')
         if args.path_inputs is None or args.raw_inputs is None:parser.error('submit requires both input directories')
         if Path(args.run_name).name!=args.run_name or Path(args.source_run).name!=args.source_run:parser.error('Run names must be simple directory names')
-        files={p.name:p for p in sorted(TRAINING.iterdir()) if p.is_file() and p.suffix!='.pyc' and p.name!='INPUT_SHA256.json'}
+        files={p.name:p for p in sorted(args.training_dir.iterdir()) if p.is_file() and p.suffix!='.pyc' and p.name!='INPUT_SHA256.json'}
         files.update({n:args.path_inputs/n for n in ['path_targets.npz','path_extra.npz']})
         manifest={n:sha(p) for n,p in files.items()}
         manifest.update({n:sha(args.raw_inputs/n) for n in ['train.npz','validation.npz','evaluation.npz']})
         buffer=io.BytesIO()
         with tarfile.open(fileobj=buffer,mode='w:gz') as archive:
-            for name,path in files.items():archive.add(path,arcname=name,recursive=False)
+            for name,path in files.items():
+                if args.reuse_remote_path_inputs and name in ('path_targets.npz','path_extra.npz'):continue
+                archive.add(path,arcname=name,recursive=False)
             raw=(json.dumps(manifest,indent=2)+'\n').encode();info=tarfile.TarInfo('INPUT_SHA256.json');info.size=len(raw);archive.addfile(info,io.BytesIO(raw))
+        copy_names=('train.npz','validation.npz','evaluation.npz')+(('path_targets.npz','path_extra.npz') if args.reuse_remote_path_inputs else ())
         script=f'''
 import hashlib,io,json,pathlib,shutil,subprocess,sys,tarfile
 project=(pathlib.Path.home()/'V4_CEDIA_LINK').resolve(strict=True)
@@ -57,7 +63,7 @@ with tarfile.open(fileobj=io.BytesIO(sys.stdin.buffer.read()),mode='r:gz') as ar
  for member in archive.getmembers():
   if not member.isfile() or pathlib.PurePosixPath(member.name).name!=member.name:raise ValueError('Unsafe archive member')
   (root/member.name).write_bytes(archive.extractfile(member).read())
-for name in ('train.npz','validation.npz','evaluation.npz'):shutil.copy2(source/name,root/name)
+for name in {copy_names!r}:shutil.copy2(source/name,root/name)
 manifest=json.loads((root/'INPUT_SHA256.json').read_text())
 for name,h in manifest.items():
  if hashlib.sha256((root/name).read_bytes()).hexdigest()!=h:raise ValueError('Input hash differs: '+name)

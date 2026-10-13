@@ -156,6 +156,17 @@ Training reconstruction commands and the exact GPU stack are provided in the bun
 
 ## Artifact Inventory
 
+The 2026-10-13 continuation provides three additional sealed experiments:
+[balanced joint fitting](outputs/reviewer_verification/balanced_joint_2026-10-13/README.md),
+[sequential head fitting](outputs/reviewer_verification/sequential_heads_2026-10-13/README.md),
+and [actual compatible-head reconstruction](outputs/reviewer_verification/compatible_heads_2026-10-13/README.md).
+The first two retain the phase6 fallback after validation rejection. The third
+is a real single checkpoint whose shared tensors match bytewise, not a merger
+of two metric tables. Both tasks are inferred from that same PTH. Its rhythm
+follow-up improves while pathology declines; neither target achievement nor
+joint clinical validity is claimed. Each bundle works with the explicit
+`--bundle` argument of the source, prediction, historical and evidence verifiers.
+
 `outputs/reproduced/primary9/` contains:
 
 - `primary9_record_predictions.csv`: one row per record and one probability per class.

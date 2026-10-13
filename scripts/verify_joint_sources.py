@@ -16,13 +16,15 @@ BUNDLE=ROOT/'outputs/reviewer_verification/joint_refinement_2026-10-12'
 
 
 def main():
+    global BUNDLE
     parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--bundle',type=Path,default=BUNDLE)
     parser.add_argument('--metadata',type=Path,default=ROOT/'data/cache/physionet/ptb-xl/1.0.3/ptbxl_database.csv')
     parser.add_argument('--source-index',type=Path,default=ROOT/'data/cache/refinement_source_indexes/ptb-xl/1.0.3/SHA256SUMS.txt')
     parser.add_argument('--scp-statements',type=Path,default=ROOT/'data/cache/physionet/ptb-xl/1.0.3/scp_statements.csv')
     parser.add_argument('--offline',action='store_true')
     parser.add_argument('--output',type=Path)
-    args=parser.parse_args()
+    args=parser.parse_args();BUNDLE=args.bundle
     receipt=json.loads((BUNDLE/'data/preparation.json').read_text())['expansion']
     base='https://physionet.org/files/ptb-xl/1.0.3/'
     _ensure_file(args.metadata,base+'ptbxl_database.csv',receipt['metadata_sha256'],not args.offline)

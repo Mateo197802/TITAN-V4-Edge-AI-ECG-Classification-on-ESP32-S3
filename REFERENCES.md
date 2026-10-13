@@ -18,6 +18,7 @@ These publication dates are not obsolete citations: the original papers identify
 
 ## Methods and Tooling
 
+- Ridnik T, et al. Asymmetric Loss for Multi-Label Classification. *ICCV*. 2021. [doi:10.1109/ICCV48922.2021.00015](https://doi.org/10.1109/ICCV48922.2021.00015), [primary paper](https://openaccess.thecvf.com/content/ICCV2021/papers/Ridnik_Asymmetric_Loss_for_Multi-Label_Classification_ICCV_2021_paper.pdf). The balanced joint experiment adapts its multi-label loss with explicit source masks, stable log-space arithmetic and weighted-mean reduction; the original image benchmarks are not evidence of TITAN ECG performance.
 - PhysioNet/CinC Challenge 2021 official evaluation code and scoring files: [evaluation-2021](https://github.com/physionetchallenges/evaluation-2021). Challenge recordings may have one or more labels; its official weighted score is not ordinary single-label accuracy.
 - SciPy `resample_poly`: [API documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.resample_poly.html).
 - WFDB Python package: [documentation](https://wfdb.readthedocs.io/).

@@ -56,6 +56,13 @@ python scripts/run_refinement_inference.py
 
 ## Evidence Boundaries
 
+The [compatible-head checkpoint](outputs/reviewer_verification/compatible_heads_2026-10-13/README.md) is an actual single PTH reconstructed and evaluated in CEDIA job 29407 after twelve continued-fit controls in jobs 29368 and 29384. It preserves 1,143,751 parameters, four heads, six frontal leads and 125 Hz. Its fixed 2,171-record rhythm follow-up reaches **1,800/2,171, 82.91% accuracy / 82.10% macro-F1**, adding 16 correct predictions to phase6. Primary-5 follow-up instead declines to **93.13% mean label accuracy / 45.39% macro-F1**, versus phase6 94.44% / 48.51%. It is not promoted as an improvement of both tasks, and Gold/reference models remain unchanged. All rejected validation candidates, actual model predictions and source/protocol hashes are preserved.
+
+```bash
+python scripts/verify_joint_evidence.py --bundle outputs/reviewer_verification/compatible_heads_2026-10-13
+python scripts/run_joint_inference.py --bundle outputs/reviewer_verification/compatible_heads_2026-10-13 --output data/cache/compatible_joint_reproduced
+```
+
 The [joint rhythm/pathology experiment](outputs/reviewer_verification/joint_refinement_2026-10-12/README.md) completed its corrected CEDIA run, job 29350, on 2026-10-13. It added 3,083 training-only PTB-XL records and compared six fine-tuning strategies, without resetting the network, changing comparison references, or changing the original 1,143,751 parameters, four heads, six leads and 125 Hz input. Full official rhythm-taxonomy checks corrected 56 ambiguous additional training targets before this rerun. Both validation objectives selected the same learned state: **84.28% accuracy / 83.37% macro-F1 in validation**, **82.17% / 81.53% on the 2,171 fixed follow-up records**, and **94.44% mean per-label accuracy / 48.51% macro-F1 for Primary-5 on 1,022 PTB-XL records**. This does not achieve the overall rhythm 90% / approximately 87% target or improve the historical final-reference score; no result is promoted over Gold.
 
 ```bash

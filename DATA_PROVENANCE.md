@@ -42,6 +42,16 @@ No source ECG waveforms are included. Obtain them from their versioned PhysioNet
 
 ## Attribution and Redistribution
 
+The 2026-10-13 balanced, sequential-head and compatible-head experiments
+reuse the exact phase6 raw/pathology tensors and reference tables. No new
+training patient or evaluation record is added, no reference vector changes,
+and no signals are synthesized or replaced. The additional checkpoint sources
+in the compatible reconstruction are the two phase8 trained heads with identical
+shared body/buffer/auxiliary tensors. Their source hashes and validation-only
+selection rule are recorded before the composed checkpoint's evaluation.
+These new experiments preserve the earlier source release and initialization
+provenance boundaries rather than treating a new run as proof of old lineage.
+
 The joint 2026-10-13 fine-tuning run extends the same development data with 3,083 native PTB-XL v1.0.3 records. All additional records belong to folds 1-8 and have at least one Primary-5 SCP statement; the complete eligible set is published, not a selection based on model errors. Native validation, follow-up and historical-cohort patients are excluded, with historical duplicate alias `141` resolved to retained record `2509` using the official release change log. The full official rhythm taxonomy is checked: 2,510 added records have an unambiguous supported rhythm statement; 573 have no single supported rhythm reference and are masked. This corrects 56 training targets from a superseded run that had ignored unsupported rhythm statements absent from the project mapping. Original comparison targets and signals are unchanged. All additional records have observed pathology targets. Other source families have unknown pathology targets, which are masked rather than converted into negative labels.
 
 The [joint bundle](outputs/reviewer_verification/joint_refinement_2026-10-12/README.md) provides source paths, official header/waveform hashes, source SCP codes, target derivations, patient tokens and independent metadata/source-index verification. These patient tokens are deterministic hashes of public PTB-XL pseudonymous IDs, not named clinical identities. They establish split checks for this new fine-tuning run; they do not reconstruct the initialization checkpoint's earlier training lineage or establish a new clinical reference review.

@@ -44,3 +44,6 @@ outputs/reproduced/primary9/** -text
 outputs/reviewer_verification/gold_target_gap_2026-10-12/** -text
 outputs/reviewer_verification/loss_anchor_ablation_2026-10-12/** -text
 outputs/reviewer_verification/joint_refinement_2026-10-12/** -text
+outputs/reviewer_verification/balanced_joint_2026-10-13/** -text
+outputs/reviewer_verification/sequential_heads_2026-10-13/** -text
+outputs/reviewer_verification/compatible_heads_2026-10-13/** -text

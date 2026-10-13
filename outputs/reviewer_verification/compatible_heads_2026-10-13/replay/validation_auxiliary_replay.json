@@ -1,0 +1,26 @@
+{
+  "records": 1476,
+  "candidates": 1,
+  "verified_original_source_tensors": 1476,
+  "checks": [
+    {
+      "candidate": "compatible_heads_e00",
+      "checkpoint_sha256": "ad7322bbfa7d44376c8ae8a3ccfb232669eda5918159230f788040d7b7f88738",
+      "max_probability_difference": 1.6689300537109375e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    }
+  ],
+  "all_passed": true,
+  "tolerance": 2e-05,
+  "environment": {
+    "python": "3.12.10",
+    "torch": "2.12.1+cpu",
+    "numpy": "2.4.6",
+    "device": "cpu"
+  }
+}

@@ -21,13 +21,15 @@ BUNDLE=ROOT/'outputs/reviewer_verification/joint_refinement_2026-10-12'
 
 
 def main():
+    global BUNDLE
     parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--bundle',type=Path,default=BUNDLE)
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--data-root',type=Path,default=ROOT/'data/cache/physionet')
     parser.add_argument('--model',choices=['joint_selected','rhythm_selected'],default='joint_selected')
     parser.add_argument('--offline',action='store_true')
     parser.add_argument('--workers',type=int,default=4)
-    args=parser.parse_args()
+    args=parser.parse_args();BUNDLE=args.bundle
     if args.output.exists():raise FileExistsError('Use a new output directory')
     if args.workers<1:parser.error('workers must be positive')
     manifest=ROOT/'outputs/reviewer_verification/partial_backbone_refinement_2026-10-12/manifests/followup_records.csv'

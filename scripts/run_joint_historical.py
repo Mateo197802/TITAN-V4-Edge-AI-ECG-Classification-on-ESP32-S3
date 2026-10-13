@@ -39,11 +39,13 @@ def pair_rows(predictions,history,previous):
 
 
 def main():
+    global BUNDLE
     parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--bundle',type=Path,default=BUNDLE)
     parser.add_argument('--model',choices=['joint_selected','rhythm_selected'],default='rhythm_selected')
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--offline',action='store_true')
-    args=parser.parse_args()
+    args=parser.parse_args();BUNDLE=args.bundle
     if args.output.exists():raise FileExistsError('Use a fresh output directory')
     checkpoint=BUNDLE/'model'/(args.model+'.pth')
     selection=json.loads((BUNDLE/'results/selection.json').read_text())

@@ -26,19 +26,23 @@ def predict(model,x):
 
 
 def main():
+    global BUNDLE
     parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--bundle',type=Path,default=BUNDLE)
     parser.add_argument('--checkpoints-dir',type=Path,required=True)
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--data-root',type=Path,default=ROOT/'data/cache/physionet')
     parser.add_argument('--offline',action='store_true')
-    args=parser.parse_args()
+    args=parser.parse_args();BUNDLE=args.bundle
     if args.output.exists():raise FileExistsError('Use a new output directory')
     selection=json.loads((BUNDLE/'results/selection.json').read_text());inventory=json.loads((BUNDLE/'results/SHA256SUMS.json').read_text())
     manifest=ROOT/'outputs/reviewer_verification/partial_backbone_refinement_2026-10-12/manifests/validation_records.csv'
     rows=read_manifest(manifest)
     with ThreadPoolExecutor(max_workers=4) as pool:x=np.stack(list(pool.map(lambda r:load_tensor(r,args.data_root,download=not args.offline),rows)))
     torch.set_num_threads(2)
-    baseline=predict(load_primary9_model(BUNDLE/'training/start.pth'),x)
+    protocol=json.loads((BUNDLE/'training/protocol.json').read_text())
+    baseline_file='reference.pth' if protocol['experiment'] in ('phase8_sequential_head_repair','phase9_compatible_head_composition') else 'start.pth'
+    baseline=predict(load_primary9_model(BUNDLE/'training'/baseline_file),x)
     qualities=[];bios=[];names=[];checks=[]
     for candidate in selection['candidates']:
         name=candidate['name'];checkpoint=args.checkpoints_dir/(name+'.pth')

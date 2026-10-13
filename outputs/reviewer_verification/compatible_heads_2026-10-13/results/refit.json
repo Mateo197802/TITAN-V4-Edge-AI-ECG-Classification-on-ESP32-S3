@@ -1,0 +1,12 @@
+{
+  "joint_selected": {
+    "needed": false,
+    "operation": "deterministic head reconstruction, not fitting",
+    "all_state_tensors_bitwise_equal": true
+  },
+  "rhythm_selected": {
+    "needed": false,
+    "operation": "deterministic head reconstruction, not fitting",
+    "all_state_tensors_bitwise_equal": true
+  }
+}
