@@ -1,6 +1,11 @@
 # GitHub Linguist configuration.
 #
 # Keep tracked text stable across Windows and Unix checkouts.
+.gitattributes text eol=lf
+.gitignore text eol=lf
+LICENSE text eol=lf
+Makefile text eol=lf
+run text eol=lf
 *.py text eol=lf
 *.json text eol=lf
 *.jsonl text eol=lf
@@ -26,3 +31,13 @@ hardware/esp32/firmware/src/model_data.h linguist-generated=true
 models/gold_master/*.pth linguist-vendored
 hardware/esp32/models/*.tflite linguist-vendored
 hardware/esp32/recordings/** linguist-vendored
+
+# Preserve the byte-level checksums of archived execution inputs and evidence.
+outputs/reviewer_verification/partial_backbone_refinement_2026-10-12/** -text
+outputs/reviewer_verification/partial_backbone_refinement_2026-10-12/**/*.pth linguist-vendored
+
+# These exact source bytes are recorded in the archived inference run manifest.
+src/titan_v4/models/titan_v4_net.py -text
+src/titan_v4/data/primary9_registry.py -text
+src/titan_v4/data/label_registry.py -text
+outputs/reproduced/primary9/** -text

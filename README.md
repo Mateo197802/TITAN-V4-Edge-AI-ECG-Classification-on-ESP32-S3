@@ -45,6 +45,15 @@ The run writes `primary9_record_predictions.csv`, `primary9_recomputed_report.js
 
 The legacy-label comparator writes the current model's 672-row predictions against the rebuilt and prior label tables. The paired-reference script scores the same predictions against the CEDIA original and final reference columns and writes JSON, per-class CSV, and hashes. The Gold evidence verifier recalculates the archived 605/672 result from its saved final-label confusion matrix and validates the target-update audit. The CEDIA report gives only aggregate values for the original-reference result (476/672), without a matrix or row-level predictions. The historical Pathology-5 values remain source-reported; the separate CEDIA PTB-XL score table is recomputable from its per-record probabilities and does not calculate those historical values.
 
+## Same-Architecture Research Update
+
+The [2026-10-12 CEDIA refinement](outputs/reviewer_verification/partial_backbone_refinement_2026-10-12/README.md) preserves the original 1,143,751 parameters, four heads, six leads and 125 Hz input. It includes a separate candidate PTH, 12,040 pinned train/validation/follow-up record entries, frozen teacher sidecars, CEDIA source/logs, all 2,171 follow-up predictions, and a portable signal-to-prediction runner. CPU inference from the original WFDB files reproduced all 2,171 CEDIA predictions. Validation accuracy is 80.28%; follow-up accuracy is 78.86%. This is a new research experiment, not a reproduction of the historical 90.03% result, and Gold is unchanged.
+
+```bash
+python scripts/verify_partial_backbone_evidence.py
+python scripts/run_refinement_inference.py
+```
+
 ## Evidence Boundaries
 
 - The 672-record single-label diagnostic is computationally reproducible from this checkout and the cited public dataset release; it is not an official Challenge metric or an independent external-validation claim.

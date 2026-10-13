@@ -34,6 +34,12 @@ The CEDIA checkpoint split refers to PTB-XL records both as numeric `records100/
 
 The complete split, support counts, output hashes, and limitations are in the [CEDIA pathology evidence package](outputs/reviewer_verification/pathology_primary5/cedia_ptbxl_v1_0_3_20260925/README.md). Cite the exact [PTB-XL v1.0.3 release](https://physionet.org/content/ptb-xl/1.0.3/) and its original dataset paper. The upstream release lists CC BY 4.0; that upstream license and attribution do not resolve rights to the separately trained CEDIA checkpoint.
 
+## Partial-Backbone Refinement Data
+
+The 2026-10-12 CEDIA refinement used 8,393 training, 1,476 validation, and 2,171 previously examined follow-up records. Its minimal manifests record the exact dataset/version/DOI, record path, Primary-9 target, and SHA-256 values for source headers, waveform files, and preprocessed input tensors. Sources are Challenge 2021 v1.0.3 (including its CPSC and Georgia source paths), PTB-XL v1.0.3, and ECG-arrhythmia v1.0.0. The overlap report verifies zero exact record- or patient-ID overlap among train, validation, and follow-up within each source namespace; it does not infer identity links across datasets.
+
+No source ECG waveforms are included. Obtain them from their versioned PhysioNet releases and retain the source attributions and CC BY 4.0 terms. The candidate's predictions and target labels are published as derived evidence under the artifact license; they are not new clinical reference readings. The exact CEDIA execution, candidate checkpoint, manifests, prediction rows, and package hashes are in the [partial-backbone refinement bundle](outputs/reviewer_verification/partial_backbone_refinement_2026-10-12/README.md).
+
 ## Attribution and Redistribution
 
 The evaluation labels and the source-derived validation artifacts are provided under CC BY 4.0 with attribution to the PhysioNet Challenge 2021 versioned release and its cited source papers. See [LICENSE-ARTIFACTS.md](LICENSE-ARTIFACTS.md) and [REFERENCES.md](REFERENCES.md). The upstream dataset retains its own license and attribution requirements. This notice does not relicense any upstream ECG waveform, dataset, publication, or third-party asset.

@@ -1,6 +1,6 @@
 # References and Dataset Attribution
 
-The frozen evaluation records in this repository were resolved to the `training/` files of the PhysioNet/Computing in Cardiology Challenge 2021 release 1.0.3. Cite the exact release and its primary Challenge paper. The original dataset papers below identify the component source families; they are not evidence that the TITAN checkpoint was trained on any particular record or release.
+The historical 672-record evaluation resolves to the `training/` files of the PhysioNet/Computing in Cardiology Challenge 2021 release 1.0.3. The separate 2026-10-12 refinement study uses records listed in its manifests from Challenge 2021 v1.0.3, PTB-XL v1.0.3, and ECG-arrhythmia v1.0.0. The exact per-record versions and hashes are in the refinement evidence bundle. Dataset citations identify sources; they do not imply that records were used by another checkpoint or establish an independent clinical reference review.
 
 ## Data Releases and Primary Dataset Papers
 
@@ -12,6 +12,7 @@ The frozen evaluation records in this repository were resolved to the `training/
 6. China Physiological Signal Challenge 2018. [Official challenge site](http://2018.icbeb.org/Challenge.html). The TITAN evaluation uses the versioned Challenge 2021 training bundle described above; do not substitute a standalone CPSC download when reproducing it.
 7. Pollard T, Moody BE, Lehman L, Gow B, Fernandes C, Xie C, Johnson A, Mark RG, Heldt T. PhysioNet as a global platform for biomedical research. *Nature Health*. 2026;1(8):792-795. [doi:10.1038/s44360-026-00096-z](https://doi.org/10.1038/s44360-026-00096-z). Current recommended general PhysioNet citation.
 8. Wagner P, Strodthoff N, Bousseljot R, Samek W, Schaeffter T. PTB-XL, a large publicly available electrocardiography dataset (version 1.0.3). PhysioNet. 2022. [doi:10.13026/kfzx-aw45](https://doi.org/10.13026/kfzx-aw45), [versioned release page](https://physionet.org/content/ptb-xl/1.0.3/). This is the exact release whose database/SCP metadata checksums match the separate CEDIA pathology evaluation. Cite also the original *Scientific Data* article in reference 2. The PTB-XL source included in Challenge 2021 is separately versioned; do not conflate that training-source lineage with the v1.0.3 evaluation metadata.
+9. Zheng J, Guo H, Chu H. A large scale 12-lead electrocardiogram database for arrhythmia study (version 1.0.0). PhysioNet. 2022. [doi:10.13026/wgex-er52](https://doi.org/10.13026/wgex-er52), [versioned release page](https://physionet.org/content/ecg-arrhythmia/1.0.0/). The release lists CC BY 4.0 for its files. The refinement manifest uses this release for its `ecg-arrhythmia` records.
 
 These publication dates are not obsolete citations: the original papers identify the datasets and methods, while the versioned PhysioNet DOI identifies the exact release downloaded by this workflow. For the manuscript, cite both the original Challenge paper and its exact 1.0.3 release; cite relevant component-dataset papers as appropriate.
 

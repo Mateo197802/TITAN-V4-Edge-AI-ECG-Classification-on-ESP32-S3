@@ -1,0 +1,11 @@
+{"name": "donor_partial_alpha0.1", "validation_score": 0.6125790895833352, "eligible": false, "auxiliary_nrmse": {"quality": 6.183095138112549e-06, "biometrics": 0.03834158182144165, "pathology": 0.053217511624097824}}
+{"name": "donor_partial_alpha0.25", "validation_score": 0.6119477766574188, "eligible": false, "auxiliary_nrmse": {"quality": 1.5070484550960828e-05, "biometrics": 0.09429826587438583, "pathology": 0.1257287859916687}}
+{"name": "donor_partial_alpha0.4", "validation_score": 0.60923677319167, "eligible": false, "auxiliary_nrmse": {"quality": 2.251769183203578e-05, "biometrics": 0.14967262744903564, "pathology": 0.19138729572296143}}
+{"name": "donor_partial_alpha0.55", "validation_score": 0.6055519657577941, "eligible": false, "auxiliary_nrmse": {"quality": 2.8065602236893028e-05, "biometrics": 0.20536841452121735, "pathology": 0.25170883536338806}}
+{"name": "donor_partial_alpha0.7", "validation_score": 0.6021388253305932, "eligible": false, "auxiliary_nrmse": {"quality": 3.1559284252580255e-05, "biometrics": 0.26185446977615356, "pathology": 0.307939738035202}}
+{"name": "donor_expanded_alpha0.1", "validation_score": 0.6123368335881688, "eligible": true, "auxiliary_nrmse": {"quality": 6.571691756107612e-06, "biometrics": 0.05608181282877922, "pathology": 0.08492795377969742}}
+{"name": "donor_expanded_alpha0.25", "validation_score": 0.6190982340863433, "eligible": false, "auxiliary_nrmse": {"quality": 1.4208543689164799e-05, "biometrics": 0.13256731629371643, "pathology": 0.1916874796152115}}
+{"name": "donor_expanded_alpha0.4", "validation_score": 0.6239168578348308, "eligible": false, "auxiliary_nrmse": {"quality": 1.8620776245370507e-05, "biometrics": 0.203688383102417, "pathology": 0.2809518575668335}}
+{"name": "donor_expanded_alpha0.55", "validation_score": 0.634608590296788, "eligible": false, "auxiliary_nrmse": {"quality": 2.0827978005399927e-05, "biometrics": 0.2724984586238861, "pathology": 0.35782840847969055}}
+{"name": "donor_expanded_alpha0.7", "validation_score": 0.6400410997312768, "eligible": false, "auxiliary_nrmse": {"quality": 2.354031130380463e-05, "biometrics": 0.34092360734939575, "pathology": 0.4255353510379791}}
+{"COMPLETED": "base", "records": 2171}

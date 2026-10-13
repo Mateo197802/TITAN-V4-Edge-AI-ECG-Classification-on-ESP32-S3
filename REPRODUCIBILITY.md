@@ -114,6 +114,18 @@ The build used 137,232 / 327,680 bytes RAM (41.9%) and 5,517,309 / 6,553,600 byt
 
 Firmware source-level and build-contract tests are part of `python -m pytest -q`. The fixed firmware interpreter lifetime prevents the wrapper from deleting a function-static interpreter it does not own.
 
+## CEDIA Same-Architecture Refinement
+
+The separate 2026-10-12 research bundle includes the candidate PTH, warm-start PTH, exact training source/configuration, frozen teacher/features, source manifests, all 2,171 follow-up probabilities and CEDIA logs. Its six-lead 125 Hz input and 1,143,751-parameter four-head architecture are unchanged. The portable runner was verified from original public WFDB files, with identical Top-1 predictions for all 2,171 cases.
+
+```bash
+python scripts/verify_partial_backbone_evidence.py
+python scripts/run_refinement_inference.py
+python scripts/prepare_refinement_training_inputs.py --output-dir data/cache/refinement_training_inputs
+```
+
+The inference runner downloads pinned records and checks source/header/tensor hashes. The preparer reconstructs frozen arrays for a CEDIA GPU refit; no labels are adjusted to match predictions. The [bundle runbook](outputs/reviewer_verification/partial_backbone_refinement_2026-10-12/README.md) explains environments, outputs, class results and the ten validation-only weight-interpolation comparisons. Its `posthoc672` is a new PTB-XL cohort, not the historical Challenge cohort. This bundle does not make the original Gold training lineage reproducible.
+
 ## Artifact Inventory
 
 `outputs/reproduced/primary9/` contains:

@@ -1,0 +1,12 @@
+{
+  "patient_id_scope": "exact identifiers within each dataset; cross-dataset identity linkage not inferred",
+  "train_validation_patient_overlap": 0,
+  "train_evaluation_patient_overlap": 0,
+  "validation_evaluation_patient_overlap": 0,
+  "train_validation_record_overlap": 0,
+  "train_evaluation_record_overlap": 0,
+  "validation_evaluation_record_overlap": 0,
+  "train_records": 8393,
+  "validation_records": 1476,
+  "evaluation_records": 2171
+}
