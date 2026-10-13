@@ -41,3 +41,4 @@ src/titan_v4/models/titan_v4_net.py -text
 src/titan_v4/data/primary9_registry.py -text
 src/titan_v4/data/label_registry.py -text
 outputs/reproduced/primary9/** -text
+outputs/reviewer_verification/gold_target_gap_2026-10-12/** -text

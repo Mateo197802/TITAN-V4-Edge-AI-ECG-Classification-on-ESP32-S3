@@ -1,0 +1,8 @@
+{
+  "gap_audit.json": "ae6b438e89854fc0d68f047e79914b463e2147efb1b17b54dbc5395a1e4bb387",
+  "historical672_paired_predictions.csv": "6e7f7626476cbc531fae6d3a83311208ef460a9b46f3191e707aa135cedae4c7",
+  "inference_provenance.json": "8f78a418b4b32f687309f860c20e88d19d5ce15102e6765255fbd1c2e62eb4ea",
+  "model/validation_strong_mixture.pth": "780ba98950239762388b1e3fecbcf737bb2a7681f6ad67859ec62683e5e83ef2",
+  "README.md": "3cdbf7fc7c596940b086403ab8a9115780a50f0c659feebb609c1bb39a9eb0ba",
+  "source_files_sha256.csv": "945b5bc286be9a12ea89ffda05ffc37e914da99f32c9995b6524c15e280ae879"
+}

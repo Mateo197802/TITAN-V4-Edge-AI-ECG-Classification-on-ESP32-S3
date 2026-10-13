@@ -56,6 +56,8 @@ python scripts/run_refinement_inference.py
 
 ## Evidence Boundaries
 
+The separate [historical-cohort target-gap audit](outputs/reviewer_verification/gold_target_gap_2026-10-12/README.md) reevaluates the research candidate on the actual 672 Challenge records: 576/672 (85.71% accuracy, 83.81% macro-F1) against the archived final references. It also identifies an exact CE/KL objective conflict in 1,007 training records and documents the unrun ablation needed to test its effect. This is not a reproduction of the historical 605/672 prediction run.
+
 - The 672-record single-label diagnostic is computationally reproducible from this checkout and the cited public dataset release; it is not an official Challenge metric or an independent external-validation claim.
 - The CEDIA pathology score is recomputable from checked-in targets and probabilities. It is a patient-disjoint subset of PTB-XL v1.0.3, not a source-held-out estimate or a reproduction of the historical aggregate. End-to-end inference is not standalone until the checkpoint and the exact CEDIA source files are made available under an approved redistribution basis.
 - Training the checkpoint from scratch is not currently a reproducible claim: the exact training/validation manifests and offline teacher-sidecar arrays are not included.
