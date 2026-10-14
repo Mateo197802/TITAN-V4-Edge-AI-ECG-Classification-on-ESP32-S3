@@ -4,6 +4,7 @@ import dataclasses
 import hashlib
 import importlib
 import json
+import subprocess
 from pathlib import Path
 
 import numpy as np
@@ -278,3 +279,10 @@ def test_parallel_verification_returns_only_ordered_receipts(source):
     assert all(v['verified'] is True for v in result)
     assert not any(isinstance(value, np.ndarray) for row in result for value in row.values())
     assert progress == [1, 2]
+
+
+def test_sealed_input_bytes_survive_git_storage_filters():
+    relative = 'outputs/reviewer_verification/founder_transfer_2026-10-14/inputs/paired_records.json'
+    raw = subprocess.check_output(['git', 'hash-object', '--no-filters', relative], cwd=ROOT)
+    stored = subprocess.check_output(['git', 'hash-object', '--path=' + relative, relative], cwd=ROOT)
+    assert stored == raw, 'Git storage would change the sealed manifest bytes'
