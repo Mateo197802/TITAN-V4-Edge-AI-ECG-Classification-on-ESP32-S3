@@ -56,6 +56,13 @@ python scripts/run_refinement_inference.py
 
 ## Evidence Boundaries
 
+The [directed-source and PCGrad comparison](outputs/reviewer_verification/directed_pcgrad_2026-10-13/README.md), completed CEDIA job 29484, examines all 45,152 official ECG-arrhythmia headers and adds 190 non-overlapping difficult-class training records. It compares frozen control, last-block fitting, progressive fitting and shared PCGrad without changing the original architecture or comparison references. PCGrad raises pathology validation macro-F1 from 43.82% to 45.00% while rhythm declines; neither selector replaces the starting model. The retained joint model reproduces **82.77% rhythm accuracy / 82.23% macro-F1** and **94.56% mean pathology label accuracy / 48.40% macro-F1** on the fixed followup. Earlier stronger task-specific models and Gold remain preserved. Every candidate, full-row output and cancelled-attempt receipt is included; this comparison does not achieve 90% / 87%.
+
+```bash
+python scripts/verify_directed_evidence.py --bundle outputs/reviewer_verification/directed_pcgrad_2026-10-13
+python scripts/run_joint_inference.py --bundle outputs/reviewer_verification/directed_pcgrad_2026-10-13 --output data/cache/directed_joint_replay
+```
+
 The [expanded-population continuation](outputs/reviewer_verification/expanded_population_2026-10-13/README.md), CEDIA job 29418, adds 10,901 native Primary-5-negative training records and expands pathology calibration to 2,027 patient-disjoint fold-9 ECGs. It keeps the original architecture, six leads, 125 Hz and all comparison references. The rhythm-selected PTH reaches **82.96% accuracy / 82.41% macro-F1** on the fixed 2,171-case follow-up (one net additional correct case). The separate joint-selected PTH reaches **94.56% mean label accuracy / 48.40% pathology macro-F1**, versus 93.87% / 46.45% for the equally recalibrated frozen control; its rhythm accuracy is 82.77%. These are different real checkpoints, not combined best-head metrics. Both candidates and all earlier models are retained; the experiment does not achieve 90% / 87% or replace Gold.
 
 ```bash

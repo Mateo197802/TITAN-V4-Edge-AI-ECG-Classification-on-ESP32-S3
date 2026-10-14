@@ -156,6 +156,15 @@ Training reconstruction commands and the exact GPU stack are provided in the bun
 
 ## Artifact Inventory
 
+The [directed-source/PCGrad runbook](outputs/reviewer_verification/directed_pcgrad_2026-10-13/README.md) records the four-arm comparison, source taxonomy correction, NFS startup retry and completed CEDIA job 29484. The source preparer uses the checked-in official index, so no pre-existing index cache is required. Its verifier authenticates all original header bytes and complete diagnosis sets before validating the 190 added-record selection, then recalculates all validation outputs, unchanged comparison references and fallback states. Rejected candidates are retained, not selected using followup metrics.
+
+```bash
+python scripts/prepare_directed_rhythm.py --output data/cache/directed_rebuilt
+python scripts/verify_directed_evidence.py --bundle outputs/reviewer_verification/directed_pcgrad_2026-10-13
+python scripts/replay_expanded_validation.py --bundle outputs/reviewer_verification/directed_pcgrad_2026-10-13 --output data/cache/directed_validation_replay
+python scripts/run_joint_inference.py --bundle outputs/reviewer_verification/directed_pcgrad_2026-10-13 --output data/cache/directed_joint_replay
+```
+
 The [expanded native-population study](outputs/reviewer_verification/expanded_population_2026-10-13/README.md) preserves the original network and comparison references, but separately calibrates pathology on all 2,027 eligible native fold-9 ECGs. Its own verifier understands the separate rhythm/pathology validation populations; the older joint verifier deliberately retains its 386-case/3,083-addition contract.
 
 ```bash

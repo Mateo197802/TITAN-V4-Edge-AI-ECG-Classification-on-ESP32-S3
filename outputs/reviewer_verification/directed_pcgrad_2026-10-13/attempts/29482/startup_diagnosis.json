@@ -1,0 +1,12 @@
+{
+  "job_id": "29482",
+  "node": "compute-0-1",
+  "diagnostic_scope": "Read-only Slurm accounting and process inspection inside the existing allocation",
+  "python_process_state": "Dl",
+  "wait_channel": "nfs_wait_bit_killable",
+  "accounted_cpu": "00:00:01",
+  "accounted_max_rss": "165680K",
+  "result_directory_present": false,
+  "action": "Cancel own allocation; exclude this node in the retry; unchanged numerical fitting protocol",
+  "shared_processes_modified": false
+}
