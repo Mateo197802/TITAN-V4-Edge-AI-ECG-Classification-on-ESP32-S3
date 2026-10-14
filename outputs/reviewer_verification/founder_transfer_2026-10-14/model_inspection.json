@@ -1,0 +1,14 @@
+{
+  "scope": "Static CPU architecture and restricted checkpoint loading; no teacher forward or training",
+  "teacher_pretrained_sha256": "ee199f3781f4ae1f732973267f003da0a759ea12bddb0dd28a77faa60aca7997",
+  "teacher_code_sha256": "832bf90e05e20e62db6f9c7007acf7f0b1f739938ab80fa9b2c1ad438e8da7f7",
+  "original_teacher_parameters": 30819014,
+  "original_teacher_buffer_elements": 66429,
+  "original_teacher_state_keys": 509,
+  "original_teacher_dense_shape": [150, 1024],
+  "adapted_outputs_tested": [9, 10],
+  "adapted_body_tensors_equal": true,
+  "unrestricted_pickle_used": false,
+  "gpu_probe_executed": false,
+  "student_deployment_parameters_required": 1143751
+}
