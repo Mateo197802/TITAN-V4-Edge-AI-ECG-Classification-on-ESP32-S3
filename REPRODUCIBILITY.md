@@ -156,6 +156,15 @@ Training reconstruction commands and the exact GPU stack are provided in the bun
 
 ## Artifact Inventory
 
+The [independent-head supervision runbook](outputs/reviewer_verification/supervision_control_2026-10-14/README.md) records CEDIA job 29488, six continued fits of existing heads, all 24 learned states, canonical patient-group threshold cross-fitting and an actual shared-state-compatible composition. The verifier reconstructs train-only source/supervision weights, rejects reordered patient folds, recalculates selection and both historical reference metrics, and checks executed code/input hashes. It distinguishes threshold cross-fitting from neural model cross-validation, and records the actual candidate/full-calibration order without changing archived executed bytes.
+
+```bash
+python scripts/prepare_supervision_controls.py --bundle outputs/reviewer_verification/supervision_control_2026-10-14 --output data/cache/supervision_rebuilt
+python scripts/verify_supervision_evidence.py --bundle outputs/reviewer_verification/supervision_control_2026-10-14
+python scripts/replay_expanded_validation.py --bundle outputs/reviewer_verification/supervision_control_2026-10-14 --output data/cache/supervision_validation_replay
+python scripts/run_joint_inference.py --bundle outputs/reviewer_verification/supervision_control_2026-10-14 --output data/cache/supervision_joint_replay
+```
+
 The [directed-source/PCGrad runbook](outputs/reviewer_verification/directed_pcgrad_2026-10-13/README.md) records the four-arm comparison, source taxonomy correction, NFS startup retry and completed CEDIA job 29484. The source preparer uses the checked-in official index, so no pre-existing index cache is required. Its verifier authenticates all original header bytes and complete diagnosis sets before validating the 190 added-record selection, then recalculates all validation outputs, unchanged comparison references and fallback states. Rejected candidates are retained, not selected using followup metrics.
 
 ```bash

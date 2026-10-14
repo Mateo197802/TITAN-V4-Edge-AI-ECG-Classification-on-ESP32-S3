@@ -56,6 +56,13 @@ python scripts/run_refinement_inference.py
 
 ## Evidence Boundaries
 
+The [independent-head and supervision comparison](outputs/reviewer_verification/supervision_control_2026-10-14/README.md), completed CEDIA job 29488, executes six controlled continuations without changing the original architecture or any comparison reference. Patient-group threshold-cross-fit pathology validation macro-F1 rises from 39.74% to 43.23%. Its actual composed checkpoint preserves rhythm followup at **82.96% accuracy / 82.41% macro-F1** and increases pathology followup from **42.64% to 46.16% macro-F1**, with **94.58% mean label accuracy**. The earlier 48.51% pathology checkpoint remains stronger and preserved. The bundle includes all 24 learned states, source controls, complete predictions and exact selection/refit evidence; it does not attain the historical targets.
+
+```bash
+python scripts/verify_supervision_evidence.py --bundle outputs/reviewer_verification/supervision_control_2026-10-14
+python scripts/run_joint_inference.py --bundle outputs/reviewer_verification/supervision_control_2026-10-14 --output data/cache/supervision_joint_replay
+```
+
 The [directed-source and PCGrad comparison](outputs/reviewer_verification/directed_pcgrad_2026-10-13/README.md), completed CEDIA job 29484, examines all 45,152 official ECG-arrhythmia headers and adds 190 non-overlapping difficult-class training records. It compares frozen control, last-block fitting, progressive fitting and shared PCGrad without changing the original architecture or comparison references. PCGrad raises pathology validation macro-F1 from 43.82% to 45.00% while rhythm declines; neither selector replaces the starting model. The retained joint model reproduces **82.77% rhythm accuracy / 82.23% macro-F1** and **94.56% mean pathology label accuracy / 48.40% macro-F1** on the fixed followup. Earlier stronger task-specific models and Gold remain preserved. Every candidate, full-row output and cancelled-attempt receipt is included; this comparison does not achieve 90% / 87%.
 
 ```bash
