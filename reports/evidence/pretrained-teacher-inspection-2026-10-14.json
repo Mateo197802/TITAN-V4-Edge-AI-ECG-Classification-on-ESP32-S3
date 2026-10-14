@@ -1,0 +1,115 @@
+{
+  "inspection_date": "2026-10-14",
+  "scope": "Public-source metadata and static local checkpoint inspection; no teacher forward pass or new training",
+  "implementation_state": "written_spec_awaiting_review",
+  "neural_training_jobs_submitted": 0,
+  "teacher_candidate": {
+    "name": "ECGFounder",
+    "selection_status": "first_eligibility_candidate_not_empirically_selected",
+    "official_code": "https://github.com/PKUDigitalHealth/ECGFounder",
+    "code_commit": "04edac702b61c91face519774ddcc0cd712fef23",
+    "model_repository": "https://huggingface.co/PKUDigitalHealth/ECGFounder",
+    "model_revision": "d9b1793951b2342f5f7e84f1ac03cd37f8a08724",
+    "download_url": "https://huggingface.co/PKUDigitalHealth/ECGFounder/resolve/d9b1793951b2342f5f7e84f1ac03cd37f8a08724/12_lead_ECGFounder.pth",
+    "filename": "12_lead_ECGFounder.pth",
+    "size_bytes": 369942585,
+    "declared_lfs_sha256": "ee199f3781f4ae1f732973267f003da0a759ea12bddb0dd28a77faa60aca7997",
+    "measured_sha256": "ee199f3781f4ae1f732973267f003da0a759ea12bddb0dd28a77faa60aca7997",
+    "download_hash_verified": true,
+    "code_license_notice": "MIT, Copyright (c) 2025 PKUDigitalHealth",
+    "model_card_license": "mit",
+    "weights_committed_to_git": false,
+    "safe_load": {
+      "weights_only": true,
+      "unrestricted_pickle_used": false,
+      "remote_code_executed": false,
+      "initial_default_weights_only_load": "rejected_unallowlisted_numpy_scalar_serialization",
+      "explicit_numpy_allowlist": [
+        "numpy.dtype",
+        "numpy.core.multiarray.scalar",
+        "numpy.dtypes.Float64DType",
+        "numpy.dtypes.Int64DType"
+      ],
+      "restricted_load_success": true
+    },
+    "static_state_inspection": {
+      "checkpoint_keys": ["epoch", "step", "state_dict", "optimizer", "scheduler", "val_auroc"],
+      "state_keys": 509,
+      "state_tensor_elements_including_buffers": 30885443,
+      "first_conv_weight_shape": [64, 12, 16],
+      "first_conv_bias_shape": [64],
+      "dense_weight_shape": [150, 1024],
+      "dense_bias_shape": [150],
+      "forward_pass_executed": false,
+      "titan_metrics_measured": false
+    },
+    "task_compatibility": {
+      "upstream_task_count": 150,
+      "explicit_irbbb_label_present": true,
+      "exact_ilmi_task_name_present": false,
+      "exact_isc_underscore_task_name_present": false,
+      "titan_pathology_interface": "requires_training_native_masked_ten_label_head_not_approximate_label_unions"
+    },
+    "pretraining_population": "HEEDB according to primary paper",
+    "all_titan_source_record_disjointness_proven": false,
+    "preprocessing_resolution_required": [
+      "HEED versus MIMIC frontal lead ordering",
+      "README filtering requirement versus PTB evaluator transforms",
+      "global teacher z-score versus per-lead student z-score"
+    ]
+  },
+  "alternative_screening": [
+    {
+      "name": "ECG-FM",
+      "official_source": "https://github.com/bowang-lab/ecg-fm",
+      "pretraining_includes_challenge_2021": true,
+      "status": "not_clean_external_comparison_on_current_challenge_populations",
+      "weights_downloaded": false
+    },
+    {
+      "name": "ECG-JEPA_kweimann",
+      "official_source": "https://github.com/kweimann/ECG-JEPA",
+      "github_release_count_observed": 0,
+      "mimic_only_variant_described": true,
+      "official_matching_mimic_only_weights_verified": false,
+      "weights_downloaded": false
+    },
+    {
+      "name": "ECG-LFM",
+      "official_source": "https://github.com/biomed-AI/ECG-LFM",
+      "code_commit": "647369a012dd8d5d362e99e2bf238c91f3e1d03b",
+      "code_license_header": "MIT License, Copyright (c) 2023 Jungwoo Oh",
+      "weight_record": "https://zenodo.org/records/20388950",
+      "upstream_weight_doi": "10.5281/zenodo.20388950",
+      "weight_metadata_license": "cc-by-4.0",
+      "weight_access": "open",
+      "filename": "pretrain.pt",
+      "declared_size_bytes": 7522279891,
+      "declared_checksum": "md5:afa8dfc680590948f82aabbdb123bf43",
+      "checkpoint_checksum_locally_verified": false,
+      "weights_downloaded": false,
+      "status": "secondary_candidate_needs_safe_load_and_runtime_probe"
+    }
+  ],
+  "student_constraints": {
+    "parameters": 1143751,
+    "input_leads": ["I", "II", "III", "aVR", "aVL", "aVF"],
+    "input_hz": 125,
+    "samples_per_lead": 1250,
+    "heads": 4,
+    "rhythm_classes": 9,
+    "pathology_labels": 10,
+    "warm_start_sha256": "72d3ece9b00e844d6a94f207f4ced71af0af69c59cef66b625031ff92b2f965b",
+    "new_student_from_scratch": false
+  },
+  "local_source_inspection": {
+    "training_union_records": 22567,
+    "native_observed_pathology_training_records": 16413,
+    "manifest_directed_source_file_existence_checked": true,
+    "training_headers_twelve_leads_500hz_checked": true,
+    "raw_signal_rehash_scope": "sampled_by_source_not_exhaustive_in_this_inspection",
+    "all_seven_existing_training_input_hashes_matched": true,
+    "existing_teachers": "six_lead_CNN_features_or_cached_rhythm_outputs_not_verified_twelve_lead_models",
+    "confirmed_event_level_labels_established": false
+  }
+}
