@@ -8,7 +8,7 @@
 
 **Tech Stack:** Python, NumPy/SciPy/WFDB, PyTorch, scikit-learn, existing TITAN metrics and SHA manifests, SSH with strict host checks, CEDIA Slurm/A100.
 
-**Spec:** `docs/superpowers/specs/2026-10-14-titan-pretrained-transfer-design.md`; written-spec approval received from the user after commit `3e32d17`. This plan awaits its own review and execution-method selection. All implementation steps below remain pending.
+**Spec:** `docs/superpowers/specs/2026-10-14-titan-pretrained-transfer-design.md`; written-spec approval received from the user after commit `3e32d17`. The user reviewed this plan and selected direct implementation with one independent final review on 2026-10-14. Checked steps below have observed execution evidence; unchecked steps remain pending.
 
 ## Global Constraints
 
@@ -17,7 +17,7 @@
 - Pathology order: IMI, ASMI, LVH, ISC_, ISCAL, NST_, ILMI, AMI, ALMI, LAE; Primary-5 indices `[0,8,6,9,3]`.
 - Warm-start SHA-256: `72d3ece9b00e844d6a94f207f4ced71af0af69c59cef66b625031ff92b2f965b`; initialize weights, not a claimed optimizer resume.
 - Preserve Gold, prior PTHs, original labels and all archived scripts/results. Do not change deployed strides or add deployed projection modules in this plan.
-- Training allowlist: 22,567 records, including 16,413 observed native pathology records. Keep unobserved targets masked; diagnostic likelihood zero is not a negative finding.
+- Original training union: 22,567 records. Execution found 27 signal/tensor-identical historical aliases; preserve those as excluded records, yielding a clean fitting allowlist of 22,540 with 16,413 observed native pathology records. Keep unobserved targets masked; diagnostic likelihood zero is not a negative finding.
 - Teacher and student fitting excludes rhythm validation 1,476, pathology validation 2,027, follow-up 2,171 and historical 672. Split before window derivation; check patients where available and source/tensor hashes.
 - All neural fits and GPU probes run in Slurm, never on the login node or local CPU. CPU unit tests and data preparation are permitted.
 - This plan implements subprojects A/B only. SSL continuation, event supervision and temporal-stride variants require their separate specs/plans; do not claim them implemented here.
@@ -65,6 +65,7 @@ artifact inventory; preserve its numerical archives byte-for-byte.
 - Total ceiling: 48 A100 GPU-hours, counted across failed/completed allocations. Preparation/bootstrap/features use at most 4.5 hours, teacher adaptation at most 21 hours, student comparisons/replay at most 22.5 hours. Reaching a ceiling stops further submission and preserves partial evidence; it does not imply research completion.
 - Pilot: 40-minute allocation, batch 8, FP32 forward/backward on at most 64 training records. If memory fails, retry once at batch 4 with accumulation 2; do not alter labels, lead count or sampling rate. Fix the successful setting for all comparable runs. No lower precision switch after seeing metrics.
 - Four preprocessing contracts registered before fitting: HEED versus canonical frontal order, each with global z-score either without filtering or with the pinned upstream filtering. The pinned filter applies a 50-Hz notch with Q=30, zero-phase fourth-order 0.67-40 Hz bandpass, then subtracts a 0.4-second odd-width median baseline. Teacher normalization uses the entire 12-by-5000 matrix; no per-lead substitution.
+- Source-only execution audit found WFDB16 missing-sample sentinels in four fitting records and one rhythm-validation record. The strict raw preprocessor remains available; the registered source-reader mode verifies NaNs against digital -32768 codes before zero filling, logs counts/flags and rejects unexplained NaNs/infinities. No evaluation record is removed. Original student tensor bytes remain the control. [WFDB source-format reference](https://archive.physionet.org/faq.shtml).
 - Frozen teacher head probes: four contracts, two tasks, three seeds, at most 24 dense-head fits. AdamW, LR `1e-3`, decay `1e-4`, maximum 20 epochs, patience 4. Cache 1024-dimensional features in Slurm; rank contracts by mean endpoint score with lexicographic contract ID as exact tie-break.
 - Optional teacher adaptation: at most six fits, one selected contract per endpoint and three seeds. Initialize from that seed's frozen-head checkpoint; unfreeze `stage_list[-1]` and `dense` only. AdamW body/head LRs `1e-5`/`1e-4`, decay `1e-4`, at most five epochs, each allocation at most three hours. Retain a frozen teacher if adaptation does not qualify.
 - Student arms: supervised-only; supervised-only with train-balanced BN recalibration; rhythm transfer; pathology transfer; joint transfer. Three seeds give at most 15 fits, each at most 90 minutes including replay; skip arms whose teachers are ineligible.
