@@ -1,0 +1,23 @@
+{
+  "audit.json": "c2186adf5ec6e7ce94f051836970596307213be9cb951c8121fdc8ba480f6e78",
+  "logs/redaction_receipt.json": "73fa0cc59bee63d365bfbbfaf82b396912c2cddd141e9f55daed0909aaec09e5",
+  "logs/slurm-29490.err": "78fc634fcbc0fd808c7d71dda2fa9bbd072cea8af6250d642f94e53c6a2ee7a7",
+  "logs/slurm-29490.out": "7760ab198b4979983cf11e58e0c46b9b6d1437a1b776812859e4420eb4f4eab2",
+  "logs/submission.json": "f429516b4d75d405c95bd8861471b5efe45d86de85aaaf8c0af3ae583a1d9ea1",
+  "README.md": "0dfce876c2029cf714e7870d3141e7112ef627d6718491c476937f0cb11210a9",
+  "results/diagnostic.json": "bba2c603d58e24830e302ad0a8566f4052c127798eae285c32cb67b9658ee4b6",
+  "results/diagnostic_probabilities.npz": "629a8d9c6aa16556f454b04c39b366c0d4c80c5c43235cced02e61613a2c85d4",
+  "results/execution.json": "475711578d02f011fe086fcfc29da6acd83d3e482de9acbeceae98dc894e836e",
+  "results/SHA256SUMS.json": "04dd8cc17c2ab9fab5d49954d33ec510936129ec5a9b633ce7c6b032c92bb7b5",
+  "training/audit_plateau_cedia.py": "6e004e0bfcd12e6f0cb5ca9d20845946e34f9b1db6d844652818713bb486b208",
+  "training/contract.py": "b368e1658c889f8851d4a65ff47f184d018455503781a148f438fcbf3c942916",
+  "training/INPUT_SHA256.json": "c920c4bccfc2639a242577caea36630e507703cc3ea8f818896f20b0b86210ac",
+  "training/job.sbatch": "7bfea53acde8eed161a54cd852ca5aed99ccae1ced8ea92df32d16f94ff9398c",
+  "training/joint_metrics.py": "02e7389717d2d2623dcf39c52b15d86c1726b0a6f08d0e42f341c0030ba8dda8",
+  "training/model_core.py": "53f0b10928fb5bebf1c984c217659c076c2d3ce920a99a80b170704a1682aa8a",
+  "training/phase10.pth": "77a8c3749ad863256fe03e038c5c686bb62f6bb4cc9db7ad1f926801845d4112",
+  "training/phase12.pth": "72d3ece9b00e844d6a94f207f4ced71af0af69c59cef66b625031ff92b2f965b",
+  "training/phase6.pth": "fd8a5d6ca95b7875e53305ef0fdc3962f2aa4d493fa16630befc7a75e1cb2249",
+  "training/protocol.json": "296009622ef5f073b49b2ab814886ca2a0a8acd5802b8bde47dc0d3a4758bd9d",
+  "training/titan_v4_net.py": "5a3c980f44c71df1f075ddf7592dd61a88c99690c739b467a0964291b1fae696"
+}

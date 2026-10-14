@@ -1,0 +1,12 @@
+{
+  "purpose": "Read-only train/validation fit diagnosis; no optimizer or model selection",
+  "checkpoints": {
+    "phase6": "fd8a5d6ca95b7875e53305ef0fdc3962f2aa4d493fa16630befc7a75e1cb2249",
+    "phase10": "77a8c3749ad863256fe03e038c5c686bb62f6bb4cc9db7ad1f926801845d4112",
+    "phase12": "72d3ece9b00e844d6a94f207f4ced71af0af69c59cef66b625031ff92b2f965b"
+  },
+  "data": {"training": 22567, "rhythm_validation": 1476, "pathology_validation": 2027, "followup_loaded": false},
+  "calibration": "Each checkpoint thresholds fitted on the same pathology validation population only, then reused to score training",
+  "outputs": "Complete probabilities with ordered references and IDs, per-class and per-source metrics; checkpoint states must remain bit-identical",
+  "hardware": "Same 1143751 parameters, 6 frontal leads, 125Hz; Slurm GPU inference only"
+}

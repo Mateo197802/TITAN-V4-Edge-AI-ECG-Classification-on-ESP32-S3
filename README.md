@@ -56,6 +56,8 @@ python scripts/run_refinement_inference.py
 
 ## Evidence Boundaries
 
+The [plateau diagnosis](outputs/reviewer_verification/plateau_audit_2026-10-14/README.md), CEDIA job 29490, performs read-only train/validation inference with three retained checkpoints. It quantifies class/source mix, subtype support, shared errors and pathology ranking/decision metrics, and examines 140 prior candidate entries. Current native IRBBB recall is only 274/604 in training versus 17/41 in validation; the same model recognizes 201/212 and 14/15 CRBBB. The three models share 185 validation errors, and their retrospective target-knowing oracle reaches only 87.47%, not a deployable result. The report specifies separate representation and voltage-preserving input experiments without claiming they have run or changed Gold.
+
 The [independent-head and supervision comparison](outputs/reviewer_verification/supervision_control_2026-10-14/README.md), completed CEDIA job 29488, executes six controlled continuations without changing the original architecture or any comparison reference. Patient-group threshold-cross-fit pathology validation macro-F1 rises from 39.74% to 43.23%. Its actual composed checkpoint preserves rhythm followup at **82.96% accuracy / 82.41% macro-F1** and increases pathology followup from **42.64% to 46.16% macro-F1**, with **94.58% mean label accuracy**. The earlier 48.51% pathology checkpoint remains stronger and preserved. The bundle includes all 24 learned states, source controls, complete predictions and exact selection/refit evidence; it does not attain the historical targets.
 
 ```bash
