@@ -22,7 +22,7 @@ from titan_v4.reproducibility.pretrained_transfer.execution import (
     safe_relative, verify_inventory, verify_frozen_inputs, verify_result, MANIFEST_SHA)
 
 STAGES = ('bootstrap', 'pilot', 'features', 'teachers', 'students', 'replay')
-IMPLEMENTED_STAGES = ('bootstrap', 'pilot')
+IMPLEMENTED_STAGES = ('bootstrap', 'pilot', 'features', 'teachers')
 BUCKET = {s: 'preparation' if s in STAGES[:3] else 'teachers' if s == 'teachers' else 'students' for s in STAGES}
 LIMITS = {'preparation': 4.5, 'teachers': 21., 'students': 22.5}
 RUN_NAME = 'TITAN-V4-Founder-Transfer-2026-10-14'
@@ -170,13 +170,18 @@ import pathlib,subprocess,json
 root=pathlib.Path({root!r}); stage=pathlib.Path({stage_root!r})
 if not stage.resolve().is_relative_to(root.resolve()):raise ValueError('Foreign stage')
 identity={{'code_sha256':file_sha(stage/'INPUT_SHA256.json'),'paired_manifest_sha256':MANIFEST_SHA}}
-verify_inventory(stage,json.loads((stage/'INPUT_SHA256.json').read_text()))
+verify_prepared_stage(stage,{state.get('code_sha256')!r})
 verify_frozen_inputs(root,stage/'code/configs/founder_transfer_2026-10-14.json')
 if {stage_name!r} not in ('bootstrap','pilot'):
- pilot=root/'stages/pilot-a2/results'
- expected=json.loads((root/'stages/pilot-a2/SUBMISSION.json').read_text())
- verify_result(pilot,expected)
- if registry_usage(root)['jobs'][str(expected['job_id'])]['state']!='COMPLETED':raise ValueError('Pilot must complete before fitting')
+ valid_pilots=[]
+ for candidate in (root/'stages').glob('pilot*'):
+  if not (candidate/'SUBMISSION.json').exists() or not (candidate/'results/SHA256SUMS.json').exists():continue
+  expected=json.loads((candidate/'SUBMISSION.json').read_text())
+  if expected.get('stage')!='pilot':continue
+  job=registry_usage(root)['jobs'][str(expected['job_id'])]
+  if job['state']=='COMPLETED' and job['exit_code']=='0:0':
+   verify_result(candidate/'results',expected); valid_pilots.append(expected['job_id'])
+ if not valid_pilots:raise ValueError('Pilot must complete before fitting')
 if {stage_name!r}=='bootstrap':python=pathlib.Path.home()/'V4_CEDIA_LINK/.venv_audit/bin/python'
 else:
  env=json.loads((root/'ENVIRONMENT.json').read_text())['relative_env']
@@ -210,12 +215,19 @@ def _submit(args):
 
 
 def asset_files(bundle, scope):
-    if scope not in ('pilot', 'development', 'tracking'):
+    if scope not in ('pilot', 'development', 'tracking', 'controls'):
         raise ValueError('Unknown asset scope')
     from titan_v4.reproducibility.pretrained_transfer.contracts import PairedRecord
     from titan_v4.reproducibility.pretrained_transfer.inputs import _paths
     config = json.loads((ROOT / 'configs/founder_transfer_2026-10-14.json').read_text())
     rows = [PairedRecord(**r) for r in verify_frozen_inputs(bundle, ROOT / 'configs/founder_transfer_2026-10-14.json')]
+    if scope == 'controls':
+        from titan_v4.reproducibility.pretrained_transfer.teachers import CONTROL_MODELS
+        files = {'models/' + role + '_control.pth': ROOT / pair[0] for role, pair in CONTROL_MODELS.items()}
+        for role, pair in CONTROL_MODELS.items():
+            if sha256(files['models/' + role + '_control.pth']) != pair[1]:
+                raise ValueError('Pinned comparison control differs')
+        return files, []
     if scope == 'pilot':
         train = [r for r in rows if r.role == 'train']
         rows = [r for d in sorted({v.dataset for v in train}) for r in [v for v in train if v.dataset == d][:16]]
@@ -312,7 +324,7 @@ def main():
     parser.add_argument('--bundle', type=Path, required=True)
     parser.add_argument('--stage', choices=STAGES, default='bootstrap')
     parser.add_argument('--hours', type=float, default=40 / 60)
-    parser.add_argument('--asset-scope', choices=('pilot', 'development', 'tracking'), default='pilot')
+    parser.add_argument('--asset-scope', choices=('pilot', 'development', 'tracking', 'controls'), default='pilot')
     parser.add_argument('--attempt', type=int, default=1)
     args = parser.parse_args()
     validate_run_name(RUN_NAME)

@@ -72,6 +72,14 @@ def verify_frozen_inputs(bundle, configuration):
     return rows
 
 
+def verify_prepared_stage(stage, expected):
+    stage = Path(stage)
+    seal = stage / 'INPUT_SHA256.json'
+    if file_sha(seal) != expected:
+        raise ValueError('Stage differs from immutable preparation identity')
+    verify_inventory(stage, json.loads(seal.read_text()))
+
+
 def verify_result(root, expected):
     root = Path(root)
     seal = root / 'SHA256SUMS.json'

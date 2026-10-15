@@ -67,6 +67,17 @@ def test_missing_stage_input_is_rejected(tmp_path):
         module.verify_files(tmp_path, manifest)
 
 
+def test_resealed_stage_cannot_replace_the_preparation_identity(tmp_path):
+    code = tmp_path / 'source.py'; code.write_text('original')
+    seal = tmp_path / 'INPUT_SHA256.json'
+    seal.write_text(json.dumps({'source.py': hashlib.sha256(code.read_bytes()).hexdigest()}))
+    expected = hashlib.sha256(seal.read_bytes()).hexdigest()
+    code.write_text('changed')
+    seal.write_text(json.dumps({'source.py': hashlib.sha256(code.read_bytes()).hexdigest()}))
+    with pytest.raises(ValueError, match='prepar'):
+        execution().verify_prepared_stage(tmp_path, expected)
+
+
 def test_unsealed_result_is_not_success(tmp_path):
     module = api()
     with pytest.raises(ValueError, match='sealed'):

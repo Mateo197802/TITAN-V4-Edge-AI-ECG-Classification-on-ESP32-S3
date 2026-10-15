@@ -6,12 +6,13 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
 from titan_v4.reproducibility.pretrained_transfer.execution import (
-    verify_frozen_inputs, verify_inventory, file_sha, IDENTITY_FIELDS, allocation_lock, worker_receipt)
+    verify_frozen_inputs, verify_inventory, file_sha, IDENTITY_FIELDS, allocation_lock, worker_receipt, safe_relative)
 
 
 def submission_identity(bundle, stage_root, stage, attempt):
@@ -39,13 +40,27 @@ def digest(path):
     return h.hexdigest()
 
 
-def seal(root, stage, data):
+def seal(root, stage, data, artifacts=None):
     root.mkdir(parents=True, exist_ok=False)
     if not IDENTITY or IDENTITY['stage'] != stage:
         raise ValueError('Cannot seal results without verified submission identity')
+    for name, source in (artifacts or {}).items():
+        target = root / safe_relative(name)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, target)
     (root / 'status.json').write_text(json.dumps({**data, **IDENTITY, 'completed': True}, indent=2) + '\n')
     manifest = {f.relative_to(root).as_posix(): digest(f) for f in root.rglob('*') if f.is_file()}
     (root / 'SHA256SUMS.json').write_text(json.dumps(manifest, indent=2) + '\n')
+
+
+def public_paths(value, bundle):
+    if isinstance(value, dict):
+        return {k: public_paths(v, bundle) for k, v in value.items()}
+    if isinstance(value, list):
+        return [public_paths(v, bundle) for v in value]
+    if isinstance(value, str) and value.startswith(str(bundle) + '/'):
+        return Path(value).relative_to(bundle).as_posix()
+    return value
 
 
 def bootstrap_commands(python, requirements, reports):
@@ -158,6 +173,29 @@ def main():
         bootstrap(args.bundle, args.stage_root, args.attempt)
     elif args.stage == 'pilot':
         pilot(args.bundle, args.stage_root)
+    elif args.stage == 'features':
+        from titan_v4.reproducibility.pretrained_transfer.teachers import cache_features, controls
+        receipt = cache_features(args.bundle)
+        measured = controls(args.bundle)
+        artifacts = {'feature-cache/cache.json': args.bundle / 'feature-cache/cache.json',
+                     'feature-cache/SHA256SUMS.json': args.bundle / 'feature-cache/SHA256SUMS.json'}
+        for role in ('warm', 'task'):
+            for endpoint in ('rhythm', 'pathology'):
+                for name in ('validation.csv', 'validation.npz'):
+                    relative = 'teacher-controls/' + role + '/' + endpoint + '/' + name
+                    artifacts[relative] = args.bundle / relative
+        seal(args.stage_root / 'results', 'features', {'cache': receipt,
+             'control_metrics': {k: v['metrics'] for k, v in measured.items() if k != 'warm'},
+             'warm_control_metrics': {k: v['metrics'] for k, v in measured['warm'].items()}}, artifacts)
+    elif args.stage == 'teachers':
+        from titan_v4.reproducibility.pretrained_transfer.teachers import run_teachers
+        result = run_teachers(args.bundle)
+        artifacts = {}
+        for trial in (args.bundle / 'teacher-fits').iterdir():
+            for name in ('validation.csv', 'validation.npz', 'checkpoint.pth'):
+                file = trial / name
+                if file.is_file(): artifacts[file.relative_to(args.bundle).as_posix()] = file
+        seal(args.stage_root / 'results', 'teachers', {'qualification': public_paths(result, args.bundle)}, artifacts)
     else:
         raise NotImplementedError('This stage must have its tested implementation before submission')
 
