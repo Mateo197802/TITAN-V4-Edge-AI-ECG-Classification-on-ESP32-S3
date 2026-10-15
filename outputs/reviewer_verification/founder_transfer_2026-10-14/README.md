@@ -77,6 +77,13 @@ stage-code snapshots. Its default mode reconstructs signals and performs CPU
 student inference; `--metrics-only` explicitly does not certify source inference.
 An incomplete study fails rather than returning a review-ready status.
 
+Unit tests use synthetic model fixtures and the hash-pinned reference manifest;
+they do not require the external pretrained weight or raw ECG cache. Full
+source reconstruction is a separate, mandatory integration check: use
+`scripts/prepare_founder_transfer.py --output <fresh-input-directory> --offline`
+with the pinned source cache present, followed by the source-inference verifier.
+Synthetic fixture success is not a claim about pretrained-model performance.
+
 Manager commands require an explicit state directory and this bundle path.
 The CEDIA study registry, not the local directory, accounts for submissions,
 including failed and connection-interrupted attempts. Unresolved or nonterminal

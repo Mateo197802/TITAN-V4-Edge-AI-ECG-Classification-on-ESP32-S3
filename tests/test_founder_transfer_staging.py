@@ -131,9 +131,21 @@ def test_result_seal_binds_stage_and_file_bytes(tmp_path):
                           'job_state': 'COMPLETED', 'job_exit_code': '0:0'})
 
 
-def test_pilot_asset_scope_is_training_only_and_pinned():
+@pytest.mark.parametrize('teacher_matches', [True, False])
+def test_pilot_asset_scope_is_training_only_and_pinned(monkeypatch, teacher_matches):
     module = api()
     bundle = ROOT / 'outputs/reviewer_verification/founder_transfer_2026-10-14'
+    config = json.loads((ROOT / 'configs/founder_transfer_2026-10-14.json').read_text())
+    digest = module.sha256
+    # Exercise staging without requiring a separately licensed 370-MB download.
+    def asset_digest(path):
+        if Path(path).name == '12_lead_ECGFounder.pth':
+            return config['teacher_sha256'] if teacher_matches else '0' * 64
+        return digest(path)
+    monkeypatch.setattr(module, 'sha256', asset_digest)
+    if not teacher_matches:
+        with pytest.raises(ValueError, match='asset hash'): module.asset_files(bundle, 'pilot')
+        return
     files, records = module.asset_files(bundle, 'pilot')
     assert len(records) == 64 and all(r.role == 'train' for r in records)
     assert len({r.dataset for r in records}) == 4

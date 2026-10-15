@@ -192,10 +192,13 @@ def test_legacy_missing_sample_policy_does_not_enter_teacher_fitting(source, rol
         assert 'legacy_nonfinite_zero_fill' in flags
 
 
-def test_real_manifest_has_frozen_support_and_unknown_masks():
+def test_sealed_manifest_has_frozen_support_and_unknown_masks():
     module = api()
-    config = json.loads((ROOT / 'configs/founder_transfer_2026-10-14.json').read_text())
-    rows = module.build_pair_manifest(ROOT, config)
+    from titan_v4.reproducibility.pretrained_transfer.execution import verify_frozen_inputs
+    from titan_v4.reproducibility.pretrained_transfer.contracts import PairedRecord
+    rows = [PairedRecord(**r) for r in verify_frozen_inputs(
+        ROOT / 'outputs/reviewer_verification/founder_transfer_2026-10-14',
+        ROOT / 'configs/founder_transfer_2026-10-14.json')]
     train = [r for r in rows if r.role == 'train']
     removed = [r for r in rows if r.role == 'train_excluded']
     assert len(train) == 22540

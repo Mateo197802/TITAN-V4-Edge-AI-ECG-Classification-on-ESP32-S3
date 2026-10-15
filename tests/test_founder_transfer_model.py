@@ -8,7 +8,6 @@ import pytest
 import torch
 
 ROOT = Path(__file__).resolve().parents[1]
-CHECKPOINT = ROOT / 'data/cache/external_teachers/ecgfounder/12_lead_ECGFounder.pth'
 
 
 def api():
@@ -71,13 +70,16 @@ def test_unapproved_pickle_global_is_not_executed(tmp_path):
         module.restricted_load(path)
 
 
-def test_adaptation_changes_only_dense_and_preserves_random_state():
+def test_adaptation_changes_only_dense_and_preserves_random_state(tmp_path, monkeypatch):
     module = api()
+    checkpoint = tmp_path / 'synthetic_teacher.pth'
+    torch.save({'state_dict': module.build_founder(outputs=150).state_dict()}, checkpoint)
+    monkeypatch.setattr(module, 'FOUNDER_SHA256', module.sha256(checkpoint))
     torch.manual_seed(47)
     initial_rng = torch.get_rng_state().clone()
-    rhythm = module.load_founder(CHECKPOINT, outputs=9, seed=20261014)
+    rhythm = module.load_founder(checkpoint, outputs=9, seed=20261014)
     assert torch.equal(torch.get_rng_state(), initial_rng)
-    pathology = module.load_founder(CHECKPOINT, outputs=10, seed=20261014)
+    pathology = module.load_founder(checkpoint, outputs=10, seed=20261014)
     assert rhythm.first_conv.conv.weight.shape == (64, 12, 16)
     assert rhythm.dense.weight.shape == (9, 1024)
     assert pathology.dense.weight.shape == (10, 1024)
