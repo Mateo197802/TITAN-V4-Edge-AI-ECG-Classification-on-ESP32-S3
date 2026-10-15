@@ -57,8 +57,9 @@ and every class/source decision are in `teachers/status.json` and
 These are teacher results, not student deployment results. Job 29644 completed
 0:0 in 520 GPU-seconds and exported rhythm ensemble targets for exactly 22,540
 training keys. The target cache joins against the original references and
-source/tensor hashes; no pathology teacher is included. Student comparisons
-(job 29650) and source replay must also complete before the
+source/tensor hashes; no pathology teacher is included. Student job 29650
+completed 0:0 in 1,438 GPU-seconds with 535 sealed payload files. Source replay
+must also complete before the
 whole-study verifier can pass. Input, feature and zero-step pilot checks do
 not establish student improvement.
 
@@ -86,6 +87,27 @@ source reconstruction is a separate, mandatory integration check: use
 `scripts/prepare_founder_transfer.py --output <fresh-input-directory> --offline`
 with the pinned source cache present, followed by the source-inference verifier.
 Synthetic fixture success is not a claim about pretrained-model performance.
+
+## Frozen Student Selection
+
+The three permitted arms (supervised, train-balanced BN recalibration, rhythm
+transfer) were evaluated with all three registered seeds. The fixed deployment
+seed and three-seed comparison retained the warm-start: none demonstrated the
+required joint improvement. The separate supervised repeat reproduced all eight
+epoch states and validation logits. Pathology/joint transfer was not run because
+its teacher was not eligible. No comparison reference or evaluation case changed.
+
+| Retained student validation | Records | Accuracy | Macro-F1 |
+| --- | --- | --- | --- |
+| Rhythm | 1,476 | 85.4336% | 84.8157% |
+| Pathology, Primary-5 | 2,027 | 95.7375% per label | 43.2334% threshold-cross-fit |
+
+These are the retained student's own scores, not the twelve-lead teacher's.
+The first source replay (job 29655) stopped on a loader family mismatch before
+inference. The corrected retry preserves its failed allocation/log and adds
+support for all six pinned historical Challenge families without changing
+source bytes, labels or the older refinement loader. Whole-study verification
+and publication remain pending the completed retry and independent CPU checks.
 
 Manager commands require an explicit state directory and this bundle path.
 The CEDIA study registry, not the local directory, accounts for submissions,

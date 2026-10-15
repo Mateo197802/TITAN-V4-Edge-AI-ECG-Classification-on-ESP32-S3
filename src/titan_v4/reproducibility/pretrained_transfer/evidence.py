@@ -4,8 +4,9 @@ import csv
 import hashlib
 import io
 import json
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import tarfile
+from urllib.parse import quote
 
 import numpy as np
 from scipy.special import expit, softmax
@@ -20,7 +21,8 @@ from .selection import load_predictions, prediction_metrics, qualify_teachers, s
 from .distillation import join_teacher_targets
 from .students import load_exported_student, _producer_artifacts, ARMS, require_arm, assert_student_preserved
 from .inputs import load_pair, load_student_tensor
-from titan_v4.reproducibility.refinement import ensure_record, RELEASES
+from titan_v4.reproducibility.refinement import _ensure_file, RELEASES, source_release as refinement_source_release
+from titan_v4.reproducibility.physionet import dataset_for_record
 from titan_v4.reproducibility.joint_refinement import pathology_metrics, PRIMARY5_INDEX
 from titan_v4.reproducibility.supervision_control import patient_folds
 
@@ -236,6 +238,38 @@ def _source_row(record):
             'signal_sha256': record.signal_sha256}
 
 
+def validated_source_release(record):
+    row = _source_row(record)
+    relative = safe_relative(record.record_path)
+    if row['source_release'] == 'challenge-2021':
+        if (len(relative.parts) != 4 or relative.parts[:2] != ('training', record.dataset)
+                or dataset_for_record('training/' + record.dataset, relative.name) != record.dataset):
+            raise ValueError('Historical Challenge family/path differs')
+        release = 'challenge-2021'
+    else:
+        release = refinement_source_release(row)
+    if row['source_release'] != release or record.version != RELEASES[release][0]:
+        raise ValueError('Source release/version differs')
+    signal = PurePosixPath(record.signal_filename)
+    if signal.name != record.signal_filename or signal.stem != relative.name or signal.suffix not in ('.dat', '.mat'):
+        raise ValueError('Source signal filename differs')
+    return release
+
+
+def ensure_source(record, data_root, *, offline):
+    release = validated_source_release(record)
+    root = (data_root / release / record.version).resolve()
+    relative = safe_relative(record.record_path)
+    header = root / (relative.as_posix() + '.hea')
+    signal_relative = relative.parent / record.signal_filename
+    signal = root / signal_relative
+    if not header.resolve().is_relative_to(root) or not signal.resolve().is_relative_to(root):
+        raise ValueError('Source cache path escapes release')
+    url = 'https://physionet.org/files/' + release + '/' + record.version + '/'
+    _ensure_file(header, url + quote(relative.as_posix(), safe='/') + '.hea', record.header_sha256, not offline)
+    _ensure_file(signal, url + quote(signal_relative.as_posix(), safe='/'), record.signal_sha256, not offline)
+
+
 def source_tensors(records, data_root, *, offline):
     unique = {}
     for r in records:
@@ -244,7 +278,7 @@ def source_tensors(records, data_root, *, offline):
             raise ValueError('Inconsistent source replay key identity')
         unique[r.key] = r
     def load(record):
-        ensure_record(_source_row(record), data_root, download=not offline)
+        ensure_source(record, data_root, offline=offline)
         if record.role in ('historical', 'tracking'):
             tensor, flags = load_student_tensor(record, data_root)
         else:

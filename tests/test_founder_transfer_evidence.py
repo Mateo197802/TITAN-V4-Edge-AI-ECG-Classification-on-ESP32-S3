@@ -111,6 +111,40 @@ def test_registered_nonwinning_trials_cannot_be_omitted_from_packet():
         api().assert_trial_coverage([], [], adaptation={}, eligible={})
 
 
+def test_historical_challenge_families_keep_their_pinned_source_cache():
+    from titan_v4.reproducibility.pretrained_transfer.contracts import PairedRecord
+    from titan_v4.reproducibility.pretrained_transfer.execution import verify_frozen_inputs
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[1]
+    records = [PairedRecord(**r) for r in verify_frozen_inputs(
+        root / 'outputs/reviewer_verification/founder_transfer_2026-10-14',
+        root / 'configs/founder_transfer_2026-10-14.json')]
+    historical = [r for r in records if r.role == 'historical']
+    assert len(historical) == 672
+    assert {api().validated_source_release(r) for r in historical} == {'challenge-2021'}
+
+
+def test_historical_source_cannot_change_family_or_release():
+    from dataclasses import replace
+    record = replace(rows()[0], role='historical', key='ningbo/1.0.3/JS00012',
+                     record_path='training/chapman_shaoxing/g1/JS00012', source_release='challenge-2021')
+    with pytest.raises(ValueError): api().validated_source_release(record)
+
+
+def test_replay_source_download_preserves_hash_checks_and_offline_mode(tmp_path, monkeypatch):
+    from dataclasses import replace
+    from titan_v4.reproducibility import refinement
+    header, signal = b'pinned header', b'pinned signal'
+    record = replace(rows()[0], record_path='records500/00000/00001_hr', signal_filename='00001_hr.dat',
+                     header_sha256=hashlib.sha256(header).hexdigest(), signal_sha256=hashlib.sha256(signal).hexdigest())
+    monkeypatch.setattr(refinement, '_http_bytes', lambda url: header if url.endswith('.hea') else signal)
+    with pytest.raises(FileNotFoundError): api().ensure_source(record, tmp_path, offline=True)
+    api().ensure_source(record, tmp_path, offline=False)
+    api().ensure_source(record, tmp_path, offline=True)
+    (tmp_path / 'ptb-xl/1.0.3/records500/00000/00001_hr.dat').write_bytes(b'tampered')
+    with pytest.raises(ValueError, match='hash'): api().ensure_source(record, tmp_path, offline=False)
+
+
 @pytest.mark.parametrize('change', ['active', 'missing_job', 'negative', 'bucket', 'total'])
 def test_allocation_receipt_cannot_hide_failed_time_or_exceed_budget(change):
     receipt = {'active': [], 'total': 58 / 3600, 'buckets': {'preparation': 58 / 3600},
