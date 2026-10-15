@@ -35,10 +35,26 @@ as an installation record, not a model-evaluation result.
 
 ## Execution Status
 
-Teacher job 29627 completed 0:0 in 4,376 GPU-seconds. Its sealed packet is being
-retrieved. Soft-target export, student comparisons and independent source
-replay must also complete before the whole-study verifier can pass. Input,
-feature and zero-step pilot checks do not establish student improvement.
+Teacher job 29627 completed 0:0 in 4,376 GPU-seconds. Its 125-file inventory
+and validation references passed verification; all 30 trial decisions were
+independently recalculated from the published predictions. One additional
+head fit repeated with identical parameters and logits.
+
+| Twelve-lead teacher | Three-seed mean accuracy | Three-seed mean macro-F1 | Transfer decision |
+| --- | --- | --- | --- |
+| Rhythm, canonical filtered, final stage | 88.7986% | 87.1488% | Eligible |
+| Pathology, canonical unfiltered, final stage | 95.3626% per label | 47.8978% Primary-5 cross-fit | Not selected; class recall regressed |
+
+The rhythm mean-logit ensemble scores 88.7534% accuracy and 87.0605% macro-F1
+on 1,476 validation ECGs. Pathology uses 2,027 native validation ECGs; its
+warm-start Primary-5 cross-fit macro-F1 is 43.2334%. The teacher comparisons
+and every class/source decision are in `teachers/status.json` and
+`teachers/teacher-fits/*/result.json`.
+
+These are teacher results, not student deployment results. Soft-target export,
+student comparisons and source replay must also complete before the
+whole-study verifier can pass. Input, feature and zero-step pilot checks do
+not establish student improvement.
 
 The fixed protocol is in
 `docs/superpowers/plans/2026-10-14-founder-transfer.md`. Fitting and threshold
