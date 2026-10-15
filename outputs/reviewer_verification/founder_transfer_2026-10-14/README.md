@@ -43,7 +43,7 @@ head fit repeated with identical parameters and logits.
 | Twelve-lead teacher | Three-seed mean accuracy | Three-seed mean macro-F1 | Transfer decision |
 | --- | --- | --- | --- |
 | Rhythm, canonical filtered, final stage | 88.7986% | 87.1488% | Eligible |
-| Pathology, canonical unfiltered, final stage | 95.3626% per label | 47.8978% Primary-5 cross-fit | Not selected; class recall regressed |
+| Pathology, canonical unfiltered, final stage | 95.3626% Primary-5 per label | 47.8978% Primary-5 cross-fit | Not selected; class recall regressed |
 
 The rhythm mean-logit ensemble scores 88.7534% accuracy and 87.0605% macro-F1
 on 1,476 validation ECGs. Pathology uses 2,027 native validation ECGs; its
@@ -51,8 +51,11 @@ warm-start Primary-5 cross-fit macro-F1 is 43.2334%. The teacher comparisons
 and every class/source decision are in `teachers/status.json` and
 `teachers/teacher-fits/*/result.json`.
 
-These are teacher results, not student deployment results. Soft-target export,
-student comparisons and source replay must also complete before the
+These are teacher results, not student deployment results. Job 29644 completed
+0:0 in 520 GPU-seconds and exported rhythm ensemble targets for exactly 22,540
+training keys. The target cache joins against the original references and
+source/tensor hashes; no pathology teacher is included. Student comparisons
+(job 29650) and source replay must also complete before the
 whole-study verifier can pass. Input, feature and zero-step pilot checks do
 not establish student improvement.
 

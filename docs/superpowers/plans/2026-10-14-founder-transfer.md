@@ -17,7 +17,7 @@ Execution checkpoints (2026-10-15):
 - [x] Task 2: pinned teacher adapter and restricted serialization.
 - [x] Task 3: isolated runtime and zero-step A100 pilot (job 29619).
 - [x] Task 4: endpoint teacher qualification (30 trials and deterministic repeat, job 29627).
-- [ ] Task 5: qualified training-only soft targets.
+- [x] Task 5: qualified training-only soft targets (22,540 keyed rows, job 29644).
 - [ ] Task 6: same-architecture student comparisons.
 - [ ] Task 7: selected-model source replay and reviewer publication.
 
