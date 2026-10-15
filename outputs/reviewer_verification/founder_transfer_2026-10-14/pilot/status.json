@@ -1,0 +1,21 @@
+{
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "peak_bytes": 204987392,
+  "records_checked": 64,
+  "forward_backward_batch": 8,
+  "teacher_logits_shape": [
+    8,
+    150
+  ],
+  "adapted_head_gradient_finite": true,
+  "student_parameters": 1143751,
+  "student_repeated_outputs_equal": true,
+  "input_tensor_mutated": false,
+  "optimizer_steps": 0,
+  "stage": "pilot",
+  "attempt": 2,
+  "job_id": 29619,
+  "code_sha256": "6ea83ddea3c66d86ca43cdff7bc5b3a3aa025f48e92c399c09983555a386868f",
+  "paired_manifest_sha256": "b27acd413edf89bda192c7a03b38bd6ba9e6c799da34e490dab832bd25c4e3b5",
+  "completed": true
+}

@@ -12,6 +12,18 @@
 
 ## Global Constraints
 
+Execution checkpoints (2026-10-15):
+- [x] Task 1: paired inputs and complete source/tensor audit.
+- [x] Task 2: pinned teacher adapter and restricted serialization.
+- [x] Task 3: isolated runtime and zero-step A100 pilot (job 29619).
+- [ ] Task 4: endpoint teacher qualification.
+- [ ] Task 5: qualified training-only soft targets.
+- [ ] Task 6: same-architecture student comparisons.
+- [ ] Task 7: selected-model source replay and reviewer publication.
+
+The detailed steps below preserve the original implementation instructions;
+execution receipts are in `outputs/reviewer_verification/founder_transfer_2026-10-14/`.
+
 - Deployed student: 1,143,751 parameters, four existing heads, six leads I, II, III, aVR, aVL, aVF, 125 Hz, float32 `[B,6,1250]`.
 - Rhythm order: AFIB, SB, STACH, NSR, PVC, RBBB, LBBB, PAC, 1AVB.
 - Pathology order: IMI, ASMI, LVH, ISC_, ISCAL, NST_, ILMI, AMI, ALMI, LAE; Primary-5 indices `[0,8,6,9,3]`.
@@ -245,9 +257,6 @@ published revision. Scientific improvement is a separate measured outcome.
 
 Plan self-review must check interface names, exact task masks, prospective
 selection criteria, five review-focus failure modes and budget accounting.
-No execution method has been selected yet. Recommended method: native
-implementation in this session with a fresh whole-branch reviewer before
-publication, because the paired-input, loss and provenance contracts are
-tightly coupled and the GPU sequence is necessarily staged. Alternatively,
-use fresh task implementers and task reviewers for the seven tasks. Obtain
-user review and method selection before starting Task 1 implementation.
+The user selected native implementation in this session with independent final
+review. Execution is staged because teacher eligibility must be established
+before transfer; no further design approval is required for this fixed plan.
