@@ -251,9 +251,11 @@ def test_worker_recovers_reserved_submission_after_lost_submit_response(tmp_path
         module.worker_receipt(tmp_path, stage, 452, receipt['job_name'])
 
 
-def test_unimplemented_stage_is_rejected_before_remote_allocation():
+def test_unimplemented_stage_is_rejected_before_remote_allocation(monkeypatch):
+    module = api()
+    monkeypatch.setattr(module, 'IMPLEMENTED_STAGES', ('bootstrap', 'pilot'))
     with pytest.raises(NotImplementedError):
-        api().submission_program({'remote_root': '/study', 'stage_root': '/study/stages/students'}, 'students', 40)
+        module.submission_program({'remote_root': '/study', 'stage_root': '/study/stages/students'}, 'students', 40)
 
 
 @pytest.mark.parametrize('change', ['attempt', 'job_id', 'code_sha256', 'extra'])

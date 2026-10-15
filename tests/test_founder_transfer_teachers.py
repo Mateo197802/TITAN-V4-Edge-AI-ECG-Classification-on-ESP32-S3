@@ -171,3 +171,12 @@ def test_teacher_delta_requires_exact_input_and_label_semantics(tmp_path, field)
     path = tmp_path / 'checkpoint.pth'; torch.save(state, path)
     with pytest.raises(ValueError, match='provenance'):
         module.load_teacher_delta(tmp_path, path, endpoint='rhythm', seed=20261014)
+
+
+def test_final_stage_can_repair_a_promising_probe_without_promoting_it():
+    probe = {'endpoint': 'rhythm', 'contract': 'canonical_unfiltered', 'eligible': False,
+             'mean': metrics(.82), 'control': metrics(.8), 'warm_control': metrics(.8)}
+    assert teacher().adaptation_candidates({'decisions': [probe]})['rhythm'] == 'canonical_unfiltered'
+    assert probe['eligible'] is False
+    probe['mean'] = metrics(.79)
+    assert teacher().adaptation_candidates({'decisions': [probe]}) == {}

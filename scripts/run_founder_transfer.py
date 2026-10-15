@@ -53,6 +53,25 @@ def seal(root, stage, data, artifacts=None):
     (root / 'SHA256SUMS.json').write_text(json.dumps(manifest, indent=2) + '\n')
 
 
+def public_fit_artifacts(bundle, stage_root, namespace):
+    artifacts, origins = {}, {}
+    source = bundle / namespace
+    for file in source.rglob('*'):
+        if not file.is_file() or file.name in ('training_state.pth', 'SHA256SUMS.json'):
+            continue
+        if file.suffix not in ('.pth', '.json', '.npz', '.csv'): continue
+        name = file.relative_to(bundle).as_posix()
+        if file.suffix == '.json':
+            target = stage_root / 'public-json' / name; target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(json.dumps(public_paths(json.loads(file.read_text()), bundle), sort_keys=True, indent=2) + '\n')
+            origins[name] = {'original_sha256': digest(file), 'published_sha256': digest(target),
+                             'transformation': 'study-relative paths only'}
+            artifacts[name] = target
+        else: artifacts[name] = file
+    inventories = {p.relative_to(bundle).as_posix(): digest(p) for p in source.rglob('SHA256SUMS.json')}
+    return artifacts, {'json_derivations': origins, 'source_fit_inventory_sha256': inventories}
+
+
 def bootstrap_commands(python, requirements, reports):
     common = [str(python), '-m', 'pip', 'install']
     return [common + ['--upgrade', 'pip==25.0.1'],
@@ -180,18 +199,20 @@ def main():
     elif args.stage == 'teachers':
         from titan_v4.reproducibility.pretrained_transfer.teachers import run_teachers
         result = run_teachers(args.bundle)
-        artifacts = {}
-        for trial in (args.bundle / 'teacher-fits').iterdir():
-            for name in ('validation.csv', 'validation.npz', 'checkpoint.pth'):
-                file = trial / name
-                if file.is_file(): artifacts[file.relative_to(args.bundle).as_posix()] = file
-        seal(args.stage_root / 'results', 'teachers', {'qualification': public_paths(result, args.bundle)}, artifacts)
+        artifacts, origins = public_fit_artifacts(args.bundle, args.stage_root, 'teacher-fits')
+        seal(args.stage_root / 'results', 'teachers', {'qualification': public_paths(result, args.bundle), **origins}, artifacts)
     elif args.stage == 'targets':
         from titan_v4.reproducibility.pretrained_transfer.distillation import export_teacher_targets
         qualification = json.loads((args.bundle / 'teacher_qualification.json').read_text())
         path = export_teacher_targets(args.bundle, qualification)
         artifacts = {f.relative_to(args.bundle).as_posix(): f for f in path.iterdir() if f.is_file()}
         seal(args.stage_root / 'results', 'targets', {'target_metadata': json.loads((path / 'metadata.json').read_text())}, artifacts)
+    elif args.stage == 'students':
+        from titan_v4.reproducibility.pretrained_transfer.students import run_students
+        result = run_students(args.bundle)
+        artifacts, origins = public_fit_artifacts(args.bundle, args.stage_root, 'student-fits')
+        artifacts['models/student_start.pth'] = args.bundle / 'models/student_start.pth'
+        seal(args.stage_root / 'results', 'students', {'selection': public_paths(result, args.bundle), **origins}, artifacts)
     else:
         raise NotImplementedError('This stage must have its tested implementation before submission')
 

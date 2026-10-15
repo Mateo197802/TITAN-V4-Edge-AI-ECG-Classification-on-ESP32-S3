@@ -342,6 +342,23 @@ def fit_teacher(bundle: Path, *, endpoint: str, contract: str, seed: int, stage:
     return result
 
 
+def adaptation_candidates(qualification):
+    selected = {}
+    for endpoint in ('rhythm', 'pathology'):
+        candidates = []
+        for result in qualification['decisions']:
+            if result['endpoint'] != endpoint: continue
+            controls = [result['control']] + ([result['warm_control']] if 'warm_control' in result else [])
+            mean = result['mean']
+            supported = all(mean['macro_f1'] + 1e-12 >= base['macro_f1'] and (
+                mean['accuracy'] + 1e-12 >= base['accuracy'] - .005 if endpoint == 'rhythm'
+                else mean['macro_ap'] + 1e-12 >= base['macro_ap']) for base in controls)
+            if supported: candidates.append(result)
+        if candidates:
+            selected[endpoint] = max(candidates, key=lambda r: (r['mean']['macro_f1'], r['contract']))['contract']
+    return selected
+
+
 def run_teachers(bundle):
     allocation()
     control_root = bundle / 'teacher-controls'
@@ -355,13 +372,9 @@ def run_teachers(bundle):
                 results.append(fit_teacher(bundle, endpoint=endpoint, contract=contract, seed=seed, stage='heads'))
     heads = qualify_teachers(results, control)
     _json(bundle / 'head_qualification.json', heads)
-    for endpoint in ('rhythm', 'pathology'):
-        candidates = [r for r in heads['decisions'] if r['endpoint'] == endpoint and r['eligible']]
-        if not candidates:
-            continue
-        selected = max(candidates, key=lambda r: (r['mean']['macro_f1'], r['contract']))
+    for endpoint, contract in adaptation_candidates(heads).items():
         for seed in SEEDS:
-            results.append(fit_teacher(bundle, endpoint=endpoint, contract=selected['contract'], seed=seed, stage='adapt'))
+            results.append(fit_teacher(bundle, endpoint=endpoint, contract=contract, seed=seed, stage='adapt'))
     repeated = fit_teacher(bundle, endpoint='rhythm', contract='canonical_unfiltered',
                            seed=20261014, stage='heads', repeat=True)
     original = next(r for r in results if (r['endpoint'], r['contract'], r['seed'], r['stage']) ==

@@ -166,3 +166,98 @@ def qualify_teachers(results, controls):
             chosen[endpoint] = decision
     return {'scope': 'validation', 'decisions': decisions, 'eligible': chosen,
             'seeds': list(SEEDS), 'selection_uses_tracking': False}
+
+
+def mean_endpoint(metrics):
+    result = {name: float(np.mean([m[name] for m in metrics])) for name in ('macro_f1', 'accuracy', 'macro_ap')}
+    for group in ('classes', 'sources'):
+        if any(set(m[group]) != set(metrics[0][group]) for m in metrics):
+            raise ValueError('Endpoint strata differ')
+        result[group] = {}
+        for name, reference in metrics[0][group].items():
+            values = [m[group][name] for m in metrics]
+            if any(v['support'] != reference['support'] for v in values):
+                raise ValueError('Endpoint support differs')
+            averaged = {'support': reference['support']}
+            for field in ('recall', 'ap', 'f1', 'macro_f1'):
+                if all(field in v for v in values): averaged[field] = float(np.mean([v[field] for v in values]))
+            result[group][name] = averaged
+    return result
+
+
+def student_eligibility(measures, baseline):
+    if len(measures) != 3 or len(baseline) != 3:
+        raise ValueError('Student comparisons require all three seeds')
+    mean = {e: mean_endpoint([m[e] for m in measures]) for e in ('rhythm', 'pathology')}
+    control = {e: mean_endpoint([m[e] for m in baseline]) for e in ('rhythm', 'pathology')}
+    delta = {e: mean[e]['macro_f1'] - control[e]['macro_f1'] for e in mean}
+    reasons = []
+    if not ((delta['rhythm'] >= .01 - 1e-12 and delta['pathology'] >= -.005 - 1e-12)
+            or (delta['pathology'] >= .01 - 1e-12 and delta['rhythm'] >= -.005 - 1e-12)):
+        reasons.append('no_guarded_endpoint_gain')
+    if mean['rhythm']['accuracy'] + 1e-12 < control['rhythm']['accuracy'] - .005:
+        reasons.append('rhythm_accuracy_regression')
+    for endpoint in mean:
+        for group, field, minimum, allowed in (('classes', 'recall', 20, .05), ('sources', 'macro_f1', 100, .02)):
+            if set(mean[endpoint][group]) != set(control[endpoint][group]):
+                raise ValueError('Student comparison strata differ')
+            for name, base in control[endpoint][group].items():
+                candidate = mean[endpoint][group][name]
+                if candidate['support'] != base['support']:
+                    raise ValueError('Student comparison support differs')
+                if base['support'] >= minimum and candidate[field] + 1e-12 < base[field] - allowed:
+                    reasons.append(endpoint + ':' + group + ':' + name)
+    return {'eligible': not reasons, 'mean': mean, 'baseline': control, 'deltas': delta, 'reasons': reasons}
+
+
+def select_students(results, controls):
+    from .students import ARMS, load_exported_student
+    groups = defaultdict(list)
+    for record in results:
+        if record.get('scope') != 'validation' or record.get('arm') not in ARMS or record.get('seed') not in SEEDS:
+            raise ValueError('Student selection is validation-only with registered arms/seeds')
+        groups[record['arm']].append(record)
+    if 'supervised' not in groups:
+        raise ValueError('Missing supervised three-seed comparison')
+    measured = {}
+    arrays = {}
+    for arm, records in groups.items():
+        records.sort(key=lambda r: r['seed'])
+        if [r['seed'] for r in records] != list(SEEDS):
+            raise ValueError('Missing or duplicate student seed')
+        measured[arm] = []
+        for record in records:
+            load_exported_student(Path(record['checkpoint']), record['checkpoint_sha256'])
+            data = {e: load_predictions(record['validation'][e]) for e in ('rhythm', 'pathology')}
+            arrays[(arm, record['seed'])] = data
+            measured[arm].append({e: prediction_metrics(data[e], e) for e in data})
+    for (arm, seed), data in arrays.items():
+        reference = arrays[('supervised', seed)]
+        for endpoint in data:
+            if any(not np.array_equal(data[endpoint][k], reference[endpoint][k])
+                   for k in ('keys', 'labels', 'mask', 'sources', 'patients', 'roles', 'classes')):
+                raise ValueError('Student comparison validation identities differ')
+    table, candidates = [], []
+    for arm in sorted(groups):
+        decision = student_eligibility(measured[arm], measured['supervised'])
+        fixed = student_eligibility([measured[arm][0]] * 3, [measured['supervised'][0]] * 3)
+        decision.update(arm=arm, fixed_seed=SEEDS[0], fixed_seed_eligible=fixed['eligible'],
+                        fixed_seed_reasons=fixed['reasons'], seed_metrics=measured[arm],
+                        total_fit_seconds=sum(r['elapsed_seconds'] for r in groups[arm]))
+        table.append(decision)
+        if decision['eligible'] and fixed['eligible']:
+            candidates.append((decision, groups[arm][0]))
+    if candidates:
+        decision, chosen = min(candidates, key=lambda pair: (
+            -(pair[0]['mean']['rhythm']['macro_f1'] + pair[0]['mean']['pathology']['macro_f1']) / 2,
+            pair[0]['total_fit_seconds'], pair[0]['arm']))
+        metrics = measured[decision['arm']][0]
+        return {'scope': 'validation', 'selected_arm': decision['arm'], 'seed': SEEDS[0], 'promoted': True,
+                'checkpoint': chosen['checkpoint'], 'checkpoint_sha256': chosen['checkpoint_sha256'],
+                'thresholds': prediction_metrics(arrays[(decision['arm'], SEEDS[0])]['pathology'], 'pathology')['thresholds'],
+                'metrics': metrics, 'comparisons': table, 'selection_uses_tracking': False}
+    load_exported_student(Path(controls['checkpoint']), controls['checkpoint_sha256'])
+    return {'scope': 'validation', 'selected_arm': 'warm_start', 'seed': SEEDS[0], 'promoted': False,
+            'checkpoint': controls['checkpoint'], 'checkpoint_sha256': controls['checkpoint_sha256'],
+            'thresholds': controls['metrics']['pathology']['thresholds'], 'metrics': controls['metrics'],
+            'comparisons': table, 'selection_uses_tracking': False}

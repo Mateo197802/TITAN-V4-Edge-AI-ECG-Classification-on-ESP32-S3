@@ -99,6 +99,14 @@ source strata with at least 100 cases, endpoint macro-F1 may fall by at most
 0.02. Report smaller strata in full, not as passed guards. These are prospective
 research choices, not confidence intervals or guaranteed improvements.
 
+Before any teacher fit, optional final-stage feasibility is resolved as follows:
+the head probe's three-seed mean macro-F1 must be noninferior to both retained
+and primary controls; rhythm accuracy must remain within 0.005 and pathology
+macro-AP must be noninferior too. Select the strongest supported preprocessing
+contract for its three final-stage fits. This feasibility check does not
+qualify a teacher for transfer: full endpoint, class/source and ensemble rules
+above still apply after fitting.
+
 Each eligible endpoint retains all three teacher seed checkpoints. Its transfer
 teacher is their mean-logit ensemble, not the best-scoring seed. Require the
 ensemble itself to satisfy the same endpoint/class/source rules; calibrate
