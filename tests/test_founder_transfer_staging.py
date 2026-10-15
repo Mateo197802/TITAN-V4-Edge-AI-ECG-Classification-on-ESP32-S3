@@ -78,6 +78,22 @@ def test_resealed_stage_cannot_replace_the_preparation_identity(tmp_path):
         execution().verify_prepared_stage(tmp_path, expected)
 
 
+def test_dependency_requires_a_successful_exact_sealed_producer(tmp_path):
+    stage = tmp_path / 'stages/teachers'; stage.mkdir(parents=True)
+    identity = {'stage': 'teachers', 'attempt': 1, 'job_id': 451,
+                'code_sha256': 'a' * 64, 'paired_manifest_sha256': 'b' * 64}
+    (stage / 'SUBMISSION.json').write_text(json.dumps(identity))
+    with pytest.raises(ValueError):
+        execution().successful_stage(tmp_path, 'teachers', run=lambda c: '451|COMPLETED|0:0|60\n')
+
+
+def test_public_provenance_paths_are_relative_and_cannot_leak_foreign_roots(tmp_path):
+    module = execution()
+    assert module.public_paths({'path': str(tmp_path / 'models/x.pth')}, tmp_path) == {'path': 'models/x.pth'}
+    with pytest.raises(ValueError):
+        module.public_paths({'path': str(tmp_path.parent / 'private.pth')}, tmp_path)
+
+
 def test_unsealed_result_is_not_success(tmp_path):
     module = api()
     with pytest.raises(ValueError, match='sealed'):

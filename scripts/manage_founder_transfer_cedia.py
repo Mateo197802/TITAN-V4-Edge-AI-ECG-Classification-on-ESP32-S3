@@ -21,9 +21,9 @@ from titan_v4.reproducibility.refinement import sha256
 from titan_v4.reproducibility.pretrained_transfer.execution import (
     safe_relative, verify_inventory, verify_frozen_inputs, verify_result, MANIFEST_SHA)
 
-STAGES = ('bootstrap', 'pilot', 'features', 'teachers', 'students', 'replay')
-IMPLEMENTED_STAGES = ('bootstrap', 'pilot', 'features', 'teachers')
-BUCKET = {s: 'preparation' if s in STAGES[:3] else 'teachers' if s == 'teachers' else 'students' for s in STAGES}
+STAGES = ('bootstrap', 'pilot', 'features', 'teachers', 'targets', 'students', 'replay')
+IMPLEMENTED_STAGES = ('bootstrap', 'pilot', 'features', 'teachers', 'targets')
+BUCKET = {s: 'preparation' if s in STAGES[:3] else 'teachers' if s in ('teachers', 'targets') else 'students' for s in STAGES}
 LIMITS = {'preparation': 4.5, 'teachers': 21., 'students': 22.5}
 RUN_NAME = 'TITAN-V4-Founder-Transfer-2026-10-14'
 
@@ -182,6 +182,8 @@ if {stage_name!r} not in ('bootstrap','pilot'):
   if job['state']=='COMPLETED' and job['exit_code']=='0:0':
    verify_result(candidate/'results',expected); valid_pilots.append(expected['job_id'])
  if not valid_pilots:raise ValueError('Pilot must complete before fitting')
+if {stage_name!r}=='teachers':successful_stage(root,'features')
+if {stage_name!r}=='targets':successful_stage(root,'teachers')
 if {stage_name!r}=='bootstrap':python=pathlib.Path.home()/'V4_CEDIA_LINK/.venv_audit/bin/python'
 else:
  env=json.loads((root/'ENVIRONMENT.json').read_text())['relative_env']

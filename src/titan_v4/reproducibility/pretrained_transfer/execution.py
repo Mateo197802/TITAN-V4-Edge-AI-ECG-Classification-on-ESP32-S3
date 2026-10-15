@@ -11,7 +11,7 @@ import uuid
 MANIFEST_SHA = 'b27acd413edf89bda192c7a03b38bd6ba9e6c799da34e490dab832bd25c4e3b5'
 CONFIG_SHA = '609d7a3e0bc4bcd68133f0a7449fb5e81f839dbe5b70f8623123e1cfba6f3009'
 BUCKETS = {'bootstrap': 'preparation', 'pilot': 'preparation', 'features': 'preparation',
-           'teachers': 'teachers', 'students': 'students', 'replay': 'students'}
+           'teachers': 'teachers', 'targets': 'teachers', 'students': 'students', 'replay': 'students'}
 CEILINGS = {'preparation': 4.5, 'teachers': 21., 'students': 22.5}
 IDENTITY_FIELDS = ('stage', 'attempt', 'job_id', 'code_sha256', 'paired_manifest_sha256')
 
@@ -186,6 +186,40 @@ def worker_receipt(root, stage_root, job_id, job_name, run=_run):
     if receipt.get('job_id') != job_id:
         raise ValueError('Worker job identity differs')
     return receipt
+
+
+def public_paths(value, bundle):
+    if isinstance(value, dict):
+        return {k: public_paths(v, bundle) for k, v in value.items()}
+    if isinstance(value, list):
+        return [public_paths(v, bundle) for v in value]
+    if isinstance(value, str) and Path(value).is_absolute():
+        path = Path(value).resolve()
+        if not path.is_relative_to(Path(bundle).resolve()):
+            raise ValueError('Foreign private path in public provenance')
+        return path.relative_to(Path(bundle).resolve()).as_posix()
+    return value
+
+
+def successful_stage(root, stage, run=_run):
+    candidates = []
+    for directory in (Path(root) / 'stages').glob(stage + '*'):
+        receipt = directory / 'SUBMISSION.json'
+        if not receipt.is_file() or not (directory / 'results/SHA256SUMS.json').is_file():
+            continue
+        expected = json.loads(receipt.read_text())
+        if expected.get('stage') != stage or 'job_id' not in expected:
+            continue
+        output = run(['sacct', '-j', str(expected['job_id']), '--noheader', '--parsable2',
+                      '--format=JobIDRaw,State,ExitCode,ElapsedRaw'])
+        rows = [line.split('|') for line in output.splitlines() if line.split('|')[0] == str(expected['job_id'])]
+        if len(rows) != 1 or rows[0][1:3] != ['COMPLETED', '0:0']:
+            continue
+        status = verify_result(directory / 'results', expected)['status']
+        candidates.append((expected['attempt'], status))
+    if not candidates:
+        raise ValueError('No successful sealed dependency: ' + stage)
+    return max(candidates, key=lambda r: r[0])[1]
 
 
 @contextmanager

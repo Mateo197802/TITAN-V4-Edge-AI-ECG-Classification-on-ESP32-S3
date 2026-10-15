@@ -164,7 +164,7 @@ without further fit decisions. This plan does not assert a new untouched test.
 
 **Files:** Create `scripts/manage_founder_transfer_cedia.py`, `scripts/run_founder_transfer.py`; test `tests/test_founder_transfer_staging.py`.
 
-**Interfaces:** Manager CLI actions `prepare`, `submit`, `status`, `fetch`, each requiring `--state-dir --bundle`; submit also requires `--stage bootstrap|pilot|features|teachers|students|replay`. Worker CLI requires `--bundle --stage`. Reuse existing strict SSH transport `manage_joint_cedia_run.rpc`; do not inherit its old NPZ assumptions. Save one immutable submission identity per stage/run.
+**Interfaces:** Manager CLI actions `prepare`, `submit`, `status`, `fetch`, each requiring `--state-dir --bundle`; submit also requires `--stage bootstrap|pilot|features|teachers|targets|students|replay`. The `targets` allocation separates Task 5 export from fitting and counts toward the unchanged teacher budget. Worker CLI requires `--bundle --stage`. Reuse existing strict SSH transport `manage_joint_cedia_run.rpc`; do not inherit its old NPZ assumptions. Save one immutable submission identity per stage/run.
 
 - [ ] **Step 1: Write failing tests** rejecting path traversal, links escaping the project root, repeated stage submission, missing pinned files, over-budget submission, nonzero/partial Slurm results and unsealed retrieval. Assert only the immutable stage selection/configuration reaches the worker.
   ```python

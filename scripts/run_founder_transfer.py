@@ -12,7 +12,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
 from titan_v4.reproducibility.pretrained_transfer.execution import (
-    verify_frozen_inputs, verify_inventory, file_sha, IDENTITY_FIELDS, allocation_lock, worker_receipt, safe_relative)
+    verify_frozen_inputs, verify_inventory, file_sha, IDENTITY_FIELDS, allocation_lock, worker_receipt, safe_relative, public_paths)
 
 
 def submission_identity(bundle, stage_root, stage, attempt):
@@ -51,16 +51,6 @@ def seal(root, stage, data, artifacts=None):
     (root / 'status.json').write_text(json.dumps({**data, **IDENTITY, 'completed': True}, indent=2) + '\n')
     manifest = {f.relative_to(root).as_posix(): digest(f) for f in root.rglob('*') if f.is_file()}
     (root / 'SHA256SUMS.json').write_text(json.dumps(manifest, indent=2) + '\n')
-
-
-def public_paths(value, bundle):
-    if isinstance(value, dict):
-        return {k: public_paths(v, bundle) for k, v in value.items()}
-    if isinstance(value, list):
-        return [public_paths(v, bundle) for v in value]
-    if isinstance(value, str) and value.startswith(str(bundle) + '/'):
-        return Path(value).relative_to(bundle).as_posix()
-    return value
 
 
 def bootstrap_commands(python, requirements, reports):
@@ -196,6 +186,12 @@ def main():
                 file = trial / name
                 if file.is_file(): artifacts[file.relative_to(args.bundle).as_posix()] = file
         seal(args.stage_root / 'results', 'teachers', {'qualification': public_paths(result, args.bundle)}, artifacts)
+    elif args.stage == 'targets':
+        from titan_v4.reproducibility.pretrained_transfer.distillation import export_teacher_targets
+        qualification = json.loads((args.bundle / 'teacher_qualification.json').read_text())
+        path = export_teacher_targets(args.bundle, qualification)
+        artifacts = {f.relative_to(args.bundle).as_posix(): f for f in path.iterdir() if f.is_file()}
+        seal(args.stage_root / 'results', 'targets', {'target_metadata': json.loads((path / 'metadata.json').read_text())}, artifacts)
     else:
         raise NotImplementedError('This stage must have its tested implementation before submission')
 
