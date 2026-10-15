@@ -1,5 +1,9 @@
 import importlib.util
+import hashlib
+import io
+import json
 from pathlib import Path
+import tarfile
 
 import pytest
 
@@ -31,3 +35,18 @@ def test_packet_copy_rejects_unlisted_existing_files(tmp_path):
     target = tmp_path / 'target'; target.mkdir(); (target / 'unlisted').write_bytes(b'extra')
     with pytest.raises(ValueError, match='different'):
         api().copy_exact(source, target)
+
+
+@pytest.mark.parametrize('stage', ['bootstrap', 'teachers'])
+def test_legacy_installation_snapshot_is_never_a_submission_bound_model_result(stage):
+    data = b'pass\n'; manifest = json.dumps({'code/worker.py': hashlib.sha256(data).hexdigest()}).encode()
+    buffer = io.BytesIO()
+    with tarfile.open(fileobj=buffer, mode='w:gz') as archive:
+        for name, raw in {'code/worker.py': data, 'INPUT_SHA256.json': manifest}.items():
+            info = tarfile.TarInfo(name); info.size = len(raw); archive.addfile(info, io.BytesIO(raw))
+    if stage == 'bootstrap':
+        receipt = api().snapshot_identity({'stage': stage}, buffer.getvalue())
+        assert receipt == {'code_sha256': hashlib.sha256(manifest).hexdigest(), 'submission_bound': False}
+    else:
+        with pytest.raises(ValueError, match='identity'):
+            api().snapshot_identity({'stage': stage}, buffer.getvalue())

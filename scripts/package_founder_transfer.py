@@ -1,5 +1,6 @@
 """Collect completed immutable stage packets, code snapshots and sanitized logs."""
 import argparse
+import hashlib
 import io
 import json
 from pathlib import Path
@@ -14,10 +15,21 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 
 from manage_founder_transfer_cedia import _accounting, _fetch, stage_key, validate_archive
 from manage_joint_cedia_run import rpc
-from titan_v4.reproducibility.pretrained_transfer.execution import file_sha, safe_relative, verify_result
+from titan_v4.reproducibility.pretrained_transfer.execution import file_sha, safe_relative, verify_result, verify_inventory
 from titan_v4.reproducibility.pretrained_transfer.evidence import verify_allocation_receipt, verify_stage_snapshot
 
 REQUIRED = ('features', 'teachers', 'targets', 'students', 'replay')
+
+
+def snapshot_identity(state, blob):
+    expected = state.get('code_sha256')
+    bound = expected is not None
+    if not bound:
+        if state['stage'] != 'bootstrap': raise ValueError('Missing model-stage submission identity')
+        with tarfile.open(fileobj=io.BytesIO(blob), mode='r:gz') as archive:
+            expected = hashlib.sha256(archive.extractfile('INPUT_SHA256.json').read()).hexdigest()
+    verify_stage_snapshot(blob, expected)
+    return {'code_sha256': expected, 'submission_bound': bound}
 
 
 def copy_exact(source, target):
@@ -42,7 +54,9 @@ for state in states:
  root=pathlib.Path(state['remote_root']); stage=pathlib.Path(state['stage_root'])
  if not stage.resolve().is_relative_to((root/'stages').resolve()):raise ValueError('Foreign stage')
  raw=(stage/'INPUT_SHA256.json').read_bytes()
- if hashlib.sha256(raw).hexdigest()!=state['code_sha256']:raise ValueError('Changed stage identity')
+ measured=hashlib.sha256(raw).hexdigest();expected=state.get('code_sha256')
+ if expected and measured!=expected:raise ValueError('Changed stage identity')
+ if not expected and state['stage']!='bootstrap':raise ValueError('Missing model-stage identity')
  manifest=json.loads(raw); archive=io.BytesIO()
  with tarfile.open(fileobj=archive,mode='w:gz') as target:
   for name,expected in manifest.items():
@@ -61,7 +75,7 @@ for state in states:
    text=text.replace(str(path),token)
   published=text.encode('utf-8');name='logs/'+key+'/'+label+'.txt';files[name]=published
   receipts[label]={'original_sha256':hashlib.sha256(original).hexdigest(),'published_sha256':hashlib.sha256(published).hexdigest(),'transformation':'UTF-8 and private path replacement'}
- files['logs/'+key+'/receipt.json']=(json.dumps({'job_id':state['job_id'],'stage':state['stage'],'attempt':state.get('attempt',1),'streams':receipts},sort_keys=True,indent=2)+'\\n').encode()
+ files['logs/'+key+'/receipt.json']=(json.dumps({'job_id':state['job_id'],'stage':state['stage'],'attempt':state.get('attempt',1),'streams':receipts,'snapshot':{'code_sha256':measured,'submission_bound':expected is not None}},sort_keys=True,indent=2)+'\\n').encode()
 outer=io.BytesIO()
 with tarfile.open(fileobj=outer,mode='w:gz') as archive:
  for name,raw in files.items():
@@ -74,7 +88,9 @@ sys.stdout.buffer.write(outer.getvalue())
         for member in archive.getmembers(): files[member.name] = archive.extractfile(member).read()
     for state in states:
         key = stage_key(state['stage'], state.get('attempt', 1))
-        verify_stage_snapshot(files['snapshots/' + key + '-code.tar.gz'], state['code_sha256'])
+        identity = snapshot_identity(state, files['snapshots/' + key + '-code.tar.gz'])
+        receipt = json.loads(files['logs/' + key + '/receipt.json'])
+        if receipt['snapshot'] != identity: raise ValueError('Snapshot receipt differs')
     return files
 
 
@@ -105,19 +121,25 @@ def main():
             _fetch(SimpleNamespace(state_dir=args.state_dir, stage=stage, attempt=state.get('attempt', 1)), accounting)
         verify_result(source, state)
         copy_exact(source, args.bundle / stage)
+    for state in states:
+        if state['stage'] != 'bootstrap': continue
+        key = stage_key(state['stage'], state.get('attempt', 1)); source = args.state_dir / (key + '-results')
+        if not source.exists(): continue
+        verify_inventory(source, json.loads((source / 'SHA256SUMS.json').read_text()), exact=True, seal_name='SHA256SUMS.json')
+        copy_exact(source, args.bundle / 'installation' / key)
     assets = args.state_dir / 'publication-assets'
     if not assets.exists():
         files = collect_execution_assets(states)
         assets.mkdir()
         for name, raw in files.items():
             path = assets / safe_relative(name); path.parent.mkdir(parents=True, exist_ok=True); path.write_bytes(raw)
-    snapshot_identities = {stage_key(s['stage'], s.get('attempt', 1)) + '-code.tar.gz': s['code_sha256'] for s in states}
+    snapshot_states = {stage_key(s['stage'], s.get('attempt', 1)) + '-code.tar.gz': s for s in states}
     for path in sorted(assets.rglob('*')):
         if not path.is_file(): continue
         relative = path.relative_to(assets); target = args.bundle / relative
         if target.exists():
             if relative.parts[0] == 'snapshots':
-                verify_stage_snapshot(target.read_bytes(), snapshot_identities[path.name])
+                snapshot_identity(snapshot_states[path.name], target.read_bytes())
             elif file_sha(target) != file_sha(path):
                 raise ValueError('Refuse to overwrite different execution evidence')
             continue
