@@ -272,3 +272,25 @@ def test_result_seal_rejects_stale_submission_and_unlisted_files(tmp_path, chang
         (tmp_path / 'unexpected.csv').write_text('unsealed')
     with pytest.raises(ValueError):
         module.verify_result(tmp_path, expected)
+
+
+def test_interrupted_trial_is_preserved_and_can_restart(tmp_path):
+    output = tmp_path / 'fits' / 'trial'; output.mkdir(parents=True)
+    (output / 'partial.pth').write_bytes(b'original partial evidence')
+    assert execution().prepare_fit_trial(output, {'seed': 1}) is None
+    assert not output.exists()
+    archived = list((tmp_path / 'fits/.interrupted').glob('*/partial.pth'))
+    assert len(archived) == 1 and archived[0].read_bytes() == b'original partial evidence'
+
+
+def test_completed_trial_is_reused_only_when_sealed_identity_matches(tmp_path):
+    output = tmp_path / 'trial'; output.mkdir()
+    record = {'fit_identity': {'seed': 1}}
+    (output / 'result.json').write_text(json.dumps(record))
+    inventory = {'result.json': hashlib.sha256((output / 'result.json').read_bytes()).hexdigest()}
+    (output / 'SHA256SUMS.json').write_text(json.dumps(inventory))
+    assert execution().prepare_fit_trial(output, {'seed': 1}) == record
+    with pytest.raises(ValueError, match='identity'):
+        execution().prepare_fit_trial(output, {'seed': 2})
+    (output / 'result.json').write_text('{}')
+    with pytest.raises(ValueError): execution().prepare_fit_trial(output, {'seed': 1})

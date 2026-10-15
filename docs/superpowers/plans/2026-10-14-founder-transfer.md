@@ -124,6 +124,11 @@ For a single deployed student, preselect seed `20261014`: it must independently
 satisfy the same promotion rules. Report its own results alongside the
 three-seed summary; do not attribute ensemble or mean scores to its PTH.
 
+If no recalibration/transfer arm qualifies against supervised-only, retain the
+supervised continuation when its three-seed mean and fixed deployment seed
+both improve the warm-start under the same rules. Otherwise retain the warm
+checkpoint. A supervised-only gain is not attributed to distillation.
+
 Use existing `patient_folds` and `crossfit_pathology` on observed native
 validation labels; use full-validation thresholds only for subsequently frozen
 tracking inference. Source/class AP, support and calibration folds accompany

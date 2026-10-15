@@ -24,6 +24,34 @@ def file_sha(path):
     return h.hexdigest()
 
 
+def fit_identity(kind, **fields):
+    modules = ('teachers.py', 'founder.py', 'inputs.py', 'selection.py', 'contracts.py')
+    if kind == 'student': modules += ('students.py', 'distillation.py')
+    root = Path(__file__).parent
+    return {'kind': kind, 'configuration_sha256': CONFIG_SHA, 'paired_manifest_sha256': MANIFEST_SHA,
+            'implementation_sha256': {name: file_sha(root / name) for name in modules}, **fields}
+
+
+def prepare_fit_trial(output, identity):
+    output = Path(output)
+    if not output.exists(): return None
+    parent = output.parent.resolve()
+    if output.is_symlink() or not output.resolve().is_relative_to(parent):
+        raise ValueError('Unsafe trial recovery path')
+    seal = output / 'SHA256SUMS.json'
+    if seal.is_file():
+        verify_inventory(output, json.loads(seal.read_text()), exact=True, seal_name='SHA256SUMS.json')
+        result = json.loads((output / 'result.json').read_text())
+        if result.get('fit_identity') != identity:
+            raise ValueError('Completed fit identity differs; preserve the previous study')
+        return result
+    archive = parent / '.interrupted' / (output.name + '-' + uuid.uuid4().hex)
+    if not archive.resolve().is_relative_to(parent): raise ValueError('Unsafe partial-trial archive')
+    archive.parent.mkdir(exist_ok=True)
+    output.rename(archive)
+    return None
+
+
 def safe_relative(name):
     posix, windows = PurePosixPath(name), PureWindowsPath(name)
     if (not posix.parts or str(posix) != name or posix.is_absolute() or windows.drive or windows.root

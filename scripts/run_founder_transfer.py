@@ -57,6 +57,7 @@ def public_fit_artifacts(bundle, stage_root, namespace):
     artifacts, origins = {}, {}
     source = bundle / namespace
     for file in source.rglob('*'):
+        if '.interrupted' in file.relative_to(source).parts: continue
         if not file.is_file() or file.name in ('training_state.pth', 'SHA256SUMS.json'):
             continue
         if file.suffix not in ('.pth', '.json', '.npz', '.csv'): continue
@@ -68,7 +69,8 @@ def public_fit_artifacts(bundle, stage_root, namespace):
                              'transformation': 'study-relative paths only'}
             artifacts[name] = target
         else: artifacts[name] = file
-    inventories = {p.relative_to(bundle).as_posix(): digest(p) for p in source.rglob('SHA256SUMS.json')}
+    inventories = {p.relative_to(bundle).as_posix(): digest(p) for p in source.rglob('SHA256SUMS.json')
+                   if '.interrupted' not in p.relative_to(source).parts}
     return artifacts, {'json_derivations': origins, 'source_fit_inventory_sha256': inventories}
 
 
@@ -213,6 +215,12 @@ def main():
         artifacts, origins = public_fit_artifacts(args.bundle, args.stage_root, 'student-fits')
         artifacts['models/student_start.pth'] = args.bundle / 'models/student_start.pth'
         seal(args.stage_root / 'results', 'students', {'selection': public_paths(result, args.bundle), **origins}, artifacts)
+    elif args.stage == 'replay':
+        from titan_v4.reproducibility.pretrained_transfer.evidence import run_source_replay
+        result = run_source_replay(args.bundle)
+        artifacts = {f.relative_to(args.bundle).as_posix(): f for f in (args.bundle / 'source-replay').rglob('*')
+                     if f.is_file()}
+        seal(args.stage_root / 'results', 'replay', {'report': result}, artifacts)
     else:
         raise NotImplementedError('This stage must have its tested implementation before submission')
 

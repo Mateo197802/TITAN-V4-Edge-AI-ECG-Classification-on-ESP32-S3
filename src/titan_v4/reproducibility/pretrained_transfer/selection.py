@@ -256,6 +256,16 @@ def select_students(results, controls):
                 'checkpoint': chosen['checkpoint'], 'checkpoint_sha256': chosen['checkpoint_sha256'],
                 'thresholds': prediction_metrics(arrays[(decision['arm'], SEEDS[0])]['pathology'], 'pathology')['thresholds'],
                 'metrics': metrics, 'comparisons': table, 'selection_uses_tracking': False}
+    continuation = student_eligibility(measured['supervised'], [controls['metrics']] * 3)
+    continuation_fixed = student_eligibility([measured['supervised'][0]] * 3, [controls['metrics']] * 3)
+    if continuation['eligible'] and continuation_fixed['eligible']:
+        chosen = groups['supervised'][0]
+        return {'scope': 'validation', 'selected_arm': 'supervised', 'seed': SEEDS[0], 'promoted': True,
+                'checkpoint': chosen['checkpoint'], 'checkpoint_sha256': chosen['checkpoint_sha256'],
+                'thresholds': measured['supervised'][0]['pathology']['thresholds'],
+                'metrics': measured['supervised'][0], 'comparisons': table, 'selection_uses_tracking': False,
+                'supervised_vs_warm': continuation, 'supervised_fixed_vs_warm': continuation_fixed,
+                'transfer_improvement': False}
     load_exported_student(Path(controls['checkpoint']), controls['checkpoint_sha256'])
     return {'scope': 'validation', 'selected_arm': 'warm_start', 'seed': SEEDS[0], 'promoted': False,
             'checkpoint': controls['checkpoint'], 'checkpoint_sha256': controls['checkpoint_sha256'],

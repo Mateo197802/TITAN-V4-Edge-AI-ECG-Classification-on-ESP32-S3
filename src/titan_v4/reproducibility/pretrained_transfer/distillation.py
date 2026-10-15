@@ -116,8 +116,9 @@ def write_target_cache(output, records, teacher_logits, qualification, *, produc
     return output
 
 
-def join_teacher_targets(records, cache):
+def join_teacher_targets(records, cache, *, checkpoint_root=None):
     cache = Path(cache).resolve()
+    checkpoint_root = cache.parent if checkpoint_root is None else Path(checkpoint_root).resolve()
     requested = _references(records)
     verify_inventory(cache, json.loads((cache / 'SHA256SUMS.json').read_text()), exact=True, seal_name='SHA256SUMS.json')
     metadata = json.loads((cache / 'metadata.json').read_text())
@@ -128,7 +129,7 @@ def join_teacher_targets(records, cache):
     if file_sha(cache / 'qualification.json') != metadata['qualification_sha256']:
         raise ValueError('Qualification receipt hash differs')
     qualification = json.loads((cache / 'qualification.json').read_text())
-    if _qualification(qualification, cache.parent) != metadata['teachers']:
+    if _qualification(qualification, checkpoint_root) != metadata['teachers']:
         raise ValueError('Teacher metadata differs from qualification')
     for description in metadata['teachers'].values():
         if description['contract_sha256'] != contract_fingerprint(description['contract']):
@@ -136,8 +137,8 @@ def join_teacher_targets(records, cache):
         if [c['seed'] for c in description['checkpoints']] != list(SEEDS):
             raise ValueError('Missing teacher checkpoint seed')
         for c in description['checkpoints']:
-            file = cache.parent / safe_relative(c['path'])
-            if not file.resolve().is_relative_to(cache.parent.resolve()) or file_sha(file) != c['sha256']:
+            file = checkpoint_root / safe_relative(c['path'])
+            if not file.resolve().is_relative_to(checkpoint_root) or file_sha(file) != c['sha256']:
                 raise ValueError('Teacher checkpoint hash differs')
     with np.load(cache / 'targets.npz', allow_pickle=False) as archive:
         arrays = {k: archive[k] for k in archive.files}

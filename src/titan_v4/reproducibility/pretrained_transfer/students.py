@@ -28,7 +28,7 @@ def _architecture(model):
         for field in ('in_channels', 'out_channels', 'kernel_size', 'stride', 'padding', 'dilation',
                       'groups', 'in_features', 'out_features', 'num_features', 'eps', 'momentum', 'p', 'inplace'):
             if hasattr(module, field): attributes[field] = getattr(module, field)
-        signature.append((name, type(module).__name__, attributes))
+        signature.append((name, type(module).__name__, attributes, module.extra_repr()))
     return signature
 
 
@@ -67,6 +67,11 @@ def load_exported_student(path, expected_sha):
             or data.get('parameters') != 1143751):
         raise ValueError('Student exported head metadata differs')
     with torch.random.fork_rng(devices=[]): model = TitanV4Lite(in_channels=6, num_rhythm=9, num_pathology=10)
+    expected = model.state_dict(); state = data['state_dict']
+    if state.keys() != expected.keys() or any(
+            not isinstance(value, torch.Tensor) or value.shape != expected[name].shape
+            or value.dtype != expected[name].dtype or not torch.isfinite(value).all() for name, value in state.items()):
+        raise ValueError('Student checkpoint state shape/dtype/value differs')
     model.load_state_dict(data['state_dict'], strict=True)
     if any(not torch.isfinite(v).all() for v in model.state_dict().values()):
         raise ValueError('Nonfinite student state')
@@ -194,13 +199,25 @@ def _save_student(path, model, seed, arm, epoch):
                 'input_contract': {'leads': ['I', 'II', 'III', 'aVR', 'aVL', 'aVF'], 'hz': 125, 'samples': 1250}}, path)
 
 
+def training_snapshot(model, optimizer, scheduler, *, epoch, seed):
+    return {'optimizer': optimizer.state_dict(), 'scheduler': scheduler.state_dict(),
+            'torch_rng': torch.get_rng_state(), 'cuda_rng': torch.cuda.get_rng_state_all(),
+            'training_buffers': {name: value.detach().cpu().clone() for name, value in model.named_buffers()},
+            'permutation_seed': seed + epoch, 'next_permutation_seed': seed + epoch + 1, 'epoch': epoch}
+
+
 def fit_student(bundle: Path, *, arm: str, seed: int, repeat=False) -> dict:
     device = allocation(seed)
     if seed not in SEEDS: raise ValueError('Unregistered student seed')
     rows, train, x, lookup, targets, metadata = student_data(bundle)
     require_arm(arm, metadata['teachers'])
     trial = arm + '-' + str(seed) + ('-repeat' if repeat else '')
-    output = bundle / 'student-fits' / trial; output.mkdir(parents=True, exist_ok=False)
+    from .execution import fit_identity, prepare_fit_trial
+    identity = fit_identity('student', arm=arm, seed=seed, repeat=repeat)
+    output = bundle / 'student-fits' / trial
+    completed = prepare_fit_trial(output, identity)
+    if completed is not None: return completed
+    output.mkdir(parents=True, exist_ok=False)
     start = time.monotonic()
     model = load_student(bundle / 'models/student_start.pth').to(device)
     initial = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
@@ -271,15 +288,13 @@ def fit_student(bundle: Path, *, arm: str, seed: int, repeat=False) -> dict:
             best = {**record, 'fallback': False}; score = utility
         if saved_buffers is not None:
             for name, value in model.named_buffers(): value.copy_(saved_buffers[name])
-        torch.save({'optimizer': optimizer.state_dict(), 'scheduler': scheduler.state_dict(),
-                    'torch_rng': torch.get_rng_state(), 'cuda_rng': torch.cuda.get_rng_state_all(),
-                    'permutation_seed': seed + epoch, 'epoch': epoch}, epoch_root / 'training_state.pth')
+        torch.save(training_snapshot(model, optimizer, scheduler, epoch=epoch, seed=seed), epoch_root / 'training_state.pth')
         _json(epoch_root / 'result.json', record)
         print(json.dumps({'student': trial, 'epoch': epoch, 'rhythm_macro_f1': measured['metrics']['rhythm']['macro_f1'],
                           'pathology_macro_f1': measured['metrics']['pathology']['macro_f1'], 'eligible': decision['eligible']}), flush=True)
     result = {**best, 'scope': 'validation', 'arm': arm, 'seed': seed, 'history': history,
               'elapsed_seconds': time.monotonic() - start, 'parameters': 1143751,
-              'warm_start_sha256': STUDENT_SHA256, 'optimizer_resume': False}
+              'warm_start_sha256': STUDENT_SHA256, 'optimizer_resume': False, 'fit_identity': identity}
     _json(output / 'result.json', result); seal_directory(output)
     return result
 

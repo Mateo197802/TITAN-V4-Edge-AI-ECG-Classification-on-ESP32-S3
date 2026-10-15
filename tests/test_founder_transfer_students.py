@@ -173,3 +173,55 @@ def test_fixed_deployment_seed_must_qualify_independently(tmp_path, monkeypatch)
     assert result['selected_arm'] == 'joint_transfer' and result['seed'] == SEEDS[0]
     rejected = next(r for r in result['comparisons'] if r['arm'] == 'rhythm_transfer')
     assert rejected['eligible'] and not rejected['fixed_seed_eligible']
+
+
+def test_student_checkpoint_cannot_silently_cast_weight_dtype(tmp_path):
+    from pathlib import Path
+    from titan_v4.reproducibility.pretrained_transfer.execution import file_sha
+    root = Path(__file__).resolve().parents[1]
+    data = torch.load(root / 'outputs/reviewer_verification/supervision_control_2026-10-14/model/joint_selected.pth',
+                      map_location='cpu', weights_only=True)
+    data['state_dict']['stem.0.weight'] = data['state_dict']['stem.0.weight'].half()
+    path = tmp_path / 'wrong_dtype.pth'; torch.save(data, path)
+    with pytest.raises(ValueError, match='state'):
+        api().load_exported_student(path, file_sha(path))
+
+
+def test_student_operator_fingerprint_includes_padding_behavior():
+    value = model(); value.stem[0].padding_mode = 'reflect'
+    with pytest.raises(ValueError):
+        api().assert_deployment_contract(value)
+
+
+def test_improved_supervised_control_is_not_discarded_when_transfer_adds_nothing(tmp_path, monkeypatch):
+    from titan_v4.reproducibility.pretrained_transfer.contracts import SEEDS
+    module = selection()
+    monkeypatch.setattr(api(), 'load_exported_student', lambda *a: None)
+    def data(record):
+        return {'keys': np.array(['one']), 'labels': np.array([0]), 'mask': np.array([1]),
+                'sources': np.array(['source']), 'patients': np.array(['patient']),
+                'roles': np.array([record['endpoint'] + '_validation']), 'classes': np.array(['class']),
+                'fixture_metrics': record['fixture_metrics']}
+    monkeypatch.setattr(module, 'load_predictions', data)
+    monkeypatch.setattr(module, 'prediction_metrics', lambda d, endpoint: d['fixture_metrics'])
+    results = []
+    for seed in SEEDS:
+        measure = measures(.82, .52); measure['pathology']['thresholds'] = [.5] * 10
+        results.append({'scope': 'validation', 'arm': 'supervised', 'seed': seed,
+            'checkpoint': str(tmp_path / ('supervised-' + str(seed) + '.pth')), 'checkpoint_sha256': 'a' * 64,
+            'elapsed_seconds': 1, 'validation': {e: {'endpoint': e, 'fixture_metrics': m} for e, m in measure.items()}})
+    warm = measures(); warm['pathology']['thresholds'] = [.5] * 10
+    selected = module.select_students(results, {'checkpoint': 'warm.pth', 'checkpoint_sha256': 'b' * 64, 'metrics': warm})
+    assert selected['selected_arm'] == 'supervised' and selected['promoted']
+
+
+def test_new_training_receipt_preserves_pre_recalibration_buffers(monkeypatch):
+    value = model()
+    optimizer = torch.optim.AdamW(value.head_rhythm.parameters(), lr=.001)
+    scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lambda _: 1.)
+    monkeypatch.setattr(torch.cuda, 'get_rng_state_all', lambda: [])
+    snapshot = api().training_snapshot(value, optimizer, scheduler, epoch=2, seed=20261014)
+    saved = snapshot['training_buffers']['stem.1.running_mean'].clone()
+    value.stem[1].running_mean.add_(1)
+    assert torch.equal(snapshot['training_buffers']['stem.1.running_mean'], saved)
+    assert snapshot['next_permutation_seed'] == 20261017

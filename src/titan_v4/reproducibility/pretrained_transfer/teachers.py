@@ -270,7 +270,12 @@ def fit_teacher(bundle: Path, *, endpoint: str, contract: str, seed: int, stage:
     # Validation is compact; fitting tensors remain disk-backed and batch indexed.
     val_values = np.asarray(values[val_ids])
     trial_name = '-'.join((endpoint, contract, stage, str(seed))) + ('-repeat' if repeat else '')
-    output = bundle / 'teacher-fits' / trial_name; output.mkdir(parents=True, exist_ok=False)
+    from .execution import fit_identity, prepare_fit_trial
+    identity = fit_identity('teacher', endpoint=endpoint, contract=contract, seed=seed, stage=stage, repeat=repeat)
+    output = bundle / 'teacher-fits' / trial_name
+    completed = prepare_fit_trial(output, identity)
+    if completed is not None: return completed
+    output.mkdir(parents=True, exist_ok=False)
     if stage == 'adapt':
         parent = bundle / 'teacher-fits' / '-'.join((endpoint, contract, 'heads', str(seed))) / 'checkpoint.pth'
         model = load_teacher_delta(bundle, parent, endpoint=endpoint, seed=seed)
@@ -337,7 +342,7 @@ def fit_teacher(bundle: Path, *, endpoint: str, contract: str, seed: int, stage:
     result = save_predictions(output, validation, logits, endpoint)
     result.update(contract=contract, seed=seed, stage=stage, checkpoint=str(output / 'checkpoint.pth'),
                   checkpoint_sha256=file_sha(output / 'checkpoint.pth'), elapsed_seconds=time.monotonic() - start,
-                  frozen_state_unchanged=True, epochs=len(history), history=history)
+                  frozen_state_unchanged=True, epochs=len(history), history=history, fit_identity=identity)
     _json(output / 'result.json', result); seal_directory(output)
     return result
 
