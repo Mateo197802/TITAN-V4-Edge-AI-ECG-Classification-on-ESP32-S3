@@ -11,6 +11,9 @@ measured outcomes.
   original bytes, including all evaluation records. The new fitting allowlist
   contains 22,540 records; 27 source/tensor-identical historical aliases remain
   preserved with role `train_excluded` and do not enter the new fits.
+- `inputs/source-reconstruction-2026-10-15.json`: a separate complete rebuild
+  reverified all 28,913 source/tensor pairs and seven archived numerical inputs.
+  Its regenerated paired manifest has the same SHA-256 as the frozen manifest.
 - `model_inspection.json`: pinned 150-output teacher architecture and safe
   serialization checks. External weights stay outside Git.
 - `pilot/status.json`: Slurm job 29619 completed with exit code 0:0 on an
