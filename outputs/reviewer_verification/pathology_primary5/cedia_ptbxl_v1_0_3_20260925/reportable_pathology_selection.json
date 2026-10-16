@@ -1,0 +1,75 @@
+{
+  "selection_status": "frozen_before_final_evaluation",
+  "canonical_pathology_10": [
+    "IMI",
+    "ASMI",
+    "LVH",
+    "ISC_",
+    "ISCAL",
+    "NST_",
+    "ILMI",
+    "AMI",
+    "ALMI",
+    "LAE"
+  ],
+  "reportable_pathologies": [
+    "IMI",
+    "ALMI",
+    "ILMI",
+    "LAE",
+    "ISC_"
+  ],
+  "quarantine_pathologies": [
+    "AMI",
+    "ISCAL"
+  ],
+  "auxiliary_pathologies": [
+    "ASMI",
+    "LVH",
+    "NST_"
+  ],
+  "target_per_label_accuracy": 0.8,
+  "target_macro_f1": 0.7,
+  "rules": {
+    "reportable": "best-supported pathology labels used for primary claim",
+    "quarantine": "weak, ambiguous, or low-performing pathology labels evaluated separately",
+    "no_test_time_class_switching": true
+  },
+  "per_class": [
+    {
+      "class_name": "IMI",
+      "role": "reportable_pathology",
+      "reason": "selected_for_primary_accuracy_and_macro_f1_gate"
+    },
+    {
+      "class_name": "ALMI",
+      "role": "reportable_pathology",
+      "reason": "selected_for_primary_accuracy_and_macro_f1_gate"
+    },
+    {
+      "class_name": "ILMI",
+      "role": "reportable_pathology",
+      "reason": "selected_for_primary_accuracy_and_macro_f1_gate"
+    },
+    {
+      "class_name": "LAE",
+      "role": "reportable_pathology",
+      "reason": "selected_for_primary_accuracy_and_macro_f1_gate"
+    },
+    {
+      "class_name": "ISC_",
+      "role": "reportable_pathology",
+      "reason": "selected_for_primary_accuracy_and_macro_f1_gate"
+    },
+    {
+      "class_name": "AMI",
+      "role": "pathology_quarantine",
+      "reason": "excluded_from_primary_metric_and_evaluated_separately"
+    },
+    {
+      "class_name": "ISCAL",
+      "role": "pathology_quarantine",
+      "reason": "excluded_from_primary_metric_and_evaluated_separately"
+    }
+  ]
+}

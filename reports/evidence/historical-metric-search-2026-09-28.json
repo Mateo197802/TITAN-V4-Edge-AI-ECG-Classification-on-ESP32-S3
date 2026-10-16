@@ -1,0 +1,170 @@
+{
+  "protocol": "TITAN_V4_HISTORICAL_METRIC_LINEAGE_SEARCH_V1",
+  "audit_date": "2026-09-28",
+  "scope": "TITAN V4 only; remote CEDIA files were inspected read-only. The directory named Mateo Gavilanes contains a separate V4.5 project and was not used as V4 evidence.",
+  "search_coverage": {
+    "cedia_v4_text_files_checked": 482,
+    "cedia_v4_text_bytes_checked": 76414025,
+    "exact_historical_value_hits_in_checked_cedia_text": 0,
+    "git_lfs_prediction_artifacts_found": false,
+    "reachable_git_history_contains_historical_prediction_rows": false,
+    "detached_git_blobs": 11,
+    "detached_blob_with_evaluation_script_identity": true,
+    "v4_5_text_files_checked_separately": 210,
+    "v4_5_archive_text_members_checked_separately": 179,
+    "v4_5_exact_historical_value_hits": 0
+  },
+  "primary9": {
+    "historical_aggregate": {
+      "correct": 605,
+      "records": 672,
+      "accuracy": 0.9002976190476191,
+      "macro_f1": 0.8781916793252358,
+      "weighted_f1": 0.9008533778242968,
+      "record_level_predictions_available": false,
+      "checkpoint_sha256": null
+    },
+    "public_checkpoint_against_historical_targets": {
+      "correct": 568,
+      "records": 672,
+      "accuracy": 0.8452380952380952,
+      "macro_f1": 0.8235192633143207,
+      "reproduces_historical_605": false
+    },
+    "additional_saved_cedia_runs": [
+      {
+        "run": "TEACHER_PRIMARY9_EVAL",
+        "report_path": "03_OUTPUTS/TEACHER_PRIMARY9_EVAL/holdout_raw_report.json",
+        "report_sha256": "306953519a474f8631c36d58ec183be2f0a409363542f9e927a991bcee390256",
+        "prediction_manifest_path": "03_OUTPUTS/TEACHER_PRIMARY9_EVAL/primary9_full_672_audit_manifest.csv",
+        "prediction_manifest_sha256": "b23a28111e5a48eac87525bcb850fcb34a1f6c924b27ef5f1b643f421b06427c",
+        "saved_report_metrics": {
+          "correct": 328,
+          "records": 672,
+          "accuracy": 0.4880952380952381,
+          "macro_f1": 0.40883754472559364,
+          "calibrated": false,
+          "per_class_thresholds_applied": false
+        },
+        "reaggregated_predictions": {
+          "against_canonical_source_labels": {
+            "correct": 338,
+            "accuracy": 0.5029761904761905,
+            "macro_f1": 0.44584928887460784
+          },
+          "against_historical_labels": {
+            "correct": 375,
+            "accuracy": 0.5580357142857143,
+            "macro_f1": 0.4841282436393885
+          }
+        },
+        "test_target_override_crosscheck": {
+          "changed_targets": 50,
+          "changed_record_ids_equal_override_table": true,
+          "changed_values_equal_override_table": true,
+          "override_table_notes_are_ai_generated": true,
+          "this_model_predictions_matching_override_values": 9
+        },
+        "adjacent_checkpoint_candidate": {
+          "path": "03_OUTPUTS/TEACHER_PRIMARY9/titan_v4_lite_weights_best.pth",
+          "sha256": "a226acf2105789cb8d4c4d9419b33c71ff3472a92b3e7f83836b6b9a6704511d",
+          "hash_recorded_in_evaluation_report": false
+        }
+      },
+      {
+        "run": "TEACHER_PRIMARY9_FULLUNFREEZE_EVAL",
+        "report_path": "03_OUTPUTS/TEACHER_PRIMARY9_FULLUNFREEZE_EVAL/holdout_raw_report.json",
+        "report_sha256": "7a5ae4eb8e024d4944e6a40746ec37bec0bbc0f119d852fb52938ed126ac4765",
+        "prediction_manifest_path": "03_OUTPUTS/TEACHER_PRIMARY9_FULLUNFREEZE_EVAL/primary9_full_672_audit_manifest.csv",
+        "prediction_manifest_sha256": "db1c53b64e1e55dbba9efa01d2ac35aaed3d0938c21a9d655325f4186b142949",
+        "saved_report_metrics": {
+          "correct": 340,
+          "records": 672,
+          "accuracy": 0.5059523809523809,
+          "macro_f1": 0.41845556061363776,
+          "calibrated": false,
+          "per_class_thresholds_applied": false
+        },
+        "reaggregated_predictions": {
+          "against_canonical_source_labels": {
+            "correct": 346,
+            "accuracy": 0.5148809523809523,
+            "macro_f1": 0.4460883072003011
+          },
+          "against_historical_labels": {
+            "correct": 399,
+            "accuracy": 0.59375,
+            "macro_f1": 0.5048664572115693
+          }
+        },
+        "test_target_override_crosscheck": {
+          "changed_targets": 50,
+          "changed_record_ids_equal_override_table": true,
+          "changed_values_equal_override_table": true,
+          "override_table_notes_are_ai_generated": true,
+          "this_model_predictions_matching_override_values": 12
+        },
+        "adjacent_checkpoint_candidate": {
+          "path": "03_OUTPUTS/TEACHER_PRIMARY9_FULLUNFREEZE/titan_v4_lite_weights_best.pth",
+          "sha256": "9d27737f1d8f7aca0267fc7a251f4f38f327fd9b5affefc04f4364c02fe9b6ea",
+          "hash_recorded_in_evaluation_report": false
+        }
+      }
+    ],
+    "log_only_runs": {
+      "records_evaluated": 672,
+      "reported_accuracy": 0.5505952380952381,
+      "reported_macro_f1": 0.44975365179528937,
+      "matching_log_count": 5,
+      "record_level_prediction_manifests_found": false,
+      "checkpoint_hashes_recorded": false,
+      "representative_log_sha256": "0acddf73e0cb26318eb09155faac4865dfdf55467d313f46892b24db8f1db14d"
+    },
+    "incomplete_student_log": {
+      "records_found": 672,
+      "records_evaluated": 360,
+      "accuracy": 0.49166666666666664,
+      "not_comparable_to_full_672_result": true,
+      "log_sha256": "755b1a566bcd3141521dd35b0c301951b50acf0d15439795ce6dde52c9c575fb"
+    },
+    "historical_605_reproduced": false,
+    "historical_605_disproved": false
+  },
+  "pathology_primary5": {
+    "historical_aggregate": {
+      "per_label_accuracy": 0.90256,
+      "macro_f1": 0.66874,
+      "checkpoint_sha256": null,
+      "record_level_targets_available": false,
+      "record_level_predictions_available": false,
+      "cohort_and_threshold_lineage_available": false
+    },
+    "available_cedia_supervised_candidate": {
+      "checkpoint_sha256": "e9a44e4eea8ebb8f89d5e32909ae4afcc96442d1fa8eacb1e57a73bfa498353b",
+      "pathology_loss_weight": 0.2,
+      "pathology_labeled_windows_in_training_summary": 1811,
+      "patient_disjoint_test_records": 406,
+      "calibration_records": 273,
+      "calibrated_mean_per_label_accuracy": 0.7157635467980296,
+      "calibrated_macro_f1": 0.41369591347184287,
+      "fixed_0_65_mean_per_label_accuracy": 0.7990147783251231,
+      "fixed_0_65_macro_f1": 0.4202665494351573,
+      "reproduces_historical_aggregate": false
+    },
+    "historical_artifact_search": {
+      "checked_cedia_scopes": [
+        "03_OUTPUTS saved files, archives, logs, and model summaries",
+        "04_EVIDENCIA_AUDITORIA reports and manifests",
+        "01_CODIGO_FUENTE audit scripts",
+        "00_LANZADORES_CEDIA launch and audit files"
+      ],
+      "exact_historical_value_hits": 0,
+      "historical_primary5_prediction_manifest_found": false,
+      "historical_threshold_file_linked_to_aggregate_found": false,
+      "only_reported_aggregate_found_in_public_v4_tree": true
+    },
+    "historical_metric_reproduced": false,
+    "historical_metric_disproved": false
+  },
+  "conclusion": "The search recovered additional CEDIA 672-record prediction manifests, but none reproduces 605/672. Their evaluation reports do not record checkpoint hashes and their 50 changed targets come from an AI-generated override table. The original Primary-5 prediction/target pairs, checkpoint, cohort, and thresholds were not found. The historical numbers remain unreproduced, not refuted; fitting thresholds or selecting checkpoints on these test results would not recover the historical experiment."
+}

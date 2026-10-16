@@ -1,0 +1,672 @@
+{
+  "superseded_job": "29349",
+  "changed_training_rhythm_targets": 56,
+  "correction": "Official unsupported rhythm statements must be masked, including statements absent from the project registry",
+  "original_npz_sha256": "a5f5d3ba9547ff86621613d0c603245ee8723c028f72e54ec8aee86a3fd9799d",
+  "corrected_npz_sha256": "3fb2db3f1d0bd85f7502e8bd7afc83315fba4df92ec6f5ef6127a529628d7311",
+  "unchanged_fields_bitwise": {
+    "x": true,
+    "targets": true,
+    "mask": true,
+    "ecg_id": true,
+    "tensor_sha256": true
+  },
+  "existing_training_validation_followup_and_historical_references_changed": false,
+  "changes": [
+    {
+      "ecg_id": "2459",
+      "previous_target_index": 7,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "BIGU": 0.0,
+        "IMI": 15.0,
+        "PAC": 0.0,
+        "SR": 0.0
+      }
+    },
+    {
+      "ecg_id": "2650",
+      "previous_target_index": 3,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "AMI": 100.0,
+        "BIGU": 0.0,
+        "ISC_": 100.0,
+        "LVH": 100.0,
+        "SR": 0.0,
+        "VCLVH": 0.0
+      }
+    },
+    {
+      "ecg_id": "4227",
+      "previous_target_index": 2,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "IMI": 100.0,
+        "STACH": 0.0,
+        "TRIGU": 0.0
+      }
+    },
+    {
+      "ecg_id": "4443",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "IMI": 15.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "4470",
+      "previous_target_index": 5,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "ALMI": 50.0,
+        "ASMI": 50.0,
+        "CRBBB": 100.0,
+        "LAFB": 100.0,
+        "SVARR": 0.0
+      }
+    },
+    {
+      "ecg_id": "4499",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "ASMI": 100.0,
+        "ISC_": 50.0,
+        "LVH": 50.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "4763",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ISC_": 100.0,
+        "LVH": 100.0,
+        "PVC": 100.0,
+        "SVARR": 0.0,
+        "TRIGU": 0.0
+      }
+    },
+    {
+      "ecg_id": "5021",
+      "previous_target_index": 7,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "BIGU": 0.0,
+        "IMI": 50.0,
+        "INVT": 0.0,
+        "NDT": 100.0,
+        "PAC": 0.0,
+        "QWAVE": 0.0,
+        "SR": 0.0
+      }
+    },
+    {
+      "ecg_id": "6545",
+      "previous_target_index": 7,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "AMI": 15.0,
+        "BIGU": 0.0,
+        "ILMI": 50.0,
+        "NT_": 0.0,
+        "PAC": 0.0,
+        "SR": 0.0
+      }
+    },
+    {
+      "ecg_id": "6703",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "ALMI": 100.0,
+        "ASMI": 100.0,
+        "LAFB": 100.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "6721",
+      "previous_target_index": 7,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "BIGU": 0.0,
+        "IMI": 100.0,
+        "PAC": 0.0,
+        "SR": 0.0
+      }
+    },
+    {
+      "ecg_id": "6892",
+      "previous_target_index": 0,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "AFIB": 0.0,
+        "IMI": 100.0,
+        "ISC_": 100.0,
+        "IVCD": 100.0,
+        "LVH": 100.0,
+        "NST_": 0.0,
+        "SVTAC": 0.0,
+        "VCLVH": 0.0
+      }
+    },
+    {
+      "ecg_id": "6918",
+      "previous_target_index": 3,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ASMI": 100.0,
+        "BIGU": 0.0,
+        "INVT": 0.0,
+        "ISC_": 100.0,
+        "RAO/RAE": 100.0,
+        "SR": 0.0
+      }
+    },
+    {
+      "ecg_id": "6975",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "IMI": 15.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "7228",
+      "previous_target_index": 5,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ASMI": 80.0,
+        "CRBBB": 100.0,
+        "IMI": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "7741",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "ASMI": 100.0,
+        "IMI": 100.0,
+        "ISCLA": 50.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "8802",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "ASMI": 100.0,
+        "IMI": 100.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "9269",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "ILMI": 100.0,
+        "PVC": 100.0,
+        "RAO/RAE": 50.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "10835",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "IMI": 50.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "10844",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "ASMI": 100.0,
+        "ISC_": 100.0,
+        "LVH": 100.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "10972",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "IMI": 15.0,
+        "NDT": 100.0,
+        "NT_": 0.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "11649",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "IMI": 50.0,
+        "IVCD": 100.0,
+        "LAFB": 100.0,
+        "PVC": 100.0,
+        "SVARR": 0.0
+      }
+    },
+    {
+      "ecg_id": "12714",
+      "previous_target_index": 3,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "BIGU": 0.0,
+        "INVT": 0.0,
+        "ISC_": 100.0,
+        "LVH": 100.0,
+        "SR": 0.0,
+        "STD_": 0.0
+      }
+    },
+    {
+      "ecg_id": "12963",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "INVT": 0.0,
+        "ISC_": 100.0,
+        "LVH": 35.0,
+        "PVC": 100.0,
+        "STD_": 0.0,
+        "SVTAC": 0.0,
+        "VCLVH": 0.0
+      }
+    },
+    {
+      "ecg_id": "13064",
+      "previous_target_index": 6,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ILBBB": 100.0,
+        "ISCAL": 100.0,
+        "LAO/LAE": 100.0,
+        "SVARR": 0.0
+      }
+    },
+    {
+      "ecg_id": "13219",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "IMI": 100.0,
+        "LAFB": 100.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "13303",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "ASMI": 15.0,
+        "IMI": 15.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "13432",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "BIGU": 100.0,
+        "IMI": 100.0,
+        "PVC": 100.0
+      }
+    },
+    {
+      "ecg_id": "13598",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "IMI": 100.0,
+        "ISC_": 100.0,
+        "LVH": 100.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "14326",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "IMI": 35.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "14850",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "LAFB": 100.0,
+        "LAO/LAE": 100.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "15519",
+      "previous_target_index": 8,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "1AVB": 100.0,
+        "LAFB": 100.0,
+        "LAO/LAE": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "15705",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "IMI": 100.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "16664",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "IMI": 15.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "16924",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "IMI": 100.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "17086",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "IMI": 100.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "17277",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "IMI": 15.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "17369",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "IMI": 100.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "17408",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "BIGU": 100.0,
+        "IMI": 15.0,
+        "PVC": 100.0
+      }
+    },
+    {
+      "ecg_id": "17409",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "IMI": 15.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "18388",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "IMI": 15.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "18598",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ILMI": 100.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "19145",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "ASMI": 100.0,
+        "IMI": 100.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "19150",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "ASMI": 15.0,
+        "IMI": 15.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "19610",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "BIGU": 0.0,
+        "IMI": 15.0,
+        "PVC": 100.0
+      }
+    },
+    {
+      "ecg_id": "19620",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ASMI": 50.0,
+        "ILMI": 50.0,
+        "LAFB": 100.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "19688",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ALMI": 100.0,
+        "LAFB": 100.0,
+        "LAO/LAE": 100.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "19871",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "ASMI": 100.0,
+        "IMI": 100.0,
+        "PVC": 100.0,
+        "SVARR": 0.0
+      }
+    },
+    {
+      "ecg_id": "19932",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "BIGU": 100.0,
+        "IMI": 100.0,
+        "PVC": 100.0
+      }
+    },
+    {
+      "ecg_id": "20052",
+      "previous_target_index": 2,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ISC_": 100.0,
+        "STACH": 0.0,
+        "TRIGU": 0.0
+      }
+    },
+    {
+      "ecg_id": "20147",
+      "previous_target_index": 8,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "1AVB": 100.0,
+        "ABQRS": 0.0,
+        "ALMI": 100.0,
+        "ASMI": 100.0,
+        "LAFB": 100.0,
+        "LAO/LAE": 100.0,
+        "SVARR": 0.0
+      }
+    },
+    {
+      "ecg_id": "20158",
+      "previous_target_index": 5,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "ASMI": 50.0,
+        "CRBBB": 100.0,
+        "ILMI": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "20354",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ISC_": 100.0,
+        "LVH": 100.0,
+        "PVC": 100.0,
+        "SARRH": 0.0,
+        "VCLVH": 0.0
+      }
+    },
+    {
+      "ecg_id": "20408",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "ASMI": 100.0,
+        "IMI": 35.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "20533",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "ABQRS": 0.0,
+        "IMI": 15.0,
+        "ISCAL": 100.0,
+        "ISCAS": 100.0,
+        "PVC": 100.0,
+        "SARRH": 0.0
+      }
+    },
+    {
+      "ecg_id": "21579",
+      "previous_target_index": 4,
+      "corrected_target_index": -1,
+      "scp_codes": {
+        "BIGU": 100.0,
+        "ISC_": 100.0,
+        "LVH": 100.0,
+        "PVC": 100.0
+      }
+    }
+  ]
+}

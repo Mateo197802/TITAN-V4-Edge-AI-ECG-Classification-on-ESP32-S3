@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-python scripts/run_combined_external_validation.py
+python scripts/run_primary9_inference.py
+python scripts/run_combined_external_validation.py --write
 python scripts/build_result_tables.py
 python scripts/verify_artifact_hashes.py

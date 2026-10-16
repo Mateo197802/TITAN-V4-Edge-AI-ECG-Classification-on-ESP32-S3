@@ -1,0 +1,12 @@
+{
+  "slurm-29368.err": {
+    "original_sha256": "483d1edd7188b8e8a23acadba47834011b618cc3a0d7b02fabf3e7d582219a84",
+    "published_sha256": "247b108d53ecf828f0cb6a2ff7b5e607e50020846afd8643027e781ae57f4a43",
+    "changed_fields": "Private user/project path segments only; metrics and errors retained"
+  },
+  "slurm-29368.out": {
+    "original_sha256": "32c04e43e26f9c10643e39085c0e53141c9f22ba3cdb37ecfc535ee2c3125c3c",
+    "published_sha256": "32c04e43e26f9c10643e39085c0e53141c9f22ba3cdb37ecfc535ee2c3125c3c",
+    "changed_fields": "Private user/project path segments only; metrics and errors retained"
+  }
+}

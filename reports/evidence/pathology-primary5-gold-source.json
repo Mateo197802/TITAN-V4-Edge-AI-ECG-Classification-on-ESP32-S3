@@ -1,0 +1,46 @@
+{
+  "schema": "TITAN_V4_PATHOLOGY_PRIMARY5_GOLD_SOURCE_V1",
+  "audit_date": "2026-10-03",
+  "evidence_status": "SOURCE_REPORTED_AGGREGATE",
+  "endpoint": {
+    "name": "Pathology Primary-5",
+    "labels": [
+      "IMI",
+      "ALMI",
+      "ILMI",
+      "LAE",
+      "ISC_"
+    ],
+    "mean_per_label_accuracy": 0.90256,
+    "macro_f1": 0.66874,
+    "accuracy_definition": "Unweighted mean of the five binary-label accuracies.",
+    "threshold_description_in_source": "Existing thresholds",
+    "per_label_thresholds_available": false,
+    "record_count_available": false
+  },
+  "source_artifacts": {
+    "gold_summary": {
+      "artifact": "CEDIA V4 Gold Pathology Primary-5 summary JSON",
+      "sha256": "EBB44EB025397C018C9CBAEE9873C33317B5E16840C47DA6FD6B3944AD4D4E07"
+    },
+    "promotion_manifest": {
+      "artifact": "CEDIA V4 Gold Pathology Primary-5 promotion manifest",
+      "sha256": "2AC090CC86192221C3F81F036D1AF0DDF9D402E3FD2BB4B1116A70FBC05CAA15"
+    }
+  },
+  "checkpoint_attribution": {
+    "declared_artifact": "CEDIA V4 Pathology Primary-5 checkpoint from the 2026-05-25 focused run",
+    "declared_sha256": "843ed16c2a4dd53a193c7f37b9ce75542762ac9606e2701ea7128283e953607d",
+    "present_at_declared_path_on_2026_10_03": false,
+    "source_report_records_checkpoint_hash": false
+  },
+  "row_level_evaluation": {
+    "targets_available": false,
+    "predictions_available": false,
+    "scores_available": false,
+    "threshold_values_available": false,
+    "source_run_summary_at_manifest_path_available": false,
+    "recalculated_from_record_level_data": false
+  },
+  "interpretation": "The 90.256% mean per-label accuracy and 66.874% macro-F1 are preserved exactly as reported in the CEDIA Gold summary. The summary and promotion manifest identify the claimed checkpoint lineage, but the checkpoint and row-level evaluation inputs were absent from their declared paths during the read-only verification. This record documents the source-reported result; it is not a fresh recomputation."
+}

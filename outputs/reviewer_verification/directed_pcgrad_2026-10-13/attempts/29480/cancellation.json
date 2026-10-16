@@ -1,0 +1,18 @@
+{
+  "job_id": "29480",
+  "accounting": "29480|CANCELLED by 1725|0:0|00:05:26\n29480.batch|CANCELLED|0:15|00:05:26\n29480.extern|COMPLETED|0:0|00:05:26\n",
+  "sealed_results": false,
+  "input_manifest_sha256": "84d8cdb288f15594a212911b737ec45d2229977d568955896e2b85fabd9d4cb7",
+  "reason": "Source headers contain codes absent from the published taxonomy; reject unsupported and all unrecognized codes before final fitting",
+  "used_for_model_selection": false,
+  "logs": {
+    "slurm-29480.out": {
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "slurm-29480.err": {
+      "original_sha256": "6389461a20509181464a72e3ce59fca85c9dc78b543a0de7d029503ef69f10d1",
+      "published_sha256": "69a99dee39f444bcbf78858f86958d52638f04b4587082828056a24819ae99a6"
+    }
+  }
+}

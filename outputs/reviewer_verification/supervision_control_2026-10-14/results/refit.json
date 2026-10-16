@@ -1,0 +1,10 @@
+{
+  "rhythm_component": {
+    "needed": false
+  },
+  "pathology_component": {
+    "needed": true,
+    "candidate": "path_human_positive_e12",
+    "all_state_tensors_bitwise_equal": true
+  }
+}

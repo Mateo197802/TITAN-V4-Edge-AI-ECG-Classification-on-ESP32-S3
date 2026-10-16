@@ -1,0 +1,15 @@
+{
+  "source_sha256": {
+    "scripts/prepare_joint_pathology_inputs.py": "e17bf6029435e881be50f24c34eb394c79cd051c56cfe4fa4718fb0706695100",
+    "src/titan_v4/reproducibility/physionet.py": "53fe9ab0a4465d9275b08684cdda21d95a7b7f59a171c9eb2dbe92dab40f86f1",
+    "src/titan_v4/reproducibility/joint_refinement.py": "02e7389717d2d2623dcf39c52b15d86c1726b0a6f08d0e42f341c0030ba8dda8",
+    "src/titan_v4/data/label_registry.py": "a9c3360c436767c98fa12e81113836320b6b7258677987ef618df003e8eee94b",
+    "src/titan_v4/data/label_registry_pathology.py": "ded6cf50ae4488a4e8189c409552f29d850aa1c7fb84e766048cb7aa0c7ad848"
+  },
+  "environment": {
+    "python": "3.12.10",
+    "numpy": "2.4.6",
+    "scipy": "1.18.1",
+    "wfdb": "4.3.1"
+  }
+}

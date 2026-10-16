@@ -1,0 +1,438 @@
+{
+  "model": "rhythm_selected",
+  "checkpoint_sha256": "0941b585d62416ab176942a2b0a65c2c8824c2cffb87609a515e6f36de126d8c",
+  "records": 672,
+  "reference_file_sha256": "7d1943a1fbab9511047eb2d649cf0904e2d6535809c02fa1e4c5e3a648cd9f8d",
+  "reference_labels_changed": false,
+  "results": {
+    "original_rhythm_label": {
+      "classes": [
+        "AFIB",
+        "SB",
+        "STACH",
+        "NSR",
+        "PVC",
+        "RBBB",
+        "LBBB",
+        "PAC",
+        "1AVB"
+      ],
+      "total_records": 672,
+      "correct_predictions": 494,
+      "accuracy": 0.7351190476190477,
+      "macro_f1": 0.7383446518528044,
+      "weighted_f1": 0.7316441131186261,
+      "classification_report": {
+        "AFIB": {
+          "precision": 0.589041095890411,
+          "recall": 0.9347826086956522,
+          "f1-score": 0.7226890756302521,
+          "support": 46.0
+        },
+        "SB": {
+          "precision": 0.9024390243902439,
+          "recall": 0.9736842105263158,
+          "f1-score": 0.9367088607594937,
+          "support": 38.0
+        },
+        "STACH": {
+          "precision": 0.7973856209150327,
+          "recall": 0.8299319727891157,
+          "f1-score": 0.8133333333333334,
+          "support": 147.0
+        },
+        "NSR": {
+          "precision": 0.5111111111111111,
+          "recall": 0.6052631578947368,
+          "f1-score": 0.5542168674698795,
+          "support": 38.0
+        },
+        "PVC": {
+          "precision": 0.7706422018348624,
+          "recall": 0.6268656716417911,
+          "f1-score": 0.691358024691358,
+          "support": 134.0
+        },
+        "RBBB": {
+          "precision": 0.6271186440677966,
+          "recall": 0.7872340425531915,
+          "f1-score": 0.6981132075471698,
+          "support": 47.0
+        },
+        "LBBB": {
+          "precision": 0.6744186046511628,
+          "recall": 0.9666666666666667,
+          "f1-score": 0.7945205479452054,
+          "support": 30.0
+        },
+        "PAC": {
+          "precision": 0.8602150537634409,
+          "recall": 0.547945205479452,
+          "f1-score": 0.6694560669456067,
+          "support": 146.0
+        },
+        "1AVB": {
+          "precision": 0.6964285714285714,
+          "recall": 0.8478260869565217,
+          "f1-score": 0.7647058823529411,
+          "support": 46.0
+        },
+        "accuracy": 0.7351190476190477,
+        "macro avg": {
+          "precision": 0.7143111031169591,
+          "recall": 0.7911332914670494,
+          "f1-score": 0.7383446518528044,
+          "support": 672.0
+        },
+        "weighted avg": {
+          "precision": 0.7568850943843598,
+          "recall": 0.7351190476190477,
+          "f1-score": 0.7316441131186261,
+          "support": 672.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          43,
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          37,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          122,
+          1,
+          9,
+          2,
+          3,
+          1,
+          3
+        ],
+        [
+          0,
+          2,
+          0,
+          23,
+          0,
+          5,
+          2,
+          1,
+          5
+        ],
+        [
+          16,
+          0,
+          2,
+          6,
+          84,
+          4,
+          7,
+          11,
+          4
+        ],
+        [
+          3,
+          1,
+          2,
+          3,
+          0,
+          37,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          29,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          25,
+          11,
+          16,
+          6,
+          0,
+          80,
+          4
+        ],
+        [
+          1,
+          1,
+          2,
+          0,
+          0,
+          3,
+          0,
+          0,
+          39
+        ]
+      ]
+    },
+    "final_rhythm_label": {
+      "classes": [
+        "AFIB",
+        "SB",
+        "STACH",
+        "NSR",
+        "PVC",
+        "RBBB",
+        "LBBB",
+        "PAC",
+        "1AVB"
+      ],
+      "total_records": 672,
+      "correct_predictions": 567,
+      "accuracy": 0.84375,
+      "macro_f1": 0.8280205970011765,
+      "weighted_f1": 0.8423192691720912,
+      "classification_report": {
+        "AFIB": {
+          "precision": 0.9178082191780822,
+          "recall": 0.881578947368421,
+          "f1-score": 0.8993288590604027,
+          "support": 76.0
+        },
+        "SB": {
+          "precision": 0.9024390243902439,
+          "recall": 0.9736842105263158,
+          "f1-score": 0.9367088607594937,
+          "support": 38.0
+        },
+        "STACH": {
+          "precision": 0.8954248366013072,
+          "recall": 0.9133333333333333,
+          "f1-score": 0.9042904290429042,
+          "support": 150.0
+        },
+        "NSR": {
+          "precision": 0.8444444444444444,
+          "recall": 0.6129032258064516,
+          "f1-score": 0.7102803738317757,
+          "support": 62.0
+        },
+        "PVC": {
+          "precision": 0.8990825688073395,
+          "recall": 0.875,
+          "f1-score": 0.8868778280542986,
+          "support": 112.0
+        },
+        "RBBB": {
+          "precision": 0.711864406779661,
+          "recall": 0.7777777777777778,
+          "f1-score": 0.7433628318584071,
+          "support": 54.0
+        },
+        "LBBB": {
+          "precision": 0.6744186046511628,
+          "recall": 0.9666666666666667,
+          "f1-score": 0.7945205479452054,
+          "support": 30.0
+        },
+        "PAC": {
+          "precision": 0.7956989247311828,
+          "recall": 0.8604651162790697,
+          "f1-score": 0.8268156424581006,
+          "support": 86.0
+        },
+        "1AVB": {
+          "precision": 0.8035714285714286,
+          "recall": 0.703125,
+          "f1-score": 0.75,
+          "support": 64.0
+        },
+        "accuracy": 0.84375,
+        "macro avg": {
+          "precision": 0.8271947175727613,
+          "recall": 0.8405038086397817,
+          "f1-score": 0.8280205970011765,
+          "support": 672.0
+        },
+        "weighted avg": {
+          "precision": 0.8481317729131354,
+          "recall": 0.84375,
+          "f1-score": 0.8423192691720912,
+          "support": 672.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          67,
+          0,
+          4,
+          0,
+          1,
+          1,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          37,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          137,
+          1,
+          3,
+          2,
+          2,
+          2,
+          3
+        ],
+        [
+          0,
+          2,
+          0,
+          38,
+          1,
+          7,
+          2,
+          7,
+          5
+        ],
+        [
+          2,
+          0,
+          1,
+          0,
+          98,
+          2,
+          4,
+          5,
+          0
+        ],
+        [
+          3,
+          1,
+          2,
+          3,
+          0,
+          42,
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          29,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          7,
+          2,
+          1,
+          0,
+          0,
+          74,
+          2
+        ],
+        [
+          1,
+          1,
+          2,
+          0,
+          5,
+          4,
+          3,
+          3,
+          45
+        ]
+      ]
+    }
+  },
+  "original_signal_run_manifest_sha256": "76199dd804e65ad4a3b51743941cabd4b73501d7532c3381f761f427b3fca280",
+  "source_file_hashes_sha256": "945b5bc286be9a12ea89ffda05ffc37e914da99f32c9995b6524c15e280ae879",
+  "inference_code_sha256": {
+    "scripts/run_joint_historical.py": "0038b3bc9f7da13dd048985d8d11b1c21207f3430589d618deeba74d6dd4aa31",
+    "scripts/run_primary9_inference.py": "70f785d9921d0569fc9f4753c6993f138cd2d54dd2d07cbf1ac61cd2cb41b7fe",
+    "scripts/build_primary9_evaluation_labels.py": "233d891426c35ab0ec908c101deef00043cc0ab0196a7f72c5b664b070a449db",
+    "src/titan_v4/reproducibility/inference.py": "65c0383c8544f6c93ba0fd8ee3a0ecddca3a2a605248086e9c2ef30396f8ee57",
+    "src/titan_v4/reproducibility/labels.py": "51e67cccdbc04fb61a623ab064da0bd4986a16164caffd226bb72bc1e3ccc9ea",
+    "src/titan_v4/reproducibility/physionet.py": "53fe9ab0a4465d9275b08684cdda21d95a7b7f59a171c9eb2dbe92dab40f86f1",
+    "src/titan_v4/models/titan_v4_net.py": "5a3c980f44c71df1f075ddf7592dd61a88c99690c739b467a0964291b1fae696",
+    "src/titan_v4/data/primary9_registry.py": "61ed35a31a5cc9a173db84b93117905bfc766e042bf362912d9a48e35d2afbcf",
+    "src/titan_v4/data/label_registry.py": "a9c3360c436767c98fa12e81113836320b6b7258677987ef618df003e8eee94b"
+  },
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "torch": "2.12.1+cpu",
+    "numpy": "2.4.6",
+    "scipy": "1.18.1",
+    "scikit_learn": "1.9.0",
+    "wfdb": "4.3.1",
+    "device": "cpu",
+    "torch_threads": 1,
+    "deterministic_algorithms": true
+  },
+  "preprocessing": {
+    "input_leads": [
+      "I",
+      "II",
+      "III",
+      "AVR",
+      "AVL",
+      "AVF"
+    ],
+    "target_sampling_rate_hz": 125,
+    "window_seconds": 10.0,
+    "window_start_seconds": 0,
+    "bandpass_hz": [
+      0.5,
+      45.0
+    ],
+    "butterworth_order": 3,
+    "filter": "causal scipy.signal.lfilter with two-second zero-padded context",
+    "resampling": "scipy.signal.resample_poly",
+    "normalization": "per-lead z-score over the 10-second window"
+  },
+  "source_dataset": {
+    "name": "PhysioNet/Computing in Cardiology Challenge 2021",
+    "version": "1.0.3",
+    "url": "https://physionet.org/files/challenge-2021/1.0.3",
+    "license": "CC BY 4.0; see the source release terms and REFERENCES.md"
+  },
+  "interpretation": "New research-model inference, evaluated after validation selection; not a reproduction of the original Gold execution"
+}

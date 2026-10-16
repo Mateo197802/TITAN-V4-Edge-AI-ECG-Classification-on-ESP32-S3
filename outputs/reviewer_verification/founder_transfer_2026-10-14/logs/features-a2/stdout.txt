@@ -1,0 +1,4 @@
+{"completed_contract": "canonical_unfiltered", "records": 25657, "elapsed_seconds": 140.47883024811745}
+{"completed_contract": "canonical_filtered", "records": 25657, "elapsed_seconds": 1096.3925408385694}
+{"completed_contract": "heed_unfiltered", "records": 25657, "elapsed_seconds": 1215.8496601842344}
+{"completed_contract": "heed_filtered", "records": 25657, "elapsed_seconds": 2174.992496535182}

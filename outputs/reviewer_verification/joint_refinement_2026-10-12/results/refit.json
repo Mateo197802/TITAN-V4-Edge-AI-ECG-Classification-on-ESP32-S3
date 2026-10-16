@@ -1,0 +1,12 @@
+{
+  "joint_selected": {
+    "needed": true,
+    "candidate": "joint_100_e08",
+    "all_state_tensors_bitwise_equal": true
+  },
+  "rhythm_selected": {
+    "needed": true,
+    "candidate": "joint_100_e08",
+    "all_state_tensors_bitwise_equal": true
+  }
+}

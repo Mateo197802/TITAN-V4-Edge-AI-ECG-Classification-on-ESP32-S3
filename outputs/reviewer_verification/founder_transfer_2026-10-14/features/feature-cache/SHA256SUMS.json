@@ -1,0 +1,13 @@
+{
+  "cache.json": "4a363976f55735a4a927180cab2488db3661031e596a67ae2bf26bc228195139",
+  "canonical_filtered-features.npy": "87ba63f9b6bfc2b21e816e81407c4cf0de3a0702c7c530e3fb38b2155f843e86",
+  "canonical_filtered-signals.npy": "bd32f1bd735ad5cf6c84554d76e60ff42778fea17341b46f1eef9d068528ee74",
+  "canonical_unfiltered-features.npy": "b576ff4d624e6d77817745242c91cc07aa6250c4a3e258cfcb3ccaee410be1c0",
+  "canonical_unfiltered-signals.npy": "e8c14e8c5b8514c4ab75a197c3086e3ca231268070760fb7e832ebf29e2ab0f5",
+  "heed_filtered-features.npy": "62e3ed9d9ec41e309397d10738239b41f22a20c830603507039dc212e54368bd",
+  "heed_filtered-signals.npy": "ea1f8c5fd75d9d2f154fb7e4b5341827f75b6d2a89e0b211b9cac723abe0597f",
+  "heed_unfiltered-features.npy": "d2e1aef8a0f6faed1ca85f30f58d16e54ca9eef7d9e1892fbed887f88bb438b5",
+  "heed_unfiltered-signals.npy": "daf7cbba965064a979c15780181ff8503112834e9aac154045e8f0c6af9a2ff1",
+  "keys.json": "41bde39ff76e1c595697ce1f623b9f0098455353ed13f8bb24978187c9f82237",
+  "student.npy": "16995bdd669c3872eb0be273519c73380d97957f37a58fcdd698d4ce8ea671fd"
+}

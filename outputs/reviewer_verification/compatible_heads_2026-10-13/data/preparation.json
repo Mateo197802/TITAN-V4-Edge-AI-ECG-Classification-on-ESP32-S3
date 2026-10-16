@@ -1,0 +1,109 @@
+{
+  "train": {
+    "records": 8393,
+    "pathology_observed": 2429,
+    "positive_support": {
+      "IMI": 244,
+      "ASMI": 276,
+      "LVH": 228,
+      "ISC_": 151,
+      "ISCAL": 78,
+      "NST_": 114,
+      "ILMI": 34,
+      "AMI": 49,
+      "ALMI": 18,
+      "LAE": 55
+    }
+  },
+  "validation": {
+    "records": 1476,
+    "pathology_observed": 386,
+    "positive_support": {
+      "IMI": 47,
+      "ASMI": 52,
+      "LVH": 51,
+      "ISC_": 33,
+      "ISCAL": 19,
+      "NST_": 19,
+      "ILMI": 5,
+      "AMI": 8,
+      "ALMI": 6,
+      "LAE": 14
+    }
+  },
+  "followup": {
+    "records": 2171,
+    "pathology_observed": 1022,
+    "positive_support": {
+      "IMI": 127,
+      "ASMI": 136,
+      "LVH": 119,
+      "ISC_": 77,
+      "ISCAL": 33,
+      "NST_": 42,
+      "ILMI": 23,
+      "AMI": 17,
+      "ALMI": 18,
+      "LAE": 30
+    }
+  },
+  "expansion": {
+    "records": 3083,
+    "positive_support": {
+      "IMI": 1772,
+      "ASMI": 707,
+      "LVH": 829,
+      "ISC_": 778,
+      "ISCAL": 99,
+      "NST_": 40,
+      "ILMI": 319,
+      "AMI": 91,
+      "ALMI": 197,
+      "LAE": 255
+    },
+    "selection": "All remaining Primary-5-positive fold 1-8 records, excluding validation/followup/historical patients",
+    "unknown_rhythm_targets_not_used": true,
+    "overlapping_validation_followup_patients": 0,
+    "rhythm_positive_support": {
+      "AFIB": 158,
+      "SB": 38,
+      "STACH": 71,
+      "NSR": 1929,
+      "PVC": 98,
+      "RBBB": 98,
+      "LBBB": 26,
+      "PAC": 1,
+      "1AVB": 91
+    },
+    "rhythm_unknown_records": 573,
+    "historical_ptb_aliases": 378,
+    "historical_aliases_matched": 378,
+    "historical_alias_replacements": {
+      "141": "2509"
+    },
+    "overlapping_historical_patients": 0,
+    "metadata_sha256": "7600de9c1b27d181d850b3c6038a35d7c3ddb6bb33b702e3a20252a6859d216b",
+    "scp_statements_sha256": "ad05b0b1fcae83bb1230755ad9cfc7c96f303feddc08a4a9ad5bdc9ca63bac8f",
+    "official_rhythm_codes": [
+      "AFIB",
+      "AFLT",
+      "BIGU",
+      "PACE",
+      "PSVT",
+      "SARRH",
+      "SBRAD",
+      "SR",
+      "STACH",
+      "SVARR",
+      "SVTAC",
+      "TRIGU"
+    ],
+    "official_index_sha256": "b7224b92b341511ec3ceb13dc6652079b2c36a06504bcb49506f157f51dc695d"
+  },
+  "files": {
+    "path_extra.npz": "3fb2db3f1d0bd85f7502e8bd7afc83315fba4df92ec6f5ef6127a529628d7311",
+    "path_extra_records.csv": "4c09f000ac0206c1a82f1e281840833d87fadba3da96c47f14a7131c9c77d65f",
+    "path_targets.csv": "96af1da2c09c0ec6e76baa5f12175b01d6633cf3e0f17b297ea4e7b1a7369d4a",
+    "path_targets.npz": "56abbd8058c306227e2b033745b40f81764358c3e51a7cb5b1abf67c6eef6912"
+  }
+}

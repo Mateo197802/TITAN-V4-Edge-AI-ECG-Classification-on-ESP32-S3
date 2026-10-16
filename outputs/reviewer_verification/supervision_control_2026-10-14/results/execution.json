@@ -1,0 +1,17 @@
+{
+  "job_id": "29488",
+  "hostname": "compute-0-2.hpc.cedia.edu.ec",
+  "python": "3.10.14",
+  "torch": "2.1.2+cu121",
+  "numpy": "1.26.4",
+  "cuda": "12.1",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "parameters": 1143751,
+  "input_manifest_sha256": "dbdc2c5a076be4d2ab98d0f1289a5e13a853bcb2ad489f302ab76bd9b3877e94",
+  "features_reproduce_raw_outputs_bitwise": true,
+  "feature_sha256": {
+    "train": "8e461b950f7ddcfed25770513f05432fa8b62304407a87df2d0a9a141d8106cd",
+    "validation": "9deba0ef9c6dfed908198a48a58a98d51188279719a1a9cd249ebace0658d780",
+    "path_validation": "ab4342c27d5bb472bc3c827d3b3021d195dd14b5d40820452fe9288cd677c44d"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "experiment":"phase9_compatible_head_composition",
+  "operation":"Deterministic reconstruction of one actual unchanged-architecture PTH from independently trained heads sharing identical body and auxiliary tensors; no gradient fitting",
+  "start_sha256":"3e04ef7f7c20bb7597ffae2ea1e16b29a644d77b6cc7060ce0edea00d3467c93",
+  "path_source_sha256":"a9ac5ac07dbc5f957c524d0148b95847b01c5b3c5d2b368d09bd44ec61ead136",
+  "reference_sha256":"fd8a5d6ca95b7875e53305ef0fdc3962f2aa4d493fa16630befc7a75e1cb2249",
+  "head_selection":{"role":"validation only","rhythm":"Highest source-mean fixed-nine macro-F1 among eligible phase8 candidates, ties lexicographic name","pathology":"Highest Primary5 macro-F1 among phase8 candidates, ties lexicographic name","source_job":"29384","chosen_rhythm":"heads_sb3_e16","chosen_pathology":"heads_sb3_low_lr_e08","evaluation_labels_used":false,"chronology":"Method specified after phase8 validation analysis and before new composed-model evaluation; not retrospectively declared a phase8 trial"},
+  "architecture":{"parameters":1143751,"heads":4,"leads":["I","II","III","aVR","aVL","aVF"],"fs_hz":125,"input_shape":[6,1250],"shared_state":"All body, buffers, quality and biometric tensors must be bitwise identical across head sources"},
+  "data":{"rhythm_train":8393,"pathology_extra_train":3083,"validation":1476,"followup":2171,"references_changed":false,"reuse":"Same immutable source tensors and references"},
+  "optimization":{"epochs":0,"checkpoints":[0],"trials":[{"name":"compatible_heads","blocks":0,"path_train":true,"rhythm_head_train":false,"composition":true}]},
+  "selection":{"test_predictions_not_used":true,"joint_metric":"source mean fixed-nine macro-F1 + 0.5 * Primary5 macro-F1","joint_minimum_path_gain":0.005,"joint_maximum_source_drop":0.002,"rhythm_minimum_source_gain":0.002,"rhythm_maximum_path_drop":0.005,"maximum_rhythm_macro_f1_drop":0.005,"maximum_source_mean_f1_drop":0.005,"minimum_class_support":20,"maximum_recall_drop":0.05,"protected_classes":["SB","LBBB","RBBB","PAC","NSR"],"maximum_quality_biometrics_nrmse":0.15,"fallback":"phase6 reference.pth","threshold_fit_role":"validation only","threshold_rule":"Same 19 thresholds 0.05..0.95, ties higher"},
+  "execution":"CEDIA Slurm GPU inference; verify actual composed outputs against both source heads; verify deterministic reconstruction; only then load evaluation targets"
+}

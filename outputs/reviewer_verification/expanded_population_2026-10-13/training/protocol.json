@@ -1,0 +1,19 @@
+{
+  "experiment": "phase10_expanded_native_population",
+  "start_sha256": "4b20177029ee5388b76c336bda09b10bb962750b94feacb0b32b47d7e1fc6637",
+  "architecture": {"parameters": 1143751, "heads": 4, "leads": ["I","II","III","aVR","aVL","aVF"], "fs_hz":125, "input_shape":[6,1250], "batch_norm_statistics":"frozen"},
+  "data": {"rhythm_train":8393, "pathology_extra_train":13984, "rhythm_validation":1476, "pathology_validation":2027, "followup":2171, "new_negatives":10901, "selection":"All eligible native records, not selected using predictions", "unknown_pathology":"masked", "references_changed":false},
+  "optimization": {"seed":20261016, "epochs":20, "checkpoints":[4,8,12,20], "batch_size":128, "weight_decay":0.01, "gradient_clip":1, "start_agreement_kl":0.1, "teacher_agreement_kl":0.15, "auxiliary_weight":1,
+    "sampling":"One shuffled visit per training record per epoch; no positive oversampling",
+    "pathology_loss":"Masked stable BCEWithLogits, no positive class weights; Primary5 label weights 2 and other labels 1",
+    "rhythm_loss":"Equal source/class mass, plus conditional agreement anchors; unknown rhythms masked",
+    "scheduler":"Cosine from stated LR to 10% across original 20 epochs, identical in refit",
+    "trials":[
+      {"name":"path_head_natural", "blocks":0, "path_weight":1, "lr":0.001},
+      {"name":"joint_natural_025", "blocks":2, "path_weight":0.25, "lr":0.00005},
+      {"name":"joint_natural_100", "blocks":2, "path_weight":1, "lr":0.00005}
+    ]},
+  "selection": {"role":"validation only", "threshold_fit":"All 2027 eligible fold-9 ECGs; per-label F1, fixed 19 thresholds 0.05..0.95; ties higher", "maximum_rhythm_macro_f1_drop":0.005, "maximum_source_mean_f1_drop":0.005, "minimum_class_support":20, "maximum_recall_drop":0.05, "protected_classes":["SB","LBBB","RBBB","PAC","NSR"], "maximum_quality_biometrics_nrmse":0.15, "joint_minimum_path_gain":0.005, "joint_maximum_source_drop":0.002, "rhythm_minimum_source_gain":0.002, "rhythm_maximum_path_drop":0.005, "fallback":"start.pth"},
+  "control":"Frozen starting model recalibrated on exactly the same expanded validation population, separating calibration from fitting effects",
+  "execution":"CEDIA Slurm GPU only, strict deterministic algorithms, selected fits repeated before opening followup"
+}

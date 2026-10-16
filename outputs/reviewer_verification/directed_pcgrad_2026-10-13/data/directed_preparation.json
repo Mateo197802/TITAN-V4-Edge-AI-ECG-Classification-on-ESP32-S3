@@ -1,0 +1,21 @@
+{
+  "source_index_sha256": "dfad0c26a276ce7e450e5002051f4c749304552d9add4d592928bbdcb6e4f31c",
+  "taxonomy_sha256": "05d6fa23acdcbb466b378310ccfad22ea6cef4d3abfa83e8f660c77016be028d",
+  "census_records": 45152,
+  "new_records": 190,
+  "cap_per_class": 500,
+  "support": {
+    "RBBB": 74,
+    "PAC": 48,
+    "1AVB": 35,
+    "PVC": 27,
+    "LBBB": 6
+  },
+  "selection": "Complete source census; fixed hash order; five difficult classes; exclude known record IDs and waveform hashes",
+  "pathology": "All added-source pathology targets masked; no MI localization inferred",
+  "files": {
+    "header_census.csv": "8e1b082640e64f9c8bc8dc6d4007f3e946d347eaf8636290b63ca5c9d19a6bbd",
+    "rhythm_extra.npz": "c3da47033dcc1216d48e7573a4c1875a3fc5c34071d91e1251a11e4110a45c35",
+    "rhythm_extra_records.csv": "d0335296b3dc99a5f17fc738bd893d7254bc7f996b33e21762d460797094a065"
+  }
+}

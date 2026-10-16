@@ -11,11 +11,11 @@ from titan_v4.metrics.external_validation import load_json, primary9_summary
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Read and validate the Primary-9 external validation report.")
+    parser = argparse.ArgumentParser(description="Summarize the Primary-9 single-label diagnostic report.")
     parser.add_argument(
         "--report",
         type=Path,
-        default=Path("outputs/gold_master_external_validation/arrhythmia_primary9/primary9_external_validation_report.json"),
+        default=Path("outputs/reproduced/primary9/primary9_recomputed_report.json"),
     )
     args = parser.parse_args()
     print(json.dumps(primary9_summary(load_json(args.report)), indent=2))

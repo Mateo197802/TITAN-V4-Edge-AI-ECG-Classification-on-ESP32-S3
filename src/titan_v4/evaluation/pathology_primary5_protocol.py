@@ -220,6 +220,50 @@ def optimize_threshold(y_true: list[int], y_score: list[float]) -> float:
     return best_threshold
 
 
+def summarize_fixed_threshold(
+    rows: Iterable[dict[str, str]],
+    *,
+    threshold: float,
+    pathologies: Iterable[str] | None = None,
+) -> dict[str, object]:
+    """Summarize fixed-threshold metrics on test rows only."""
+
+    threshold = float(threshold)
+    if not 0.0 <= threshold <= 1.0:
+        raise ValueError("threshold must be between 0 and 1")
+    selected = _normalize_pathology_names(pathologies, PRIMARY5_PATHOLOGIES)
+    if not selected or len(set(selected)) != len(selected):
+        raise ValueError("Pathology selection must be non-empty and unique")
+    unknown = sorted(set(selected) - set(CANONICAL_PATHOLOGY_10))
+    if unknown:
+        raise ValueError(f"Unknown pathology labels: {unknown}")
+
+    test_rows = [dict(row) for row in rows if row.get("split") == "test"]
+    if not test_rows:
+        raise ValueError("No test rows available for fixed-threshold evaluation")
+
+    per_class: dict[str, dict[str, float | int]] = {}
+    for label in selected:
+        y_true = [_truth(row, label) for row in test_rows]
+        y_score = [_score(row, label) for row in test_rows]
+        metrics = binary_metrics(y_true, y_score, threshold)
+        per_class[label] = {
+            "accuracy": metrics.accuracy,
+            "precision": metrics.precision,
+            "recall": metrics.recall,
+            "f1": metrics.f1,
+            "support": metrics.support,
+        }
+
+    return {
+        "threshold": threshold,
+        "test_records": len(test_rows),
+        "per_label_accuracy": _mean(row["accuracy"] for row in per_class.values()),
+        "macro_f1": _mean(row["f1"] for row in per_class.values()),
+        "per_class": per_class,
+    }
+
+
 def _try_average_precision(y_true: list[int], y_score: list[float]) -> float | None:
     try:
         from sklearn.metrics import average_precision_score
@@ -331,6 +375,7 @@ def evaluate_pathology_primary5(
         writer = csv.DictWriter(
             handle,
             fieldnames=["label", "threshold", "accuracy", "precision", "recall", "f1", "support", "pr_auc"],
+            lineterminator="\n",
         )
         writer.writeheader()
         for label, metrics in per_class.items():
@@ -339,6 +384,7 @@ def evaluate_pathology_primary5(
         writer = csv.DictWriter(
             handle,
             fieldnames=["record_id", "split", "label", "true", "score", "threshold", "predicted"],
+            lineterminator="\n",
         )
         writer.writeheader()
         writer.writerows(prediction_rows)
@@ -464,6 +510,13 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--reportable_pathologies_csv", default=None)
     parser.add_argument("--quarantine_pathologies_json", default=None)
     parser.add_argument("--quarantine_pathologies_csv", default=None)
+    parser.add_argument(
+        "--fixed-threshold",
+        action="append",
+        type=float,
+        default=None,
+        help="Also report test metrics at this prespecified threshold; repeat to compare thresholds.",
+    )
     args = parser.parse_args(argv)
     primary_pathologies = _read_classes_file(
         args.reportable_pathologies_json or args.reportable_pathologies_csv,
@@ -474,6 +527,8 @@ def main(argv: list[str] | None = None) -> int:
         json_key="quarantine_pathologies",
     )
     if args.existing_report_json:
+        if args.fixed_threshold:
+            parser.error("--fixed-threshold requires --predictions_csv, not --existing_report_json")
         report = summarize_existing_pathology_report(
             args.existing_report_json,
             out_dir=args.out_dir,
@@ -481,12 +536,26 @@ def main(argv: list[str] | None = None) -> int:
             quarantine_pathologies=quarantine_pathologies,
         )
     elif args.predictions_csv:
+        rows = read_rows(args.predictions_csv)
         report = evaluate_pathology_primary5(
-            read_rows(args.predictions_csv),
+            rows,
             out_dir=args.out_dir,
             primary_pathologies=primary_pathologies,
             quarantine_pathologies=quarantine_pathologies,
         )
+        if args.fixed_threshold:
+            report["fixed_threshold_sensitivities"] = {
+                str(threshold): summarize_fixed_threshold(
+                    rows,
+                    threshold=threshold,
+                    pathologies=primary_pathologies,
+                )
+                for threshold in args.fixed_threshold
+            }
+            (Path(args.out_dir) / "pathology_primary5_report.json").write_text(
+                json.dumps(report, indent=2, ensure_ascii=False),
+                encoding="utf-8",
+            )
     else:
         raise SystemExit("--predictions_csv or --existing_report_json is required")
     print(json.dumps(report, indent=2, ensure_ascii=False))

@@ -1,0 +1,20 @@
+{
+  "experiment":"phase12_independent_heads_and_supervision_control",
+  "start_sha256":"0941b585d62416ab176942a2b0a65c2c8824c2cffb87609a515e6f36de126d8c",
+  "architecture":{"parameters":1143751,"heads":4,"leads":["I","II","III","aVR","aVL","aVF"],"fs_hz":125,"input_shape":[6,1250],"shared_extractor":"frozen byte-identical","batch_norm_statistics":"frozen"},
+  "data":{"original_train":8393,"native_extra":13984,"directed_extra":190,"rhythm_validation":1476,"pathology_validation":2027,"followup":2171,"references_changed":false,"pathology_unknown":"masked, never negative","patient_folds":"Five fixed patient-token hash groups, full thresholds fitted after model selection"},
+  "optimization":{"seed":20261014,"epochs":20,"checkpoints":[4,8,12,20],"batch_size":128,"weight_decay":0.01,"gradient_clip":1,
+    "sampling":"One shuffled visit per applicable training record per epoch; frozen extractor features computed on CEDIA GPU","rhythm_budget":"Freeze source mass before the 190-record expansion, equal class mass within each source","anchors":"0.1 start and 0.15 original teacher KL only where agreement with training target","primary5_label_weights":2,"other_label_weights":1,
+    "trials":[
+      {"name":"rhythm_fixed_030","task":"rhythm","weighting":"fixed_source","lr":0.0003},
+      {"name":"rhythm_fixed_010","task":"rhythm","weighting":"fixed_source","lr":0.0001},
+      {"name":"path_natural","task":"pathology","weighting":"natural","lr":0.001},
+      {"name":"path_human","task":"pathology","weighting":"human","lr":0.001},
+      {"name":"path_certainty","task":"pathology","weighting":"certainty","lr":0.001},
+      {"name":"path_human_positive","task":"pathology","weighting":"human_positive","lr":0.001}
+    ]},
+  "selection":{"role":"validation only","maximum_rhythm_macro_f1_drop":0.005,"maximum_source_mean_f1_drop":0.005,"minimum_class_support":20,"maximum_recall_drop":0.05,"protected_classes":["SB","LBBB","RBBB","PAC","NSR"],"maximum_quality_biometrics_nrmse":0,
+    "rhythm_minimum_global_and_source_macro_gain":0.002,"path_minimum_patient_oof_macro_gain":0.005,"path_maximum_ap_drop":0.005,"path_full_calibration_macro_must_not_drop":true,"thresholds":"Fixed 19 values .05.. .95; each OOF group calibrated only on other patients; final thresholds from all2027validation records","fallback":"starting head","composition":"Chosen heads combined only when every shared tensor matches"},
+  "supervision":"Human flag False weight0.5,True1; positive nonzero diagnostic likelihood weight0.5+0.5*likelihood/100; zero likelihood unknown remains1; binary references unchanged; optional positive class weight sqrt(weighted negatives/positives) clipped1..4",
+  "execution":"CEDIA GPU only; deterministic algorithms; selected component fits repeated before opening followup"
+}

@@ -1,0 +1,11 @@
+{
+  "rhythm_source": "heads_sb3_e16",
+  "pathology_source": "heads_sb3_low_lr_e08",
+  "shared_state_bitwise_equal": true,
+  "actual_validation_rhythm_matches_source": true,
+  "actual_validation_pathology_matches_source": true,
+  "actual_auxiliary_matches_source": true,
+  "deterministic_reconstruction": true,
+  "labels_changed": false,
+  "selection_role": "validation only"
+}

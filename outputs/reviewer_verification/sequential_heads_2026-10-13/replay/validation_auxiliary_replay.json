@@ -1,0 +1,290 @@
+{
+  "records": 1476,
+  "candidates": 25,
+  "verified_original_source_tensors": 1476,
+  "checks": [
+    {
+      "candidate": "path_natural_e04",
+      "checkpoint_sha256": "29dbb43572f1417cc096d96b4e724506978db3751682ba0031b8b328147faca2",
+      "max_probability_difference": 1.8477439880371094e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "path_natural_e08",
+      "checkpoint_sha256": "bf918474ab319bb71a80c393ee98ed6434d459ab9162bb5ec34be684e0b5a729",
+      "max_probability_difference": 1.8477439880371094e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "path_natural_e16",
+      "checkpoint_sha256": "3cc5d4b53fc269e0aea5d8d182af7b9f9b9640c4dcce2b2d1ec0c64b15e65d5f",
+      "max_probability_difference": 1.8477439880371094e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "path_natural_e24",
+      "checkpoint_sha256": "5f7f072b7a4084b8457c40dcb64a6d3a8731964b3c3f53e4401a542662a2a048",
+      "max_probability_difference": 1.8477439880371094e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "path_natural_e32",
+      "checkpoint_sha256": "a0f9fd17dc48943f7d8ff131206af282eb43e8668dcbe7e3f4d6e6fe5bd3d944",
+      "max_probability_difference": 1.8477439880371094e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb1_e04",
+      "checkpoint_sha256": "f65d29f7d755f98f932d4a4325f76e7c616a0a61cc55110094b04a80f4758861",
+      "max_probability_difference": 1.4901161193847656e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb1_e08",
+      "checkpoint_sha256": "2eb3594e20e2dfc2df6b5d65db3393c244c37d2020ac2c17177f07324e98405e",
+      "max_probability_difference": 1.6987323760986328e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb1_e16",
+      "checkpoint_sha256": "90b3aad9867e3557c5b74e594a06fc27fe316604cf21c8e4fb67f6a30c740a37",
+      "max_probability_difference": 1.8477439880371094e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb1_e24",
+      "checkpoint_sha256": "ea917afd7ce4501b5c72c86d77d12e34b4ac1a30f1a3e4bdf26209877207a689",
+      "max_probability_difference": 1.8477439880371094e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb1_e32",
+      "checkpoint_sha256": "a938668ca345922a7920d3b8757dc83fabe535458ae3d6b743c3a64c296920ce",
+      "max_probability_difference": 1.6689300537109375e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb2_e04",
+      "checkpoint_sha256": "5303710a17e7e19d3418cf4847414b40b8db7151afb46696fed15c46911551d0",
+      "max_probability_difference": 1.5497207641601562e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb2_e08",
+      "checkpoint_sha256": "627dbf977e037bfef92b20a5697ec00e4a24732a6d071307bb14fc2fdc425842",
+      "max_probability_difference": 1.519918441772461e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb2_e16",
+      "checkpoint_sha256": "2ca558cd6d651135917006345bc1d44cf5896c426105e79fa43977347b8c4baa",
+      "max_probability_difference": 1.7285346984863281e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb2_e24",
+      "checkpoint_sha256": "bc677b6977e531bcf2a0a4fa754fc007e00cf95769abe9a27c4cb73d14cacf07",
+      "max_probability_difference": 1.6689300537109375e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb2_e32",
+      "checkpoint_sha256": "fcb6e1597eab0cd938c6c5ff47bd32262e32dd3fe8e4802fa80a1545bd118d58",
+      "max_probability_difference": 1.6689300537109375e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb3_e04",
+      "checkpoint_sha256": "70283762f6e1a61c05b6f4b493261bd47d3dd1197db5311792b1ed209ce4569f",
+      "max_probability_difference": 1.6093254089355469e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb3_e08",
+      "checkpoint_sha256": "1c18c46747581c76a13bec2bb4cff03fc072851a3a869d8dbf3e09361b4fa41b",
+      "max_probability_difference": 1.6391277313232422e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb3_e16",
+      "checkpoint_sha256": "3e04ef7f7c20bb7597ffae2ea1e16b29a644d77b6cc7060ce0edea00d3467c93",
+      "max_probability_difference": 1.6689300537109375e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb3_e24",
+      "checkpoint_sha256": "7a4055c50b0e58dece5db77b9489d0bad4db578a66f98292877390d9f9b04ec0",
+      "max_probability_difference": 1.9073486328125e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb3_e32",
+      "checkpoint_sha256": "07986409422dd0e66ceaba28810171f14f45527dc6fb3e989194731a24965103",
+      "max_probability_difference": 1.5497207641601562e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb3_low_lr_e04",
+      "checkpoint_sha256": "cd988a07129961586c7df76cf885019a663eeef222172ef6b2fd1c1a9ba6b686",
+      "max_probability_difference": 1.5795230865478516e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb3_low_lr_e08",
+      "checkpoint_sha256": "a9ac5ac07dbc5f957c524d0148b95847b01c5b3c5d2b368d09bd44ec61ead136",
+      "max_probability_difference": 1.519918441772461e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb3_low_lr_e16",
+      "checkpoint_sha256": "e7542da2c63bd7ce8e07b666f12d84ebc624443abced54d2f0c9122a4076c1fd",
+      "max_probability_difference": 1.430511474609375e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb3_low_lr_e24",
+      "checkpoint_sha256": "74cbb1110e1fb0d078638315272db97be4b15a94c8818be02e7c12316c1c3f06",
+      "max_probability_difference": 1.4901161193847656e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "heads_sb3_low_lr_e32",
+      "checkpoint_sha256": "030a85f604278925c1bb3ec9d07419db56846d1aedeb207c279753d410e313de",
+      "max_probability_difference": 1.7881393432617188e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    }
+  ],
+  "all_passed": true,
+  "tolerance": 2e-05,
+  "environment": {
+    "python": "3.12.10",
+    "torch": "2.12.1+cpu",
+    "numpy": "2.4.6",
+    "device": "cpu"
+  }
+}
