@@ -1,0 +1,21 @@
+{
+  "attempt": 1,
+  "job_id": 29650,
+  "snapshot": {
+    "code_sha256": "24b71dd4101e3309ae187385229212fc4b052025b8d84105bc2e905e49b962fc",
+    "submission_bound": true
+  },
+  "stage": "students",
+  "streams": {
+    "stderr": {
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "transformation": "UTF-8 and private path replacement"
+    },
+    "stdout": {
+      "original_sha256": "1a8bcec2bd6583ef7ffa7a03e261e3061220054626e4368e428e8fe8b2e5307c",
+      "published_sha256": "1a8bcec2bd6583ef7ffa7a03e261e3061220054626e4368e428e8fe8b2e5307c",
+      "transformation": "UTF-8 and private path replacement"
+    }
+  }
+}

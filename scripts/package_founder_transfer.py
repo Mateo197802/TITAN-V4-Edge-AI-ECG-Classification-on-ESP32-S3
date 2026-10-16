@@ -54,9 +54,9 @@ for state in states:
  root=pathlib.Path(state['remote_root']); stage=pathlib.Path(state['stage_root'])
  if not stage.resolve().is_relative_to((root/'stages').resolve()):raise ValueError('Foreign stage')
  raw=(stage/'INPUT_SHA256.json').read_bytes()
- measured=hashlib.sha256(raw).hexdigest();expected=state.get('code_sha256')
- if expected and measured!=expected:raise ValueError('Changed stage identity')
- if not expected and state['stage']!='bootstrap':raise ValueError('Missing model-stage identity')
+ measured=hashlib.sha256(raw).hexdigest();submission_sha=state.get('code_sha256')
+ if submission_sha and measured!=submission_sha:raise ValueError('Changed stage identity')
+ if not submission_sha and state['stage']!='bootstrap':raise ValueError('Missing model-stage identity')
  manifest=json.loads(raw); archive=io.BytesIO()
  with tarfile.open(fileobj=archive,mode='w:gz') as target:
   for name,expected in manifest.items():
@@ -75,7 +75,7 @@ for state in states:
    text=text.replace(str(path),token)
   published=text.encode('utf-8');name='logs/'+key+'/'+label+'.txt';files[name]=published
   receipts[label]={'original_sha256':hashlib.sha256(original).hexdigest(),'published_sha256':hashlib.sha256(published).hexdigest(),'transformation':'UTF-8 and private path replacement'}
- files['logs/'+key+'/receipt.json']=(json.dumps({'job_id':state['job_id'],'stage':state['stage'],'attempt':state.get('attempt',1),'streams':receipts,'snapshot':{'code_sha256':measured,'submission_bound':expected is not None}},sort_keys=True,indent=2)+'\\n').encode()
+ files['logs/'+key+'/receipt.json']=(json.dumps({'job_id':state['job_id'],'stage':state['stage'],'attempt':state.get('attempt',1),'streams':receipts,'snapshot':{'code_sha256':measured,'submission_bound':submission_sha is not None}},sort_keys=True,indent=2)+'\\n').encode()
 outer=io.BytesIO()
 with tarfile.open(fileobj=outer,mode='w:gz') as archive:
  for name,raw in files.items():

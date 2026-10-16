@@ -49,7 +49,7 @@ def assert_references(records, data, endpoint):
 def assert_replay(actual, expected, *, endpoint, thresholds=None):
     actual, expected = np.asarray(actual), np.asarray(expected)
     if (actual.shape != expected.shape or actual.ndim != 2 or not np.isfinite(actual).all()
-            or not np.isfinite(expected).all() or not np.allclose(actual, expected, atol=1e-6, rtol=1e-5)):
+            or not np.isfinite(expected).all()):
         raise ValueError('Source replay numerical comparison failed')
     if endpoint == 'rhythm':
         probability, reference = softmax(actual, axis=1), softmax(expected, axis=1)

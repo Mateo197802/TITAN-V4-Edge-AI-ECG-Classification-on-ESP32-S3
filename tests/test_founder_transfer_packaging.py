@@ -50,3 +50,21 @@ def test_legacy_installation_snapshot_is_never_a_submission_bound_model_result(s
     else:
         with pytest.raises(ValueError, match='identity'):
             api().snapshot_identity({'stage': stage}, buffer.getvalue())
+
+
+def test_collected_legacy_snapshot_keeps_unbound_installation_flag(tmp_path, monkeypatch):
+    import contextlib
+    from types import SimpleNamespace
+    stage = tmp_path / 'stages/bootstrap'; (stage / 'code').mkdir(parents=True)
+    source = stage / 'code/worker.py'; source.write_bytes(b'pass\n')
+    (stage / 'INPUT_SHA256.json').write_text(json.dumps({'code/worker.py': hashlib.sha256(source.read_bytes()).hexdigest()}))
+    for suffix in ('out', 'err'): (stage / ('slurm-1.' + suffix)).write_text('')
+    module = api()
+    def local_rpc(program):
+        buffer = io.BytesIO()
+        with contextlib.redirect_stdout(SimpleNamespace(buffer=buffer)): exec(program, {})
+        return buffer.getvalue()
+    monkeypatch.setattr(module, 'rpc', local_rpc)
+    files = module.collect_execution_assets([{'stage': 'bootstrap', 'remote_root': str(tmp_path),
+        'stage_root': str(stage), 'job_id': 1}])
+    assert json.loads(files['logs/bootstrap/receipt.json'])['snapshot']['submission_bound'] is False

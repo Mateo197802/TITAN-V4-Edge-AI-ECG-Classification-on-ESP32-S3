@@ -156,6 +156,15 @@ Training reconstruction commands and the exact GPU stack are provided in the bun
 
 ## Artifact Inventory
 
+The [pretrained transfer runbook](outputs/reviewer_verification/founder_transfer_2026-10-14/README.md) records isolated CEDIA teacher adaptation, keyed training-only targets, all three-seed student comparisons and the retained warm-start. Its verifier checks the complete five-stage inventory, executed-code snapshots, all-attempt GPU accounting, references, teacher qualification, every student epoch decision, fixed-seed selection and deterministic training repeats. Default verification also reconstructs versioned source ECGs and reruns student inference on CPU; `--metrics-only` is explicitly not independent source inference. The previously examined follow-up/historical cohorts do not select the model.
+
+```bash
+python scripts/verify_founder_transfer.py --metrics-only --output data/cache/founder_metrics.json
+python scripts/verify_founder_transfer.py --data-root data/cache/physionet --output data/cache/founder_source.json
+```
+
+The second command downloads missing source files with their exact release/version/hash checks; add `--offline` only when that cache is populated. Evaluation needs the public student PTHs in the bundle, not the separate full ECGFounder pretrained weight. For training reconstruction, use the fixed teacher revision and isolated CEDIA manager stages in the linked runbook, and retain their exact source snapshots and runtime receipt. The study does not reproduce the historical 90.03% / 87.82% aggregate or replace Gold.
+
 The [read-only plateau audit](outputs/reviewer_verification/plateau_audit_2026-10-14/README.md) supplies three complete train/validation probability arrays, ordered references, immutable checkpoint receipts, CEDIA source/input hashes and an executable metric/source/subtype decomposition. It does not fit any model, open followup or present its retrospective target-knowing oracle as a usable ensemble. Recompute it with `python scripts/build_plateau_audit.py`; the report distinguishes measured generalization/support issues from proposed normalization, running-statistics and continued-fit hypotheses.
 
 The [independent-head supervision runbook](outputs/reviewer_verification/supervision_control_2026-10-14/README.md) records CEDIA job 29488, six continued fits of existing heads, all 24 learned states, canonical patient-group threshold cross-fitting and an actual shared-state-compatible composition. The verifier reconstructs train-only source/supervision weights, rejects reordered patient folds, recalculates selection and both historical reference metrics, and checks executed code/input hashes. It distinguishes threshold cross-fitting from neural model cross-validation, and records the actual candidate/full-calibration order without changing archived executed bytes.

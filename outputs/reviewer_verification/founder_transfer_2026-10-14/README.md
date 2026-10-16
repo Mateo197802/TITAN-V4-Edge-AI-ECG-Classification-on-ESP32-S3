@@ -58,10 +58,10 @@ These are teacher results, not student deployment results. Job 29644 completed
 0:0 in 520 GPU-seconds and exported rhythm ensemble targets for exactly 22,540
 training keys. The target cache joins against the original references and
 source/tensor hashes; no pathology teacher is included. Student job 29650
-completed 0:0 in 1,438 GPU-seconds with 535 sealed payload files. Source replay
-must also complete before the
-whole-study verifier can pass. Input, feature and zero-step pilot checks do
-not establish student improvement.
+completed 0:0 in 1,438 GPU-seconds with 535 sealed payload files. Corrected
+source replay job 29656 completed 0:0 in 148 GPU-seconds. The complete packet
+contains 746 hash-listed files plus its bundle inventory. All failed and
+completed allocations together consumed 2.5878 A100 GPU-hours; none remain active.
 
 The fixed protocol is in
 `docs/superpowers/plans/2026-10-14-founder-transfer.md`. Fitting and threshold
@@ -106,8 +106,49 @@ These are the retained student's own scores, not the twelve-lead teacher's.
 The first source replay (job 29655) stopped on a loader family mismatch before
 inference. The corrected retry preserves its failed allocation/log and adds
 support for all six pinned historical Challenge families without changing
-source bytes, labels or the older refinement loader. Whole-study verification
-and publication remain pending the completed retry and independent CPU checks.
+source bytes, labels or the older refinement loader. The successful replay
+verified all nine selected-per-seed validation models, then repeated both the
+retained and warm-control inference on each follow-up/historical source cohort.
+
+| Retained student source replay | Records | Accuracy | Macro-F1 |
+| --- | --- | --- | --- |
+| Rhythm follow-up | 2,171 | 82.9572% (1,801 correct) | 82.4110% |
+| Pathology follow-up, Primary-5 | 1,022 | 94.5793% per label | 46.1596% |
+| Historical final reference, rhythm | 672 | 84.3750% (567 correct) | 82.8021% |
+| Historical original reference, rhythm | 672 | 73.5119% (494 correct) | 73.8345% |
+
+The historical rows are this retained PTH's new inference, not the archived
+605/672 aggregate. Pathology targets are unavailable in that historical cohort;
+the 1,022-record native follow-up is reported separately, never padded with
+unobserved negatives. All 672 outputs and both original/final references appear
+in `replay/source-replay/selected/historical/predictions.csv`.
+
+## Reviewer Run
+
+Use Python 3.10, `requirements/founder-transfer.txt` and PyTorch 2.6.0. The
+isolated CUDA runtime and wheel hashes are preserved under `installation/`;
+CPU review can instead use the corresponding official PyTorch CPU wheel.
+
+```sh
+python scripts/verify_founder_transfer.py --metrics-only --output data/cache/founder_metrics.json
+python scripts/verify_founder_transfer.py --data-root data/cache/physionet --output data/cache/founder_source.json
+```
+
+The default command downloads missing exact source files and verifies their
+hashes before CPU inference. Add `--offline` when the source cache exists.
+Keep output outside this sealed bundle. The first command only recalculates
+archived evidence; only the second performs independent source inference.
+It reports raw logit differences, checks probability tolerance and requires identical class
+and frozen-threshold decisions, rather than accepting only matching aggregates.
+
+For CEDIA reconstruction, prepare/submit/fetch the manager stages in order:
+bootstrap, pilot, features, teachers, targets, students, replay. Use a fresh
+study identity instead of overwriting existing allocations, the pinned raw
+cache and external teacher from `third_party/ecgfounder/UPSTREAM.md`, and the
+exact executed snapshots in `snapshots/`. Fitting remains training-only;
+comparison source cohorts do not reopen selection. Student architecture and
+all references remain unchanged, and no result from a twelve-lead teacher
+is presented as a six-lead deployment result.
 
 Manager commands require an explicit state directory and this bundle path.
 The CEDIA study registry, not the local directory, accounts for submissions,

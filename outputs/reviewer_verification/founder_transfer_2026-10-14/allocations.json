@@ -1,0 +1,74 @@
+{
+  "active": [],
+  "buckets": {
+    "preparation": 0.7419444444444444,
+    "students": 0.48583333333333334,
+    "teachers": 1.3599999999999999
+  },
+  "jobs": {
+    "29574": {
+      "attempt": 1,
+      "exit_code": "1:0",
+      "seconds": 58,
+      "stage": "bootstrap",
+      "state": "FAILED"
+    },
+    "29618": {
+      "attempt": 2,
+      "exit_code": "0:0",
+      "seconds": 268,
+      "stage": "bootstrap",
+      "state": "COMPLETED"
+    },
+    "29619": {
+      "attempt": 2,
+      "exit_code": "0:0",
+      "seconds": 39,
+      "stage": "pilot",
+      "state": "COMPLETED"
+    },
+    "29625": {
+      "attempt": 2,
+      "exit_code": "0:0",
+      "seconds": 2306,
+      "stage": "features",
+      "state": "COMPLETED"
+    },
+    "29627": {
+      "attempt": 3,
+      "exit_code": "0:0",
+      "seconds": 4376,
+      "stage": "teachers",
+      "state": "COMPLETED"
+    },
+    "29644": {
+      "attempt": 1,
+      "exit_code": "0:0",
+      "seconds": 520,
+      "stage": "targets",
+      "state": "COMPLETED"
+    },
+    "29650": {
+      "attempt": 1,
+      "exit_code": "0:0",
+      "seconds": 1438,
+      "stage": "students",
+      "state": "COMPLETED"
+    },
+    "29655": {
+      "attempt": 1,
+      "exit_code": "1:0",
+      "seconds": 163,
+      "stage": "replay",
+      "state": "FAILED"
+    },
+    "29656": {
+      "attempt": 2,
+      "exit_code": "0:0",
+      "seconds": 148,
+      "stage": "replay",
+      "state": "COMPLETED"
+    }
+  },
+  "total": 2.5877777777777773
+}

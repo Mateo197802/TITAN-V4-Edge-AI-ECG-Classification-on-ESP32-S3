@@ -39,8 +39,16 @@ def test_raw_replay_accepts_only_bounded_probabilities_and_identical_decisions()
     value = np.zeros((2, 9), np.float32); value[:, 0] = 1
     result = api().assert_replay(value + 1e-7, value, endpoint='rhythm')
     assert result['decisions_equal']
+    changed = value.copy(); changed[:, 1] += .01
     with pytest.raises(ValueError):
-        api().assert_replay(value + .01, value, endpoint='rhythm')
+        api().assert_replay(changed, value, endpoint='rhythm')
+
+
+def test_rhythm_logit_common_offset_is_not_a_probability_replay_error():
+    expected = np.zeros((2, 9), np.float32); expected[:, 0] = 1
+    result = api().assert_replay(expected + 2., expected, endpoint='rhythm')
+    assert result['decisions_equal']
+    assert result['maximum_absolute_probability_difference'] < 1e-6
 
 
 def test_near_tie_cannot_hide_a_changed_class_inside_numerical_tolerance():

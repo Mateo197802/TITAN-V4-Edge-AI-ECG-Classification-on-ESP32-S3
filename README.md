@@ -47,6 +47,12 @@ The legacy-label comparator writes the current model's 672-row predictions again
 
 ## Same-Architecture Research Update
 
+The [pretrained transfer study](outputs/reviewer_verification/founder_transfer_2026-10-14/README.md) includes 30 ECGFounder teacher trials, nine student fits across three seeds and deterministic training repeats. The twelve-lead rhythm teacher reaches 88.80% mean accuracy / 87.15% mean macro-F1 on validation, but the continued six-lead student comparisons do not improve the fixed deployment control. The original 1,143,751-parameter student is retained. CEDIA source replay gives **82.96% rhythm accuracy / 82.41% macro-F1** on 2,171 follow-up ECGs and **94.58% mean label accuracy / 46.16% pathology macro-F1** on 1,022 native ECGs. The packet preserves all trials, the 672 historical case outputs, exact executed-code snapshots, allocation logs and hashes. Teacher scores are not attributed to the deployed student; Gold remains unchanged.
+
+```bash
+python scripts/verify_founder_transfer.py --output data/cache/founder_source_verification.json
+```
+
 The [2026-10-12 CEDIA refinement](outputs/reviewer_verification/partial_backbone_refinement_2026-10-12/README.md) preserves the original 1,143,751 parameters, four heads, six leads and 125 Hz input. It includes a separate candidate PTH, 12,040 pinned train/validation/follow-up record entries, frozen teacher sidecars, CEDIA source/logs, all 2,171 follow-up predictions, and a portable signal-to-prediction runner. CPU inference from the original WFDB files reproduced all 2,171 CEDIA predictions. Validation accuracy is 80.28%; follow-up accuracy is 78.86%. This is a new research experiment, not a reproduction of the historical 90.03% result, and Gold is unchanged.
 
 ```bash
