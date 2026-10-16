@@ -153,6 +153,18 @@ def test_replay_source_download_preserves_hash_checks_and_offline_mode(tmp_path,
     with pytest.raises(ValueError, match='hash'): api().ensure_source(record, tmp_path, offline=False)
 
 
+def test_independent_verification_report_bytes_survive_git_filters():
+    import subprocess
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[1]
+    relative = 'reports/evidence/founder-transfer-reviewer-verification-2026-10-16.json'
+    raw = subprocess.check_output(['git', 'hash-object', '--no-filters', relative], cwd=root)
+    stored = subprocess.check_output(['git', 'hash-object', '--path=' + relative, relative], cwd=root)
+    assert raw == stored, 'Git would invalidate the verification receipt report SHA-256'
+    receipt = json.loads((root / 'reports/evidence/founder-transfer-verification-receipt-2026-10-16.json').read_text())
+    assert hashlib.sha256((root / relative).read_bytes()).hexdigest() == receipt['verification_report_sha256']
+
+
 @pytest.mark.parametrize('change', ['active', 'missing_job', 'negative', 'bucket', 'total'])
 def test_allocation_receipt_cannot_hide_failed_time_or_exceed_budget(change):
     receipt = {'active': [], 'total': 58 / 3600, 'buckets': {'preparation': 58 / 3600},
