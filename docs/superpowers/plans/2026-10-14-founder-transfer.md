@@ -19,7 +19,7 @@ Execution checkpoints (2026-10-15):
 - [x] Task 4: endpoint teacher qualification (30 trials and deterministic repeat, job 29627).
 - [x] Task 5: qualified training-only soft targets (22,540 keyed rows, job 29644).
 - [x] Task 6: same-architecture student comparisons (nine fits and deterministic repeat, job 29650).
-- [ ] Task 7: selected-model source replay and reviewer publication.
+- [x] Task 7: selected-model source replay and reviewer packet (CEDIA 29656; independent CPU and clean Git archive checks completed 2026-10-16).
 
 The detailed steps below preserve the original implementation instructions;
 execution receipts are in `outputs/reviewer_verification/founder_transfer_2026-10-14/`.
