@@ -1,0 +1,16 @@
+{"candidate": "path_head_natural_e04", "rhythm_accuracy": 0.8462059620596206, "rhythm_macro_f1": 0.8407676516045144, "pathology_macro_f1": 0.43388105975840896, "eligible": true}
+{"candidate": "path_head_natural_e08", "rhythm_accuracy": 0.8462059620596206, "rhythm_macro_f1": 0.8407676516045144, "pathology_macro_f1": 0.437350495021896, "eligible": true}
+{"candidate": "path_head_natural_e12", "rhythm_accuracy": 0.8462059620596206, "rhythm_macro_f1": 0.8407676516045144, "pathology_macro_f1": 0.445824663435506, "eligible": true}
+{"candidate": "path_head_natural_e20", "rhythm_accuracy": 0.8462059620596206, "rhythm_macro_f1": 0.8407676516045144, "pathology_macro_f1": 0.4415317179107488, "eligible": true}
+{"candidate": "joint_natural_025_e04", "rhythm_accuracy": 0.8536585365853658, "rhythm_macro_f1": 0.8473249204344039, "pathology_macro_f1": 0.42479806158445116, "eligible": true}
+{"candidate": "joint_natural_025_e08", "rhythm_accuracy": 0.8509485094850948, "rhythm_macro_f1": 0.845528692158388, "pathology_macro_f1": 0.43103145795523296, "eligible": true}
+{"candidate": "joint_natural_025_e12", "rhythm_accuracy": 0.8482384823848238, "rhythm_macro_f1": 0.8420307637536771, "pathology_macro_f1": 0.42755205092328963, "eligible": true}
+{"candidate": "joint_natural_025_e20", "rhythm_accuracy": 0.8495934959349594, "rhythm_macro_f1": 0.8444643657935489, "pathology_macro_f1": 0.42813497656476535, "eligible": true}
+{"candidate": "joint_natural_100_e04", "rhythm_accuracy": 0.8543360433604336, "rhythm_macro_f1": 0.8481574858190577, "pathology_macro_f1": 0.42918991108452237, "eligible": true}
+{"candidate": "joint_natural_100_e08", "rhythm_accuracy": 0.8516260162601627, "rhythm_macro_f1": 0.8460238096992174, "pathology_macro_f1": 0.43817790241244314, "eligible": true}
+{"candidate": "joint_natural_100_e12", "rhythm_accuracy": 0.8489159891598916, "rhythm_macro_f1": 0.8431377459042708, "pathology_macro_f1": 0.43142267262238965, "eligible": true}
+{"candidate": "joint_natural_100_e20", "rhythm_accuracy": 0.8475609756097561, "rhythm_macro_f1": 0.8418883084583263, "pathology_macro_f1": 0.4355761099136551, "eligible": true}
+{"candidate": "joint_natural_100_e04", "rhythm_accuracy": 0.8543360433604336, "rhythm_macro_f1": 0.8481574858190577, "pathology_macro_f1": 0.42918991108452237, "eligible": true}
+{"candidate": "joint_natural_100_e08", "rhythm_accuracy": 0.8516260162601627, "rhythm_macro_f1": 0.8460238096992174, "pathology_macro_f1": 0.43817790241244314, "eligible": true}
+{"candidate": "joint_natural_100_e04", "rhythm_accuracy": 0.8543360433604336, "rhythm_macro_f1": 0.8481574858190577, "pathology_macro_f1": 0.42918991108452237, "eligible": true}
+{"COMPLETED": true, "joint_selected": "joint_natural_100_e08", "rhythm_selected": "joint_natural_100_e04"}

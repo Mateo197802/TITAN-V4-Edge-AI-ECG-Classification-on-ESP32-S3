@@ -1,0 +1,17 @@
+{
+  "experiment":"phase8_sequential_head_repair",
+  "initialization":"Strict highest global rhythm macro-F1 phase7 validation checkpoint; no layer reset; intermediate not promoted before repair",
+  "start_sha256":"5c3c4e8334a02907371eb074de8359d30c58c89aedea8b2ebeaf05a1668ec43a",
+  "reference_sha256":"fd8a5d6ca95b7875e53305ef0fdc3962f2aa4d493fa16630befc7a75e1cb2249",
+  "architecture":{"parameters":1143751,"heads":4,"leads":["I","II","III","aVR","aVL","aVF"],"fs_hz":125,"input_shape":[6,1250],"batch_norm_statistics":"frozen","feature_extractor":"frozen phase7 forward_features, 192 dimensions","quality_biometrics":"parameters frozen, output consistency measured against phase6, not clinical accuracy"},
+  "data":{"rhythm_train":8393,"pathology_extra_train":3083,"validation":1476,"followup":2171,"references_changed":false,"reuse":"Exact phase6 taxonomy-corrected arrays; no new records or labels","unknown_source_pathology":"masked, not negative"},
+  "optimization":{"seed":20261016,"epochs":32,"checkpoints":[4,8,16,24,32],"batch_size":128,"weight_decay":0.01,"gradient_clip":1.0,"pathology":"Natural traversal; sqrt negative/positive BCE weights from training only, clipped 1..10; all ten original outputs","conditional_reference_rhythm_kl":0.1,"original_teacher_agreement_kl":0.15,"other_rhythm_focus":{"LBBB":3,"PAC":2,"RBBB":2,"NSR":2,"PVC":2},"trials":[
+    {"name":"path_natural","blocks":0,"path_train":true,"rhythm_head_train":false,"sb_focus":1,"rhythm_lr":0.0003,"path_lr":0.001},
+    {"name":"heads_sb1","blocks":0,"path_train":true,"rhythm_head_train":true,"sb_focus":1,"rhythm_lr":0.0003,"path_lr":0.001},
+    {"name":"heads_sb2","blocks":0,"path_train":true,"rhythm_head_train":true,"sb_focus":2,"rhythm_lr":0.0003,"path_lr":0.001},
+    {"name":"heads_sb3","blocks":0,"path_train":true,"rhythm_head_train":true,"sb_focus":3,"rhythm_lr":0.0003,"path_lr":0.001},
+    {"name":"heads_sb3_low_lr","blocks":0,"path_train":true,"rhythm_head_train":true,"sb_focus":3,"rhythm_lr":0.0001,"path_lr":0.0003}
+  ]},
+  "selection":{"test_predictions_not_used":true,"joint_metric":"source mean fixed-nine macro-F1 + 0.5 * Primary5 macro-F1","joint_minimum_path_gain":0.005,"joint_maximum_source_drop":0.002,"rhythm_minimum_source_gain":0.002,"rhythm_maximum_path_drop":0.005,"maximum_rhythm_macro_f1_drop":0.005,"maximum_source_mean_f1_drop":0.005,"minimum_class_support":20,"maximum_recall_drop":0.05,"protected_classes":["SB","LBBB","RBBB","PAC","NSR"],"maximum_quality_biometrics_nrmse":0.15,"fallback":"reference.pth (phase6), not the ineligible initialization","threshold_fit_role":"validation only","threshold_rule":"Same 19 thresholds 0.05..0.95, max validation F1, ties higher"},
+  "execution":"CEDIA Slurm CUDA only; cached head output equivalence checked; deterministic selected-trial refit; follow-up unopened until checkpoint selection"
+}

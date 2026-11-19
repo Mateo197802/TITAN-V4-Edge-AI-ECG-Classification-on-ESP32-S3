@@ -1,0 +1,270 @@
+{
+  "primary_pathologies": [
+    "IMI",
+    "ALMI",
+    "ILMI",
+    "LAE",
+    "ISC_"
+  ],
+  "quarantine_pathologies": [
+    "AMI",
+    "ISCAL"
+  ],
+  "auxiliary_pathologies": [
+    "ASMI",
+    "LVH",
+    "NST_"
+  ],
+  "calibration_records": 273,
+  "test_records": 406,
+  "thresholds": {
+    "IMI": 0.37337324023246765,
+    "ALMI": 0.4493688941001892,
+    "ILMI": 0.6333341002464294,
+    "LAE": 0.27086660265922546,
+    "ISC_": 0.831833004951477
+  },
+  "per_class": {
+    "IMI": {
+      "threshold": 0.37337324023246765,
+      "accuracy": 0.5862068965517241,
+      "precision": 0.27860696517412936,
+      "recall": 0.7088607594936709,
+      "f1": 0.39999999999999997,
+      "support": 79,
+      "pr_auc": 0.34392326504239845
+    },
+    "ALMI": {
+      "threshold": 0.4493688941001892,
+      "accuracy": 0.8325123152709359,
+      "precision": 0.27631578947368424,
+      "recall": 0.6176470588235294,
+      "f1": 0.38181818181818183,
+      "support": 34,
+      "pr_auc": 0.45966766868890374
+    },
+    "ILMI": {
+      "threshold": 0.6333341002464294,
+      "accuracy": 0.8768472906403941,
+      "precision": 0.6060606060606061,
+      "recall": 0.3508771929824561,
+      "f1": 0.4444444444444444,
+      "support": 57,
+      "pr_auc": 0.42217873085265895
+    },
+    "LAE": {
+      "threshold": 0.27086660265922546,
+      "accuracy": 0.458128078817734,
+      "precision": 0.23846153846153847,
+      "recall": 0.7380952380952381,
+      "f1": 0.36046511627906974,
+      "support": 84,
+      "pr_auc": 0.31343849787915923
+    },
+    "ISC_": {
+      "threshold": 0.831833004951477,
+      "accuracy": 0.8251231527093597,
+      "precision": 0.5238095238095238,
+      "recall": 0.44594594594594594,
+      "f1": 0.48175182481751827,
+      "support": 74,
+      "pr_auc": 0.4837039168467685
+    }
+  },
+  "macro_f1": 0.41369591347184287,
+  "macro_pr_auc": 0.40458241586197774,
+  "per_label_accuracy": 0.7157635467980296,
+  "gate": {
+    "macro_f1_min": 0.7,
+    "per_label_accuracy_min": 0.8,
+    "passed": false
+  },
+  "fixed_threshold_sensitivities": {
+    "0.5": {
+      "threshold": 0.5,
+      "test_records": 406,
+      "per_label_accuracy": 0.7315270935960592,
+      "macro_f1": 0.4176266358935374,
+      "per_class": {
+        "IMI": {
+          "accuracy": 0.7044334975369458,
+          "precision": 0.3333333333333333,
+          "recall": 0.5189873417721519,
+          "f1": 0.4059405940594059,
+          "support": 79
+        },
+        "ALMI": {
+          "accuracy": 0.8571428571428571,
+          "precision": 0.3125,
+          "recall": 0.5882352941176471,
+          "f1": 0.40816326530612246,
+          "support": 34
+        },
+        "ILMI": {
+          "accuracy": 0.8620689655172413,
+          "precision": 0.5106382978723404,
+          "recall": 0.42105263157894735,
+          "f1": 0.4615384615384615,
+          "support": 57
+        },
+        "LAE": {
+          "accuracy": 0.5689655172413793,
+          "precision": 0.24861878453038674,
+          "recall": 0.5357142857142857,
+          "f1": 0.33962264150943394,
+          "support": 84
+        },
+        "ISC_": {
+          "accuracy": 0.6650246305418719,
+          "precision": 0.33152173913043476,
+          "recall": 0.8243243243243243,
+          "f1": 0.4728682170542635,
+          "support": 74
+        }
+      }
+    },
+    "0.65": {
+      "threshold": 0.65,
+      "test_records": 406,
+      "per_label_accuracy": 0.7990147783251231,
+      "macro_f1": 0.4202665494351573,
+      "per_class": {
+        "IMI": {
+          "accuracy": 0.7438423645320197,
+          "precision": 0.35294117647058826,
+          "recall": 0.379746835443038,
+          "f1": 0.36585365853658536,
+          "support": 79
+        },
+        "ALMI": {
+          "accuracy": 0.8817733990147784,
+          "precision": 0.34782608695652173,
+          "recall": 0.47058823529411764,
+          "f1": 0.39999999999999997,
+          "support": 34
+        },
+        "ILMI": {
+          "accuracy": 0.8768472906403941,
+          "precision": 0.6060606060606061,
+          "recall": 0.3508771929824561,
+          "f1": 0.4444444444444444,
+          "support": 57
+        },
+        "LAE": {
+          "accuracy": 0.7093596059113301,
+          "precision": 0.3425925925925926,
+          "recall": 0.44047619047619047,
+          "f1": 0.38541666666666674,
+          "support": 84
+        },
+        "ISC_": {
+          "accuracy": 0.7832512315270936,
+          "precision": 0.4326923076923077,
+          "recall": 0.6081081081081081,
+          "f1": 0.5056179775280899,
+          "support": 74
+        }
+      }
+    }
+  },
+  "evidence_status": "CEDIA_CHECKPOINT_EVALUATED_ON_PATIENT_DISJOINT_PTBXL_HOLDOUT",
+  "dataset": {
+    "name": "PTB-XL",
+    "version": "1.0.3",
+    "doi": "10.13026/kfzx-aw45",
+    "metadata_sha256_verified": "7600de9c1b27d181d850b3c6038a35d7c3ddb6bb33b702e3a20252a6859d216b",
+    "scp_statements_sha256_verified": "ad05b0b1fcae83bb1230755ad9cfc7c96f303feddc08a4a9ad5bdc9ca63bac8f",
+    "available_100hz_records": 4392,
+    "label_mapping": "PTB-XL scp_codes mapped by the repository's frozen 10-class pathology registry",
+    "training_sidecar_reconstructed_records": 2580,
+    "training_sidecar_exact_label_matches": 2580
+  },
+  "cohort_protocol": {
+    "checkpoint_training_records_with_ptbxl_paths": 3103,
+    "checkpoint_validation_records_with_ptbxl_paths": 507,
+    "checkpoint_training_ids_by_path_type": {
+      "records100": 2999,
+      "challenge_hr_alias": 118
+    },
+    "checkpoint_validation_ids_by_path_type": {
+      "records100": 498,
+      "challenge_hr_alias": 10
+    },
+    "checkpoint_training_pathology_records_in_sidecar": 1819,
+    "checkpoint_training_pathology_labeled_windows_from_summary": 1811,
+    "calibration_records": 273,
+    "calibration_patients": 271,
+    "test_records": 406,
+    "test_patients": 387,
+    "candidate_calibration_records_before_input_preflight": 275,
+    "candidate_test_records_before_input_preflight": 406,
+    "excluded_unreadable_inputs": {
+      "total": 2,
+      "by_split": {
+        "calibration": 2,
+        "test": 0
+      },
+      "by_error_type": {
+        "TypeError": 2
+      }
+    },
+    "excluded_records": {
+      "labeled_training_records": 1867,
+      "checkpoint_train_validation_record_id_overlap": 7,
+      "calibration_patient_overlap_with_training": 40,
+      "test_patient_overlap_with_training_or_validation": 61
+    },
+    "calibration_patient_disjoint_from_training": true,
+    "test_patient_disjoint_from_training_and_validation": true,
+    "challenge_hr_alias_resolution": "PTB-XL Challenge HR##### suffix maps to the matching PTB-XL ecg_id; alias IDs are included in the patient-overlap exclusion.",
+    "threshold_selection": "per-label F1 optimization on calibration records only; fixed before test evaluation",
+    "fixed_thresholds_are_sensitivity_checks": [
+      0.5,
+      0.65
+    ],
+    "model_selection_metric": "rhythm_f1",
+    "selected_epoch": 25
+  },
+  "checkpoint": {
+    "sha256": "e9a44e4eea8ebb8f89d5e32909ae4afcc96442d1fa8eacb1e57a73bfa498353b",
+    "training_summary_sha256": "01629aca2287d2ae58c71f51e9e80a19a3fa77c48438fe93d59995d10b8ab81d",
+    "pathology_loss_weight": 0.2,
+    "architecture": "TitanV4Max",
+    "encoder_dim": 1024,
+    "rhythm_classes": 9,
+    "pathology_classes": 10,
+    "morphology_dim": 0,
+    "state_dict_strict_load": true
+  },
+  "input_sha256": {
+    "split_metadata": "b2091665d207baf6ef4a60bdd8804a28f18e3bf53e63d6d445e6d6dfd07b8fbf",
+    "training_label_sidecar": "e5f677944efc18db42248db4130fe51dc9ae863a68b8056a3542f52b786b8409",
+    "cedia_evaluator": "d9c8cddc8f8524b3a6e818ef78387b951ed3bb51e1c3db7eefebdf81112047ce",
+    "cedia_preprocessing": "27b829cbd83dfbe0f3fe671fd9c68cfdf68dd2925f2b57a1f4ed830445b6466d",
+    "cedia_model_definition": "4ff67af6c05f8f55ac3e00ae94e2df0f95b5317570beba7e146717c7d00cc571",
+    "cedia_training_utilities": "66696dfa626dd162d765ddcb09facc9e928ff87b9150689d53e22deebd34abd0",
+    "cedia_training_script": "286f78b368543d42227725d03d27407c923ec36029f297652b51c088b49743fd",
+    "public_label_registry": "ded6cf50ae4488a4e8189c409552f29d850aa1c7fb84e766048cb7aa0c7ad848",
+    "public_cohort_protocol": "f3393cd0dc1da2f615373584c46a723c306daba50301b1fae4f5b997df271836",
+    "public_checkpoint_loader": "e10d379cf065c959ea32723f86621ce1b01df8161c691e336b51d8150bf3bd43",
+    "public_metric_protocol": "61577ff660eb756f4e9fb3297a4c0092e8be63d42dc2f5e5ce05dfb99eb12bb2",
+    "evaluation_script": "af81b4358feb4d19d6a687acf168e2c640326d9ff21607e8e246afcd56205d8d"
+  },
+  "runtime": {
+    "python": "3.10.14",
+    "numpy": "1.26.4",
+    "scikit_learn": "1.3.2",
+    "scipy": "1.13.1",
+    "torch": "2.1.2",
+    "wfdb": "4.1.2",
+    "device": "cpu",
+    "inference_batch_size": 24,
+    "torch_threads": 8
+  },
+  "historical_reference": {
+    "reported_per_label_accuracy": 0.90256,
+    "reported_macro_f1": 0.66874,
+    "comparable_as_reproduction": false,
+    "note": "Historical checkpoint, exact cohort, and threshold lineage are not recorded; this is a separate, newly evaluated CEDIA checkpoint."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "job_id": "29482",
+  "accounting": "29482|CANCELLED by 1725|0:0|00:08:34\n29482.batch|CANCELLED|0:15|00:08:34\n29482.extern|COMPLETED|0:0|00:08:34\n29482.0|COMPLETED|0:0|00:00:00\n",
+  "sealed_results": false,
+  "input_manifest_sha256": "1b6808f5e46d58f32a82098087fc0b7d12ad1b982d1ff8d19fc12beaca70c3e5",
+  "reason": "Compute node blocked in nfs_wait_bit_killable during startup; no sealed results or model selection; retry identical experiment excluding compute-0-1",
+  "used_for_model_selection": false,
+  "logs": {
+    "slurm-29482.out": {
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "slurm-29482.err": {
+      "original_sha256": "9702e45e8152d4cb3265d494bd805aa4e428fb2b6349658df8001ebf3317603c",
+      "published_sha256": "67f33f72d7597ce6c9af90e3c2403216820c31f4868b803556a748b00bcc2395"
+    }
+  }
+}

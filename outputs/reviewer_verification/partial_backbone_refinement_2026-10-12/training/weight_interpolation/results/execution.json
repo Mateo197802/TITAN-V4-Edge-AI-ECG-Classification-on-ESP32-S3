@@ -1,0 +1,12 @@
+{
+  "job_id": "29342",
+  "hostname": "compute-0-1.hpc.cedia.edu.ec",
+  "finished_utc": "2026-10-12T23:35:31Z",
+  "torch": "2.1.2+cu121",
+  "numpy": "1.26.4",
+  "cuda": "12.1",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "input_manifest_sha256": "9143d2b72ddba5e6b1dce64d063b49b3807659aab1fc7e623c865add7f19c184",
+  "parameters": 1143751,
+  "selection_persisted_before_evaluation_labels_loaded": true
+}

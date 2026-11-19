@@ -1,0 +1,17 @@
+{
+  "train": {
+    "records": 8393,
+    "verified_tensor_hashes": 8393,
+    "npz_sha256": "39927ab6425f57f1164fbe0b31f1959fa067c220bf54da0b81f2ad2cff3928a1"
+  },
+  "validation": {
+    "records": 1476,
+    "verified_tensor_hashes": 1476,
+    "npz_sha256": "3c38448952076cc1393ec212f3414fd9044d7adf7eb988d3bce0e7e9a8105fb7"
+  },
+  "evaluation": {
+    "records": 2171,
+    "verified_tensor_hashes": 2171,
+    "npz_sha256": "744e28408ec30178b87f42561a4591314b993e4da340b8749be6e6bcb4ebd0f9"
+  }
+}

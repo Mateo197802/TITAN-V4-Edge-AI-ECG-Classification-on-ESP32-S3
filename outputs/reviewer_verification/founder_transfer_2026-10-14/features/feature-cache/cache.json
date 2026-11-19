@@ -1,0 +1,26 @@
+{
+  "batch": 8,
+  "contracts": {
+    "canonical_filtered": {
+      "features": "canonical_filtered-features.npy",
+      "signals": "canonical_filtered-signals.npy"
+    },
+    "canonical_unfiltered": {
+      "features": "canonical_unfiltered-features.npy",
+      "signals": "canonical_unfiltered-signals.npy"
+    },
+    "heed_filtered": {
+      "features": "heed_filtered-features.npy",
+      "signals": "heed_filtered-signals.npy"
+    },
+    "heed_unfiltered": {
+      "features": "heed_unfiltered-features.npy",
+      "signals": "heed_unfiltered-signals.npy"
+    }
+  },
+  "elapsed_seconds": 2175.0072002001107,
+  "paired_manifest_sha256": "b27acd413edf89bda192c7a03b38bd6ba9e6c799da34e490dab832bd25c4e3b5",
+  "peak_bytes": 181876736,
+  "records": 25657,
+  "teacher_sha256": "ee199f3781f4ae1f732973267f003da0a759ea12bddb0dd28a77faa60aca7997"
+}

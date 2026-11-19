@@ -1,0 +1,35 @@
+{
+  "verified_utc": "2026-10-12T23:55:22.434606+00:00",
+  "records": 12040,
+  "releases": {
+    "challenge-2021": {
+      "version": "1.0.3",
+      "doi": "10.13026/34va-7q14",
+      "index_url": "https://physionet.org/files/challenge-2021/1.0.3/SHA256SUMS.txt",
+      "index_sha256": "9271601b6b6aa6446699d711a0e5ac9fde7f85be78f40d2959317704d9bf2a96",
+      "matched_records": 5547,
+      "index_capture": {
+        "url": "https://physionet.org/files/challenge-2021/1.0.3/SHA256SUMS.txt",
+        "range": "bytes=0-5242879",
+        "total_upstream_bytes": 17305274,
+        "upstream_etag": "\"62e44010-1080eba\"",
+        "captured_bytes": 5242799,
+        "captured_sha256": "9271601b6b6aa6446699d711a0e5ac9fde7f85be78f40d2959317704d9bf2a96"
+      }
+    },
+    "ptb-xl": {
+      "version": "1.0.3",
+      "doi": "10.13026/kfzx-aw45",
+      "index_url": "https://physionet.org/files/ptb-xl/1.0.3/SHA256SUMS.txt",
+      "index_sha256": "b7224b92b341511ec3ceb13dc6652079b2c36a06504bcb49506f157f51dc695d",
+      "matched_records": 3837
+    },
+    "ecg-arrhythmia": {
+      "version": "1.0.0",
+      "doi": "10.13026/wgex-er52",
+      "index_url": "https://physionet.org/files/ecg-arrhythmia/1.0.0/SHA256SUMS.txt",
+      "index_sha256": "dfad0c26a276ce7e450e5002051f4c749304552d9add4d592928bbdcb6e4f31c",
+      "matched_records": 2656
+    }
+  }
+}

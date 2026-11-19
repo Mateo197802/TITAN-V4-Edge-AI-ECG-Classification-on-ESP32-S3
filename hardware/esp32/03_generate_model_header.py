@@ -18,6 +18,8 @@ HEADER_PATH = os.path.join(OUTPUT_DIR, "firmware", "src", "model_data.h")
 # librería TFLite Micro usada por el firmware no soporta ese contrato.
 TFLITE_CANDIDATES = [
     # Modelo verificado como compatible con TFLite Micro.
+    os.path.join(OUTPUT_DIR, "models", "titan_v4_edge_float32.tflite"),
+    # Legacy conversion output.
     os.path.join(OUTPUT_DIR, "_tf_saved_model", "titan_v4_edge_float32.tflite"),
     # Fallbacks para conversiones futuras compatibles.
     os.path.join(OUTPUT_DIR, "titan_v4_edge_fp32.tflite"),

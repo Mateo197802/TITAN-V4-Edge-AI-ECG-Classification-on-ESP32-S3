@@ -1,0 +1,28 @@
+{
+  "scope": "input preparation, no neural inference",
+  "records": 28913,
+  "roles": {
+    "historical": 672,
+    "pathology_validation": 2027,
+    "rhythm_validation": 1476,
+    "tracking": 2171,
+    "train": 22540,
+    "train_excluded": 27
+  },
+  "quality_flags": {
+    "legacy_nonfinite_zero_fill": 3,
+    "wfdb16_missing_zero_fill": 5
+  },
+  "all_source_bytes_and_student_tensors_verified": true,
+  "archived_inputs_sha256": {
+    "data/cache/loss_ablation_rebuilt/train.npz": "39927ab6425f57f1164fbe0b31f1959fa067c220bf54da0b81f2ad2cff3928a1",
+    "data/cache/loss_ablation_rebuilt/validation.npz": "3c38448952076cc1393ec212f3414fd9044d7adf7eb988d3bce0e7e9a8105fb7",
+    "data/cache/loss_ablation_rebuilt/evaluation.npz": "744e28408ec30178b87f42561a4591314b993e4da340b8749be6e6bcb4ebd0f9",
+    "data/cache/expanded_pathology_inputs_s3/path_targets.npz": "56abbd8058c306227e2b033745b40f81764358c3e51a7cb5b1abf67c6eef6912",
+    "data/cache/expanded_pathology_inputs_s3/path_extra.npz": "6ea66c77efd95602eb06ef95c815036a17628a80d967ec45773060f6be19bde5",
+    "data/cache/supervision_control_cedia/staged_path_validation.npz": "2f2ee2e93508a3a3688ee8b0d38f05d84922a35a97409d11d8d1c0a5cf39f1e5",
+    "data/cache/supervision_control_cedia/staged_rhythm_extra.npz": "c3da47033dcc1216d48e7573a4c1875a3fc5c34071d91e1251a11e4110a45c35"
+  },
+  "configuration_sha256": "609d7a3e0bc4bcd68133f0a7449fb5e81f839dbe5b70f8623123e1cfba6f3009",
+  "paired_manifest_sha256": "b27acd413edf89bda192c7a03b38bd6ba9e6c799da34e490dab832bd25c4e3b5"
+}

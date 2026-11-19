@@ -1,0 +1,13 @@
+{"candidate": "directed_last2_e04", "rhythm_accuracy": 0.8489159891598916, "rhythm_macro_f1": 0.8435046265702802, "pathology_macro_f1": 0.43943672506103937, "eligible": true}
+{"candidate": "directed_last2_e08", "rhythm_accuracy": 0.8468834688346883, "rhythm_macro_f1": 0.8407092511823455, "pathology_macro_f1": 0.4430911811735526, "eligible": false}
+{"candidate": "directed_last2_e12", "rhythm_accuracy": 0.8428184281842819, "rhythm_macro_f1": 0.8360463608727334, "pathology_macro_f1": 0.4492170315369017, "eligible": false}
+{"candidate": "directed_last2_e20", "rhythm_accuracy": 0.8441734417344173, "rhythm_macro_f1": 0.8383827138163765, "pathology_macro_f1": 0.4482473253346574, "eligible": false}
+{"candidate": "directed_progressive_e04", "rhythm_accuracy": 0.8489159891598916, "rhythm_macro_f1": 0.8435046265702802, "pathology_macro_f1": 0.43943672506103937, "eligible": true}
+{"candidate": "directed_progressive_e08", "rhythm_accuracy": 0.8509485094850948, "rhythm_macro_f1": 0.8444859725162679, "pathology_macro_f1": 0.44319278158004505, "eligible": true}
+{"candidate": "directed_progressive_e12", "rhythm_accuracy": 0.8495934959349594, "rhythm_macro_f1": 0.8418877557997079, "pathology_macro_f1": 0.4433477708457005, "eligible": false}
+{"candidate": "directed_progressive_e20", "rhythm_accuracy": 0.8509485094850948, "rhythm_macro_f1": 0.8456853604613356, "pathology_macro_f1": 0.44549896948736534, "eligible": true}
+{"candidate": "directed_pcgrad_e04", "rhythm_accuracy": 0.8489159891598916, "rhythm_macro_f1": 0.8435898013226941, "pathology_macro_f1": 0.44055635109416025, "eligible": true}
+{"candidate": "directed_pcgrad_e08", "rhythm_accuracy": 0.8509485094850948, "rhythm_macro_f1": 0.844600074241426, "pathology_macro_f1": 0.4424887114775869, "eligible": true}
+{"candidate": "directed_pcgrad_e12", "rhythm_accuracy": 0.8502710027100271, "rhythm_macro_f1": 0.8425180776086759, "pathology_macro_f1": 0.44351980362576393, "eligible": false}
+{"candidate": "directed_pcgrad_e20", "rhythm_accuracy": 0.8509485094850948, "rhythm_macro_f1": 0.8456853604613356, "pathology_macro_f1": 0.45001157443354634, "eligible": true}
+{"COMPLETED": true, "joint_selected": "start", "rhythm_selected": "start"}

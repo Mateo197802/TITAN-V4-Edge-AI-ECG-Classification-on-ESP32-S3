@@ -1,0 +1,77 @@
+{
+  "created_utc": "2026-10-12T08:41:44Z",
+  "parameters": 1143751,
+  "trainable_parameters": 19401,
+  "classes": [
+    "AFIB",
+    "SB",
+    "STACH",
+    "NSR",
+    "PVC",
+    "RBBB",
+    "LBBB",
+    "PAC",
+    "1AVB"
+  ],
+  "input": {
+    "leads": [
+      "I",
+      "II",
+      "III",
+      "aVR",
+      "aVL",
+      "aVF"
+    ],
+    "fs": 125,
+    "samples": 1250
+  },
+  "warm_start": "gold.pth, strict full-state loading; no reset of any layer",
+  "trainable": [
+    "head_rhythm"
+  ],
+  "frozen": "all other parameters and all buffers, bitwise",
+  "teacher": "training-only privileged soft probabilities; never ground-truth replacement or inference input",
+  "teacher_artifact_sha256": "b30ed3a4c8e82a281af495a3d412b3dcdebf2d11cd764e17edeca6e2e3d99c93",
+  "teacher_fusion": {
+    "expanded_mil": 0.75,
+    "previous_partial": 0.25
+  },
+  "selection": "source-mean fixed-nine-class macro-F1 on validation; SB/LBBB recall within .05 of Gold; Gold fallback",
+  "learning_rates": [
+    0.0001,
+    0.0003,
+    0.001
+  ],
+  "gold_anchor": [
+    0.1,
+    0.5
+  ],
+  "teacher_weight": 0.3,
+  "epochs": 32,
+  "checkpoints": [
+    8,
+    16,
+    32
+  ],
+  "batch_size": 128,
+  "seed": 20261012,
+  "loss": "source/class balanced original-label CE + .3 KL to teacher + anchor KL to Gold",
+  "training_location": "CEDIA Slurm GPU only",
+  "receipts": {
+    "train": {
+      "n": 8393,
+      "original_feature_sha256": "bb10636de82cc5c3ddbd9294bafa8b3ceb31f05ed36833380e35985361533c59",
+      "original_manifest_sha256": "5209aebb2756f71a817a38b4b265546e42cc98b3aee48ed55178a486618b335e",
+      "labels_unchanged": true,
+      "feature_dimension": 192
+    },
+    "validation": {
+      "n": 1476,
+      "original_feature_sha256": "a3057695d7ec3f5fc6fad4100456fff7992339ea18f00d1d4cc3c16646e2d229",
+      "original_manifest_sha256": "5b74f4027e83558a7a0d96fbb752cd5a38eede03e4fe21685812b167a1d20e4d",
+      "labels_unchanged": true,
+      "feature_dimension": 192
+    }
+  },
+  "evaluation": "all existing cohorts are follow-up, not untouched tests"
+}

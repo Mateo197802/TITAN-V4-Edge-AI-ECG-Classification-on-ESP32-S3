@@ -1,0 +1,21 @@
+{
+  "attempt": 1,
+  "job_id": 29655,
+  "snapshot": {
+    "code_sha256": "24b71dd4101e3309ae187385229212fc4b052025b8d84105bc2e905e49b962fc",
+    "submission_bound": true
+  },
+  "stage": "replay",
+  "streams": {
+    "stderr": {
+      "original_sha256": "e40502316dca31e93761a333f335f88966a3c443f1e3b09efacec1ae78d3af6c",
+      "published_sha256": "ea5154561a0847a5628fc63a204e8cd04e236a2353c29f474701d371fd48e24a",
+      "transformation": "UTF-8 and private path replacement"
+    },
+    "stdout": {
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "transformation": "UTF-8 and private path replacement"
+    }
+  }
+}

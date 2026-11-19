@@ -1,0 +1,30 @@
+Looking in indexes: https://download.pytorch.org/whl/cu118
+Collecting torch==2.6.0
+  Obtaining dependency information for torch==2.6.0 from https://download-r2.pytorch.org/whl/cu118/torch-2.6.0%2Bcu118-cp310-cp310-linux_x86_64.whl.metadata
+  Downloading https://download-r2.pytorch.org/whl/cu118/torch-2.6.0%2Bcu118-cp310-cp310-linux_x86_64.whl.metadata (27 kB)
+Collecting sympy==1.13.1
+  Obtaining dependency information for sympy==1.13.1 from https://files.pythonhosted.org/packages/b2/fe/81695a1aa331a842b582453b605175f419fe8540355886031328089d840a/sympy-1.13.1-py3-none-any.whl.metadata
+  Downloading sympy-1.13.1-py3-none-any.whl.metadata (12 kB)
+Collecting nvidia-cuda-runtime-cu11==11.8.89
+  Downloading https://download.pytorch.org/whl/cu118/nvidia_cuda_runtime_cu11-11.8.89-py3-none-manylinux1_x86_64.whl (875 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 875.6/875.6 kB 2.6 MB/s eta 0:00:00
+Collecting nvidia-cudnn-cu11==9.1.0.70
+  Downloading https://download.pytorch.org/whl/cu118/nvidia_cudnn_cu11-9.1.0.70-py3-none-manylinux2014_x86_64.whl (663.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 663.9/663.9 MB 7.6 MB/s eta 0:00:00
+Collecting fsspec
+  Obtaining dependency information for fsspec from https://files.pythonhosted.org/packages/fd/3c/6a2bf344106328fd04963664a60b9bb6496fc25df8e962fcdc1367285fb9/fsspec-2026.7.0-py3-none-any.whl.metadata
+  Downloading fsspec-2026.7.0-py3-none-any.whl.metadata (10 kB)
+Collecting triton==3.2.0
+  Obtaining dependency information for triton==3.2.0 from https://download-r2.pytorch.org/whl/triton-3.2.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata
+  Downloading https://download-r2.pytorch.org/whl/triton-3.2.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (1.4 kB)
+Collecting nvidia-nccl-cu11==2.21.5
+  Downloading https://download.pytorch.org/whl/cu118/nvidia_nccl_cu11-2.21.5-py3-none-manylinux2014_x86_64.whl (147.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 147.8/147.8 MB 12.3 MB/s eta 0:00:00
+Collecting typing-extensions>=4.10.0
+  Obtaining dependency information for typing-extensions>=4.10.0 from https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl.metadata
+  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Discarding https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl#sha256=481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8 (from https://download.pytorch.org/whl/cu118/typing-extensions/) (requires-python:>=3.9): Requested typing-extensions>=4.10.0 from https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl#sha256=481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8 (from torch==2.6.0) has inconsistent Name: expected 'typing-extensions', but metadata has 'typing_extensions'
+  Downloading typing_extensions-4.16.0.tar.gz (113 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 113.6/113.6 kB 556.3 kB/s eta 0:00:00
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'error'

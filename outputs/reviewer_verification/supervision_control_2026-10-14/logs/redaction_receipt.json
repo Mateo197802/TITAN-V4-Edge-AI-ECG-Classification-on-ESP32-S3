@@ -1,0 +1,10 @@
+{
+  "slurm-29488.out": {
+    "original_sha256": "1205db53923dba7d2fc553062a7010114eca1cdc63156a3bed09299358174078",
+    "published_sha256": "c3d0b6614591a3dc4bd8656858caaa9f9ed3992f28f6240b6dc70969d82113d2"
+  },
+  "slurm-29488.err": {
+    "original_sha256": "483d1edd7188b8e8a23acadba47834011b618cc3a0d7b02fabf3e7d582219a84",
+    "published_sha256": "78fc634fcbc0fd808c7d71dda2fa9bbd072cea8af6250d642f94e53c6a2ee7a7"
+  }
+}

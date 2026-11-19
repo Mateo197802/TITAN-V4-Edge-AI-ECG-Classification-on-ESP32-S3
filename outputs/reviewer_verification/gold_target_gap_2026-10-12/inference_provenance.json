@@ -1,0 +1,97 @@
+{
+  "source_files_identical_to_archived_gold_inference": true,
+  "verified_source_files": 1344,
+  "labels_changed": false,
+  "runs": {
+    "gold": {
+      "model": {
+        "architecture": "TitanV4Lite",
+        "checkpoint": "gold_master_primary9_model.pth",
+        "sha256": "BC7BA03D0D6D40E823FDB9BB261EBE29AE8B7A74C97D1C98E7140BCA4D2D305B"
+      },
+      "runtime": {
+        "python": "3.12.10",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "torch": "2.12.1+cpu",
+        "numpy": "2.4.6",
+        "scipy": "1.18.1",
+        "scikit_learn": "1.9.0",
+        "wfdb": "4.3.1",
+        "device": "cpu",
+        "torch_threads": 1,
+        "deterministic_algorithms": true
+      },
+      "code_files": {
+        "scripts/run_primary9_inference.py": "70F785D9921D0569FC9F4753C6993F138CD2D54DD2D07CBF1AC61CD2CB41B7FE",
+        "scripts/build_primary9_evaluation_labels.py": "233D891426C35AB0EC908C101DEEF00043CC0AB0196A7F72C5B664B070A449DB",
+        "src/titan_v4/reproducibility/inference.py": "65C0383C8544F6C93BA0FD8EE3A0ECDDCA3A2A605248086E9C2EF30396F8EE57",
+        "src/titan_v4/reproducibility/labels.py": "51E67CCCDBC04FB61A623AB064DA0BD4986A16164CAFFD226BB72BC1E3CCC9EA",
+        "src/titan_v4/reproducibility/physionet.py": "53FE9AB0A4465D9275B08684CDDA21D95A7B7F59A171C9EB2DBE92DAB40F86F1",
+        "src/titan_v4/models/titan_v4_net.py": "5A3C980F44C71DF1F075DDF7592DD61A88C99690C739B467A0964291B1FAE696",
+        "src/titan_v4/data/primary9_registry.py": "61ED35A31A5CC9A173DB84B93117905BFC766E042BF362912D9A48E35D2AFBCF",
+        "src/titan_v4/data/label_registry.py": "A9C3360C436767C98FA12E81113836320B6B7258677987EF618DF003E8EEE94B"
+      },
+      "raw_prediction_csv_sha256": "a3cfedc54f3cacf4cd130813a6d5923931d048bcec10d9044fbb05b23d709168"
+    },
+    "phase3": {
+      "model": {
+        "architecture": "TitanV4Lite",
+        "checkpoint": "partial_backbone_candidate.pth",
+        "sha256": "6410DE24A38A8021CB68FC2A51C275FAC8FD16009D5BB7124B680E540E5EB5F4"
+      },
+      "runtime": {
+        "python": "3.12.10",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "torch": "2.12.1+cpu",
+        "numpy": "2.4.6",
+        "scipy": "1.18.1",
+        "scikit_learn": "1.9.0",
+        "wfdb": "4.3.1",
+        "device": "cpu",
+        "torch_threads": 1,
+        "deterministic_algorithms": true
+      },
+      "code_files": {
+        "scripts/run_primary9_inference.py": "70F785D9921D0569FC9F4753C6993F138CD2D54DD2D07CBF1AC61CD2CB41B7FE",
+        "scripts/build_primary9_evaluation_labels.py": "233D891426C35AB0EC908C101DEEF00043CC0AB0196A7F72C5B664B070A449DB",
+        "src/titan_v4/reproducibility/inference.py": "65C0383C8544F6C93BA0FD8EE3A0ECDDCA3A2A605248086E9C2EF30396F8EE57",
+        "src/titan_v4/reproducibility/labels.py": "51E67CCCDBC04FB61A623AB064DA0BD4986A16164CAFFD226BB72BC1E3CCC9EA",
+        "src/titan_v4/reproducibility/physionet.py": "53FE9AB0A4465D9275B08684CDDA21D95A7B7F59A171C9EB2DBE92DAB40F86F1",
+        "src/titan_v4/models/titan_v4_net.py": "5A3C980F44C71DF1F075DDF7592DD61A88C99690C739B467A0964291B1FAE696",
+        "src/titan_v4/data/primary9_registry.py": "61ED35A31A5CC9A173DB84B93117905BFC766E042BF362912D9A48E35D2AFBCF",
+        "src/titan_v4/data/label_registry.py": "A9C3360C436767C98FA12E81113836320B6B7258677987EF618DF003E8EEE94B"
+      },
+      "raw_prediction_csv_sha256": "03f1ee4df24cf734d36c0685da99800fea19bdd3a0a0fab119f19ae7e6bf8e3c"
+    },
+    "validation_mixture": {
+      "model": {
+        "architecture": "TitanV4Lite",
+        "checkpoint": "gold_gap_validation_strong_mixture.pth",
+        "sha256": "780BA98950239762388B1E3FECBCF737BB2A7681F6AD67859EC62683E5E83EF2"
+      },
+      "runtime": {
+        "python": "3.12.10",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "torch": "2.12.1+cpu",
+        "numpy": "2.4.6",
+        "scipy": "1.18.1",
+        "scikit_learn": "1.9.0",
+        "wfdb": "4.3.1",
+        "device": "cpu",
+        "torch_threads": 1,
+        "deterministic_algorithms": true
+      },
+      "code_files": {
+        "scripts/run_primary9_inference.py": "70F785D9921D0569FC9F4753C6993F138CD2D54DD2D07CBF1AC61CD2CB41B7FE",
+        "scripts/build_primary9_evaluation_labels.py": "233D891426C35AB0EC908C101DEEF00043CC0AB0196A7F72C5B664B070A449DB",
+        "src/titan_v4/reproducibility/inference.py": "65C0383C8544F6C93BA0FD8EE3A0ECDDCA3A2A605248086E9C2EF30396F8EE57",
+        "src/titan_v4/reproducibility/labels.py": "51E67CCCDBC04FB61A623AB064DA0BD4986A16164CAFFD226BB72BC1E3CCC9EA",
+        "src/titan_v4/reproducibility/physionet.py": "53FE9AB0A4465D9275B08684CDDA21D95A7B7F59A171C9EB2DBE92DAB40F86F1",
+        "src/titan_v4/models/titan_v4_net.py": "5A3C980F44C71DF1F075DDF7592DD61A88C99690C739B467A0964291B1FAE696",
+        "src/titan_v4/data/primary9_registry.py": "61ED35A31A5CC9A173DB84B93117905BFC766E042BF362912D9A48E35D2AFBCF",
+        "src/titan_v4/data/label_registry.py": "A9C3360C436767C98FA12E81113836320B6B7258677987EF618DF003E8EEE94B"
+      },
+      "raw_prediction_csv_sha256": "8d942be79188649435e94b8e4ca044480902646ef430a881a8037db417b67083"
+    }
+  }
+}

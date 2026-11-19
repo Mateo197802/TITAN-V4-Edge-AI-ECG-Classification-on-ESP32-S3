@@ -1,0 +1,24 @@
+{
+  "selected": "partial_lr1e-05_anchor2.0_focus1.25_e08",
+  "refit_needed": true,
+  "all_state_tensors_bitwise_equal": true,
+  "changed_state_tensors": [
+    "res_layers.4.conv1.weight",
+    "res_layers.4.bn1.weight",
+    "res_layers.4.bn1.bias",
+    "res_layers.4.conv2.weight",
+    "res_layers.4.bn2.weight",
+    "res_layers.4.bn2.bias",
+    "res_layers.4.se.fc1.weight",
+    "res_layers.4.se.fc1.bias",
+    "res_layers.4.se.fc2.weight",
+    "res_layers.4.se.fc2.bias",
+    "res_layers.4.downsample.0.weight",
+    "res_layers.4.downsample.1.weight",
+    "res_layers.4.downsample.1.bias",
+    "head_rhythm.0.weight",
+    "head_rhythm.0.bias",
+    "head_rhythm.3.weight",
+    "head_rhythm.3.bias"
+  ]
+}

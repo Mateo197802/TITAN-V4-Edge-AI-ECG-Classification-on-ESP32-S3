@@ -1,0 +1,66 @@
+{
+  "absent_endpoints": [
+    "pathology"
+  ],
+  "aggregation": "mean_logits",
+  "coefficient": 0.25,
+  "paired_manifest_sha256": "b27acd413edf89bda192c7a03b38bd6ba9e6c799da34e490dab832bd25c4e3b5",
+  "pathology_classes": [
+    "IMI",
+    "ASMI",
+    "LVH",
+    "ISC_",
+    "ISCAL",
+    "NST_",
+    "ILMI",
+    "AMI",
+    "ALMI",
+    "LAE"
+  ],
+  "pretrained_teacher_sha256": "ee199f3781f4ae1f732973267f003da0a759ea12bddb0dd28a77faa60aca7997",
+  "qualification_producer": {
+    "attempt": 3,
+    "code_sha256": "4e83afb9ee5c7c4db717d037b834c0c1cca315fb290e9846d74d60b13c525c13",
+    "job_id": 29627,
+    "paired_manifest_sha256": "b27acd413edf89bda192c7a03b38bd6ba9e6c799da34e490dab832bd25c4e3b5",
+    "stage": "teachers"
+  },
+  "qualification_sha256": "9c7021d920e8ab54f1e0b5a016e238a6cb12483095fa5c8623e3ed4dffe979a2",
+  "records": 22540,
+  "rhythm_classes": [
+    "AFIB",
+    "SB",
+    "STACH",
+    "NSR",
+    "PVC",
+    "RBBB",
+    "LBBB",
+    "PAC",
+    "1AVB"
+  ],
+  "rhythm_temperature": 2.0,
+  "scope": "train",
+  "teachers": {
+    "rhythm": {
+      "checkpoints": [
+        {
+          "path": "teacher-fits/rhythm-canonical_filtered-adapt-20261014/checkpoint.pth",
+          "seed": 20261014,
+          "sha256": "278c55493b9540e82b29b77286882bbe63e797fa6bddbfa4a2bc345f09a0b7d7"
+        },
+        {
+          "path": "teacher-fits/rhythm-canonical_filtered-adapt-20261015/checkpoint.pth",
+          "seed": 20261015,
+          "sha256": "6a32d9c8c0b8cad8bb15897585330231f5e3413b465931bb29942306c1d9d9e6"
+        },
+        {
+          "path": "teacher-fits/rhythm-canonical_filtered-adapt-20261016/checkpoint.pth",
+          "seed": 20261016,
+          "sha256": "eb9cbb0c80e52be2fb370bb8fd56c02b4006d53d8ccf399747a10653d92f2d7e"
+        }
+      ],
+      "contract": "canonical_filtered",
+      "contract_sha256": "fecc2e41cc73dd5e774355f0f753877f01c5a90ce2406d5ec6a3e6baafcdda7f"
+    }
+  }
+}

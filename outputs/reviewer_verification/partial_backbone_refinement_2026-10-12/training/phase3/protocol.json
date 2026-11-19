@@ -1,0 +1,59 @@
+{
+  "experiment": "phase3_partial_backbone_finetune",
+  "created_utc": "2026-10-12T22:35:00Z",
+  "initialization": {
+    "checkpoint": "phase2_selected.pth",
+    "sha256": "763ca7c30a17cbe69d56b21204869bf1fdd6444fc8b9b6d5bf80d0b7440e11d1",
+    "origin": "Gold checkpoint; phase 2 changed only the original rhythm head",
+    "random_reinitialization": false
+  },
+  "architecture": {
+    "parameter_count": 1143751,
+    "input_shape": [6, 1250],
+    "input_sampling_rate_hz": 125,
+    "input_leads": ["I", "II", "III", "aVR", "aVL", "aVF"],
+    "output_heads": ["rhythm", "quality", "biometrics", "pathology"],
+    "trainable_modules": ["res_layers.4", "head_rhythm"],
+    "trainable_parameter_count": 460065,
+    "all_other_parameters_frozen": true,
+    "batch_norm_running_statistics_frozen": true
+  },
+  "data": {
+    "train_records": 8393,
+    "validation_records": 1476,
+    "follow_up_records": 2171,
+    "primary9_class_order": ["AFIB", "SB", "STACH", "NSR", "PVC", "RBBB", "LBBB", "PAC", "1AVB"],
+    "labels_changed": false,
+    "follow_up_role": "previously examined comparisons only; never used for training or selection",
+    "signal_contract": "frozen first 10 seconds, six frontal leads, existing 0.5-45 Hz filter, resampling and per-lead z-score"
+  },
+  "optimization": {
+    "seed": 20261012,
+    "batch_size": 128,
+    "epochs": 12,
+    "checkpoints": [2, 4, 8, 12],
+    "optimizer": "AdamW",
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "teacher_kl_weight": 0.15,
+    "auxiliary_head_distillation_weight": 0.05,
+    "sb_lbbb_sample_weight": 5.0,
+    "trials": [
+      {"learning_rate": 0.00001, "gold_anchor": 2.0, "weak_class_multiplier": 1.25},
+      {"learning_rate": 0.00003, "gold_anchor": 5.0, "weak_class_multiplier": 1.25},
+      {"learning_rate": 0.00001, "gold_anchor": 5.0, "weak_class_multiplier": 1.5}
+    ]
+  },
+  "selection": {
+    "metric": "mean fixed-nine-class macro-F1 across validation sources",
+    "gold_preservation": "SB and LBBB recall within 0.05 of Gold per source",
+    "weak_class_preservation": "SB, LBBB, RBBB, PAC, NSR recall no more than 0.05 below phase2 on source-class support >=20",
+    "auxiliary_output_preservation": "normalized RMSE <=0.15 for quality, biometrics and pathology outputs",
+    "minimum_score_gain": 0.002,
+    "max_protected_recall_drop": 0.05,
+    "minimum_class_support": 20,
+    "maximum_auxiliary_nrmse": 0.15,
+    "fallback": "phase2_selected.pth"
+  },
+  "execution": "CEDIA Slurm GPU only; the follow-up predictions are evaluated after the validation-based selection is sealed"
+}

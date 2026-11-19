@@ -1,0 +1,13 @@
+{
+  "status.json": "ad7fa32a69a192853b547896620b1b05a74e54e3b79c64a1513b0880511f9505",
+  "feature-cache/cache.json": "4a363976f55735a4a927180cab2488db3661031e596a67ae2bf26bc228195139",
+  "feature-cache/SHA256SUMS.json": "f6d6bfc94aa29eb768cb6b183fbd20206835f7190d58e288cf860e13dd2c0921",
+  "teacher-controls/warm/rhythm/validation.csv": "3ec531280547540e48a096c71c1fb9f51acd71a7e9a8c41887c63c61abee9f40",
+  "teacher-controls/warm/rhythm/validation.npz": "dd273f87364fa3b774d7fd8f37ab2b7915ffbf16f793d5573276606ffba70584",
+  "teacher-controls/warm/pathology/validation.csv": "5e65b9454313df3cd78e310e401d904763513606bab7757d7bc16b9a481edb51",
+  "teacher-controls/warm/pathology/validation.npz": "99336a81394d805a7d28bc510ae112b064d49f11393366ed1e3d99f8e9236e37",
+  "teacher-controls/task/rhythm/validation.csv": "3ec531280547540e48a096c71c1fb9f51acd71a7e9a8c41887c63c61abee9f40",
+  "teacher-controls/task/rhythm/validation.npz": "dd273f87364fa3b774d7fd8f37ab2b7915ffbf16f793d5573276606ffba70584",
+  "teacher-controls/task/pathology/validation.csv": "3aff9e66633bbe0107ed9c84e5ea4a3d9df4fa5ecebd650df97c5c26ff2daf9d",
+  "teacher-controls/task/pathology/validation.npz": "dc0f891df7dc713088f52277595e24d7a0c97dab9c4181b916c4f7e01d4819cd"
+}

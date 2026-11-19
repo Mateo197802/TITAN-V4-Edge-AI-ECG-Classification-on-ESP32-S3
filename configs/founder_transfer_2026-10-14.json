@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "metadata": "outputs/reviewer_verification/supervision_control_2026-10-14/data/ptbxl_database.csv",
+  "metadata_sha256": "7600de9c1b27d181d850b3c6038a35d7c3ddb6bb33b702e3a20252a6859d216b",
+  "data_root": "data/cache/physionet",
+  "manifests": {
+    "train": [
+      "outputs/reviewer_verification/partial_backbone_refinement_2026-10-12/manifests/train_records.csv",
+      "outputs/reviewer_verification/supervision_control_2026-10-14/data/path_extra_records.csv",
+      "outputs/reviewer_verification/supervision_control_2026-10-14/data/rhythm_extra_records.csv"
+    ],
+    "rhythm_validation": ["outputs/reviewer_verification/partial_backbone_refinement_2026-10-12/manifests/validation_records.csv"],
+    "pathology_validation": ["outputs/reviewer_verification/supervision_control_2026-10-14/data/path_validation_records.csv"],
+    "tracking": ["outputs/reviewer_verification/partial_backbone_refinement_2026-10-12/manifests/followup_records.csv"]
+  },
+  "historical_sources": "data/external_validation/record_source_manifest.csv",
+  "historical_hashes": "outputs/reviewer_verification/arrhythmia_primary9/cedia_gold_2026-05-26/fresh_inference/source_files_sha256.csv",
+  "historical_labels": "outputs/reviewer_verification/arrhythmia_primary9/cedia_gold_2026-05-26/primary9_label_history_672.csv",
+  "manifest_sha256": {
+    "outputs/reviewer_verification/partial_backbone_refinement_2026-10-12/manifests/train_records.csv": "d9d055b80e6f4983785a63cad045392cd49bdc766b36f64db6f87b81dcbce18c",
+    "outputs/reviewer_verification/supervision_control_2026-10-14/data/path_extra_records.csv": "b3dbf56562ce88e7940ba2cb4cc808ecf750a06cebe478b6612101b84f482c11",
+    "outputs/reviewer_verification/supervision_control_2026-10-14/data/rhythm_extra_records.csv": "d0335296b3dc99a5f17fc738bd893d7254bc7f996b33e21762d460797094a065",
+    "outputs/reviewer_verification/partial_backbone_refinement_2026-10-12/manifests/validation_records.csv": "2ac7fd8ea045a30c8398930d530aed709da7a1bedc4e8a1dc54790f4ae0ea674",
+    "outputs/reviewer_verification/supervision_control_2026-10-14/data/path_validation_records.csv": "b9b1db142fea0b6e990d7b3f6d11840691a3f6d23a97d04131a3cc7a370a804a",
+    "outputs/reviewer_verification/partial_backbone_refinement_2026-10-12/manifests/followup_records.csv": "307e00c30bcc079436e53271e1f9b0bf72839586f01fcf29e416442c93927a5d",
+    "data/external_validation/record_source_manifest.csv": "e224686569e54f471aa4a5fdbac0ce2123c43bc8f5cd0637b0c389b75692cfb0",
+    "outputs/reviewer_verification/arrhythmia_primary9/cedia_gold_2026-05-26/fresh_inference/source_files_sha256.csv": "945b5bc286be9a12ea89ffda05ffc37e914da99f32c9995b6524c15e280ae879",
+    "outputs/reviewer_verification/arrhythmia_primary9/cedia_gold_2026-05-26/primary9_label_history_672.csv": "7d1943a1fbab9511047eb2d649cf0904e2d6535809c02fa1e4c5e3a648cd9f8d"
+  },
+  "archived_input_sha256": {
+    "data/cache/loss_ablation_rebuilt/train.npz": "39927ab6425f57f1164fbe0b31f1959fa067c220bf54da0b81f2ad2cff3928a1",
+    "data/cache/loss_ablation_rebuilt/validation.npz": "3c38448952076cc1393ec212f3414fd9044d7adf7eb988d3bce0e7e9a8105fb7",
+    "data/cache/loss_ablation_rebuilt/evaluation.npz": "744e28408ec30178b87f42561a4591314b993e4da340b8749be6e6bcb4ebd0f9",
+    "data/cache/expanded_pathology_inputs_s3/path_targets.npz": "56abbd8058c306227e2b033745b40f81764358c3e51a7cb5b1abf67c6eef6912",
+    "data/cache/expanded_pathology_inputs_s3/path_extra.npz": "6ea66c77efd95602eb06ef95c815036a17628a80d967ec45773060f6be19bde5",
+    "data/cache/supervision_control_cedia/staged_path_validation.npz": "2f2ee2e93508a3a3688ee8b0d38f05d84922a35a97409d11d8d1c0a5cf39f1e5",
+    "data/cache/supervision_control_cedia/staged_rhythm_extra.npz": "c3da47033dcc1216d48e7573a4c1875a3fc5c34071d91e1251a11e4110a45c35"
+  },
+  "expected_role_counts": {"train": 22540, "train_excluded": 27, "rhythm_validation": 1476, "pathology_validation": 2027, "tracking": 2171, "historical": 672},
+  "expected_training_union": 22567,
+  "expected_pathology_training": 16413,
+  "preprocessing_contracts": ["canonical_unfiltered", "canonical_filtered", "heed_unfiltered", "heed_filtered"],
+  "missing_sample_policy": "wfdb16_zero_fill",
+  "seeds": [20261014, 20261015, 20261016],
+  "student_checkpoint": "outputs/reviewer_verification/supervision_control_2026-10-14/model/joint_selected.pth",
+  "student_sha256": "72d3ece9b00e844d6a94f207f4ced71af0af69c59cef66b625031ff92b2f965b",
+  "teacher_sha256": "ee199f3781f4ae1f732973267f003da0a759ea12bddb0dd28a77faa60aca7997",
+  "gpu_hours_total": 48,
+  "gpu_hours_buckets": {"preparation": 4.5, "teachers": 21, "students": 22.5}
+}

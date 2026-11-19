@@ -1,0 +1,90 @@
+{
+  "metadata_sha256": "7600de9c1b27d181d850b3c6038a35d7c3ddb6bb33b702e3a20252a6859d216b",
+  "training_records": 22567,
+  "native_pathology_records": 16413,
+  "native_human_validation": {
+    "True": 10715,
+    "False": 5698
+  },
+  "source_mass_before": {
+    "cpsc_2018": 0.2413793103448276,
+    "ecg-arrhythmia": 0.13793103448275862,
+    "georgia": 0.3103448275862069,
+    "ptb-xl": 0.3103448275862069
+  },
+  "equal_pair_source_mass_after": {
+    "cpsc_2018": 0.20588235294117646,
+    "ecg-arrhythmia": 0.2647058823529412,
+    "georgia": 0.2647058823529412,
+    "ptb-xl": 0.2647058823529412
+  },
+  "fixed_source_mass_measured": {
+    "cpsc_2018": 0.24137932062149048,
+    "ecg-arrhythmia": 0.13793104887008667,
+    "georgia": 0.3103448450565338,
+    "ptb-xl": 0.3103448152542114
+  },
+  "source_positive_likelihoods": {
+    "IMI": {
+      "weak": 1218,
+      "100": 798
+    },
+    "ASMI": {
+      "100": 1134,
+      "weak": 606
+    },
+    "LVH": {
+      "weak": 764,
+      "100": 815
+    },
+    "ISC_": {
+      "100": 818,
+      "weak": 111
+    },
+    "ISCAL": {
+      "100": 387,
+      "weak": 98
+    },
+    "NST_": {
+      "100": 392,
+      "weak": 26,
+      "unknown": 131
+    },
+    "ILMI": {
+      "100": 254,
+      "weak": 99
+    },
+    "AMI": {
+      "100": 81,
+      "weak": 180
+    },
+    "ALMI": {
+      "100": 152,
+      "weak": 63
+    },
+    "LAE": {
+      "weak": 82,
+      "100": 228
+    }
+  },
+  "calibration_patient_groups": 5,
+  "calibration_records_per_group": [
+    404,
+    386,
+    423,
+    403,
+    411
+  ],
+  "reference_labels_changed": false,
+  "evaluation_data_used_for_weights": false,
+  "unknown_likelihood_policy": "Zero is unknown, not a negative or zero-weight positive",
+  "source_files": {
+    "ptbxl_database.csv": "7600de9c1b27d181d850b3c6038a35d7c3ddb6bb33b702e3a20252a6859d216b",
+    "path_extra_records.csv": "b3dbf56562ce88e7940ba2cb4cc808ecf750a06cebe478b6612101b84f482c11",
+    "rhythm_extra_records.csv": "d0335296b3dc99a5f17fc738bd893d7254bc7f996b33e21762d460797094a065"
+  },
+  "files": {
+    "supervision_weights.npz": "b64625dac68f6e761eb990e84b02fdca349ab600e6633dd0062afd61703e7cae",
+    "training_controls_records.csv": "b5b14e5c53474095d8925550f942aa54b281979aac94dea62e011d5aa604c603"
+  }
+}

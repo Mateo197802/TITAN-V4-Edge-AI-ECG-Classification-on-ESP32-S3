@@ -1,0 +1,17 @@
+{
+  "baseline_metrics.json": "62664607f1ee50576cbba7b0a01019ec90afdd34c17ffe008ad6deaa6991e427",
+  "baseline_predictions.csv": "2d7298d583d3d9d49f68947e5885689cca81f98e35565db730327ded11a1ba49",
+  "baseline_validation.npz": "09efc0478198d96b364947901b2b061642565b6fbac4620199c06abd5011ae4c",
+  "compatible_heads_e00.pth": "ad7322bbfa7d44376c8ae8a3ccfb232669eda5918159230f788040d7b7f88738",
+  "compatible_heads_e00_validation.npz": "3905e744d8aee74927caee9e80f087f02d889a8751f2dc0a0460f6c0110672e2",
+  "composition.json": "4b19067b3cc7ea2b57f72c51a61db56d71b4eb8c773dabe19faa9cc96522a4d3",
+  "execution.json": "632f1cccc0933f6d078511560346b64218af3d2ea734563035f87a90eefa9b3f",
+  "joint_selected.pth": "83983e974b9648e724a7f16b92b10467a867151f1cd99ff02d3eeec570042c0b",
+  "joint_selected_metrics.json": "69ca48e24a237f89e4721db360793fa1e5528992c6fea845004bbcd3c9ce0849",
+  "joint_selected_predictions.csv": "23e2d78645cd19b627f09882ca64733bd90462dc4283c5a70d78862509de47ac",
+  "refit.json": "182290a3c5f2ea96cabf8419ee8a9b16f6ec398749f46c7552e035c81eeeca18",
+  "rhythm_selected.pth": "4b20177029ee5388b76c336bda09b10bb962750b94feacb0b32b47d7e1fc6637",
+  "rhythm_selected_metrics.json": "69ca48e24a237f89e4721db360793fa1e5528992c6fea845004bbcd3c9ce0849",
+  "rhythm_selected_predictions.csv": "23e2d78645cd19b627f09882ca64733bd90462dc4283c5a70d78862509de47ac",
+  "selection.json": "10bc7f6ade557794c8c29493eff9d23e8c045f4ffbca0837fdc107f4ff263d4a"
+}

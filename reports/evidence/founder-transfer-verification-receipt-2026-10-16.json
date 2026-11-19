@@ -1,0 +1,42 @@
+{
+  "bundle_inventory_sha256": "5d862fb302c2d60d954e30f4e3e1ead894ed5407997668ab3d931f137aaab321",
+  "clean_git_archive_unit_tests": {
+    "external_teacher_cache_required": false,
+    "failed": 0,
+    "passed": 426,
+    "seconds": 54.89
+  },
+  "environment": {
+    "numpy": "2.4.6",
+    "python": "3.12.10",
+    "scikit_learn": "1.9.0",
+    "scipy": "1.18.1",
+    "torch": "2.12.1+cpu"
+  },
+  "exact_class_and_threshold_decisions_required": true,
+  "git_zip_sha256": "f076295a977b40ce8de1f4f4ecf69961368494e1466911d925c325c3b1e5523a",
+  "independent_code_review": {
+    "actionable_findings": 0,
+    "did_not_execute_inference_or_full_tests": true,
+    "kind": "automated read-only source and focused evidence review"
+  },
+  "independent_cpu_source_inference": true,
+  "probability_atol": 1e-06,
+  "probability_rtol": 1e-05,
+  "scope": "same-architecture continued-fit study; development validation and previously examined follow-up/historical cohorts; no historical 90/87 inference claim",
+  "source_sha256": {
+    "scripts/verify_founder_transfer.py": "72038c1ebadad3e0008d470c7a184979031f478a30c6b37c5374e49f61619e77",
+    "src/titan_v4/models/titan_v4_net.py": "5a3c980f44c71df1f075ddf7592dd61a88c99690c739b467a0964291b1fae696",
+    "src/titan_v4/reproducibility/pretrained_transfer/evidence.py": "791b5b2482af636b37e12fb8b37b31ceb5d0e7499102989b3371209af5bbd0b7",
+    "src/titan_v4/reproducibility/pretrained_transfer/inputs.py": "34f119a7aa4fcd44a5012d7005a4cc8bb7607c0e898ed697767a35092264da8c"
+  },
+  "tested_git_revision": "81897f1112a88fdef194fbb558b6ff7b1bd2282d",
+  "verification_date_utc": "2026-10-16",
+  "verification_report_sha256": "98e60894a6662873ea2acc50eb95000251957bf7e49bed94c12e08dc785084c3",
+  "working_copy_source_sha256": {
+    "scripts/verify_founder_transfer.py": "72038c1ebadad3e0008d470c7a184979031f478a30c6b37c5374e49f61619e77",
+    "src/titan_v4/models/titan_v4_net.py": "5a3c980f44c71df1f075ddf7592dd61a88c99690c739b467a0964291b1fae696",
+    "src/titan_v4/reproducibility/pretrained_transfer/evidence.py": "791b5b2482af636b37e12fb8b37b31ceb5d0e7499102989b3371209af5bbd0b7",
+    "src/titan_v4/reproducibility/pretrained_transfer/inputs.py": "34f119a7aa4fcd44a5012d7005a4cc8bb7607c0e898ed697767a35092264da8c"
+  }
+}

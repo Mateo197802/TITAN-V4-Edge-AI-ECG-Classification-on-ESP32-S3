@@ -1,0 +1,21 @@
+{
+  "started_utc": "2026-10-12T22:37:33Z",
+  "hostname": "compute-0-1.hpc.cedia.edu.ec",
+  "job_id": "29336",
+  "torch": "2.1.2+cu121",
+  "numpy": "1.26.4",
+  "cuda": "12.1",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "input_manifest_sha256": "ed1b76caa23b060ecce9fcdedbce8ebfa838e7c96cd053956f5b8333eeb4e3fa",
+  "initialization": "phase2_selected.pth, itself strict warm-start from Gold; no layer reinitialization",
+  "trainable_modules": [
+    "res_layers.4",
+    "head_rhythm"
+  ],
+  "training": "CEDIA GPU; original architecture and total parameters unchanged",
+  "gold_embedding_max_abs_error": {
+    "train": 7.152557373046875e-06,
+    "validation": 4.649162292480469e-06
+  },
+  "starting_validation_score": 0.607131156197565
+}

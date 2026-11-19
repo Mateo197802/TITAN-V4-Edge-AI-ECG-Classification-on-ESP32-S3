@@ -1,0 +1,289 @@
+{
+  "stage": "bootstrap",
+  "completed": true,
+  "runtime": {
+    "python": "3.10.14",
+    "torch": "2.6.0+cu118",
+    "numpy": "1.26.4",
+    "scipy": "1.13.1",
+    "wfdb": "4.1.2",
+    "pandas": "2.2.3",
+    "cuda": "11.8",
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "device_memory_bytes": 42406903808
+  },
+  "wheel_receipts": [
+    {
+      "name": "torch",
+      "version": "2.6.0+cu118",
+      "sha256": "715d3b039a629881f263c40d1fb65edac6786da13bfba221b353ef2371c4da86"
+    },
+    {
+      "name": "nvidia-cublas-cu11",
+      "version": "11.11.3.6",
+      "sha256": "60252822adea5d0b10cd990a7dc7bedf7435f30ae40083c7a624a85a43225abc"
+    },
+    {
+      "name": "nvidia-cuda-cupti-cu11",
+      "version": "11.8.87",
+      "sha256": "4191a17913a706b5098681280cd089cd7d8d3df209a6f5cb79384974a96d24f2"
+    },
+    {
+      "name": "nvidia-cuda-nvrtc-cu11",
+      "version": "11.8.89",
+      "sha256": "a8d02f3cba345be56b1ffc3e74d8f61f02bb758dd31b0f20e12277a5a244f756"
+    },
+    {
+      "name": "nvidia-cuda-runtime-cu11",
+      "version": "11.8.89",
+      "sha256": "92d04069a987e1fbc9213f8376d265df0f7bb42617d44f5eda1f496acea7f2d1"
+    },
+    {
+      "name": "nvidia-cudnn-cu11",
+      "version": "9.1.0.70",
+      "sha256": "e6135ac63fe9d5b0b89cfb35c3fc1c1349f2b995becadf2e9dc21bca89d9633d"
+    },
+    {
+      "name": "nvidia-cufft-cu11",
+      "version": "10.9.0.58",
+      "sha256": "e21037259995243cc370dd63c430d77ae9280bedb68d5b5a18226bfc92e5d748"
+    },
+    {
+      "name": "nvidia-curand-cu11",
+      "version": "10.3.0.86",
+      "sha256": "cd4cffbf78bb06580206b4814d5dc696d1161c902aae37b2bba00056832379e6"
+    },
+    {
+      "name": "nvidia-cusolver-cu11",
+      "version": "11.4.1.48",
+      "sha256": "ea9fb1ad8c644ca9ed55af13cc39af3b7ba4c3eb5aef18471fe1fe77d94383cb"
+    },
+    {
+      "name": "nvidia-cusparse-cu11",
+      "version": "11.7.5.86",
+      "sha256": "8d7cf1628fd8d462b5d2ba6678fae34733a48ecb80495b9c68672ec6a6dde5ef"
+    },
+    {
+      "name": "nvidia-nccl-cu11",
+      "version": "2.21.5",
+      "sha256": "49d8350629c7888701d1fd200934942671cb5c728f49acc5a0b3a768820bed29"
+    },
+    {
+      "name": "nvidia-nvtx-cu11",
+      "version": "11.8.86",
+      "sha256": "979f5b2aef5da164c5c53c64c85c3dfa61b8b4704f4f963bb568bf98fa8472e8"
+    },
+    {
+      "name": "sympy",
+      "version": "1.13.1",
+      "sha256": "db36cdc64bf61b9b24578b6f7bab1ecdd2452cf008f34faa33776680c26d66f8"
+    },
+    {
+      "name": "triton",
+      "version": "3.2.0",
+      "sha256": "468a01c9aa6e18fe2bba49c5e5002c1fd5f61b1af891c0594eaf446fe1aaae10"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0",
+      "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+    },
+    {
+      "name": "filelock",
+      "version": "4.1.0",
+      "sha256": "2ce9818e3e2d8f284c1a964414447ef148d42a5fd5e2a477a7118e574b293ec1"
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0",
+      "sha256": "8dd6e646e99ea382bd85f97a45e6b526a442d79423a7dc673f1e2756d05fcb5f"
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.6",
+      "sha256": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67"
+    },
+    {
+      "name": "networkx",
+      "version": "3.4.2",
+      "sha256": "df5d4365b724cf81b8c6a7312509d0c22386097011ad1abe274afd5e9d3bbc5f"
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "3.0.4",
+      "sha256": "d1aca03ede943eb80ab3d63bb082c84b7aab85ea83bd0fd0c200260945fb49d9"
+    },
+    {
+      "name": "mpmath",
+      "version": "1.3.0",
+      "sha256": "a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c"
+    },
+    {
+      "name": "numpy",
+      "version": "1.26.4",
+      "sha256": "ffa75af20b44f8dba823498024771d5ac50620e6915abac414251bd971b4529f"
+    },
+    {
+      "name": "scipy",
+      "version": "1.13.1",
+      "sha256": "f26264b282b9da0952a024ae34710c2aff7d27480ee91a2e82b7b7073c24722f"
+    },
+    {
+      "name": "wfdb",
+      "version": "4.1.2",
+      "sha256": "57ef64309ec7793bb11611c646d129f0b1936b598947fed8c14f90a35665053d"
+    },
+    {
+      "name": "scikit-learn",
+      "version": "1.3.2",
+      "sha256": "0ee107923a623b9f517754ea2f69ea3b62fc898a3641766cb7deb2f2ce450161"
+    },
+    {
+      "name": "pandas",
+      "version": "2.2.3",
+      "sha256": "86976a1c5b25ae3f8ccae3a5306e443569ee3c3faf444dfd0f41cda24667ad57"
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.8.4",
+      "sha256": "ecd79298550cba13a43c340581a3ec9c707bd895a6a061a78fa2524660482fc0"
+    },
+    {
+      "name": "pytest",
+      "version": "8.3.5",
+      "sha256": "c69214aa47deac29fad6c2a4f590b9c4a9fdb16a403176fe154b79c0b4d4d820"
+    },
+    {
+      "name": "contourpy",
+      "version": "1.3.2",
+      "sha256": "ad687a04bc802cbe8b9c399c07162a3c35e227e2daccf1668eb1f278cb698631"
+    },
+    {
+      "name": "cycler",
+      "version": "0.12.1",
+      "sha256": "85cef7cff222d8644161529808465972e51340599459b8ac3ccbac5a854e0d30"
+    },
+    {
+      "name": "exceptiongroup",
+      "version": "1.3.1",
+      "sha256": "a7a39a3bd276781e98394987d3a5701d0c4edffb633bb7a5144577f82c773598"
+    },
+    {
+      "name": "fonttools",
+      "version": "4.65.0",
+      "sha256": "fb53892b570f7f1f0055e75fc4de32673e32f749c4c8a606b63d5c436650e634"
+    },
+    {
+      "name": "joblib",
+      "version": "1.6.0",
+      "sha256": "3dbbf9f6e4b592a2357b854608e980fe6390d131d7a82f011a377ef2ebef7aba"
+    },
+    {
+      "name": "kiwisolver",
+      "version": "1.5.1",
+      "sha256": "e05c2f7925f1d88778e53cb44f14e0223204a3bdd09a41664750363acfb1f2ef"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3",
+      "sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c"
+    },
+    {
+      "name": "pillow",
+      "version": "12.3.0",
+      "sha256": "f0606c8bf2cdefea14a43530f7657cbbb7ecf1c4222512492ef4a4434a9501ec"
+    },
+    {
+      "name": "pluggy",
+      "version": "1.7.0",
+      "sha256": "7dd7b0d8832ba3cb632c306926ded123429211b83641b35dc5c41ad2d34f9bec"
+    },
+    {
+      "name": "pyparsing",
+      "version": "3.3.3",
+      "sha256": "ece8c00a69cf01b45d0b1dedabb469c90d8caf996d4fda40f147627a122849a4"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.9.0.post0",
+      "sha256": "a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427"
+    },
+    {
+      "name": "pytz",
+      "version": "2026.5",
+      "sha256": "e658af3757f9e26a9d25dd2aff38335acd92bc9104f890a894b2c1ba28311b03"
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2",
+      "sha256": "2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0"
+    },
+    {
+      "name": "soundfile",
+      "version": "0.14.0",
+      "sha256": "1e38bac1853412871318e82a1ba69a8be677619b56025bbfcccdb41b6cafe82d"
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.7.0",
+      "sha256": "cd8b60b5641b45c67bbf73c64c843235fc2d8a480c87389f52f5dbee893b86be"
+    },
+    {
+      "name": "tomli",
+      "version": "2.5.0",
+      "sha256": "32a7b79ac57a2e83670ce329ccf675798bc5a2094783a63676866b70503f2e2b"
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.5",
+      "sha256": "b683bd1b6659ddcd810ff02ad09ba821d4bf1065072805063eb35c49617905ac"
+    },
+    {
+      "name": "iniconfig",
+      "version": "2.3.1",
+      "sha256": "9121e2c1fdb355232495be3194c8dfe87ccc2d5dee45947b78e68f499790d7a7"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.7.22",
+      "sha256": "62f22742b58a1a33014a2b6b706588a8d7e2a88ae7bd1a6ebe8c992928483775"
+    },
+    {
+      "name": "cffi",
+      "version": "2.1.1",
+      "sha256": "194cffa889098ced9976c3fc6340305e43f6303657d298da55366907c05c22d6"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2",
+      "sha256": "8a893cc101149f80a653f82062ebc95b34525a2614382e1da5458fe7c6997249"
+    },
+    {
+      "name": "cloudpickle",
+      "version": "3.1.2",
+      "sha256": "9acb47f6afd73f60dc1df93bb801b472f05ff42fa6c84167d25cb206be1fbf4a"
+    },
+    {
+      "name": "idna",
+      "version": "3.20",
+      "sha256": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0",
+      "sha256": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0",
+      "sha256": "0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3"
+    },
+    {
+      "name": "pycparser",
+      "version": "3.11",
+      "sha256": "51d5a8ba2be0bbe440b99d2112604c95bbbc3c2748a64260186c541e1729cd80"
+    }
+  ],
+  "attempt": 2,
+  "audit_environment_modified": false
+}

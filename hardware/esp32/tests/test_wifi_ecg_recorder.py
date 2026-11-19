@@ -9,7 +9,7 @@ from scipy.io import loadmat
 
 
 ESP32_ROOT = Path(__file__).resolve().parents[1]
-RECORDER = ESP32_ROOT / "07_record_wifi_ecg.py"
+RECORDER = ESP32_ROOT / "recorder" / "record_wifi_ecg.py"
 
 
 def load_recorder():

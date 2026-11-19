@@ -1,0 +1,18 @@
+{
+  "source_bundle": "outputs/reviewer_verification/joint_refinement_2026-10-12",
+  "source_bundle_inventory_sha256": "2ef107f84131954616b0923c4517aa18e39b72f25289f6f7b35686078591e6fd",
+  "unchanged_inputs": {
+    "train.npz": "39927ab6425f57f1164fbe0b31f1959fa067c220bf54da0b81f2ad2cff3928a1",
+    "validation.npz": "3c38448952076cc1393ec212f3414fd9044d7adf7eb988d3bce0e7e9a8105fb7",
+    "evaluation.npz": "744e28408ec30178b87f42561a4591314b993e4da340b8749be6e6bcb4ebd0f9",
+    "path_extra.npz": "3fb2db3f1d0bd85f7502e8bd7afc83315fba4df92ec6f5ef6127a529628d7311",
+    "path_targets.npz": "56abbd8058c306227e2b033745b40f81764358c3e51a7cb5b1abf67c6eef6912"
+  },
+  "unchanged_published_data": {
+    "path_extra_records.csv": "4c09f000ac0206c1a82f1e281840833d87fadba3da96c47f14a7131c9c77d65f",
+    "path_targets.csv": "96af1da2c09c0ec6e76baa5f12175b01d6633cf3e0f17b297ea4e7b1a7369d4a",
+    "path_targets.npz": "56abbd8058c306227e2b033745b40f81764358c3e51a7cb5b1abf67c6eef6912"
+  },
+  "reinitialized_layers": false,
+  "additional_evaluation_records": 0
+}

@@ -1,5 +1,6 @@
 {
   "module": "pathology_primary5",
+  "evidence_status": "LEGACY_NOT_REPRODUCED",
   "classes": ["IMI", "ALMI", "ILMI", "LAE", "ISC_"],
   "label_set": "final external validation label set",
   "external_training_allowed": false,

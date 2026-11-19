@@ -1,0 +1,19 @@
+{
+  "files": {
+    "header_census.csv": {
+      "sha256": "8e1b082640e64f9c8bc8dc6d4007f3e946d347eaf8636290b63ca5c9d19a6bbd",
+      "byte_identical": true
+    },
+    "rhythm_extra_records.csv": {
+      "sha256": "d0335296b3dc99a5f17fc738bd893d7254bc7f996b33e21762d460797094a065",
+      "byte_identical": true
+    },
+    "rhythm_extra.npz": {
+      "sha256": "c3da47033dcc1216d48e7573a4c1875a3fc5c34071d91e1251a11e4110a45c35",
+      "byte_identical": true
+    }
+  },
+  "original_signals": 190,
+  "authenticated_headers": 45152,
+  "excluded_identity_mismatches": 1
+}

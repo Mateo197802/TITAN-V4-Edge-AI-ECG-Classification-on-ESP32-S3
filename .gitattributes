@@ -1,5 +1,27 @@
 # GitHub Linguist configuration.
 #
+# Keep tracked text stable across Windows and Unix checkouts.
+.gitattributes text eol=lf
+.gitignore text eol=lf
+LICENSE text eol=lf
+Makefile text eol=lf
+run text eol=lf
+*.py text eol=lf
+*.json text eol=lf
+*.jsonl text eol=lf
+*.csv text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.toml text eol=lf
+*.ini text eol=lf
+*.cff text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.h text eol=lf
+*.cpp text eol=lf
+*.c text eol=lf
+*.sh text eol=lf
+
 # The ESP32 firmware includes a generated C/C++ header with embedded model
 # weights. It is required for edge reproducibility, but it should not dominate
 # repository language statistics.
@@ -9,3 +31,26 @@ hardware/esp32/firmware/src/model_data.h linguist-generated=true
 models/gold_master/*.pth linguist-vendored
 hardware/esp32/models/*.tflite linguist-vendored
 hardware/esp32/recordings/** linguist-vendored
+
+# Preserve the byte-level checksums of archived execution inputs and evidence.
+outputs/reviewer_verification/partial_backbone_refinement_2026-10-12/** -text
+outputs/reviewer_verification/partial_backbone_refinement_2026-10-12/**/*.pth linguist-vendored
+
+# These exact source bytes are recorded in the archived inference run manifest.
+src/titan_v4/models/titan_v4_net.py -text
+src/titan_v4/data/primary9_registry.py -text
+src/titan_v4/data/label_registry.py -text
+outputs/reproduced/primary9/** -text
+outputs/reviewer_verification/gold_target_gap_2026-10-12/** -text
+outputs/reviewer_verification/loss_anchor_ablation_2026-10-12/** -text
+outputs/reviewer_verification/joint_refinement_2026-10-12/** -text
+outputs/reviewer_verification/balanced_joint_2026-10-13/** -text
+outputs/reviewer_verification/sequential_heads_2026-10-13/** -text
+outputs/reviewer_verification/compatible_heads_2026-10-13/** -text
+outputs/reviewer_verification/expanded_population_2026-10-13/** -text
+outputs/reviewer_verification/directed_pcgrad_2026-10-13/** -text
+outputs/reviewer_verification/supervision_control_2026-10-14/** -text
+outputs/reviewer_verification/plateau_audit_2026-10-14/** -text
+outputs/reviewer_verification/founder_transfer_2026-10-14/** -text
+reports/evidence/founder-transfer-reviewer-verification-2026-10-16.json -text
+reports/evidence/founder-transfer-verification-receipt-2026-10-16.json -text

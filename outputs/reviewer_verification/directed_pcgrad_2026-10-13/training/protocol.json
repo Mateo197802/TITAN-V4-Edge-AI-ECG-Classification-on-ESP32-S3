@@ -1,0 +1,15 @@
+{
+  "experiment": "phase11_directed_source_and_pcgrad",
+  "start_sha256": "77a8c3749ad863256fe03e038c5c686bb62f6bb4cc9db7ad1f926801845d4112",
+  "architecture": {"parameters":1143751,"heads":4,"leads":["I","II","III","aVR","aVL","aVF"],"fs_hz":125,"input_shape":[6,1250],"batch_norm_statistics":"frozen"},
+  "data": {"original_train":8393,"native_extra":13984,"rhythm_validation":1476,"pathology_validation":2027,"followup":2171,"new_source":"ecg-arrhythmia 1.0.0","directed_classes":["PVC","RBBB","LBBB","PAC","1AVB"],"cap_per_class":500,"selection":"Complete official header census; fixed ID hash order; known IDs/waveforms excluded; unsupported or unrecognized codes excluded; no predictions","new_source_pathology":"all masked","references_changed":false},
+  "optimization": {"seed":20261017,"epochs":20,"checkpoints":[4,8,12,20],"batch_size":128,"weight_decay":0.01,"gradient_clip":1,"start_agreement_kl":0.1,"teacher_agreement_kl":0.15,"auxiliary_weight":1,"sampling":"One shuffled visit per record per epoch","pathology_loss":"Masked stable BCE; Primary5 weights 2, other labels 1; no positive class weighting","progression":"Last two existing blocks first 4 epochs; all five existing blocks thereafter; frozen BN and quality/biometrics parameters","pcgrad":"Symmetric two-task negative-dot projection on shared backbone only; head-own gradients unchanged; auxiliary preservation added without projection; sum scaling matches unprojected loss",
+    "trials":[
+      {"name":"directed_last2","blocks":2,"progressive":false,"pcgrad":false,"path_weight":1,"lr":0.00005},
+      {"name":"directed_progressive","blocks":5,"progressive":true,"pcgrad":false,"path_weight":1,"lr":0.00005},
+      {"name":"directed_pcgrad","blocks":5,"progressive":true,"pcgrad":true,"path_weight":1,"lr":0.00005}
+    ]},
+  "selection": {"role":"validation only","threshold_fit":"2027 unchanged native fold-9 records; fixed grid 0.05..0.95, ties higher","maximum_rhythm_macro_f1_drop":0.005,"maximum_source_mean_f1_drop":0.005,"minimum_class_support":20,"maximum_recall_drop":0.05,"protected_classes":["SB","LBBB","RBBB","PAC","NSR"],"maximum_quality_biometrics_nrmse":0.15,"joint_minimum_path_gain":0.005,"joint_maximum_source_drop":0.002,"rhythm_minimum_source_gain":0.002,"rhythm_maximum_path_drop":0.005,"fallback":"start.pth"},
+  "control":"Frozen phase10 joint model; identical validation/calibration; preserved alongside every candidate",
+  "execution":"CEDIA Slurm GPU; deterministic algorithms; exact selected refits before followup labels open"
+}

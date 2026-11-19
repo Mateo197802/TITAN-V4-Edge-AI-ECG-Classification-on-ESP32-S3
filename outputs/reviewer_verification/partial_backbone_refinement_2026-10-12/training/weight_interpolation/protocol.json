@@ -1,0 +1,26 @@
+{
+  "experiment": "validation_selected_weight_interpolation",
+  "model_parameters": 1143751,
+  "input_shape": [6, 1250],
+  "sampling_rate_hz": 125,
+  "method": "convex interpolation of aligned pretrained CNN states; one CNN at inference",
+  "base_checkpoint_sha256": "6410de24a38a8021cb68fc2a51c275fac8fd16009d5bb7124b680e540e5eb5f4",
+  "donors": ["donor_partial.pth", "donor_expanded.pth"],
+  "coefficients": [0.1, 0.25, 0.4, 0.55, 0.7],
+  "allowed_changed_prefixes": ["res_layers.3.", "res_layers.4.", "head_rhythm."],
+  "batch_norm_float_buffers": "convex interpolation; integer counters retained from base",
+  "selection": {
+    "data": "validation only, 1476 records",
+    "metric": "mean fixed-nine-class macro-F1 across sources",
+    "minimum_gain": 0.005,
+    "minimum_class_support": 20,
+    "maximum_protected_recall_drop": 0.05,
+    "protected_classes": ["SB", "LBBB", "RBBB", "PAC", "NSR"],
+    "maximum_auxiliary_nrmse": 0.15,
+    "fallback": "base.pth"
+  },
+  "followup": "2171 previously examined records; prediction and scoring after selection is written",
+  "labels_changed": false,
+  "gradient_updates": false,
+  "execution": "CEDIA Slurm A100 compute allocation"
+}

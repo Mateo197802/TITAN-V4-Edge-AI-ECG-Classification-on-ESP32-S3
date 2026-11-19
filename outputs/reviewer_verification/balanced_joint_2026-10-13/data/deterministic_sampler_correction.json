@@ -1,0 +1,12 @@
+{
+  "failed_job_id": "29364",
+  "failed_state": "FAILED",
+  "exit_code": "1:0",
+  "elapsed": "00:09:06",
+  "submitted_input_manifest_sha256": "d7df7bbea2d364e327318ab3fdf20f88c6d2c0ab4586629145c51535108aae73",
+  "failure": "CUDA replacement sampling cumsum is not deterministic in PyTorch2.1",
+  "correction": "Dedicated seeded CPU generator for indices; neural-network fitting remains CEDIA CUDA; deterministic algorithms stay enabled",
+  "source_tensors_targets_and_hyperparameters_changed": false,
+  "partial_execution_inventory_sha256": "ee103df3a93ecd9c2f65210ef74fb7f25425755c89f29e0753d65beb8c5c9699",
+  "partial_outputs_used_for_selection": false
+}

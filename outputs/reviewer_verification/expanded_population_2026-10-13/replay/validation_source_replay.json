@@ -1,0 +1,115 @@
+{
+  "rhythm_records": 1476,
+  "pathology_records": 2027,
+  "checkpoints": 13,
+  "checks": [
+    {
+      "name": "baseline",
+      "checkpoint_sha256": "4b20177029ee5388b76c336bda09b10bb962750b94feacb0b32b47d7e1fc6637",
+      "maximum_probability_difference": 1.6689300537109375e-06,
+      "maximum_auxiliary_difference": 4.172325134277344e-07,
+      "rhythm_decisions_identical": true,
+      "pathology_decisions_identical": true
+    },
+    {
+      "name": "path_head_natural_e04",
+      "checkpoint_sha256": "0c6b74c46d80bc5a36d8619242952ee297938a246b24f514a758e0c1da1420f5",
+      "maximum_probability_difference": 1.6689300537109375e-06,
+      "maximum_auxiliary_difference": 4.172325134277344e-07,
+      "rhythm_decisions_identical": true,
+      "pathology_decisions_identical": true
+    },
+    {
+      "name": "path_head_natural_e08",
+      "checkpoint_sha256": "5b081aac7dcd7408c08374738864fe7a03ebe11d800ed8f8199f9fc38e3eed5d",
+      "maximum_probability_difference": 1.6689300537109375e-06,
+      "maximum_auxiliary_difference": 4.172325134277344e-07,
+      "rhythm_decisions_identical": true,
+      "pathology_decisions_identical": true
+    },
+    {
+      "name": "path_head_natural_e12",
+      "checkpoint_sha256": "c211f679b0673c0f8c8034b882c7b37bd127c310e3c5d3d76ddf71297689e948",
+      "maximum_probability_difference": 1.6689300537109375e-06,
+      "maximum_auxiliary_difference": 4.172325134277344e-07,
+      "rhythm_decisions_identical": true,
+      "pathology_decisions_identical": true
+    },
+    {
+      "name": "path_head_natural_e20",
+      "checkpoint_sha256": "df517bc124a77e51d1f6fc4efa74b140155a30e10d244b4a150e8e2fd961f50d",
+      "maximum_probability_difference": 1.6689300537109375e-06,
+      "maximum_auxiliary_difference": 4.172325134277344e-07,
+      "rhythm_decisions_identical": true,
+      "pathology_decisions_identical": true
+    },
+    {
+      "name": "joint_natural_025_e04",
+      "checkpoint_sha256": "9de0c93e2e8a07b43089073951631363d501eb33f6f2e77dbdc0c6fab0dc4771",
+      "maximum_probability_difference": 2.1457672119140625e-06,
+      "maximum_auxiliary_difference": 2.980232238769531e-07,
+      "rhythm_decisions_identical": true,
+      "pathology_decisions_identical": true
+    },
+    {
+      "name": "joint_natural_025_e08",
+      "checkpoint_sha256": "32b29b88812f6b8cd77cb1a10ff3d17bb1a0852adfb22848d0d9f762d44e8d6b",
+      "maximum_probability_difference": 1.6093254089355469e-06,
+      "maximum_auxiliary_difference": 3.8743019104003906e-07,
+      "rhythm_decisions_identical": true,
+      "pathology_decisions_identical": true
+    },
+    {
+      "name": "joint_natural_025_e12",
+      "checkpoint_sha256": "cf8f8994f4ee2caae4e0e1d2bec2f4be52041ebe89b0aa1ce56eb1c1bfffb201",
+      "maximum_probability_difference": 1.6391277313232422e-06,
+      "maximum_auxiliary_difference": 3.5762786865234375e-07,
+      "rhythm_decisions_identical": true,
+      "pathology_decisions_identical": true
+    },
+    {
+      "name": "joint_natural_025_e20",
+      "checkpoint_sha256": "f855d5e321908305d5bfcf4ef756cc9fe74e79865b468f6c83a09cc8a1313a60",
+      "maximum_probability_difference": 1.6093254089355469e-06,
+      "maximum_auxiliary_difference": 2.980232238769531e-07,
+      "rhythm_decisions_identical": true,
+      "pathology_decisions_identical": true
+    },
+    {
+      "name": "joint_natural_100_e04",
+      "checkpoint_sha256": "684618c9d7588df42233a3ae580205ff9d52ae6957a1c03c03f0d7ddab8efbb9",
+      "maximum_probability_difference": 1.9073486328125e-06,
+      "maximum_auxiliary_difference": 2.980232238769531e-07,
+      "rhythm_decisions_identical": true,
+      "pathology_decisions_identical": true
+    },
+    {
+      "name": "joint_natural_100_e08",
+      "checkpoint_sha256": "bd8e8605430bfb6b9229cd69fae3575bdb7617c0875b301736905223458633a9",
+      "maximum_probability_difference": 1.7583370208740234e-06,
+      "maximum_auxiliary_difference": 3.5762786865234375e-07,
+      "rhythm_decisions_identical": true,
+      "pathology_decisions_identical": true
+    },
+    {
+      "name": "joint_natural_100_e12",
+      "checkpoint_sha256": "b3f35e65c38238ea8f18e7223d0222700ea7ebcfed4c15e0821acc4bd5744131",
+      "maximum_probability_difference": 1.8775463104248047e-06,
+      "maximum_auxiliary_difference": 2.980232238769531e-07,
+      "rhythm_decisions_identical": true,
+      "pathology_decisions_identical": true
+    },
+    {
+      "name": "joint_natural_100_e20",
+      "checkpoint_sha256": "278b98538fffd3e57ce466be3ccfcf559d7a629a668319982b045282379c67ec",
+      "maximum_probability_difference": 1.6093254089355469e-06,
+      "maximum_auxiliary_difference": 3.5762786865234375e-07,
+      "rhythm_decisions_identical": true,
+      "pathology_decisions_identical": true
+    }
+  ],
+  "all_passed": true,
+  "device": "cpu",
+  "torch": "2.12.1+cpu",
+  "numpy": "2.4.6"
+}

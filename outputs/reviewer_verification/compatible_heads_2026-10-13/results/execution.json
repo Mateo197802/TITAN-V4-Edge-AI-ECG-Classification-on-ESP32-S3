@@ -1,0 +1,14 @@
+{
+  "job_id": "29407",
+  "hostname": "compute-0-2.hpc.cedia.edu.ec",
+  "python": "3.10.14",
+  "platform": "Linux-5.4.0-124-generic-x86_64-with-glibc2.31",
+  "torch": "2.1.2+cu121",
+  "numpy": "1.26.4",
+  "cuda": "12.1",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "parameters": 1143751,
+  "input_manifest_sha256": "8ebcbdf67e9ca4d150dd2415ca658b3574248e77229c4ef8ed142c62c0f09732",
+  "started_utc": "2026-10-13T15:16:20Z",
+  "gradient_fitting": false
+}

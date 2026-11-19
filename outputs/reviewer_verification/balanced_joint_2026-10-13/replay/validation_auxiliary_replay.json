@@ -1,0 +1,400 @@
+{
+  "records": 1476,
+  "candidates": 35,
+  "verified_original_source_tensors": 1476,
+  "checks": [
+    {
+      "candidate": "legacy_control_e04",
+      "checkpoint_sha256": "729de4d806f4cc50f7fd4d3d18b76fc22a6ffdaae70512a3b12cc73bf301bb6d",
+      "max_probability_difference": 1.1622905731201172e-06,
+      "cpu_nrmse": {
+        "quality": 1.4904875570209697e-05,
+        "biometrics": 0.05440753698348999
+      },
+      "max_nrmse_difference": 3.725290298461914e-09,
+      "passed": true
+    },
+    {
+      "candidate": "legacy_control_e08",
+      "checkpoint_sha256": "7002f6760d7495532f4e89b2a4c9e774b5b8392584274834fab66136fddb1a85",
+      "max_probability_difference": 1.3709068298339844e-06,
+      "cpu_nrmse": {
+        "quality": 3.075767745031044e-05,
+        "biometrics": 0.06005570665001869
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "legacy_control_e16",
+      "checkpoint_sha256": "628ccba30788ab7248529534c9075236079a74cf77d570b1ff8ce0221325eacd",
+      "max_probability_difference": 1.6093254089355469e-06,
+      "cpu_nrmse": {
+        "quality": 4.4961736421100795e-05,
+        "biometrics": 0.07467684149742126
+      },
+      "max_nrmse_difference": 2.2351741790771484e-08,
+      "passed": true
+    },
+    {
+      "candidate": "legacy_control_e24",
+      "checkpoint_sha256": "942f31f3161f51089578706fcb13bed77fa37887aaa063a83e0860e9ca59cd2e",
+      "max_probability_difference": 1.7881393432617188e-06,
+      "cpu_nrmse": {
+        "quality": 5.041911208536476e-05,
+        "biometrics": 0.0841032862663269
+      },
+      "max_nrmse_difference": 1.4901161193847656e-08,
+      "passed": true
+    },
+    {
+      "candidate": "legacy_control_e40",
+      "checkpoint_sha256": "f15f8de778af33c175f4776c599f63dfcf4be5629845e8dee109c367fc8098e9",
+      "max_probability_difference": 1.4901161193847656e-06,
+      "cpu_nrmse": {
+        "quality": 5.788636553916149e-05,
+        "biometrics": 0.11243674904108047
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "agreement_anchor_e04",
+      "checkpoint_sha256": "8a7716d5f9f018ba4de3e72a6a5690721d23e83f93841de11c31e41ae5454f29",
+      "max_probability_difference": 1.1622905731201172e-06,
+      "cpu_nrmse": {
+        "quality": 2.814336767187342e-05,
+        "biometrics": 0.05187678709626198
+      },
+      "max_nrmse_difference": 2.2351741790771484e-08,
+      "passed": true
+    },
+    {
+      "candidate": "agreement_anchor_e08",
+      "checkpoint_sha256": "fc0fd7bb0a03d387891d13028f6cc9dd3f93f6f5ee3e3a90ffdbdbdb3df5e12c",
+      "max_probability_difference": 1.5497207641601562e-06,
+      "cpu_nrmse": {
+        "quality": 3.844935054075904e-05,
+        "biometrics": 0.06268245726823807
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "agreement_anchor_e16",
+      "checkpoint_sha256": "2e87081f1a1189c99762a4ab199646654780bdf8218f5d5f92a11cde9950be0c",
+      "max_probability_difference": 1.8477439880371094e-06,
+      "cpu_nrmse": {
+        "quality": 5.025791688240133e-05,
+        "biometrics": 0.08160986751317978
+      },
+      "max_nrmse_difference": 0.0,
+      "passed": true
+    },
+    {
+      "candidate": "agreement_anchor_e24",
+      "checkpoint_sha256": "bb44e14c089f2f69551a4783a8f155dee14fa9e6fe2f86ea5a698c2958e711b6",
+      "max_probability_difference": 1.817941665649414e-06,
+      "cpu_nrmse": {
+        "quality": 5.294362563290633e-05,
+        "biometrics": 0.0876520499587059
+      },
+      "max_nrmse_difference": 1.4901161193847656e-08,
+      "passed": true
+    },
+    {
+      "candidate": "agreement_anchor_e40",
+      "checkpoint_sha256": "a964df798a3ef31dde6bd7f15bccd41b66595f71e0a2cb4c0938e5669808645b",
+      "max_probability_difference": 1.996755599975586e-06,
+      "cpu_nrmse": {
+        "quality": 5.5955391871975735e-05,
+        "biometrics": 0.09057019650936127
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "path_head_bce_e04",
+      "checkpoint_sha256": "5e0552054240c57678b5fde977b55874cf7c4b13511ca8598217f3135838d617",
+      "max_probability_difference": 1.0728836059570312e-06,
+      "cpu_nrmse": {
+        "quality": 0.0,
+        "biometrics": 0.0
+      },
+      "max_nrmse_difference": 0.0,
+      "passed": true
+    },
+    {
+      "candidate": "path_head_bce_e08",
+      "checkpoint_sha256": "9cc75ad913a4bf5670b88aa303a528d55e4c8a954cb47b092dcb0acff43132b2",
+      "max_probability_difference": 1.3113021850585938e-06,
+      "cpu_nrmse": {
+        "quality": 0.0,
+        "biometrics": 0.0
+      },
+      "max_nrmse_difference": 0.0,
+      "passed": true
+    },
+    {
+      "candidate": "path_head_bce_e16",
+      "checkpoint_sha256": "fb82229e7172d1e8a3768d06c5b4c7a67f67fc7da8a45c17b8151667e868764e",
+      "max_probability_difference": 1.1920928955078125e-06,
+      "cpu_nrmse": {
+        "quality": 0.0,
+        "biometrics": 0.0
+      },
+      "max_nrmse_difference": 0.0,
+      "passed": true
+    },
+    {
+      "candidate": "path_head_bce_e24",
+      "checkpoint_sha256": "3c2ffb5617af680a325e4a5fd2cef5a9c7b42ff5cf79251638f48190997165c3",
+      "max_probability_difference": 1.430511474609375e-06,
+      "cpu_nrmse": {
+        "quality": 0.0,
+        "biometrics": 0.0
+      },
+      "max_nrmse_difference": 0.0,
+      "passed": true
+    },
+    {
+      "candidate": "path_head_bce_e40",
+      "checkpoint_sha256": "4cd784febb47e0a1d19dccd0a03979a240d3e63c8cb606327437baad18982bd6",
+      "max_probability_difference": 1.430511474609375e-06,
+      "cpu_nrmse": {
+        "quality": 0.0,
+        "biometrics": 0.0
+      },
+      "max_nrmse_difference": 0.0,
+      "passed": true
+    },
+    {
+      "candidate": "path_head_asl_e04",
+      "checkpoint_sha256": "c680aec8e918ccd6220a75f69a99dfc3c9ef54cd2a255e73d2bde12fa82680d2",
+      "max_probability_difference": 1.0728836059570312e-06,
+      "cpu_nrmse": {
+        "quality": 0.0,
+        "biometrics": 0.0
+      },
+      "max_nrmse_difference": 0.0,
+      "passed": true
+    },
+    {
+      "candidate": "path_head_asl_e08",
+      "checkpoint_sha256": "26fa21da47311346fc03e6fdad43a320edbf7f46ddc4b1259907df9c10bec96a",
+      "max_probability_difference": 1.0728836059570312e-06,
+      "cpu_nrmse": {
+        "quality": 0.0,
+        "biometrics": 0.0
+      },
+      "max_nrmse_difference": 0.0,
+      "passed": true
+    },
+    {
+      "candidate": "path_head_asl_e16",
+      "checkpoint_sha256": "de5e7bbf5756cba2bd6fb94214941084baa2e6ea60dfd412e97cff95b2f5137c",
+      "max_probability_difference": 1.0728836059570312e-06,
+      "cpu_nrmse": {
+        "quality": 0.0,
+        "biometrics": 0.0
+      },
+      "max_nrmse_difference": 0.0,
+      "passed": true
+    },
+    {
+      "candidate": "path_head_asl_e24",
+      "checkpoint_sha256": "80fa13f57b45260696faf53a8c486e41e165e8151998a3bfce054c6cb711b723",
+      "max_probability_difference": 1.0728836059570312e-06,
+      "cpu_nrmse": {
+        "quality": 0.0,
+        "biometrics": 0.0
+      },
+      "max_nrmse_difference": 0.0,
+      "passed": true
+    },
+    {
+      "candidate": "path_head_asl_e40",
+      "checkpoint_sha256": "08a76c1de3bc626b1613eeb3a7aec5808c9748d005dca87a91c88ae2e350df9a",
+      "max_probability_difference": 1.0728836059570312e-06,
+      "cpu_nrmse": {
+        "quality": 0.0,
+        "biometrics": 0.0
+      },
+      "max_nrmse_difference": 0.0,
+      "passed": true
+    },
+    {
+      "candidate": "joint_balanced_bce_e04",
+      "checkpoint_sha256": "6777ce0173ecad631d957b1fbfcfd5e2d1da5445ba125ce37e63d5137efbd6da",
+      "max_probability_difference": 1.1920928955078125e-06,
+      "cpu_nrmse": {
+        "quality": 3.7287849409040064e-05,
+        "biometrics": 0.06228979304432869
+      },
+      "max_nrmse_difference": 1.4901161193847656e-08,
+      "passed": true
+    },
+    {
+      "candidate": "joint_balanced_bce_e08",
+      "checkpoint_sha256": "26220f279ae7d43155d42305c224e05a7d25ef8a1bd592e07386b63c1b3465c7",
+      "max_probability_difference": 1.519918441772461e-06,
+      "cpu_nrmse": {
+        "quality": 4.573063415591605e-05,
+        "biometrics": 0.07447034865617752
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "joint_balanced_bce_e16",
+      "checkpoint_sha256": "1816ca0f0e71501e3992805fa5f81a7d6df943d9d7c55028a5fea41361452e95",
+      "max_probability_difference": 1.4901161193847656e-06,
+      "cpu_nrmse": {
+        "quality": 5.135787068866193e-05,
+        "biometrics": 0.07561685144901276
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "joint_balanced_bce_e24",
+      "checkpoint_sha256": "9336dd4617ffe23be5d9c9ce9022ef7603d8dfc65f038bd058638035fcf69106",
+      "max_probability_difference": 1.6093254089355469e-06,
+      "cpu_nrmse": {
+        "quality": 5.4011354222893715e-05,
+        "biometrics": 0.0852249339222908
+      },
+      "max_nrmse_difference": 2.2351741790771484e-08,
+      "passed": true
+    },
+    {
+      "candidate": "joint_balanced_bce_e40",
+      "checkpoint_sha256": "d61fc51628be6e492a0aeb0cc2cf4476de4d862f36ac3df862549805ca24d344",
+      "max_probability_difference": 1.9669532775878906e-06,
+      "cpu_nrmse": {
+        "quality": 5.722708738176152e-05,
+        "biometrics": 0.08781155943870544
+      },
+      "max_nrmse_difference": 1.4901161193847656e-08,
+      "passed": true
+    },
+    {
+      "candidate": "joint_balanced_asl_e04",
+      "checkpoint_sha256": "7fbfde209351082ddc000f17cdcf11ca93b4781bd4fc117e73065ede201152d5",
+      "max_probability_difference": 1.3113021850585938e-06,
+      "cpu_nrmse": {
+        "quality": 4.560485467663966e-05,
+        "biometrics": 0.06235898286104202
+      },
+      "max_nrmse_difference": 0.0,
+      "passed": true
+    },
+    {
+      "candidate": "joint_balanced_asl_e08",
+      "checkpoint_sha256": "a81fba3bf63c6c585f1b5585352ffbcc9e420317d747ad7bdd6be9c655a56eeb",
+      "max_probability_difference": 1.2516975402832031e-06,
+      "cpu_nrmse": {
+        "quality": 2.2618882212555036e-05,
+        "biometrics": 0.07310084998607635
+      },
+      "max_nrmse_difference": 1.4901161193847656e-08,
+      "passed": true
+    },
+    {
+      "candidate": "joint_balanced_asl_e16",
+      "checkpoint_sha256": "8504e6f1e7e9b860c2930bda0b82d8465a9e3f059a22d31dba852ab569a045cd",
+      "max_probability_difference": 1.4901161193847656e-06,
+      "cpu_nrmse": {
+        "quality": 4.459362753550522e-05,
+        "biometrics": 0.07299598306417465
+      },
+      "max_nrmse_difference": 0.0,
+      "passed": true
+    },
+    {
+      "candidate": "joint_balanced_asl_e24",
+      "checkpoint_sha256": "845a162222dd445a649c9e5f5b71afeac07151ea8272a705bfc37230e1b468e6",
+      "max_probability_difference": 1.3113021850585938e-06,
+      "cpu_nrmse": {
+        "quality": 5.67658971704077e-05,
+        "biometrics": 0.08238296955823898
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "joint_balanced_asl_e40",
+      "checkpoint_sha256": "afc051b7397eb098ff9e7e4bfd716e3a56085bdb819cc8bb1a0b89965d8de334",
+      "max_probability_difference": 2.086162567138672e-06,
+      "cpu_nrmse": {
+        "quality": 5.12875230924692e-05,
+        "biometrics": 0.08297712355852127
+      },
+      "max_nrmse_difference": 1.4901161193847656e-08,
+      "passed": true
+    },
+    {
+      "candidate": "full_balanced_asl_e04",
+      "checkpoint_sha256": "06aec9e85822f44bbbdb7a972338a549061529b67353ebf16ed5baa1b9c894d3",
+      "max_probability_difference": 1.5497207641601562e-06,
+      "cpu_nrmse": {
+        "quality": 4.032515789731406e-05,
+        "biometrics": 0.06691217422485352
+      },
+      "max_nrmse_difference": 1.4901161193847656e-08,
+      "passed": true
+    },
+    {
+      "candidate": "full_balanced_asl_e08",
+      "checkpoint_sha256": "8ff662442980f982d36bb8190056012dfdd06e51c896b9f7118c4aa253126fc5",
+      "max_probability_difference": 1.6093254089355469e-06,
+      "cpu_nrmse": {
+        "quality": 3.28534770233091e-05,
+        "biometrics": 0.06852167099714279
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "full_balanced_asl_e16",
+      "checkpoint_sha256": "ebeb41bd63087943dc35c467dfbf165692f01c694225eb0664a155c80fac6761",
+      "max_probability_difference": 1.475214958190918e-06,
+      "cpu_nrmse": {
+        "quality": 3.7446825444931164e-05,
+        "biometrics": 0.08693601191043854
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    },
+    {
+      "candidate": "full_balanced_asl_e24",
+      "checkpoint_sha256": "80c98960033f697d43fc88d934921f0a3c523fc4482bf691f60aad03c3c8920f",
+      "max_probability_difference": 1.5497207641601562e-06,
+      "cpu_nrmse": {
+        "quality": 4.1765135392779484e-05,
+        "biometrics": 0.09002285450696945
+      },
+      "max_nrmse_difference": 1.4901161193847656e-08,
+      "passed": true
+    },
+    {
+      "candidate": "full_balanced_asl_e40",
+      "checkpoint_sha256": "5c3c4e8334a02907371eb074de8359d30c58c89aedea8b2ebeaf05a1668ec43a",
+      "max_probability_difference": 1.8477439880371094e-06,
+      "cpu_nrmse": {
+        "quality": 4.459504998521879e-05,
+        "biometrics": 0.09596167504787445
+      },
+      "max_nrmse_difference": 7.450580596923828e-09,
+      "passed": true
+    }
+  ],
+  "all_passed": true,
+  "tolerance": 2e-05,
+  "environment": {
+    "python": "3.12.10",
+    "torch": "2.12.1+cpu",
+    "numpy": "2.4.6",
+    "device": "cpu"
+  }
+}

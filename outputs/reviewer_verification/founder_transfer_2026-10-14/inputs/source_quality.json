@@ -1,0 +1,74 @@
+[
+  {
+    "key": "ningbo/1.0.3/JS20656",
+    "role": "historical",
+    "flags": [
+      "legacy_nonfinite_zero_fill"
+    ],
+    "missing_samples": 60,
+    "verified": true
+  },
+  {
+    "key": "ecg-arrhythmia/1.0.0/JS36731",
+    "role": "rhythm_validation",
+    "flags": [
+      "wfdb16_missing_zero_fill"
+    ],
+    "missing_samples": 16,
+    "verified": true
+  },
+  {
+    "key": "ecg-arrhythmia/1.0.0/JS21701",
+    "role": "tracking",
+    "flags": [
+      "legacy_nonfinite_zero_fill"
+    ],
+    "missing_samples": 43,
+    "verified": true
+  },
+  {
+    "key": "ecg-arrhythmia/1.0.0/JS27034",
+    "role": "train",
+    "flags": [
+      "wfdb16_missing_zero_fill"
+    ],
+    "missing_samples": 18,
+    "verified": true
+  },
+  {
+    "key": "ecg-arrhythmia/1.0.0/JS37439",
+    "role": "train",
+    "flags": [
+      "wfdb16_missing_zero_fill"
+    ],
+    "missing_samples": 39,
+    "verified": true
+  },
+  {
+    "key": "ecg-arrhythmia/1.0.0/JS37609",
+    "role": "train",
+    "flags": [
+      "wfdb16_missing_zero_fill"
+    ],
+    "missing_samples": 2,
+    "verified": true
+  },
+  {
+    "key": "ecg-arrhythmia/1.0.0/JS42400",
+    "role": "train",
+    "flags": [
+      "wfdb16_missing_zero_fill"
+    ],
+    "missing_samples": 57,
+    "verified": true
+  },
+  {
+    "key": "ecg-arrhythmia/1.0.0/JS20656",
+    "role": "train_excluded",
+    "flags": [
+      "legacy_nonfinite_zero_fill"
+    ],
+    "missing_samples": 60,
+    "verified": true
+  }
+]
